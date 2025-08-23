@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Otannan tilastollisia perusteita – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-til_päät.html" rel="next">
+<link href="./09-osa1_yhteenveto.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-otanta_til.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+        <div class="sidebar-tools-main">
+    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#alaluku71" id="toc-alaluku71" class="nav-link active" data-scroll-target="#alaluku71"><span class="header-section-number">10.1</span> Otantamenetelmät</a></li>
+  <li><a href="#yksinkertainen-satunnaisotanta" id="toc-yksinkertainen-satunnaisotanta" class="nav-link" data-scroll-target="#yksinkertainen-satunnaisotanta"><span class="header-section-number">10.2</span> Yksinkertainen satunnaisotanta</a></li>
+  <li><a href="#systemaattinen-otanta" id="toc-systemaattinen-otanta" class="nav-link" data-scroll-target="#systemaattinen-otanta"><span class="header-section-number">10.3</span> Systemaattinen otanta</a></li>
+  <li><a href="#ositettu-otanta" id="toc-ositettu-otanta" class="nav-link" data-scroll-target="#ositettu-otanta"><span class="header-section-number">10.4</span> Ositettu otanta</a></li>
+  <li><a href="#ryväsotanta" id="toc-ryväsotanta" class="nav-link" data-scroll-target="#ryväsotanta"><span class="header-section-number">10.5</span> Ryväsotanta</a></li>
+  <li><a href="#esimerkkejä-otantatutkimuksista" id="toc-esimerkkejä-otantatutkimuksista" class="nav-link" data-scroll-target="#esimerkkejä-otantatutkimuksista"><span class="header-section-number">10.6</span> Esimerkkejä otantatutkimuksista</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<center>
+<font size="10"> <strong>OSA II</strong> </font>
+</center>
+<!-- {#part-osa-ii} -->
+<p>Tässä luvussa jatketaan otannan tarkastelua. Erityisesti tarkastellaan miten satunnaisotos kohdepopulaatiosta voidaan käytännössä kerätä. <strong>Otantamenetelmiksi</strong> kutsutaan niitä menetelmiä, joilla kohdepopulaatiosta <strong>edustava otos</strong> kerätään.</p>
+<p>Satunnaisuuden hyödyntäminen näyttelee keskeistä roolia otoksen edustavuuden varmentamisessa. Kohdepopulaation koko, maantieteellinen jakauma, ikärakenne ja muut yksityiskohdat vaikuttavat kuitenkin keskeisellä tavalla siihen, miten otanta tulee käytännössä suorittaa.</p>
+<section id="alaluku71" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="alaluku71"><span class="header-section-number">10.1</span> Otantamenetelmät</h2>
+<p>Tässä jaksossa tarkastellaan erilaisia <strong>otantamenetelmiä</strong>. Näiden menetelmien tarkoitus on suorittaa otosaineiston (tutkimusaineiston) kerääminen niin, että se huomioi aiemmin esitellyt hyvän otannan kriteerit, ts. että sen tuottama otos on edustava ja luotettava. Näin ollen otos kuvaa koko perusjoukkoa.</p>
+<ul>
+<li>Otantamenetelmän, joskus myös <strong>otanta-asetelman</strong>, valinta on tietenkin vahvasti sovellusalakohtainen: käytettävät aineistot ja täten otantamenetelmät määräytyvät pitkälti tehtävän tutkimuksen luonteen perusteella. Ts. käytännön tilanteet poikkeavat toisistaan lopulta varsin paljon ja eri tilanteisiin tarvitaan omat menetelmänsä.</li>
+<li>Otanta-asetelmalla tarkoitetaan erityisesti otoksen poimintaan käytettyä <strong>satunnaistuksen menetelmää</strong>.</li>
+</ul>
+<p>Otannan tavoitteena on tietenkin <strong>edustava otos</strong>. Otoksen edustavuuteen vaikuttaa käytännön otannassa se, miten todennäköistä kullakin perusjoukon alkiolla (populaation tilastoyksiköllä) on tulla poimituksi otokseen. Tätä kutsutaan <strong>sisältymistodennäköisyydeksi</strong>.</p>
+<div class="defblock">
+<p><strong>Sisältymistodennäköisyys</strong> kuvaa sitä (tunnettua) todennäköisyyttä, jolla perusjoukon alkio tulee poimituksi otokseen.</p>
+</div>
+<p>&nbsp;</p>
+<p>Käytännössä otoksen poiminta suoritetaan niin, että (n):n alkion otos ((n) on tässä siis edelleen otoskoko) poimitaan jollakin satunnaisotannan menetelmällä (N):n alkion perusjoukosta ((N) on siis edelleen perusjoukon koon merkintä).</p>
+<ul>
+<li><p>Perusjoukon yksittäinen alkio (tilastoyksikkö) (k) tulee poimituksi (n):n alkion otokseen (tutkimusaineistoon) tunnetulla <strong>sisältymistodennäköisyydellä</strong> (_k), <span class="math display">\[\begin{equation*}
+0 &lt; \pi_k \le 1, \quad k = 1, \ldots, N,
+\end{equation*}\]</span> jossa siis (N) on perusjoukon alkioiden lukumäärä. Toisin sanoen, kaikilla perusjoukon alkioilla on oma nollaa suurempi todennäköisyytensä (voi olla 1), (_k), tulla poimituksi otokseen.</p></li>
+<li><p>Sisältymistodennäköisyys voi olla sama kaikille perusjoukon alkioille tai vaihdella perusjoukon eri osajoukkojen (alkioryhmien) välillä. Tämä tulee huomioida otantamenetelmän valinnassa, jotta saadun otoksen edustavuus ei vaarannu.</p></li>
+<li><p>Sisältymistodennäköisyyttä voidaan käyttää monimutkaisemmassa otantateoriassa <strong>asetelma</strong>- ja <strong>analyysipainojen</strong> muodostamisessa sekä uudelleenpainotuksessa (vastauskadon korjaus).</p></li>
+</ul>
+<p>&nbsp;</p>
+<p>Tässä luvussa esitellään seuraavaksi erilaisia perinteisiä otantamenetelmiä (niiden paikoin yksinkertaistettuja kuvauksia ja toteutuksia) sekä sitä, minkälaisten perusjoukkojen tilanteissa mikäkin otantamenetelmä on sopivin.</p>
+<ul>
+<li><strong>Yksinkertainen satunnaisotanta</strong> (YSO): perinteisin otantamenetelmä, jossa jokaisella tietyn kokoisella otoksella sama mahdollisuus tulla valituksi.</li>
+<li><strong>Systemaattinen otanta</strong> (SYS): eli tasavälisessä otannassa poimintakehikkoon (perusjoukkoon) kuuluvat alkiot järjestetään jonoon ja siitä poimitaan otokseen joka <span class="math inline">\(k\)</span>. alkio.</li>
+<li><strong>Ositettu otanta</strong>: perusjoukko (populaatio) jaetaan ominaisuuksiltaan yhtenäisiin eli homogeenisiin <strong>ositteisiin</strong>, joista jokaisesta poimitaan erillinen otos.</li>
+<li><strong>Ryväsotanta</strong> tai joskus myös <strong>moniasteinen otanta</strong>: hyödynnetään perusjoukossa esiintyvää kerroksellisuutta eli hierarkkisuutta otannassa.</li>
+</ul>
+<p>&nbsp;</p>
+</section>
+<section id="yksinkertainen-satunnaisotanta" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="yksinkertainen-satunnaisotanta"><span class="header-section-number">10.2</span> Yksinkertainen satunnaisotanta</h2>
+<p><span class="marginnote">Yksinkertainen satunnaisotanta</span></p>
+<div class="defblock">
+<p><strong>Yksinkertaisessa satunnaisotannassa</strong> (YSO) jokaisella tilastoyksiköllä (perusjoukon alkiolla) on nollasta poikkeava todennäköisyys tulla valituksi otokseen.</p>
+</div>
+<p>YSO:ssa otannan satunnaisuus tulee siis siitä, että jokainen tilastoyksikkö poimitaan otokseen <em>satunnaisesti</em>!</p>
+<ul>
+<li><p>YSOaa pidetään otannan perusmuotona, jossa jokaisella perusjoukon alkiolla on lähtökohtaisesti yhtä suuri todennäköisyys tulla valituksi otokseen.</p></li>
+<li><p>YSO on periaatteiltaan intuitiivinen ja helppo ymmärtää. Lisäksi se on tietyissä tilanteissa usein helppo toteuttaa.</p></li>
+</ul>
+<p>Tällöin on selvää että myös jokaisella perusjoukon samankokoisella osajoukolla on sama todennäköisyys tulla valituksi.</p>
+<ul>
+<li><p>Toisin sanoen, todennäköisyys tulla poimituksi ei riipu tilastoyksikön ominaisuuksista tai siitä minkälaisia ominaisuuksia jo poimituilla otosyksiköillä on.</p></li>
+<li><p>Satunnaisotanta siis selvästi korjaa valikoitumisharhaa satunnaistamalla otokseen valikoitumisen täysin! YSO voidaankin aina tulkita arvonnaksi. Käytännön työssä arvonta onkin oiva satunnaistamisen keino.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>YSO:n toteuttaminen</strong>. Käytännössä yksinkertainen satunnaisotanta etenee vaiheittain:</p>
+<ul>
+<li>Tutkimuksen alussa tutkijalla tulisi olla käytettävänään (ts. tulisi koostaa) <strong>lista</strong> kaikista perusjoukon havaintoyksiköistä <strong>(alkioista)</strong>. Tämä muodostaa tutkimuksen <strong>otantakehikon</strong>.</li>
+<li>Tämän jälkeen jokaiseen perusjoukon alkioon voidaan liittää numeeriset tunnukset.</li>
+<li>Sitten valitaan haluttu otoksen koko. Otoskoon määrittäminen on keskeinen osa koesuunnittelua.</li>
+<li>Otantakehikosta arvotaan perusjoukon alkiot otokseen yksi kerrallaan.</li>
+<li>Käytännössä arvonta voidaan toteuttaa satunnaislukuja generoimalla (tuottamalla) niin että jokaisen otantakehikon alkion sisältymistodennäköisyys on yhtä suuri.</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>YSO:n poimintastrategiat</strong>. Käytännössä yksinkertainen satunnaisotanta voidaan suorittaa kahdella eri tavalla: <strong>palauttaen</strong> tai <strong>palauttamatta</strong>.</p>
+<ul>
+<li>Tarkastellaan, aiemman mukaisesti, <strong>äärellistä populaatiota</strong> (perusjoukkoa), jossa on (N) alkiota ja tarkoituksena on poimia (n):n alkion kokoinen otos (huom. (n&lt;N)). Olkoon (i) yksittäisen alkion indeksiluku (ts. jokainen alkio on numeroitu esimerkiksi tavalla (i = 1,,N)).</li>
+</ul>
+<div class="defblock">
+<p><strong>YSO:n poiminta palauttaen</strong>. Kun poiminta suoritetaan <strong>palauttaen</strong>, niin poimittu alkio palautetaan aina ennen uuden alkion arpomista takaisin perusjoukkoon, jolloin alkio voi tulla poimituksi otokseen useita kertoja.</p>
+<ul>
+<li><p>Kyseessä on siis otanta <strong>takaisinpanolla</strong> (<em>with replacement</em>).</p></li>
+<li><p>Tällöin alkioiden arvonnat ovat riippumattomia: alkion todennäköisyys tulla poimituksi otokseen ei riipu siitä kuinka monta alkiota otokseen on jo poimittu.</p></li>
+<li><p>Alkion <span class="math inline">\(k\)</span> <strong>poimintatodennäköisyys</strong> poimintakierroksella/“otositeraatiolle” <span class="math inline">\(j\)</span> (<span class="math inline">\(j=1,\ldots,n\)</span>, jossa <span class="math inline">\(n\)</span> on tavoiteltava otoskoko) on tällöin selvästi <span class="math display">\[\begin{equation*}
+\frac{1}{N} \quad \forall \, k=1,\ldots,N,
+\end{equation*}\]</span> eli sama todennäköisyys kaikille alkioille <span class="math inline">\(k=1,\ldots,N\)</span>.</p></li>
+<li><p>Otantaan palauttaen liittyviä todennäköisyyksiä hallitaan <strong>binomijakauman</strong> avulla, joka johtaa yksinkertaiseen <strong>tilastolliseen malliin</strong> YSO:a käytettäessä.</p></li>
+<li><p>Poiminta palauttaen (otanta takaisinpanolla) on toisaalta usein varsin epärealistinen otantamenetelmä eri tutkimustilanteissa ja sovelluksissa.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkiksi</strong> lienee mahdotonta testata samaa lääkettä useaan otteeseen samaan aikaan yhdellä koehenkilöllä.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>YSO:n poiminta palauttamatta</strong>. Kun poiminta suoritetaan <strong>palauttamatta</strong>, poimittua alkiota ei palauteta perusjoukkoon poiminnan jälkeen eikä se täten voi tulla poimituksi otokseen kuin kerran.</p>
+<ul>
+<li>Kyseessä on siis otanta <strong>ilman takaisinpanoa</strong> (<em>without replacement</em>).</li>
+<li>Tällöin alkioiden arvonnat eivät enää ole riipumattomia: alkion todennäköisyys tulla poimituksi otokseen riippuu siitä kuinka monta alkiota otokseen on jo poimittu.</li>
+<li>Alkion <span class="math inline">\(k\)</span> <strong>poimintatodennäköisyys</strong> on tällöin vastaavasti (niin kauan kun alkio ei ole jo poimittu otokseen) poimintakierroksella <span class="math inline">\(j\)</span> (<span class="math inline">\(j=1,\ldots,n\)</span>) <span class="math display">\[\begin{equation*}
+\frac{1}{N - A_k},
+\end{equation*}\]</span> ja kun <span class="math inline">\(k\)</span>:s alkio tulee poimituksi, niin tämän jälkeen poimintatodennäköisyys on 0. Tässä (A_k) on jo poimittujen alkioiden lukumäärä ennen kyseistä poimintakierrosta/otositeraatiota: ensimmäisen poiminnan kohdalla (A_k = 0), toisen kohdalla (A_k = 1) ja niin edespäin. Ts. <span class="math inline">\(A_k = j-1\)</span>.</li>
+</ul>
+<!-- - Ilman takaisinpanoa populaatiosta voidaan poimia $N \choose n$ erilaista otosta. 
+
+  - Kun otosyksiköiden järjestyksellä ei ole merkitystä. $N \choose n$ on ns. binomikerroin, joka saadaan kaavasta $\frac{N!}{n!(N-n)!}$, jossa $N! = N \cdot (N-1) \cdot (N-2) \cdots 1$ on $N$:n kertoma. -->
+<ul>
+<li><p>Ilman takaisinpanoa populaatiosta voidaan poimia <span class="math inline">\(\frac{N!}{n!(N-n)!}\)</span> erilaista otosta, jossa <span class="math inline">\(N! = N \cdot (N-1) \cdot (N-2) \cdots 1\)</span> on <span class="math inline">\(N\)</span>:n kertoma.</p></li>
+<li><p>Otantaan palauttamatta liittyviä todennäköisyyksiä hallitaan <strong>hypergeometrisen jakauman</strong> avulla, joka johtaa (melko) yksinkertaiseen <strong>tilastolliseen malliin</strong> YSO:a käytettäessä.</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki yksinkertaisen satunnaisotannan poimintastrategioista</strong>. Poimitaan palloja kulhosta satunnaisesti.</p>
+<ul>
+<li><p>Jos yksittäinen pallo (alkio) voi tulla poimituksi useammin kuin kerran, eli pallo palautetaan kulhoon sen poiminnan jälkeen, on kyseessä yksinkertainen satunnaisotanta takaisinpanolla.</p></li>
+<li><p>Vastaavasti, jos pallo voi tulla valituksi vain kerran, eli pallo poistetaan kulhosta sen poiminnan jälkeen, on kyseessä otanta ilman takaisinpanoa.</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p><strong>Otoskoon vaikutus YSO:n</strong></p>
+<ul>
+<li>Yksinkertaisen satunnaisotannan erot takaisinpanolla ja ilman takaisinpanoa riippuvat otantakehikon (tai yleisemmin perusjoukon) koosta. Mikäli poimittava otos muodostaa suuren osan perusjoukosta (ts. (<span class="math inline">\(\frac{n}{N}\)</span>) on “suuri”, eli lähellä 1:tä) menetelmät poikkeavat olennaisesti.</li>
+<li>Toisaalta, jos perusjoukko on ääretön, niin menetelmillä ei ole käytännössä eroa
+<ul>
+<li>Toisin sanoen, kun (<span class="math inline">\(N \longrightarrow \infty)\)</span>, niin (<span class="math inline">\(\frac{n}{N} \longrightarrow 0\)</span>) eli todennäköisyys että sama alkio poimittaisiin otokseen useammin kuin kerran lähestyy nollaa otoskoon lähestyessä ääretöntä.</li>
+</ul></li>
+<li>Monesti onkin (teoreettiselta) kannalta järkevää olettaa että otos poimitaan äärettömästä perusjoukosta vaikka perusjoukko tosiasiallisesti olisikin äärellinen, mutta siis riittävän “iso”.</li>
+<li>Tällöin voidaan olettaa käytettävän otantaa takaisinpanolla, sillä siinä käytettävät tilastolliset mallit ovat yksinkertaisempia kuin otannassa ilman takaisinpanoa ja tämä helpottaa tilastollisessa päättelyssä käytettäviä kaavoja.</li>
+</ul>
+<p><strong>YSO:n potentiaaliset ongelmat</strong></p>
+<ul>
+<li><p>Monissa tapauksissa ei kuitenkaan ole helppoa saada listaa kaikista perusjoukon havaintoyksiköistä (jolloin menetelmän käyttö on periaatteessa mahdotonta).</p></li>
+<li><p>Kyselytutkimuksissa perusjoukko on usein suuri ja laajalle alueelle hajaantunut. Henkilökohtaisten, kasvotusten toteutettavien, haastattelujen tekeminen vaatisi suuria resursseja. Haastattelijat joutuisivat esim. matkustamaan ympäri Suomea satunnaisotokseen valikoituneiden henkilöiden asuinpaikkojen mukaan. Tällaisissa tutkimustilanteissa voidaankin käyttää muunlaisia otantamenetelmiä.</p></li>
+</ul>
+</section>
+<section id="systemaattinen-otanta" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="systemaattinen-otanta"><span class="header-section-number">10.3</span> Systemaattinen otanta</h2>
+<p><span class="marginnote">Systemaattinen otanta</span></p>
+<div class="defblock">
+<p><strong>Systemaattisessa</strong>, eli tasavälisessä, <strong>otannassa</strong> poimintakehikkoon (perusjoukkoon) kuuluvat alkiot järjestetään jonoon ja siitä poimitaan otokseen joka (<span class="math inline">\(k\)</span>). alkio.</p>
+<ul>
+<li>Esimerkiksi, jos oletetaan että perusjoukkoon kuuluu 1000 tilastoyksikköä ja valittu otoskoko on 100, niin otos voidaan poimia perusjoukon alkioiden järjestetystä listasta poimimalla siitä joka kymmenes yksikkö.</li>
+</ul>
+</div>
+<p>Systemaattinen otanta ei oikeastaan kuulu satunnaisotannaksi laskettaviin menetelmiin, koska siinä ei sovelleta arvontaa.</p>
+<ul>
+<li><p>Yksinkertainen satunnaisotanta voidaan kuitenkin nähdä systemaattisen otannan erikoistapauksena (eli systemaattinen otanta voidaan toteuttaa satunnaisotantana), missä perusjoukon alkiot järjestetään jonoon <strong>satunnaistamalla</strong>.</p>
+<ul>
+<li>Ts. jonon järjestys on satunnainen, eli joka (<span class="math inline">\(k\)</span>). jonon alkio on “satunnaisotos” otantakehikosta. Systemaattinen otanta tuottaa tällöin samat johtopäätelmät kuin yksinkertainen satunnaisotanta, jos perusjoukon alkioiden järjestys on tutkittavan ilmiön kannalta satunnainen! Toisin sanoen, harhaa ei synny mikäli perusjoukon alkioiden järjestys ei riipu sellaisesta ominaisuudesta, jota tutkitaan.</li>
+</ul></li>
+</ul>
+<p><strong>Mahdolliset ongelmat</strong>: Systemaattisen otannan suhteen potentiaaliseksi ongelmaksi muotoutuu havaintoyksikkölistan mahdollinen säännöllinen jaksollisuus, jota systemaattinen poiminta ei havaitse ja jolloin satunnaisotanta toimisi (kenties) paremmin.</p>
+<ul>
+<li><p>Ongelmia syntyy esimerkiksi silloin, jos tiedot perusjoukosta koostuvat heteropariskunnista ja poimintaintervalli on parillinen luku. Tällöin seurauksena voi olla, että otokseen saattaisi valikoitua ainoastaan joko miehiä tai naisia.</p></li>
+<li><p>Myös systemaattisessa otannassa tarvitaan siis lista tai rekisteri kaikista perusjoukon havaintoyksiköistä ja sitä sovelletaankin tavallisesti YSO:n sijasta silloin, kun perusjoukon alkioista on käytettävissä tietorekisteri, luettelo tai havaintoja kerätään ajassa tai tilassa.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong></p>
+<ul>
+<li><p>Esimerkiksi mielipidekyselyn kohteet poimitaan (voitiin poimia) puhelinluettelosta (tai vastaavasta rekisteristä) valitsemalla haastateltavaksi jokaiselta aukeamalta ensimmäisenä esiintyvä henkilö tai jotain tuotetta valmistavan tehtaan laaduvalvonnassa valitsemalla laatuarviointiin joka sadas tuote, joka hihnalta valmistuu.</p></li>
+<li><p>Muita esimerkkejä ovat esim. liikenne-, jäsenrekisteri- tai kassajonossa seisovien otantayksiköiden poiminta otokseen.</p></li>
+</ul>
+</div>
+</section>
+<section id="ositettu-otanta" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="ositettu-otanta"><span class="header-section-number">10.4</span> Ositettu otanta</h2>
+<p><span class="marginnote">Ositettu otanta</span></p>
+<div class="defblock">
+<p><strong>Ositettu otanta</strong> on sopiva menetelmä tilanteisiin, joissa perusjoukko koostuu jonkin ominaisuuden suhteen homogeenisista ryhmistä eli ts. alkioryhmistä (osista). Ositettu otanta pyrkii varmistamaan, että tutkittava otos on edustava kaikkien (tutkimuksen kannalta) olennaisten ryhmien osalta.</p>
+</div>
+<div class="eblock">
+<p><strong>Esimerkkinä</strong> voitaisiin tutkia jonkin maan erilaisten ja usein hyvin eri kokoisten kieliryhmien taloudellista asemaa.</p>
+<ul>
+<li>Kaikista ryhmistä tulisi saada edustava otos.</li>
+<li>Tällöin maan koko populaatioon kohdistettu yksinkertainen satunnaisotanta ei olisi järkevää, sillä otoskoon pitäisi olla (todennäköisesti) hyvin suuri, että jokaisesta kieliryhmästä saataisiin poimittua edustava otos.</li>
+</ul>
+<p>Ositetun otannan avulla otos voitaisiin kerätä niin, että jokaisesta ryhmästä (ositteesta) poimitaan osaotos yksinkertaisella satunnaisotannalla tai systemaattisella otannalla ja nämä osaotokset yhdistetään yhdeksi otokseksi.</p>
+</div>
+<p>Ositettu otanta voi (oikein toteutettuna ja sopivassa asetelmassa) tuottaa paljon tarkempaa tietoa kuin yksinkertainen satunnaisotanta samaa otoskokoa käytettäessä! Voidaan esimerkiksi käyttää tietoa siitä, että otosyksiköt ovat joka ositteessa keskenään samankaltaisia.</p>
+<ul>
+<li><p>Ositetun otannan käyttöön suurissa kyselytutkimuksissa liittyy samoja ongelma kuin yksinkertaiseen ja systemaattiseen satunnaisotantaan.</p></li>
+<li><p>Otokseen valikoituneet vastaajat voivat olla mm. levittäytyneinä suurelle maantieteelliselle alueelle. Näin ollen otannan suorittaminen vaatii suuria kustannuksia.</p></li>
+<li><p>Onko (järkevä) osittaminen ylipäätään mahdollista toteuttaa tarkasteltavassa sovelluksessa?</p></li>
+</ul>
+</section>
+<section id="ryväsotanta" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="ryväsotanta"><span class="header-section-number">10.5</span> Ryväsotanta</h2>
+<p><span class="marginnote">Ryväsotanta</span></p>
+<div class="defblock">
+<p><strong>Ryväsotanta</strong> (klusteriotanta) soveltuu tilanteisiin, joissa perusjoukko on “ryvästeistä” eli se voidaan jakaa luonnollisiin ryhmiin eli rypäisiin (eng. <em>clusters</em>). Rypäät indikoivat aineiston luontaista hierarkkista eli monitasoista- tai asteista rakennetta.</p>
+</div>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong> tällaisista ryhmistä ovat erilaiset yritykset tai koululuokat. Esimerkiksi yritykset muodostavat luonnollisesti eri rypäitä, joiden alkiot ovat työntekijöitä ja koululuokat muodostavat koulun sisällä omia luonnollisia rypäitään ja opiskelijat ovat alkioita näissä rypäissä.</p>
+</div>
+<p>Huomionarvoista on, että toisin kuin ositetussa otannassa, ryväsotannassa rypäiden oletetaan olevan toistensa kanssa riittävän samankaltaisia, että jokaista rypästä ei tarvitse erikseen tutkia.</p>
+<ul>
+<li>Tämä onkin yksi ryväsotannan tärkeimpiä etuja, sillä sitä usein perustellaan kustannustehokkuudella. Tavoitteena on vähentää tietojen keruun aiheuttamia kustannuksia samalla varmistaen, että otos on kuitenkin mahdollisimman edustava!</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Sen sijaan että poimitaan satunnaisia koululaisia mahdollisesti suuresta määrästä kouluja, voidaan poimia satunnaisia rypäitä (kouluja), joista tutkimusyksiköt eli koululaiset poimitaan.</p>
+<p>Lisäksi koulun sisällä koululuokat muodostavat alirypäitä, joista voidaan edelleen poimia satunnaisotos, jotta päästään tutkimaan perusjoukon alkioita eli koululaisia esim. haastattelututkimuksen muodossa.</p>
+</div>
+<p>&nbsp;</p>
+<p>Ryväsotannan voi suorittaa yksi- tai kaksivaiheisena (ts. kyseessä on yksiasteinen/kaksiasteinen ryväsotanta).</p>
+<div class="defblock">
+<p><strong>Kaksivaiheinen ryväsotanta</strong></p>
+<ul>
+<li><p><strong>Ensimmäisessä vaiheessa</strong> poimitaan joukko rypäitä kaikkien rypäiden joukosta, eli vain osa rypäistä on mukana lopullisessa otoksessa.</p></li>
+<li><p><strong>Toisessa vaiheessa</strong> poimitaan ensimmäisessä vaiheessa poimituista rypäistä alkiotason otokset.</p></li>
+</ul>
+</div>
+<p><strong>Yksivaiheisessa ryväsotannassa</strong> toisessa vaiheessa valitaan kaikki ensimmäisen vaiheen otosrypäiden alkiot, jolloin toisen vaiheen otanta typistyy ensimmäisen vaiheen rypäiden alkioiden kokonaistutkimukseksi.</p>
+<ul>
+<li>Poiminnan eri vaiheissa voidaan soveltaa yksinkertaista satunnaisotantaa tai systemaattista otantaa.</li>
+</ul>
+<p>&nbsp;</p>
+<p>Ryväsotantaa käytetään usein suuria haastattelututkimuksia tehtäessä. Ryväsotantaa voidaan erityisesti hyödyntää myös silloin, kun tutkijalla ei ole käytettävissään kattavaa listaa kaikista havaintoyksiköistä, mutta näiden muodostamat rypäät ovat määritettävissä.</p>
+<p>Ryväsotannan heikkoutena pidetään sitä, ettei aina ole helppoa muodostaa rypäitä, jotka ovat toistensa kaltaisia. Tulosten tarkkuus myös riippuu monin paikoin siitä, kuinka hyvin rypäisiin jako onnistuu.</p>
+<div class="eblock">
+<p><strong>Esimerkkejä ryväsotannasta</strong>.</p>
+<p>Esimerkki 1: Poimitaan oppilaitoksen opiskelijoista otos arpomalla ensin otos luokkahuoneista (=rypäistä). Arvotuissa luokkahuoneissa käydään sitten suorittamassa kysely.</p>
+<ul>
+<li>Esim. Oppilaitoksen opiskelijoista voidaan poimia otos arpomalla ensin otos luokkahuoneista, jolloin luokkahuoneet ovat rypäitä.</li>
+<li>Mahdollisia ongelmia? Miten huomoida päivä- ja iltaopiskelijat? Tämän voisi toteuttaa arpomalla otos luokkahuoneista päiväsaikaan ja toinen otos ilta-aikaan. Tässä yhdistetään ryväsotantaan ositettu otanta, jolla taataan päivä- ja iltaopiskelijoiden edustus.</li>
+</ul>
+<p>Esimerkki 2: Tutkittaessa tänä vuonna peruskoulun aloittavia voidaan ensin poimia otos kouluista, jolloin koulut ovat rypäitä. Tämän jälkeen arvotaan kustakin otokseen tulleesta koulusta tietty määrä tutkimuksen kohderyhmään kuuluvia oppilaita.</p>
+</div>
+<p>&nbsp;</p>
+</section>
+<section id="esimerkkejä-otantatutkimuksista" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="esimerkkejä-otantatutkimuksista"><span class="header-section-number">10.6</span> Esimerkkejä otantatutkimuksista</h2>
+<div class="eblock">
+<p><strong>Esimerkki: Työllisyys ja työttömyys, Tilastokeskuksen työvoimatutkimus</strong> (toukokuussa 2025)</p>
+<p><a href="https://stat.fi/tilasto/dokumentaatio/tyti" class="uri">https://stat.fi/tilasto/dokumentaatio/tyti</a></p>
+<p>Työvoimatutkimus antaa tuoreen ja kattavan kuvan työvoimasta ja työmarkkinoiden muutoksista. Julkisuudessa seurataan kuukausittain erityisesti työllisyyden ja työttömyyden muutoksia edellisen vuoden vastaavasta kuukaudesta. Erityisesti kausitasoitettuja aikasarjoja ja trendiaikasarjoja käytetään seurattaessa pitkän aikavälin kehitystä ja suhdannevaihtelua. (Aikasarja-aineistoja esitellään vielä tarkemmin myöhemmin)</p>
+<ul>
+<li><p>Työvoimatutkimus on otostutkimus, jonka avulla tilastoidaan 15–89-vuotiaan väestön työmarkkinoille osallistumista, työllisyyttä, työttömyyttä ja työaikaa kuukausittain, neljännesvuosittain ja vuosittain.</p></li>
+<li><p>Tutkimuksen tietosisältö perustuu EU:n asetukseen, ja tutkimuksen otokseen kuuluu joka kuukausi noin 12 500 henkilöä.</p></li>
+<li><p>Työvoimatilastoja käytetään työvoimapoliittisten ennusteiden ja suunnitelmien laadinnassa, toimien seurannassa ja päätöksenteon tukena.</p>
+<ul>
+<li>Työmarkkina-aseman perusluokittelussa väestö jaetaan työllisiin, työttömiin ja työvoiman ulkopuolisiin.</li>
+<li>Työlliset ja työttömät muodostavat työvoiman.</li>
+</ul></li>
+<li><p>Tilasto perustuu kuukausittain verkkokyselylomakkeella ja haastattelemalla kerättävään otosaineistoon.</p></li>
+<li><p>Työvoimatutkimuksen <strong>perusjoukon</strong> muodostavat Suomessa vakinaisesti asuvat 15–89-vuotiaat henkilöt.</p>
+<ul>
+<li>Perusjoukkoon kuuluvat myös tilapäisesti ulkomailla (alle vuoden) oleskelevat sekä Suomen väestötietojärjestelmään rekisteröidyt ulkomaalaiset, joiden oleskelu Suomessa kestää vähintään vuoden.</li>
+</ul></li>
+<li><p>Työvoimatutkimuksen otos poimitaan <strong>ositetulla systemaattisella otannalla</strong> väestön keskusrekisteriin perustuvasta Tilastokeskuksen väestötietokannasta kahdesti vuodessa.</p>
+<ul>
+<li>Ositteiden muodostamisessa käytetään NUTS1-jakoa ja ikätietoa. Ositteet ovat: Manner-Suomi (15–74-vuotiaat), Ahvenanmaan maakunta (15–74-vuotiaat) ja 75–89-vuotiaiden ikäryhmä.</li>
+</ul></li>
+<li><p>Tutkimus on paneelitutkimus, jossa samaa henkilöä haastatellaan viisi kertaa. Haastattelut tehdään kolmen kuukauden välein, paitsi neljäs haastattelu, joka tehdään kuuden kuukauden kuluttua kolmannesta haastattelusta.</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki: Terveys 2000</strong></p>
+<p><a href="https://thl.fi/tutkimus-ja-kehittaminen/tutkimukset-ja-hankkeet/terveys-2000-2011/terveys-2000-tiiviisti" class="uri">https://thl.fi/tutkimus-ja-kehittaminen/tutkimukset-ja-hankkeet/terveys-2000-2011/terveys-2000-tiiviisti</a></p>
+<p>Terveys 2000 -tutkimuksen tavoite oli tuottaa ajankohtainen kattava kuva työikäisen ja iäkkään väestön terveydestä ja toimintakyvystä selvittämällä tärkeimpien terveysongelmien yleisyyttä ja syitä sekä niihin liittyvän hoidon, kuntoutuksen ja avun tarvetta.</p>
+<ul>
+<li><p>Tutkimus koskee (koski) 18 vuotta täyttänyttä Suomen aikuisväestöä (perusjoukko), josta valitaan valtakunnallisesti edustava 10 000 henkilön otos.</p></li>
+<li><p>Poimittiin kaksivaiheinen ryväsotos terveyskeskuspiireistä.</p>
+<ul>
+<li><p>Ositus perustui yliopistosairaaloiden vastuualuiden väestömäärään suhteutettuun kiintiöintiin.</p></li>
+<li><p>Suurimmat 15 terveyskeskuspiiriä poimittiin otokseen ja lopuista 65:stä piiristä poimittiin loppuotos kussakin ositteessa systemaattisella (PPS) otannalla (sisältymistodennäköisyys suhteessa alkion kokoon).</p></li>
+</ul></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-osa1_yhteenveto.html" class="pagination-link" aria-label="Osan I yhteenvetoa signaalin ja kohinan näkökulmasta">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-til_päät.html" class="pagination-link" aria-label="Satunnaisotokset: Tilastollisen päättelyn näkökulma">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

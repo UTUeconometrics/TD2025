@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Sattuma ja satunnaisuus tilastotieteessä – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-tilastolliset_aineistot.html" rel="next">
+<link href="./03-tilastotiede_tieteenalana.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-sattuma.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+        <div class="sidebar-tools-main">
+    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#satunnaisilmiöt-ja-satunnaismuuttujat-tilastotieteessä" id="toc-satunnaisilmiöt-ja-satunnaismuuttujat-tilastotieteessä" class="nav-link active" data-scroll-target="#satunnaisilmiöt-ja-satunnaismuuttujat-tilastotieteessä"><span class="header-section-number">4.1</span> Satunnaisilmiöt ja satunnaismuuttujat tilastotieteessä</a></li>
+  <li><a href="#satunnaisilmiöiden-tilastollisen-mallintamisen-perusteita" id="toc-satunnaisilmiöiden-tilastollisen-mallintamisen-perusteita" class="nav-link" data-scroll-target="#satunnaisilmiöiden-tilastollisen-mallintamisen-perusteita"><span class="header-section-number">4.2</span> Satunnaisilmiöiden tilastollisen mallintamisen perusteita</a></li>
+  <li><a href="#havaintoaineisto-eli-data" id="toc-havaintoaineisto-eli-data" class="nav-link" data-scroll-target="#havaintoaineisto-eli-data"><span class="header-section-number">4.3</span> Havaintoaineisto eli data</a></li>
+  <li><a href="#populaation-luonteesta" id="toc-populaation-luonteesta" class="nav-link" data-scroll-target="#populaation-luonteesta"><span class="header-section-number">4.4</span> Populaation luonteesta</a></li>
+  <li><a href="#todennäköisyysjakauma" id="toc-todennäköisyysjakauma" class="nav-link" data-scroll-target="#todennäköisyysjakauma"><span class="header-section-number">4.5</span> Todennäköisyysjakauma</a>
+  <ul class="collapse">
+  <li><a href="#yleistä-taustaa-todennäköisyysjakaumille" id="toc-yleistä-taustaa-todennäköisyysjakaumille" class="nav-link" data-scroll-target="#yleistä-taustaa-todennäköisyysjakaumille"><span class="header-section-number">4.5.1</span> Yleistä taustaa todennäköisyysjakaumille</a></li>
+  <li><a href="#odotusarvo-ja-varianssi" id="toc-odotusarvo-ja-varianssi" class="nav-link" data-scroll-target="#odotusarvo-ja-varianssi"><span class="header-section-number">4.5.2</span> Odotusarvo ja varianssi</a></li>
+  <li><a href="#todennäköisyysjakauma-esimerkkinä-normaalijakauma" id="toc-todennäköisyysjakauma-esimerkkinä-normaalijakauma" class="nav-link" data-scroll-target="#todennäköisyysjakauma-esimerkkinä-normaalijakauma"><span class="header-section-number">4.5.3</span> Todennäköisyysjakauma: Esimerkkinä normaalijakauma</a></li>
+  </ul></li>
+  <li><a href="#parametrien-estimointi" id="toc-parametrien-estimointi" class="nav-link" data-scroll-target="#parametrien-estimointi"><span class="header-section-number">4.6</span> Parametrien estimointi</a></li>
+  <li><a href="#hypoteesien-testaaminen" id="toc-hypoteesien-testaaminen" class="nav-link" data-scroll-target="#hypoteesien-testaaminen"><span class="header-section-number">4.7</span> Hypoteesien testaaminen</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>Tässä luvussa pohdimme sattuman ja satunnaisuuden roolia yleisesti, mutta erityisesti tilastotieteessä ja tieteessä ja millä tavalla satunnaisuus liittyy tilastoaineistojen muodostumiseen ja siten tilastotieteeseen.</p>
+<ul>
+<li><strong>Satunnaisuudella</strong> tarkoitetaan yleensä säännönmukaisuuden ja (täydellisen) ennustettavuuden puuttumista, ja kenties juuri siksi sitä voidaan pitää <strong>yhtenä maailman vaikuttavimmista ilmiöistä</strong>.</li>
+</ul>
+<p>Jokainen haluaisi tietää <em>mitä tuleman pitää</em> ja siksi sattuma tekee elämästä mielenkiintoista! Se muokkaa niin meitä itseämme kuin meitä ympäröivää maailmaa mitä merkityksellisimmin tavoin - joskus jopa vasten tahtoamme ja usein vailla täyttä ymmärtystämme!</p>
+<ul>
+<li><p>Ihmisen oma kokemus on kuitenkin altis kaikenlaisille virhepäätelmille, joita kutsutaan myös <strong>kognitiivisiksi vinoumiksi</strong>.</p></li>
+<li><p>Haluamme löytää systematiikkaa ja tarkoitusta kaaoksesta sekä merkityksiä ja syy-seuraussuhteita sellaisista tapahtumista, jotka kuuluvat normaalin satunnaisen vaihtelun piiriin (vrt. signaali vs.&nbsp;kohina). Tällaisissa tilanteissa usein tilastollinen tarkastelu paljastaakin ilmiön todellisen, alkuperäisestä kuvitelmasta poikkeavan luonteen.</p></li>
+<li><p>Erottaakseen systemaattisen vaihtelun satunnaisesta ja ymmärtääkseen oikeasti merkityksellisiä syy-seuraussuhteita, satunnaisuutta on välttämätöntä ymmärtää. Tämä välttämättömyys pätee erityisesti tiedeyhteisön jäseniin, jotka pyrkivät tutkimaan ympäröivän maailman satunnaisia ilmiöitä.</p></li>
+</ul>
+<p>Tilastotiede perustuu satunnaisilmiöiden ja niiden generoimien aineistojen tutkimiseen, joten sattuman luonteen ymmärtäminen on keskeisessä roolissa niin tilastotieteen kuin muidenkin tieteiden ja lopulta maailman ymmärtämisessä.</p>
+<p>&nbsp;</p>
+<section id="satunnaisilmiöt-ja-satunnaismuuttujat-tilastotieteessä" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="satunnaisilmiöt-ja-satunnaismuuttujat-tilastotieteessä"><span class="header-section-number">4.1</span> Satunnaisilmiöt ja satunnaismuuttujat tilastotieteessä</h2>
+<p>Tilastolliset muuttujat tulkitaan satunnaisiksi, ja tilastollisen tutkimuksen tavoite onkin siis <strong>tutkia sitä satunnaisilmiötä, joka havaitut eli toteutuneet havaintoarvot on generoinut</strong>.</p>
+<p>Olemme jo edellä todenneet:</p>
+<ul>
+<li><p>Yksi tilastotieteen olennainen tehtävä onkin kehittää <strong>tilastollisia malleja</strong>, joiden avulla tutkimuksen kohteena olevaa satunnaisilmiöitä voidaan kuvata, selittää ja ennustaa.</p></li>
+<li><p>Tilastollisen mallin satunnaisten piirteiden kuvaus perustuu <strong>todennäköisyyslaskentaan</strong>.</p></li>
+</ul>
+<p><span class="marginnote">Satunnaisilmiö</span></p>
+<div class="defblock">
+<p><strong>Satunnaisilmiö</strong>. Reaalimaailman ilmiö on satunnaisilmiö, jos seuraavat ehdot pätevät:</p>
+<ul>
+<li>Ilmiöllä on useita erilaisia tulosvaihtoehtoja.</li>
+<li>Sattuma määrää mikä tulosvaihtoehdoista toteutuu, eli yksittäistä tulosta ei voida tietää etukäteen.</li>
+<li>Vaikka tulos vaihtelee ilmiön toistuessa satunnaisesti, käyttäytyy tulosvaihtoehtojen suhteellisten osuuksien jakauma tilastollisesti stabiilisti ilmiön toistokertojen lukumäärän kasvaessa.</li>
+</ul>
+</div>
+<p><strong>Tilastollisella stabiiliudella</strong> tarkoitetaan sitä, että on mahdollista arvioida kuinka <strong>todennäköisiä</strong> erilaiset tapahtumat eli satunnaisilmiön tulosvaihtoehdot ovat.</p>
+<ul>
+<li><p>Toisin sanoen satunnaisilmiön tulosvaihtoehtoihin liittyy säännönmukaisuutta, mikä tulee esille ilmiön toistuessa.</p></li>
+<li><p>Tämä liittyy myös siihen, että (useimmiten) satunnaisilmiön lopputulos ei ole täysin ennustamaton. Ts. saatamme kyetä (ajoittain) ennustamaan/ennakoimaan lopputulemaa, mutta täyttä varmuutta lopputulemasta ei siis ole.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkkejä satunnaisilmiöistä</strong>:</p>
+<ul>
+<li><p>Tyypillinen esimerkki on uhkapelit, kuten kortti- ja noppapelit, arpajaiset, lotto tai ruletti: näitä käytetäänkin usein todennäköisyyslaskennan peruskursseilla satunnaisilmiöiden esittelyyn.</p>
+<ul>
+<li>Huom: Osakesijoittaminen, urheiluvedonlyönti tai esim. pokeri eivät kuulu uhkapeleihin, jos niitä harjoitetaan systemaattisesti ja ammattimaisesti (ml. asianmukainen riskienhallinta).</li>
+</ul></li>
+<li><p>Lukion biologian tunneilta muistetaan, että perinnöllisyyskin on osaltaan sattumaa: se määrää kummalta vanhemmalta perittävä geenikopio on peräisin.</p>
+<ul>
+<li>Vastaavasti populaatiotasolla eri ominaisuuksien jakautuminen yksilöiden ja populaatioiden välillä on satunnaista.</li>
+<li>Populaatiotaso voi tässä tarkoittaa esimerkiksi erilaisten eliöiden eri alueilla eläviä populaatioita, joiden välisiä eroja pyritään tutkimaan ja selittämään.</li>
+<li>Vastaavasti ihmisten, ihmisryhmien ja ihmisten muodostamien organisaatioiden sisäisessä ja välisessä käyttäytymisessä on useita satunnaisia elementtejä.</li>
+</ul></li>
+<li><p>Jopa hyvin deterministiseen toimintaperiaatteeseen tähtäävässä tehdastuotannossa käy satunnaisia virheitä tuotteiden valmistusprosesseissa, jotka ilmenevät esimerkiksi viallisina tuotteina.</p></li>
+<li><p>Vastaavasti luonnontieteellisiin mittauksiin liittyy mittausvirheitä, jotka kuuluvat satunnaisvaihtelun piiriin. Esimerkiksi varhaisissa valonnopeusmittauksissa mittausvirheet saattoivat olla suuriakin!</p></li>
+<li><p>Myös kvanttimekaniikan ja hiukkasfysiikan tutkimat ilmiöt ovat perusluonteeltaan satunnaisia.</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p>Tilastollista vaihtelua ilmentävät tilastolliset muuttujat tulkitaan <strong>satunnaismuuttujiksi</strong> ja havainnot (havaintoarvot) voidaan näin ollen tulkita näiden satunnaismuuttujien <strong>realisoituneiksi arvoiksi</strong>. Tällöin tilastollisen tutkimuksen kohteena on <strong>nämä havainnot generoinut satunnaisilmiö</strong>. <span class="marginnote">Satunnaismuuttuja</span></p>
+<div class="defblock">
+<p><strong>Satunnaismuuttuja</strong> (usein lyhyesti sm., englanniksi <em>random variable</em>, ja merkitään esim. (Y), ja kutsutaan ajoittain myös stokastiseksi muuttujaksi) on todennäköisyyslaskennan peruskäsite, jolla tarkoitetaan satunnaisilmiön määräämää lukua.</p>
+<ul>
+<li>Satunnaismuuttujan (Y) realisoituvaa arvoa (y) kutsutaan realisaatioksi tai toteumaksi.</li>
+<li>Tilastollinen aineisto muodostuu useiden satunnaismuuttujien (tilastoyksiköiden tutkimusmuuttujien) realisoituneista arvoista.</li>
+<li>Realisoituneiden arvojen vaihtelua tilastoyksiköiden välillä kutsutaan satunnaisvaihteluksi ja tätä vaihtelua kuvataan satunnaismuuttujan todennäköisyysjakaumalla.</li>
+</ul>
+</div>
+<p>Satunnaismuuttuja siis kuvaa tarkasteltavan mitattavan ominaisuuden (satunnais)vaihtelua tutkimuksen kohteiden eli tilastoyksiköiden joukossa.</p>
+<ul>
+<li>Mitattavan ominaisuuden mahdolliset arvot määräävät satunnaismuuttujan luonteen. Yleisesti satunnaismuuttujat jaetaan kahteen luokkaan: <strong>jatkuviin</strong> ja <strong>diskreetteihin</strong>.
+<ul>
+<li><p>Tähän jakoon voidaan liittää myös jako <strong>kvantitatiivisiin</strong> ja <strong>kvalitatiivisiin</strong> satunnaismuuttujiin. Myöhemmin esiteltäviin mitta-asteikkoihin liittyen kvalitatiiviset sm:jat liittyvät luokittelu- tai järjestysasteikkoon ja vastaavasti kvantitatiiviset sm:jat välimatka- ja suhdeasteikkoon.</p></li>
+<li><p>Huom. ajoittain kvantitatiivisten ja kvalitatiivisten muuttujien jako tehdään niin, että myös diskreetit sm:jat luetaan kvantitatiivisiksi muuttujiksi.</p></li>
+</ul></li>
+<li>Satunnaismuuttujan <strong>todennäköisyysjakauma</strong> määrää erilaisten tulosvaihtoehtojen todennäköisyydet ja mahdollistaa täten tilastollisen päättelyn. Satunnaisuus eroaa mielivaltaisesta prosessista siinä, että satunnaista ilmiötä voidaan kuvata jollakin <strong>tilastollisella lailla/mallilla</strong> kun taas mielivaltaista prosessia ei.</li>
+</ul>
+<p><span class="marginnote">Jatkuvat ja diskreetit sm:jat</span></p>
+<div class="defblock">
+<p><strong>Jatkuvat ja diskreetit satunnaismuuttujat</strong></p>
+<ul>
+<li>Satunnaismuuttuja (Y) on <strong>jatkuva</strong>, jos se voi saada ylinumeroituvan määrän arvoja tai ts. minkä tahansa arvon joltain väliltä, kuten tyypillisesti minkä tahansa arvon joltain reaalilukuväliltä <span class="math inline">\((-\infty,\infty)\)</span>.</li>
+<li>Satunnaismuuttuja (Y) on <strong>diskreetti</strong>, jos se voi saada vain joitain mahdollisia arvoja (vain yksittäisiä, äärellisen tai numeroituvasti äärettömän määrän, arvoja). Yksinkertaisimmillaan diskreetti satunnaismuuttuja (Y) on kaksiarvoinen eli binäärinen, jolloin sen mahdollisia arvoja tyypillisesti merkitään (y=0) ja (y=1).</li>
+</ul>
+<p>Todetaan lyhyesti vielä diskreetteihin sm:jiin liittyen, että mahdollisia luokkia voi olla myös enemmän kuin kaksi. Tällöin ko. <em>kategorinen</em> vastemuuttuja voi olla sellainen, että kategoriat voidaan järkevästi järjestää järjestykseen</p>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong>:</p>
+<ul>
+<li><p>Järjestämättömät luokat: esim. henkilön kotimaa, auton väri tai sairaala, jossa lääketieteellinen operaatio tapahtuu.</p></li>
+<li><p>Järjestetyt luokat: esim. sotilashenkilöiden arvo.</p></li>
+</ul>
+</div>
+</div>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki: sademäärä satunnaismuuttujana</strong>. Huomista sadantaa eli sademäärää tietyllä alueella voidaan pitää (ennen huomista sadepäivää) satunnaismuuttujana (Y) ja mitattua sademäärää (sadepäivän jälkeen) täten sademäärän yhtenä realisaationa (y).</p>
+<ul>
+<li><p>Yleensä sademäärää kohdellaan jatkuvana muuttujana millilitroissa. Mikäli kuitenkin määritetään toteumaksi jonkin sademäärän kynnysarvon, esimerkiksi yksi milli, ylittävä sademäärä, on kyseessä diskreetti kaksiarvoinen (binäärinen) muuttuja (sademäärä on joko yli tai alle yksi milli).</p></li>
+<li><p>Tutkija voisi olla esimerkiksi kiinnostunut sadannan eroista kuntien tai alueiden välillä tietyssä maasssa sekä tähän kenties vaikuttavista syistä. Tätä tutkiakseen hän tarvitsisi tilastollisen aineiston tutkimus- ja taustamuuttujineen eri alueilta, joka voitaisiin kerätä esimerkiksi satunnaisotannalla (palataan myöhemmin) asettamalla sadannan mittaavia astioita satunnaisesti kyseisille alueille.</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p><strong>Huomioita:</strong> Ajoittain tietyn suureen/ilmiön mallinnuksessa voidaan perustellusti käyttää näkökulmasta riippuen kumpaan vaan luokkaan (diskreetit ja jatkuvat sm:jat) kuuluvaa tilastollista mallityyppiä.</p>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong>. Suomen COVID19-tartuntatapauksia tutkittaessa, tartunnan saaneiden lukumäärä oli periaatteessa diskreetti satunnaismuuttuja, joka sai yksittäisen (kokonaisluku)arvon joka kuukausi, mutta käytännössä lukumäärät ovat tässä tapauksessa sen verran suuria, että niitä on perusteltua kohdalla jatkuva-arvoisena muuttujana.</p>
+<p>Vastaavasti esimerkiksi potilaan jonotusaika päivystyksessä voi periaatteessa saada minuuttitasolla hyvinkin diskreettejä arvoja, mutta toisaalta myös minkä tahansa arvon tietyltä reaalilukuväliltä, kuten <span class="math inline">\([0,\infty)\)</span>, ts. mikä vain positiivinen arvo) aikayksikköä muutettaessa ja tällöin käytettäisiin jatkuviin sm:jiin perustuvia tilastollisia menetelmiä.</p>
+</div>
+<p>&nbsp;</p>
+</section>
+<section id="satunnaisilmiöiden-tilastollisen-mallintamisen-perusteita" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="satunnaisilmiöiden-tilastollisen-mallintamisen-perusteita"><span class="header-section-number">4.2</span> Satunnaisilmiöiden tilastollisen mallintamisen perusteita</h2>
+<p>Seuraavaksi käydään vaiheittain läpi (yleisellä tasolla) todennäköisyyden (todennäköisyyslaskennan) näkökulmasta sitä, miten reaalimaailman satunnaisilmiöitä voidaan tilastollisin menetelmin mallintaa. Kaikkiin näihin vaiheisiin syvennytään tulevissa jaksoissa vielä tarkemmin, mutta tämän osion tarkoituksena on havainnollistaa sitä, miten tilastotieteessä mallinnetaan satunnaisilmiöitä.</p>
+<p>Jo aiemmin on todettu, että <strong>tilastollisen tutkimuksen lähtökohta on aineisto</strong> eli <strong>data</strong>. Aineiston tulee kuvata tutkittavaa satunnaisilmiötä sillä tavalla, että esitettyihin tutkimuskysymyksiin voidaan vastata ja/tai hypoteeseja testata.</p>
+<ul>
+<li>Aineiston havaittujen arvojen taustalla olevat satunnaismuuttujat määräävät käytettävän tilastollisen mallin, joka kuvaa tutkittavan ilmiön satunnaista luonnetta. Lopulta tätä tilastollista mallia voidaan käyttää tilastollisten analyysien tekemiseen, kuten ennusteiden muodostamiseen ja/tai hypoteesien testaamiseen.</li>
+</ul>
+<p>Kerätyn (tai havaitun) aineiston pohjalta pyritään tekemään tutkimuskysymystä vastaavia päätelmiä tutkimuksen kohteena olevasta ja aineiston generoineesta satunnaisilmiöstä.</p>
+<!-- - Tutkimuskysymyksen tulee tilastollisessa tutkimuksessa olla sellainen, että sitä vastaavat testattavat hypoteesit koskevat aineiston generoinutta satunnaisilmiötä, jota mitatut tutkimusmuuttujat ilmentävät. 
+- Kun näin on, tutkimuskysymykseen voidaan vastata käytössä olevan aineiston avulla käyttäen tilastollisia menetelmiä.
+-->
+<p>Tilastotieteessä tilastollisen tutkimusaineiston muodostumista voidaan pitää esimerkkinä satunnaisilmiöstä. Voimme ajatella (tässä kohtaa kurssia ja opintoja), että tilastollisen tutkimuksen kohteet on valittu, tavalla taikka toisella, <strong>arpomalla</strong>.</p>
+<ul>
+<li>Arvonta on mainio esimerkki satunnaisilmiöstä, sillä siihen liittyy aina ennustamattomuutta: vaikka yksittäisen arvonnan tulosta ei voi tietää etukäteen, noudattaa se kuitenkin todennäköisyyden lakeja.</li>
+<li>Koska arvonnan tulos vaihtelee satunnaisesti arvontakerrasta toiseen, myös tutkimuksen kohteita kuvaavat tiedot vaihtelevat satunnaisesti arvontakerrasta toiseen.</li>
+</ul>
+<div class="defblock">
+<p><strong>Tilastollisten aineistojen kerääminen arvontaa hyödyntäen</strong></p>
+<p><strong>Satunnaisotanta</strong>: Otannalla tarkoitetaan laveasti tutkimusaineistojen keräämisen menetelmiä. Erilaisten virhelähteiden kontrolloimiseksi tutkimuksen kohteet on syytä valita arpomalla.</p>
+<div class="eblock">
+<p>Esimerkiksi tutkittaessa peruskouluopetusta, kaikkien koulujen tutkiminen olisi liian työlästä ja kallista. Tällöin sovelletaan erilaisia otantamenetelmiä, jotka varmistavat että tutkimukseen valikoituu satunnaisesti edustava otos Suomen kouluista.</p>
+</div>
+<p><strong>Satunnaistetut kokeet</strong>: Kokeellisessa tutkimuksessa tavoitteena on vertailla erilaisten käsittelyiden vaikutuksia kokeen kohteisiin. Erilaisten virhelähteiden kontrolloimiseksi käsittelyt on syytä arpoa kohteille.</p>
+<div class="eblock">
+<p>Esimerkiksi lääketutkimuksessa on tärkeää, että testattavan lääkeaineen vaikutusta tutkittaessa testattavaksi henkilöiksi ei valikoidu esimerkiksi juuri tietyn ikäisiä ihmisiä. Lääkeaine saattaa vaikuttaa eri tavoin eri ikäisiin koehenkilöihin, joten satunnaisotanta eri ikäisistä on tarpeen tutkimusta tehdessä.</p>
+</div>
+</div>
+<p>Tilastollisen aineiston keräämistä, eli otantateoriaa, ja sen tavoitteita käsitellään myöhemmin tämän materiaalin kuluessa.</p>
+<p>Satunnaisotannalla kerätyissä aineistoissa eli <strong>otoksissa</strong> satunnaisuus perustuu siihen, että satunnaismuuttujien toteutuvat arvot (ja niistä lasketut tunnusluvut, kuten keskiarvo, joita tarkastellaan hetken kuluttua) vaihtelevat satunnaisesti otoksesta toiseen, koska otokseen kuuluvat havaintoarvot vaihtelevat otoksesta toiseen.</p>
+<ul>
+<li>Tämä vaihtelu on kuitenkin tilastollisesti stabiilia (ks. yllä), eli eri otokset ilmentävät samaa satunnaisilmiötä. Ts. otantaa toistettaessa eri aineistojen sisältämä satunnaisvaihtelu on aineiston generoineen todennäköisyysjakauman mukaista myös otosten välillä.</li>
+<li>Tilastotieteen tehtävä on tuottaa <strong>tilastollisia malleja</strong> tälle satunnaisilmiöissä havaittavalle <strong>tilastolliselle stabiliteetille</strong>. <strong>Tämä säännönmukaisuus on siis tilastollisen tutkimuksen kohde.</strong></li>
+</ul>
+<p>&nbsp;</p>
+</section>
+<section id="havaintoaineisto-eli-data" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="havaintoaineisto-eli-data"><span class="header-section-number">4.3</span> Havaintoaineisto eli data</h2>
+<p>Tilastotieteellinen tutkimus tarkastelee reaalimaailman ilmiöitä. Täten tutkimuskohteena on tavallisessa elämässä tavattavia asioita, ihmisiä tai tapahtumia.</p>
+<p>Tilastollinen tutkimus aloitetaan tutkimusaineiston keruun suunnittelulla.</p>
+<ul>
+<li>ks. “PPADC/OSAAT-sykli” luvussa 2</li>
+</ul>
+<p>Edellä esitellyt satunnaismuuttujat liittyvät hyvin olennaisesti lopulta analysoitavan tutkimusaineiston muodostumiseen. Tilastotieteessä nimittäin ajatellaan, että satunnaismuuttujien reaalisaatioiden kerätty joukko muodostaa lopulta tarkasteltavan <strong>havaintoaineiston</strong> eli <strong>datan</strong>.</p>
+<ul>
+<li><p>Kuten jo aiemmin määrittelimmme, tutkimuskohteita kutsutaan tilastoyksiköiksi, joilta tarkasteltaan erilaisia mitattavia tilastollisia muuttujia.</p></li>
+<li><p>Kun tarkasteltavien tilastoyksikön tilastollisten muuttujien (numeeriset) arvot havaitaan, kutsutaan näiden arvojen joukkoa <strong>havainnoksi</strong>. <span class="marginnote">Havainto/havainnot</span></p></li>
+</ul>
+<div class="defblock">
+<p><strong>Havainto</strong> muodostuu tilastoyksikön tarkasteltavien tilastollisten muuttujien havaitusta arvoista.</p>
+</div>
+<p>Lopulta havainnot muodostavat havaintoaineiston eli datan. <span class="marginnote">Data</span></p>
+<div class="defblock">
+<p><strong>Havaintoaineisto eli data</strong> on tilastoyksiköiden tilastollisista muuttujista kerätty havaintojen joukko. See koostuu populaation (tyypillisesti sen osajoukon) tilastoyksiköiden havaituista tilastomuuttujien arvoista eli havainnoista.</p>
+</div>
+<p>&nbsp;</p>
+<p>Havaintoaineisto voidaan koota taulukoksi, johon listataan tilastoyksiköt riveille ja tilastomuuttujat sarakkeisiin. Jos havaintoaineisto koostuu <span class="math inline">\(n\)</span>:stä tilastoyksiköstä, joista jokaisesta on kerätty esim. (m):stä tilastomuuttujasta havainnot, niin aineisto voidaan esittää taulukon muodossa seuraavasti:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>tilastomuuttuja 1</th>
+<th>tilastomuuttuja 2</th>
+<th>…</th>
+<th>tilastomuuttuja (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>tilastoyksikkö 1</td>
+<td>(y_{1,1})</td>
+<td>(y_{1,2})</td>
+<td>…</td>
+<td>(y_{1,m})</td>
+</tr>
+<tr class="even">
+<td>tilastoyksikkö 2</td>
+<td>(y_{2,1})</td>
+<td>(y_{2,2})</td>
+<td>…</td>
+<td>(y_{2,m})</td>
+</tr>
+<tr class="odd">
+<td>()</td>
+<td>()</td>
+<td>()</td>
+<td></td>
+<td>()</td>
+</tr>
+<tr class="even">
+<td>tilastoyksikkö (n)</td>
+<td>(y_{n,1})</td>
+<td>(y_{n,2})</td>
+<td>…</td>
+<td>(y_{n,m})</td>
+</tr>
+</tbody>
+</table>
+<p>Tässä siis rivillä (i) on (i). <strong>tilastoyksikön</strong> havainto ja sarakkeessa (j) on (j):tä tilastollisesta muuttujasta havaittu arvo (y_{i,j}). Ts. yhdellä rivillä on yhden tilastoyksikön tiedot kaikista tilastomuuttujista ja yksi sarake on kaikkien tilastoyksiköiden tiedot yhdestä tilastomuuttujasta.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Empiirisenä esimerkkinä ylläolevasta taulukkomuotoisesta aineistosta on isän ja pojan pituuksista koostuva aineisto (tätä tarkastellaan vielä tarkemmin myöhemmin), jossa on havaintoja 1078 kappaletta (ts. <span class="math inline">\(n=1078\)</span>). Tämän aineiston havainnot merkitsevät oheista taulukkoa</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Havaintopari (isä_i, poika_i)</th>
+<th>Isän pituus (cm)</th>
+<th>Pojan pituus (cm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(isä_1, poika_1)</td>
+<td>165.1</td>
+<td>151.9</td>
+</tr>
+<tr class="even">
+<td>(isä_2, poika_2)</td>
+<td>160.8</td>
+<td>160.5</td>
+</tr>
+<tr class="odd">
+<td>()</td>
+<td>()</td>
+<td>()</td>
+</tr>
+<tr class="even">
+<td>(isä_1078, poika_1078)</td>
+<td>178.6</td>
+<td>170.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>Usein, varsinkin parhaillaan kiihtyvällä vauhdilla, kerättävät havaintoaineistot ovat niin suuria, ettei edellisenkaltaisesta havaintotaulukosta voida usein suoraan tarkastelemalla nähdä aineiston pääpiirteitä. Tällöin voi olla tarpeen <strong>luokitella aineistoa</strong> taulukon muodostamiseksi.</p>
+<ul>
+<li>Luokittelussa on kysymys aineiston tiivistämisestä kohtuullisen kokoiseksi ja havainnollisempaan muotoon. Luokittelussa tilastomuuttujan arvot sijoitetaan eri luokkiin siten, että yhden tilastomuuttujan arvo voi kuulua vain yhteen luokkaan.
+<ul>
+<li>Luokka ilmoitetaan yleensä luokkavälinä, kuten reaalilukuvälinä. Esimerkiksi henkilön ikä on tapana luokitella ikäjakauman kuvaamisessa 10-vuotisluokkiin (15–24, 25–34,…), vaikka periaatteessa ikä voitaisiin ilmoittaa minuutinkin tarkkuudella.</li>
+<li>Luokkien lukumäärään vaikuttavat muun muassa tilastomuuttujan arvojen vaihteluväli ja havaintoaineiston laajuus.</li>
+</ul></li>
+<li>Luokittelussa pyritään siihen, että luokkien lukumäärä saadaan tarvittaessa luokkia yhdistämällä kohtuulliseksi ja että luokat valitaan tasavälisesti eli siten, että kahden peräkkäisen luokan alarajojen erotus on vakio.
+<ul>
+<li>Kun aineistoa luokitellaan, aineiston luettavuus paranee mutta toisaalta osa tiedoista (informaatiosta) menetetään eivätkä yksittäiset havaintoarvot ole enää tiedossa.</li>
+</ul></li>
+</ul>
+<p>Kvantitatiivisen tutkimuksen aineistoksi kelpaa periaatteessa kaikki havaintoihin perustuva informaatio, joka on <strong>mittauksen</strong> avulla muutettavissa numeeriseen muotoon.</p>
+<!-- - Havaintoyksiköiden (mitattujen) tilastollisten muuttujien numeerisia arvoja kutsutaan siis **havaintoarvoiksi** tai **havainnoiksi**. -->
+<ul>
+<li>Kaikki havaitut tilastolliset muuttujat eivät ole aina mielenkiintoisia. Tutkimuksen kannalta mielenkiintoisia muuttujia kutsutaan <strong>tutkimusmuuttujiksi</strong>, joiden lisäksi havaintoaineisto pitää mahdollisesti sisällään <strong>taustamuuttujia</strong>.</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkiksi</strong>, jos tutkimuksella halutaan tietoa suomalaisen aikuisväestön mielipiteistä, havaintoyksikköinä ovat aikuisväestöön kuuluvat henkilöt. Jos halutaan tietoa suomalaisista kunnista, havaintoyksikköinä ovat Suomen kunnat jne.</p>
+<ul>
+<li>Ensimmäisessä tapauksessa tilastollisina muuttujina on aikuisväestön mielipiteet, joita voidaan selvittää esimerkiksi kyselytutkimuksella. Toisaalta voidaan myös kerätä taustamuuttujiksi haastatelluista muita tietoja, kuten asuinpaikka, ikä ja ammatti.</li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p>Kaikkia mielenkiintoisia muuttujia ei kuitenkaan välttämättä voida havaita, eli niille ei voida määrittää numeerista arvoa. Tällöin puhutaan nk. <strong>latenteista muuttujista</strong>, eli muuttujista joita ei suoraan havaita mutta joiden oletetaan vaikuttavan havaittavien muuttujien taustalla.</p>
+<ul>
+<li><p>Latentteja muuttujia ovat esimerkiksi elämänlaatu, onnellisuus, konservatiivisuus, yms.</p></li>
+<li><p>Latentteja muuttujia voidaan rakentaa tilastollisten mallien avulla käyttäen hyödyksi niihin liittyviä havaittuja muuttujia.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p>Myöhemmin tässä materiaalissa palataan vielä eri yhteyksissä muutamiin perustason graafisiin esitystapoihin miten tilastotaineistoja voidaan havainnollistaa. Graafiset menetelmät ovat erittäin tärkeä osa aineiston havainnollistamista. Kuvat helpottavat aineiston tulkitsemista ja toimivat usein perusteltuna lähtökohtana monimutkaisempien tilastollisten mallien käyttämiselle.</p>
+<p>&nbsp;</p>
+</section>
+<section id="populaation-luonteesta" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="populaation-luonteesta"><span class="header-section-number">4.4</span> Populaation luonteesta</h2>
+<p>Populaatio on siis ryhmä, josta otos on peräisin.</p>
+<ul>
+<li><p>Populaatio ja otos määriteltiin lyhyesti jo aiemmin (kertaa siis näiden määritelmät!).</p></li>
+<li><p>Esim. kyselytutkimuksessa populaatio voi olla kirjaimellinen populaatio, kuten tietyn alueen asukkaat, mutta mittauksia tehtäessä, tai kun kaikki mahdollinen data on käytettävissä, populaatio muuttuu matemaattiseksi idealisaatioksi, joka edustaa kaikkia mahdollisia ko. populaatioon kuuluvia havaintoja.</p></li>
+</ul>
+<p>Populaatio voidaan ajatella yksilöiden joukkona, mutta myös todennäköisyysjakaumana satunnaisille havainnoille, joka on otettu kyseisestä populaatiosta.</p>
+<ul>
+<li><p>Tämä tarkoittaa, että populaatio ei ole vain fyysinen joukko yksilöitä, vaan se edustaa myös kaikkia mahdollisia havaintoja, jotka voidaan poimia kyseisestä joukosta.</p></li>
+<li><p>Populaatioita voidaan tiivistää esim. odotusarvon ja varianssin kautta, jotka kuvaavat populaation ominaisuuksia samalla tavalla kuin otoskeskiarvo ja otosvarianssi kuvaavat otoksen ominaisuuksia.</p></li>
+</ul>
+<p>Aineisto on siis lopulta arvonnan tulos eli mitkä perusjoukon (populaation) tilastoyksiköt tulevat valituksi otokseen, ja siten myös tutkimuksen kohteita kuvaavat tiedot vaihtelevat satunnaisesti arvontakerrasta toiseen.</p>
+<p>Usein data ei käytännössä synny kirjaimellisesta populaatiosta otoksena. Kun meillä on kaikki olemassa oleva data, voimme kuvitella sen olevan peräisin sellaisesta populaatiosta tapahtumia, jotka olisivat voineet tapahtua, mutta eivät tapahtuneet. Tämä tarkoittaa, että vaikka meillä olisi kaikki mahdollinen data, voimme silti käyttää tilastollisia menetelmiä ja malleja analysoidaksemme sitä ikään kuin se olisi otos suuremmasta, hypoteettisesta populaatiosta.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Populaatiosta-havaintoon_250523_081448.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Populaatiosta havaintoon, joka koostuu kahdesta tilastomuuttujasta.
+</center>
+<p>&nbsp;</p>
+<p>Populaation muodostavilta tilastoyksiköiltä havaitaan/mitataan/tarkastellaan tutkimuksen kannalta niiden kiinnostavia ominaisuuksia eli <strong>tilastollisia muuttujia</strong> ja lopulta niiden arvoja.</p>
+<ul>
+<li>Mielenkiinnon kohteena olevia tilastollisia muuttujia kutsutaan <strong>tutkimusmuuttujiksi</strong> (kuten tulot ja kuntien äänestysprosentti) ja niiden lisäksi voidaan kerätä lisätietoa eli <strong>taustamuuttujia</strong> (näitä voisivat olla esimerkiksi asuinpaikka ja kunnan väkiluku).</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki: vaalitutkimukset</strong>. Politiikan tutkimuksen alalla yksi mielenkiintoinen tutkimuskohde on tutkia kuntavaaleissa äänestävien ihmisten tuloja.</p>
+<ul>
+<li><p>Tällöin jokainen äänioikeuttaan käyttävä muodostaa oman tilastoyksikkönsä. Vastaavasti populaationa (perusjoukkona) toimii kaikki äänestysikäiset kansalaiset, jotka äänioikeuttaan käyttävät.</p></li>
+<li><p>Toinen tutkimuskysymys voisi käsitellä kuntien välistä äänestysaktiivisuutta.Tällöin jokainen kunta muodostaa oman tilastoyksikkönsä ja vastaavasti kaikki Suomen kunnat muodostavat populaation.</p>
+<ul>
+<li><p>Kuntien äänestysaktiivisuus saadaan kuitenkin tutkimalla kunnan sisäistä äänestysaktiivisuutta. Toisin sanoen, voidaksemme mitata kuntien äänestysaktiivisuutta, tulee ensiksi selvittää kuntien äänestysikäiset kansalaiset ja äänioikeuttaan käyttävät.</p></li>
+<li><p>Pohdi, miksi pelkästään äänioikeuttaan käyttävien tutkiminen saattaisi olla tutkimuksen tulosten luotettavuuden kannalta ongelmallista?</p></li>
+</ul></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<ul>
+<li>Tilastoyksiköiden tilastollisilla muuttujilla on tietty mahdollisten arvojen joukko, ja näillä arvoilla on jokin <strong>jakauma</strong> populaatiossa. Palaamme myöhemmin tilastotieteen keskeisiin jakaumiin ja niiden esittelyyn tarkemmin, mutta määritellään seuraavassa kuitenkin populaatiojakauma.</li>
+</ul>
+<div class="defblock">
+<p><strong>Populaatiojakaumalla</strong> tarkoitetaan potentiaalisten havaintojen jakaumaa koko populaatiossa. Se viittaa myös geneerisen satunnaismuuttujan todennäköisyysjakautumaan, joka kuvaa, kuinka todennäköistä on saada tietty arvo satunnaismuuttujan realisaationa.</p>
+</div>
+<div class="eblock">
+<p><strong>Esimerkiksi</strong> edelliseen esimerkkiin viitaten äänestysikäisten tulot voivat määritelmästä riippuen saada minkä tahansa positiivisen arvon mutta kunnan äänestysprosentti on luonnollisesti rajattu nollan ja sadan prosentin väliin.</p>
+</div>
+<p>&nbsp;</p>
+</section>
+<section id="todennäköisyysjakauma" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="todennäköisyysjakauma"><span class="header-section-number">4.5</span> Todennäköisyysjakauma</h2>
+<section id="yleistä-taustaa-todennäköisyysjakaumille" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="yleistä-taustaa-todennäköisyysjakaumille"><span class="header-section-number">4.5.1</span> Yleistä taustaa todennäköisyysjakaumille</h3>
+<p>Tilastolliset menetelmät perustuvat todennäköisyyslaskennan tuloksiin ja tarjoavat keinon hallita satunnaisuuden aiheuttamaa epävarmuutta.</p>
+<p><span class="marginnote">Todennäköisyysjakauma</span></p>
+<p>Tilastolliset mallit perustuvat satunnaismuuttujan mahdollisten tulosvaihtoehtojen todennäköisyyksiä kuvaavalle <strong>todennäköisyysjakaumalle</strong>, joka määrää millä todennäköisyydellä satunnaismuuttuja saa erilaisia arvoja.</p>
+<p>&nbsp;</p>
+<p><span class="marginnote">Kertymäfunktio</span></p>
+<div class="defblock">
+<p><strong>Todennäköisyysjakauma</strong> on yleisnimitys matemaattiselle ilmaisulle, joka kuvaa satunnaismuuttujan <span class="math inline">\(Y\)</span> mahdollisuutta saada arvon <span class="math inline">\(y\)</span>. Tämä jakauma auttaa ymmärtämään satunnaismuuttujan käyttäytymistä ja tekee mahdolliseksi tilastollisten analyysien, kuten esim. ennusteiden tekemisen.</p>
+<p>Satunnaismuuttujalla <span class="math inline">\(Y\)</span> on <strong>kertymäfunktio</strong>, joka määritellään kaavalla <span class="math display">\[\begin{equation*}
+F_Y(y) \stackrel{merk.}{=} F(y) = P(Y ≤ y)
+\end{equation*}\]</span> eli kyseessä on todennäköisyys, että <span class="math inline">\(Y\)</span> saa arvon, joka on enintään <span class="math inline">\(y\)</span>. Ts. kertymäfunktion arvo on nollan ja yhden välillä (eli ts. <span class="math inline">\([0,1]\)</span>): <span class="math inline">\(\lim_{y \to -\infty}\, F(y) = 0\)</span> ja <span class="math inline">\(\lim_{y \to \infty}\, F(y) = 1\)</span>, ja kuvaa paljonko todennäköisyysmassaa on kertynyt vasemmalta pisteeseen <span class="math inline">\(y\)</span> saakka.</p>
+</div>
+<p><span class="marginnote">Pistetodennäköisyysfunktio</span> <strong>Diskreetin satunnaismuuttujan</strong> todennäköisyysjakauma voidaan usein esittää taulukkomuodossa. Eri arvojen todennäköisyydet muodostavat kyseisen satunnaismuuttujan todennäköisyysjakauman, <strong>pistetodennäköisyysfunktion</strong> (ptnf:n), jota voidaan havainnollistaa esimerkiksi pylväsdiagrammilla</p>
+<ul>
+<li>Esimerkkejä diskreeteistä tn-jakaumista ovat mm. Bernoulli-jakauma, binomijakauma ja Poisson-jakauma. Näitä käsitellään tarkemmin Osassa II.</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkiksi</strong> allaesiteltävä puoluiden kannatusosuuksia koskeva esimerkkitapaus on esimerkki pistetodennäköisyysfunktiosta, jonka taustalla voidaan ajatella olevan satunnaismuuttuja <span class="math inline">\(Y\)</span>, joka kuvaa yksittäisen satunnaisen äänestäjän kannattamaa puoluetta. Ennen hänen vastaustaan voidaan ajatella, että on olemassa tietyt kyselyhetken aikaiset todennäköisyydet, että ko. henkilö kannattaa tiettyä puoluetta.</p>
+</div>
+<p><span class="marginnote">Tiheysfunktio</span> Vastaavasti <strong>jatkuvan satunnaismuuttujan</strong> arvot muodostavat jonkin reaaliakselin välin, joka sisältää äärettömän määrän lukuja. Tämän vuoksi jatkuvan satunnaismuuttujan todennäköisyysjakauman esittäminen pistetodennäköisyysfunktion kautta ei ole luontevaa, vaan jakauma esitetään satunnaismuuttujan <strong>tiheysfunktion</strong> avulla.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Esim_ptnf_tf.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Esimerkkitapaukset pistetodennäköisyysfunktiosta (binomijakauma) ja tiheysfunktiosta (normaalijakauma).
+</center>
+<!-- - Esimerkki jatkuvasta jakaumasta on normaalijakauma, jota käsitellään myöhemmin tässä luvussa. -->
+<p>&nbsp;</p>
+<p>Havaitulle aineistolle perustettava tilastollinen malli perustuu juuri sm:jan todennäköisyysjakaumaan, joka riippuu yhdestä tai useammasta (arvoltaan yleisesti tuntemattomasta) <strong>parametrista</strong> ja kuvaa kyseisen muuttujan säännönmukaista satunnaisvaihtelua.</p>
+<div class="defblock">
+<p><strong>Parametrit</strong> määrittävät todennäköisyysjakauman (ja/tai tilastollisen mallin) käyttäytymisen. Parametrit estimoidaan (=arvioidaan) käytettävissä olevan aineiston perusteella.</p>
+<div class="eblock">
+<p>Esimerkiksi myöhemmin (Osassa II) esiteltävässä yhden selittäjän lineaarisessa regressiomalli sisältää kaksi parametria (ja varianssiparametrin), jotka määrittävät regressiosuoran yhtälön (ns. vakiotermi ja kulmakerrointa mittaavaa parametri).</p>
+</div>
+<p>Parametrien estimointi on keskeinen osa tilastollista analyysiä, kuten erinäisten päätelmiä/tulkintojen tekemistä ja ennusteiden muodostamista.</p>
+</div>
+<p>&nbsp;</p>
+<p>Tilastollinen malli riippuu siis tehdystä todennäköisyysjakaumaoletuksesta sekä havaitusta aineistosta eli mielenkiinnon kohteena olevan satunnaismuuttujan realisaatioista. <strong>Tavoitteena on pyrkiä arvioimaan sitä populaatiotason todennäköisyysjakaumaa, joka on tutkimusaineiston generoinut</strong>.</p>
+<ul>
+<li>Tarkemmin sanottuna tavoitteena on arvioida populaatiotason todennäköisyysjakauman parametreja, jotka määrittävät jakauman muodon ja siten eri tulosvaihtoehtojen todennäköisyydet!</li>
+</ul>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki diskreettiä aineistoa koskevasta jakaumasta: puolueiden kannatusmittaus</strong></p>
+<p>Poliittisten puolueiden kannatustutkimuksia mittaavia galluppeja tehdään erityisesti vaalien alla usean tilastollisia kyselytutkimuksia tekevän tahon toimesta.</p>
+<p>Puoluevalintaa (tai valitsematta jättämistä) voidaan pitää äänestysikäisten keskuudessa satunnaismuuttujana, jolla on äärellinen määrä tulosvaihtoehtoja: puolueiden määrän lisäksi vastaaja voi ilmoittaa ettei tiedä ketä aikoo äänestää tai että ei aio äänestää ollenkaan.</p>
+<ul>
+<li><p>Täten puolueiden kannatus on diskreetti muuttuja ja kannatustutkimuksessa kohdepopulaatio on äänestysikäiset (täysi-ikäiset) Suomen kansalaiset.</p></li>
+<li><p>Osoittautuu, että tässä yksinkertaistetussa tapauksessa paras arvio (nk. suurimman uskottavuuden estimaatti, josta lyhyesti Osassa II) todennäköisyydelle, että satunnaisesti valittu äänestysikäinen kansalainen äänestää tiettyä puoluetta on kyseisen puolueen saama osuus kaikista kyselyyn vastanneista, kunhan otos on edustava. Otoksen edustavuus on erittäin tärkeä yksityiskohta ja sitä tarkastellaan hetken päästä vielä tarkemmin</p></li>
+</ul>
+<p>&nbsp;</p>
+<p>Oheisessa taulukossa on esitelty tuloksia Taloustutkimuksen Ylelle suorittamasta puolueiden eduskuntavaalikannatusta mittaavasta tutkimuksesta, jossa haastateltiin 2481 ihmistä puhelinhaastatteluina ja internetpaneelina aikavälillä 7.6.2024–2.7.2024.</p>
+<ul>
+<li><p>Haastatelluista 1910 kertoi puoluekantansa ja tutkimuksen virhemarginaalin kerrottiin olevan suurimmillaan 1,9 prosenttiyksikköä suuntaansa (virhemarginaalista myös lisää Osassa II).</p></li>
+<li><p>Tässä tapauksessa mielenkiinnon kohteena olevat tilastollisen mallin parametrit, jotka kuvaavat kannatusosuuksia koko valtakunnan tasolla ovat juurikin edellä mainitut äänestystodennäköisyydet! Saadut todennäköisyydet (estimaatit) on esitetty alla olevassa taulukossa ja kuvaajissa.</p></li>
+</ul>
+<p>&nbsp;</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Puolue</th>
+<th>SDP</th>
+<th>VAS</th>
+<th>KOK</th>
+<th>KESK</th>
+<th>RKP</th>
+<th>KD</th>
+<th>VIHR</th>
+<th>PS</th>
+<th>LIIK</th>
+<th>MUU</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Kannatus-%</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp; 20.1</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;11.6</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;21.2</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12.2</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;3.9</td>
+<td>&nbsp;&nbsp;&nbsp;3.7</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.3</td>
+<td>&nbsp;&nbsp; 15.3</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.9</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;1.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="puoluekannatukset.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Puolueiden kannatukset pylväsdiagrammeina.
+</center>
+<p>&nbsp;</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="kannatusosuudetpiirakka.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Puoluiden kannatukset piirakkakuviona.
+</center>
+<p>&nbsp;</p>
+<p><span class="marginnote">Pylväsdiagrammi</span></p>
+<p>Edellä kuvioissa esitellään samalla kaksi tilastotieteelle tyypillistä graafista esitysmuotoa eli <strong>pylväsdiagrammi</strong> ja <strong>piirakkakuvio</strong>. Pylväsdiagrammi (bar chart) on kuvio, jossa kategoriset tiedot (edellä puolueet) esitetään suorakulmaisina pylväinä. Pylvään korkeus tai pituus kuvaa havaintojen määrää tai arvoa eli tässä esimerkissä kannatusosuuksia. <span class="marginnote">Piirakkakuvio</span> Vastaavasti piirakkakuvio (pie chart) merkitsee ympyrää, joka on jaettu sektoreihin, jotka kuvaavat eri kategorioiden prosentuaalisia osuuksia kokonaisuudesta. Molemmat esitystavat ovat hyödyllisiä – mutta ne palvelevat hieman eri tarkoituksia. Pylväsdiagrammi korostaa vertailua, piirakkakuvio osuuksia. Tilastotieteessä on tärkeää valita esitystapa, joka tukee tutkimuskysymystä ja auttaa tulkitsemaan aineistoa mahdollisimman selkeästi.</p>
+<p>&nbsp;</p>
+</section>
+<section id="odotusarvo-ja-varianssi" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="odotusarvo-ja-varianssi"><span class="header-section-number">4.5.2</span> Odotusarvo ja varianssi</h3>
+<p>Satunnaismuuttujan todennäköisyysjakauman keskeisiä piirteitä voidaan tiivistää <strong>odotusarvon</strong>, <strong>varianssin</strong> ja <strong>keskihajonnan</strong> avulla. Näille on olemassa vastaavat otosvastineet, joita käytetään jakauman ominaisuuksien arvioimiseen otosaineiston perusteella.</p>
+<p><span class="marginnote">Odotusarvo</span></p>
+<div class="defblock">
+<p><strong>Odotusarvo</strong>. Satunnaismuuttujan (<span class="math inline">\(Y\)</span>) odotusarvo (<span class="math inline">\(\mathsf{E}(Y)\)</span>) kuvaa satunnaismuuttujan odotettavissa olevaa arvoa.</p>
+<ul>
+<li><p>Merkinnän (<span class="math inline">\(\mathsf{E}(Y)\)</span>) käyttö juontaa juurensa englannin kielen sanoihin expectation (“odotus”) ja <strong>expected value</strong> (“odotusarvo”).</p></li>
+<li><p>Odotusarvo kuvaa siis jakauman painopistettä.</p></li>
+<li><p>Odotusarvo on satunnaiskokeen tulosvaihtoehtojen <strong>painotettu keskiarvo</strong>, jossa kunkin tuloksen painona on vastaavan tapauksen todennäköisyys.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki: Nopanheiton odotusarvo</strong>. Perinteinen esimerkki odotusarvosta on tavallisen kuusitahoisen nopan silmäluvun odotusarvo. Nopanheitto on diskreetti satunnaisilmiö ja tavallisen painottamattoman nopan tapauksessa jokaisen silmäluvun todennäköisyys on yhtä suuri. Merkitään nopan silmälukua (sm) (Y) ja sen realisaatiota (y). Nopan silmäluvun realisaatioiden mahdolliset arvot ovat (Y = {1,2,3,4,5,6}) ja niiden todennäköisyydet ovat (<span class="math inline">\(P(Y=y) = \frac{1}{6}\)</span>).</p>
+<p>Nopanheiton silmäluvun odotusarvo määritetään siis painotettuna keskiarvona: <span class="math display">\[\begin{equation*}\mathsf{E}(Y) = \sum_{i=1}^6 \left(y_i \cdot P(Y=y_i) \right) = 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{6} + 5 \cdot \frac{1}{6} + 6 \cdot \frac{1}{6} = \frac{7}{2} = 3.5.
+\end{equation*}\]</span></p>
+</div>
+</div>
+<ul>
+<li>Sivuhuomiona edelliseen liittyen edellä lukujen <span class="math inline">\(y_i\)</span> painotetun summan yhteydessä käytetään <strong>summamerkintää</strong>. Yleisesti tällä tarkoitetaan sitä, että (esimerkinomaisesti) havaintojen (lukujen) <span class="math inline">\(y_1,\ldots,y_n\)</span> summaa <span class="math inline">\(y_1+ \cdots + y_n\)</span> voidaan merkitä lyhyesti <span class="math inline">\(\sum_{i=1}^{n} y_i\)</span>. Summamerkinnästä näkyy mistä indeksointi summassa alkaa (havaintoyksiköstä 1) ja mihin se päättyy (havaintoyksikköön <span class="math inline">\(n\)</span>). Summamerkintä luetaan tässä tapauksessa siis “summa <span class="math inline">\(y_i\)</span>, jossa <span class="math inline">\(i\)</span> käy 1:stä <span class="math inline">\(n\)</span>:ään”. Ajoittain indeksoinnit jätetään myös merkitsemättä, jos sillä ei ole tarkastelussa merkitystä tai se on asiayhteydestä muuten selvä.</li>
+</ul>
+<p>&nbsp;</p>
+<p>Diskreettien sm:jien (kuten yllä olevassa esimerkissä) sijaan jatkuvien satunnaismuuttujien tapauksessa odotusarvon <span class="math inline">\(\mathbb{E}(Y)\)</span> määritteleminen merkitsee integroinnin käyttämistä: <span class="math display">\[\begin{equation}
+\mathbb{E}(Y) = \int_{-\infty}^{\infty} \, y \cdot f_Y(y) \, dy,
+\end{equation}\]</span> jossa <span class="math inline">\(f_Y(y)\)</span> on satunnaismuuttujan <span class="math inline">\(Y\)</span> tiheysfunktio. Tarkemmat yksityiskohdat jatkuvien sm:jien odotusarvoista jäävät todennäköisyyslaskennan kursseille.</p>
+<p>&nbsp;</p>
+<p>Odotusarvon lisäksi kiinnostuksen kohteena on usein jakauman keskittyneisyys (hajaantuneisuus). Ts. kun halutaan kuvata satunnaismuuttujan arvojen vaihtelua, tutkitaan todennäköisyysjakauman <strong>varianssia</strong> tai <strong>keskihajontaa</strong>.</p>
+<p><span class="marginnote">Varianssi ja keskihajonta</span></p>
+<div class="defblock">
+<p>Satunnaismuuttujan (Y) hajontaa voidaan mitata <strong>varianssilla</strong> <span class="math display">\[\begin{equation*} \mathsf{Var}(Y) = \mathsf{E}\left[ \left( Y-\mathsf{E}(Y) \right)^2\right], \end{equation*}\]</span> tai sen neliöjuuren eli <strong>keskihajonnan</strong> avulla <span class="math display">\[\begin{equation*} \text{D}(Y) = \sqrt{\mathsf{Var}(Y)}. \end{equation*}\]</span></p>
+<ul>
+<li><p>Merkintöjen (<span class="math inline">\(\mathsf{Var}(Y)\)</span>) ja (<span class="math inline">\(\text{D}(Y)\)</span>) taustalla on englannin kielen sanat <strong>variance</strong> (varianssi) ja <strong>deviation</strong> (“poikkeama” tai “hajonta”).</p></li>
+<li><p>Ts. mitä lähempänä nollaa (nollaa ei kuitenkaan saavuteta!) keskihajonta ja varianssi ovat, sitä todennäköisempää on, että satunnaismuuttujan arvo on lähellä odotusarvoa.</p></li>
+</ul>
+</div>
+<p>Odotusarvon ja varianssin (keskihajonnan) tavanomaiset <strong>estimaattorit</strong>, eli konkreettiseen numeeriseen aineistoon, otokseen, liittyvät ja siitä laskettavat vastineet, ovat otoskeskiarvo ja otosvarianssi (otoshajonta), joihin tutustuaan pian myöhemmin. Tähän liittyen määritellään tässä vaiheessa tunnusluku</p>
+<p>&nbsp;</p>
+</section>
+<section id="todennäköisyysjakauma-esimerkkinä-normaalijakauma" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="todennäköisyysjakauma-esimerkkinä-normaalijakauma"><span class="header-section-number">4.5.3</span> Todennäköisyysjakauma: Esimerkkinä normaalijakauma</h3>
+<p>Käydään seuraavaksi läpi tilastollisen mallin parametrien merkitystä <strong>normaalijakauman</strong> tapauksessa (ja ylipäätään esitellään samalla normaalijakaumaa). Normaalijakauma on yksi keskeisimpiä ja tärkeimpiä todennäköisyysjakaumia tilastotieteessä ja sen avulla voidaan helposti kuvata jakauman parametrien vaikutusta jakauman muotoon. <span class="marginnote">Normaalijakauma</span></p>
+<div class="defblock">
+<p><strong>Normaalijakauma</strong>. Satunnaismuuttujan <span class="math inline">\(Y\)</span> noudattaessa normaalijakaumaa merkitään yleisesti <span class="math inline">\(Y \thicksim \mathsf{N}(\mu,\sigma^2)\)</span>, jossa <span class="math inline">\(\mu\)</span> on jakauman odotusarvo ja <span class="math inline">\(\sigma^2\)</span> sen varianssi. Normaalijakauman <strong>tiheysfunktio</strong> <span class="math display">\[\begin{equation*}
+f(y;\mu,\sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \mathrm{exp}\left(-\frac{1}{2} \left(\frac{y-\mu}{\sigma}\right)^2 \right)
+\end{equation*}\]</span> määrittelee parven normaalijakaumia kun parametreille () (odotusarvo) ja (^2) (varianssi) annetaan erilaisia arvoja. Alla olevassa kuvassa on kuvattu erilaisia normaalijakauman tiheysfunktion muotoja eri parametriarvoilla (ks. oikea yläkulma).</p>
+<p>&nbsp;</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="normaalisiatf.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Normaalijakauman tiheysfunktion muotoja eri parametriarvoilla.
+</center>
+<p>&nbsp;</p>
+<p>Tiheysfunktio kuvaa siis satunnaismuuttujan eri tulosvaihtoehtojen (vaaka-akselin numeeriset arvot) todennäköisyyksiä.</p>
+</div>
+<p>Tarkasteltaessa ylläolevia normaalistijakautuneita sm:jia, esimerkiksi satunnaismuuttujaa, joka on normaalisti jakautunut odotusarvoltaan (= 5) ja varianssiltaan (<span class="math inline">\(\sigma\^2 = 2\)</span>) merkitään (<span class="math inline">\(Y \thicksim \mathsf{N}(5,2)\)</span>) (ts. kuvion punainen tf.). Tämän sm:jan realisaatiot ovat keskittyneet odotusarvon ympärille niin, että suuret poikkeamat odotusarvosta kumpaankaan suuntaan ovat vähemmän todennäköisiä kuin pienemmät poikkeamat.</p>
+<ul>
+<li>Toisin sanoen, odotusarvon määritelmän mukaisesti, normaalijakauman parametreista odotusarvo kuvaa sitä mikä on satunnaisilmiön generoimien realisaatioiden odotettavissa oleva arvo. Täten odotusarvo () kuvaa normaalijakauman tapauksessa sen “sijaintia” (huomioi, että tämä on erityisesti normaalijakauman ominaisuus).</li>
+</ul>
+<!-- Tässä pisteessä normaalijakauman tiheysfunktion arvo maksimoituu, eli se kuvaa sitä realisaatiota (niiden reaalisaatioiden kohtaa), joka on kaikkein todennäköisin. -->
+<ul>
+<li>Vastaavasti varianssi kuvaa sitä, kuinka paljon realisaatiot keskimäärin poikkeavat odotusarvosta. Suurempi varianssi “leventää” normaalijakauman tiheysfunktiota, jolloin suuremmat poikkeamat ovat suhteellisesti todennäköisempiä.</li>
+</ul>
+<!-- - Varianssin yksikkö on satunnaismuuttujan yksikkö korotettuna toiseen potenssiin, joten sen tulkinta on hankalaa. Tällöin on usein helpompaa hahmottaa satunnaismuuttujan hajontaa varianssin neliöjuurella, eli keskihajonnalla, jonka yksikkö on sama kuin satunnaismuuttujan yksikkö. -->
+<ul>
+<li>Ajoittain on tulkinnan kannalta helpompaa hahmottaa satunnaismuuttujan hajontaa varianssin neliöjuurella, eli keskihajonnalla.</li>
+</ul>
+<p>&nbsp;</p>
+<p><span class="marginnote">Standardoitu normaalijakauma</span> Erityisesti ns. <strong>standardoidun normaalijakauman</strong> tapauksessa odotusarvo on 0 ja varianssi 1 eli <span class="math inline">\(\mathsf{N}(0,1)\)</span>. Se voidaan määritellä normaalisti jakautuneen sm. <span class="math inline">\(Y \thicksim \mathsf{N}(\mu,\sigma^2)\)</span> perusteella standardoimalla <span class="math display">\[\begin{equation*}
+Z = \frac{Y-\mu}{\sigma},
+\end{equation*}\]</span> jossa siis <span class="math inline">\(Z \thicksim \mathsf{N}(0,1)\)</span>. Tätä jakaumaa tarvitaan ja käsitellään myöhemmin. Seuraavassa kuvassa esitetään standardoidun normaalijakauman tiheysfunktion kuvio ja siihen liittyvien eri standardoitujen <strong>z-arvojen</strong> mukaisia <strong>prosenttipisteitä</strong>. <span class="marginnote">z-arvo</span></p>
+<ul>
+<li><p>Standardoidun normaalijakauman kertymäfunktion arvo tietyssä pisteessä (ts, tietyn z-arvon kohdalla allaolevassa kuvassa) on sen määritelmän mukaisesti kertynyt todennäköisyys (tiheys), joka jää tästä pisteestä katsoen vasemmalle puolelle jakaumaa. Ts. <span class="marginnote">Prosenttipiste</span> <span class="math inline">\(p\)</span>. prosenttipiste on se havaintoarvo, joka jakaa havainnot kahteen osaan niin, että <span class="math inline">\(p\)</span>% havaintoarvoista on ko. havaintoarvoja pienempiä tai yhtäsuuria kuin se.</p></li>
+<li><p>Esimerkiksi z-arvoon <span class="math inline">\(z=-2\)</span> liittyvä kertymäfunktion arvo on n.&nbsp;0.02 (eli n.&nbsp;2%) eli ts. tähän pisteeseen mennessä kertynyt todennäköisyysmassa vasemmalta katsoen on tämä n.&nbsp;2%. Vastaavasti arvoon <span class="math inline">\(z=2\)</span> liittyen kertymäfunktion arvo on n.&nbsp;0.98 (eli n.&nbsp;98%. Tarkalleen ottaen pisteessä <span class="math inline">\(z=1.96\)</span> kertymä on 97,5%). Koska standardinormaalijakauman tiheysfunktio on symmetrinen odotusarvon 0 ympärillä, niin kohta <span class="math inline">\(z=0\)</span> erottaa todennäköisyysmassaa 50% verran sen molemmille puolille.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="StdNpisteitä.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Standardoitu normaalijakauma ja sen tiheysfunktio. Kuvaan on korostettu muutamia z-arvojen mukaisia kertymäfunktion arvoja.
+</center>
+<p>&nbsp;</p>
+</section>
+</section>
+<section id="parametrien-estimointi" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="parametrien-estimointi"><span class="header-section-number">4.6</span> Parametrien estimointi</h2>
+<p>Tilastollinen malli, joka kuvaa satunnaisilmiötä, voidaan usein (ja tällä kurssilla) ajatella perustuvan johonkin parametriseen todennäköisyysjakaumaan. Tilastollisen analyysin tavoitteena on selvittää, mikä prosessi on tuottanut havaittavan aineiston. Kuten aiemmin todettiin, todennäköisyysjakaumat riippuvat <strong>parametreista</strong>, ja erityisesti klassisessa tilastotieteessä tehdään oletus, että aineiston taustalla vaikuttavat vakioarvoiset mutta tuntemattomat parametriarvot.</p>
+<ul>
+<li>Toisin sanoen tilastollinen aineisto koostuu usean tilastoyksikön havaituista tutkimusmuuttujan arvoista (realisaatioista), ja tavoitteena on aineiston avulla arvioida sitä todennäköisyysjakaumaa, joka on generoinut nämä havainnot.</li>
+</ul>
+<p>Lähtökohtana, <strong>tiettyjen yksinkertaistavien ja vahvojen oletusten nojalla</strong>, pidetään usein sitä, että kaikki tutkimusmuuttujan realisaatiot ovat peräisin samasta todennäköisyysjakaumasta. Tälle oletukselle voidaan perustaa havaintoaineiston <strong>yhteisjakauma</strong> (ks. Osa II), joka kuvaa koko aineiston todennäköisyysjakaumaa. Parametriarvot ovat kuitenkin edelleen tuntemattomia.</p>
+<ul>
+<li>Huom. Yhteisjakauma voidaan määritellä myös ilman oletusta, että kaikki havainnot noudattavat samaa jakaumaa.</li>
+</ul>
+<p>Tilastotieteen keskeinen tehtävä on <strong>estimoida</strong> eli arvioida, hyvin perustelluin menetelmin, mitkä nämä tuntemattomat parametriarvot ovat. Parametrit kuvaavat satunnaisilmiötä, joka on lopulta tutkimuksen varsinainen mielenkiinnon kohde.</p>
+<p>&nbsp;</p>
+<p>Nk. <strong>suurimman uskottavuuden estimoinnissa</strong> aineiston generoiman (oletetun) todennäköisyysjakauman parametriarvot <strong>estimoidaan</strong> käytettävän otoksen/aineiston avulla siten, että aineistoa kuvaavan tilastollisen mallin <strong>uskottavuusfunktio</strong> maksimoituu. Tämä merkitsee käytännössä valitun todennäköisyysjakauman sovittamista havaintoaineistoon mahdollisimman hyvin. Näin muodostuvia parametrien arvoja kutsutaan <strong>estimaateiksi</strong> ja ne kuvaavat käsillä olevan aineiston ja tehtyjen oletusten jälkeen parhaiten perusjoukkoa.</p>
+<div class="defblock">
+<p><strong>Uskottavuusfunktio</strong>. Tilastollisen mallin pohjana oleva todennäköisyysjakauma määrittää yhdessä kaikkien havaintojen kanssa uskottavuusfunktion, jota käytetään tilastollisen mallin tuntemattomien parametriarvojen estimoimiseen suurimman uskottavuuden (SU) menetelmällä.</p>
+</div>
+<p>Tähän SU-estimointimenetelmään palataan hieman tarkemmin vielä Osassa II ja erityisesti useaan kertaan myöhemmin tilastotieteen perus-, aine- ja myös syventävissä opinnoissa.</p>
+<p>&nbsp;</p>
+</section>
+<section id="hypoteesien-testaaminen" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="hypoteesien-testaaminen"><span class="header-section-number">4.7</span> Hypoteesien testaaminen</h2>
+<p>Parametrien estimointi ja niihin liittyvä <strong>hypoteesien testaus</strong> ovat tilastolliseen tutkimukseen liittyvän tilastollisen päättelyn keskeisiä välineitä, joiden avulla pyritään tekemään johtopäätöksiä tutkittavasta ilmiöstä havaintoaineiston perusteella.</p>
+<div class="defblock">
+<p>Hypoteesien testauksessa testataan tilastollisen mallin parametreihin liittyviä väittämiä vertaamalla niitä havaintoaineistosta saatuihin estimaatteihin.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Voidaan esimerkiksi testata hypoteesia, jonka mukaan aineistoa generoivan prosessin odotusarvo olisi 0 eli <span class="math inline">\(\mu=0\)</span>.</p>
+</div>
+</div>
+<p>Hypoteesien testaamisella voidaan siis testata, onko jokin asetettu hypoteesi uskottava nyt havaitun aineiston ja siihen perustuvien estimointitulosten valossa.</p>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong>. Parametreihin kohdistuva tilastollinen testaus voi (tarkemmin vielä määritellyissä ja johdetuissa tilastollisissa malleissa) vastata esimerkiksi seuraavanlaisiin tutkimuskysymyksiin:</p>
+<ul>
+<li><p>Onko suomalaisten miesten keskipituus 180 cm?</p></li>
+<li><p>Vaikuttaako yliopistokoulutus tulevaisuuden ansioihin?</p></li>
+<li><p>Auttaako tietty lääkeaine jonkin sairauden hoidossa?</p></li>
+<li><p>Voiko osakemarkkinoiden tuottoja ennustaa jonkin (selittävän/ennustavan) tekijän avulla?</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Nollahypoteesi ja vastahypoteesi</span></p>
+<div class="defblock">
+<p><strong>Nollahypoteesi</strong> on tilastollisessa testauksessa käytettävä lähtöoletus, joka kuvaa odotettavissa olevaa tilannetta. Tyypillisesti (vaikkakaan ei aina) nollahypoteesi esittää, että kahden ilmiön välillä “ei ole yhteyttä” tai että esimerkiksi tietty hoito ei ole tehokas. Tilastollisen testauksen tarkoituksena on arvioida, voidaanko nollahypoteesi hylätä havaintoaineistosta saadun tilastollisesti merkitsevän löydöksen perusteella.</p>
+<ul>
+<li><p>Nollahypoteesin paikkansapitävyyttä arvioidaan usein <strong>p-arvon</strong> avulla. Pieni p-arvo viittaa siihen, että havaittu ilmiö olisi epätodennäköinen, jos nollahypoteesi olisi tosi. Tällöin nollahypoteesi voidaan asettaa kyseenalaiseksi ja mahdollisesti hylätä.</p></li>
+<li><p>On tärkeää huomata, että nollahypoteesia ei voida todistaa “oikeaksi” — voidaan ainoastaan todeta, että aineisto ei anna riittävästi näyttöä sen hylkäämiseksi, jos p-arvo on esimerkiksi suurempi kuin 0.1 (eli yli 10 %).</p></li>
+</ul>
+<p><strong>Vastahypoteesi</strong> sisältää usein mielenkiinnon kohteena olevan tapahtuman, kuten “on eroa” tai “on vaikutusta”.</p>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Testisuure ja p-arvo</span></p>
+<div class="defblock">
+<p>(Seuraava pitkälle Mellinin (2004, s. 328-329) mukaan)</p>
+<p>Tilastollisen testin toteuttaminen perustuu erityiseen <strong>testisuureeseen</strong>, joka pyrkii keräämään yhteen “todisteet” tehtyjä oletuksia vastaan. Testisuure mittaa, kuinka hyvin havaittu aineisto sopii yhteen nollahypoteesin mukaisen tilanteen kanssa.</p>
+<ul>
+<li>Mikäli aineistosta laskettu testisuureen arvo poikkeaa niin paljon siitä arvosta, joka saataisiin tilanteessa, jossa nollahypoteesi pitää paikkansa, voidaan nollahypoteesi hylätä ja vaihtoehtoinen hypoteesi ottaa tilalle.</li>
+</ul>
+<!-- Tällöin puhutaan tilastollisesta merkitsevyydestä. -->
+<p><strong>p-arvo</strong> (eli <strong>havaittu merkitsevyystaso</strong>) on yleisellä tasolla (<strong>ilman tarkempaa tilastomatemaattista määritelmää</strong>) todennäköisyys saada testisuureen arvo, joka poikkeaa nollahypoteesin mukaisesta arvosta yhtä paljon tai enemmän kuin havaittu arvo, <strong>olettaen että nollahypoteesi pätee</strong>.</p>
+<ul>
+<li><p>Pieni p-arvo (esimerkiksi <span class="math inline">\(p &lt; 0.05\)</span> kun merkitsevyystaso <span class="math inline">\(\alpha\)</span> on 0.05 (5 %), eli <span class="math inline">\(p &lt; \alpha\)</span>) viittaa siihen, että havaittu testisuureen arvo olisi epätodennäköinen, jos nollahypoteesi olisi voimassa. Tällöin on perusteltua asettaa nollahypoteesi kyseenalaiseksi.</p></li>
+<li><p>On tärkeää huomata, että <strong>p-arvo ei ole todennäköisyys sille, että nollahypoteesi on tosi</strong>. Tämä on yleinen väärinkäsitys.</p></li>
+<li><p>p-arvo riippuu valitusta tilastollisesta testistä ja käytetystä testisuureesta. Näitä yksityiskohtia ei käsitellä tarkemmin vielä tällä kurssilla.</p></li>
+</ul>
+</div>
+<p>Käytännössä johtopäätelmiä varten valitaan <strong>ennalta</strong> (ennen tilastollisen testin suorittamista) tilastollinen merkitsevyystaso <span class="math inline">\(\alpha\)</span>, joka määrittää kuinka pieni <span class="math inline">\(p\)</span>-arvo vaaditaan nollahypoteesin hylkäämiseksi. Tyypillisiä valintoja ovat <span class="math inline">\(\alpha=0.1, \alpha=0.05\)</span> tai <span class="math inline">\(\alpha=0.01\)</span> vastaten 10 %, 5 % ja 1 % merkitsevyystasoja.</p>
+<p>Havaittu vaikutus katsotaan <strong>tilastollisesti merkitseväksi</strong>, kun tilastolliseen testiin liitettävä p-arvo on pienempi kuin <span class="math inline">\(\alpha\)</span>. Tämä tarkoittaa, että havaittu tulos olisi epätodennäköinen, jos nollahypoteesi ja kaikki muut mallinnusoletukset pitäisivät paikkansa. Tällöin nollahypoteesi voidaan perustellusti <strong>hylätä</strong>.</p>
+<ul>
+<li>Todetaan hyvin yleisellä tasolla, että tiedeyhteisöllä on usein taipumus jättää julkaisematta tutkimustuloksia, joissa nollahypoteesi jää voimaan. Yleensä tämä tilanne syntyy, kun lopputulos ei eroa jo aikaisemmin otaksutusta. (Toki ajoittain tilanne on myös toisinpäin eli “toivotaan” nollahypoteesin hylkäämistä).</li>
+</ul>
+<p>&nbsp;</p>
+<p>Tilastolliseen testaamiseen palataan vielä tarkemmin tämän materiaalin Osassa II.</p>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki: Testaus uskottavuuspohjaisessa tilastollisessa päättelyssä</strong>. Palataan aiemmin esitettyyn kuviteltuun esimerkkiin tutkijasta, joka haluaa tutkia sademääriä.</p>
+<ul>
+<li><p>Sanotaan, että tutkija on kiinnostunut tutkimaan väitettä, jonka mukaan Turussa sataa keskimäärin yli 800 milliä vuodessa.</p></li>
+<li><p>Oletetaan lisäksi, että tutkijalla on käytettävänä satunnaisotantaan perustuva arvio Turun sademääristä vuosilta 1980–2023 ja että vuosittaiset sademäärät ovat riippumattomia ja samoin jakautuneet.</p></li>
+<li><p>Nyt tutkija voi suorittaa väitteen tilastotieteellisen tutkimuksen muodostamalla tilastollisen mallin, jonka tavoite on kuvata Turun keskimääräistä vuosittaista sademäärää.</p></li>
+<li><p>Asetettua hypoteesia voidaan siis testata suhteessa estimointituloksiin, jotka kuvaavat vuosittaisen sademäärän odotettavissa olevaa arvoa.</p></li>
+<li><p>Tutkija voi lopulta muodostaa tilastollisen ennustemallin, joka huomioi sademäärissä mahdollisesti esiintyvän pitkän aikavälin muutoksen ja tehdä mallin pohjalta ennusteen tulevan vuoden sademäärästä. Tilastollista ennustamista käsitellään Osassa II.</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-tilastotiede_tieteenalana.html" class="pagination-link" aria-label="Tilastotiede tieteenalana">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-tilastolliset_aineistot.html" class="pagination-link" aria-label="Tilastolliset aineistot, niiden kerääminen ja mittaaminen">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

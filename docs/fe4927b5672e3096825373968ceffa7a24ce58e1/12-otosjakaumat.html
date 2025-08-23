@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Otosjakaumat ja epävarmuuden arvioiminen – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./13-regressioanalyysi.html" rel="next">
+<link href="./11-til_päät.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-otosjakaumat.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+        <div class="sidebar-tools-main">
+    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#otosjakauma" id="toc-otosjakauma" class="nav-link active" data-scroll-target="#otosjakauma"><span class="header-section-number">12.1</span> Otosjakauma</a></li>
+  <li><a href="#alaluku92" id="toc-alaluku92" class="nav-link" data-scroll-target="#alaluku92"><span class="header-section-number">12.2</span> Suhteellisen frekvenssin otosjakauma</a></li>
+  <li><a href="#luottamusvälit" id="toc-luottamusvälit" class="nav-link" data-scroll-target="#luottamusvälit"><span class="header-section-number">12.3</span> Luottamusvälit</a></li>
+  <li><a href="#bootstrap-ja-monte-carlo-menetelmät" id="toc-bootstrap-ja-monte-carlo-menetelmät" class="nav-link" data-scroll-target="#bootstrap-ja-monte-carlo-menetelmät"><span class="header-section-number">12.4</span> Bootstrap ja Monte Carlo-menetelmät</a></li>
+  <li><a href="#otoskoko" id="toc-otoskoko" class="nav-link" data-scroll-target="#otoskoko"><span class="header-section-number">12.5</span> Otoskoko</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>Tässä luvussa pohditaan tarkemmin sitä, <strong>miten tilastollisessa tutkimuksessa saatujen tulosten epävarmuutta voidaan arvioida</strong>.</p>
+<ul>
+<li><p>Erilaisten tutkimustulosten yhteydessä törmätään usein esim. ns. <strong>virhemarginaalin</strong> käsitteeseen. Virhemarginaalilla tarkoitetaan kansankielessä jonkin tunnusluvun, kuten esimerkiksi keskiarvon, arvojen sellaista vaihteluväliä, joka johtuu satunnaisuudesta. Käytännössä se tarkoittaa sitä, että saatu tulos, estimaatti, on ilmiön käyttäytymiseen (otantaa toistettaessa) nähden epävarma.</p></li>
+<li><p>Mistä tämä epävarmuus tutkimustuloksissa kumpuaa ja miten siihen voidaan tutkimusta tai koeasetelmaa suunnitellessa vaikuttaa?</p></li>
+</ul>
+<p>Tilastotieteen yksi keskeisimpiä tavoitteita on pyrkiä tuottamaan tarkkaa ja tutkittua tietoa. Kun tutkimuskohteena on epävarma ja satunnainen ympäröivä maailma, onkin tilastollisten menetelmien luotettavuuden kannalta keskeistä pyrkiä arvioimaan tätä epävarmuutta, jotta saatuihin tuloksiin voidaan luottaa ja ymmärtää samalla tuloksiin liittyvän epävarmuuden suuruutta. Tässä luvussa käsitellään tähän epävarmuuteen liittyviä tilastotieteen perusteita.</p>
+<section id="otosjakauma" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="otosjakauma"><span class="header-section-number">12.1</span> Otosjakauma</h2>
+<p>Hieman kertauksena jo edellisistä luvuista, mutta nyt täydennettynä otosjakaumaa koskevalla määrittelyllä voidaan todeta seuraavaa.</p>
+<p><span class="marginnote">Otosjakauma</span></p>
+<div class="defblock">
+<p><strong>Tunnusluvun/estimaattorin otosjakauma</strong>. Tunnusluku (<span class="math inline">\(T\)</span>) (kuten esim. otoskeskiarvo) on satunnaismuuttujien <span class="math inline">\(Y_1,\dots,Y_n\)</span> funktiona myös satunnaismuuttuja. Tämä tarkoittaa että tunnusluvun (<span class="math inline">\(T\)</span>) arvot vaihtelevat otoksesta toiseen (tämä on ns. otosvaihtelua) jonkin todennäköisyysjakauman mukaisesti. Tätä kutsutaan <strong>tunnusluvun (<span class="math inline">\(T\)</span>) otosjakaumaksi</strong> (otantajakaumaksi) ja sen avulla saatujen tunnuslukujen (estimaattien) luotettavuutta voidaan arvioida.</p>
+</div>
+<p>Tähän määrittelyyn liittyen on syytä vielä todeta, että todellisissa tutkimustilanteissa otantaa ei yleensä toisteta, jolloin otoksen poiminnassa käytetty otantamenetelmä (kuten arvonta) on ainutkertainen tapahtuma. Usein otantaa ei voida toistaa edes periaattessa. Tämä tarkoittaa, mikä voi tuntua yllättävältä, että otostunnuslukujen teoreettinen otosjakauma voidaan silti saada selville ja hyödyntää siten tilastollisessa päättelyssä ja lopulta aineiston käytännön analysoinnissa.</p>
+<ul>
+<li>Ts. todennäköisyyteen perustuvassa otannassa otantavirhettä (eli, kuten aiemmin todettiin, otannasta aiheutava satunnaisuus tunnusluvun arvossa) voidaan arvioida yhden otoksen perusteella, koska tunnetaan tunnusluvun otantajakauma.</li>
+</ul>
+<p>Edellisiin lukuihin viitaten, tässäkin tapauksessa otosjakaumat riippuvat tuntemattomista <strong>parametreista</strong>, joiden arvoja ei yleensä tunneta ja niitä pyritään estimoimaan kerättyä otosta ja sopivaa tunnuslukua käyttäen.</p>
+<ul>
+<li>Parametri on (usein) perusjoukon tunnusluku, jota halutaan arvioida. Parametrit <strong>estimoidaan</strong>, kuten olemme jo aiemmin nähneet, käytännön havaintoaineistoa käyttäen.</li>
+</ul>
+<p>Otosjakaumien teoria muodostaa perustan parametrien estimoinnille sekä estimaattorien ominaisuuksille sekä parametreja koskevien hypoteesien testaamiselle. Tähän liittyvä tilastollinen päättely tähän asti opittuna:</p>
+<ul>
+<li>Tilastollisessa tutkimuksessa pyritään tekemään päätelmiä aineiston generoineen satunnaisilmiön luonteesta. Ts. pyrkimyksenä on tehdä yleistyksiä otoksesta perusjoukkoon.</li>
+<li>Satunnaisilmiötä ja sen generoinutta aineistoa kuvataan todennäköisyysjakaumalla, jonka muodon määrää kyseisen jakauman parametrit.</li>
+<li>Parametrit ovat tilastollisessa päättelyssä mielenkiinnon kohteena ja niitä pyritään estimoimaan havaintoaineistosta otostunnusluvuilla/estimaattoreilla.</li>
+</ul>
+<div class="defblock">
+<p><strong>Aritmeettisen keskiarvon ominaisuuksia</strong>. Edellisestä luvusta muistamme, että aritmeettinen keskiarvo on eräs aineistosta yleisesti laskettu tunnusluku. Tarkastellaan seuraavaksi aritmeettisen keskiarvon otosjakauman ominaisuuksia.</p>
+<p>Edellä tehtyjen (sm:jia <span class="math inline">\(Y_i\)</span> koskevien) oletusten pätiessä voidaan osoittaa (perustellaan myöhemmillä kursseilla) että aritmeettisella keskiarvolla <span class="math inline">\(\bar{Y}\)</span> on seuraava odotusarvo ja varianssi: <span class="math display">\[\begin{equation*}
+\mathsf{E}(\bar{Y}) = \mu,  \quad \mathrm{ja} \quad
+\mathsf{Var}(\bar{Y}) = \frac{\sigma^2}{n}.
+\end{equation*}\]</span> Aritmeettisen keskiarvon <span class="math inline">\(\bar{Y}\)</span> <strong>standardipoikkeama</strong> on tällöin <span class="math display">\[\begin{equation*}
+\text{D}(\bar{Y}) = \sqrt{\mathsf{Var}(\bar{Y})} = \frac{\sigma}{\sqrt{n}}.
+\end{equation*}\]</span> Standardipoikkeamaa kutsutaan myös <strong>keskiarvon keskivirheeksi</strong> ja se kuvaa otoskeskiarvon otosvaihtelua odotusarvon <span class="math inline">\(\mu\)</span> ympärillä.</p>
+</div>
+<p><span class="marginnote">Standardipoikkeama ja keskivirhe</span></p>
+<p>Huomioi, että <strong>otoskeskiarvon varianssi</strong> on eri asia kuin <strong>otosvarianssi</strong>. Otoskeskiarvon varianssi kuvaa sitä, miten otoskeskiarvon toteumat vaihtelevat otantaa toistettaessa, eli otoksesta toiseen. Näin ollen otoskeskiarvon varianssia voidaan käyttää saadun otoskeskiarvon toteuman luotettavuuden arviointiin.</p>
+<p>Huomataan myös, että aritmeettisen keskiarvon otosjakauma keskittyy yhä voimakkaammin havaintojen yhteisen odotusarvon <span class="math inline">\(\mu\)</span> ympärille, kun otoskoko <span class="math inline">\(n\)</span> kasvaa.</p>
+<ul>
+<li>Ts. otoskoon <span class="math inline">\(n\)</span> kasvaessa <span class="math inline">\(\mathsf{Var}(\bar{Y}) = \frac{\sigma^2}{n}\)</span> pienenee (koska nimittäjä suurenee suhteessa osoittajaan). Näin ollen aritmeettinen keskiarvo tuottaa tarkempia estimaatteja odotusarvosta silloin, kun otoskoko on suuri.</li>
+</ul>
+<div class="defblock">
+<p><strong>Otoskeskiarvo ja normaalijakautunut otos</strong>. Muodostakoot sm:jat <span class="math inline">\(Y_1, \ldots, Y_n\)</span> satunnaisotoksen normaalijakaumasta <span class="math inline">\(\text{N}(\mu, \sigma^2)\)</span>. Tällöin voidaan osoittaa, että havaintojen <span class="math inline">\(Y_1, \ldots, Y_n\)</span> keskiarvo <span class="math inline">\(\bar{Y}\)</span> noudattaa normaalijakaumaa odotusarvolla <span class="math inline">\(\mu\)</span> ja varianssilla <span class="math inline">\(\sigma^2/n\)</span> (ks. yllä) ja pätee jakaumatulos <span class="math display">\[\begin{equation*}
+\bar{Y} \thicksim \text{N} \Big(\mu, \frac{\sigma^2}{n} \Big).
+\end{equation*}\]</span></p>
+<p>Itse asiassa ns. <strong>asymptoottiseen teoriaan</strong> vedoten eli suurten otosten tapauksessa (ts. <span class="math inline">\(n\)</span> on “iso”) voidaan osoittaa, tämä jakaumatulos pätee myös ilman sm:jien <span class="math inline">\(Y_i\)</span> normaalisuusoletusta.</p>
+<ul>
+<li><p>Tämä tulos perustuu yhteen tilastotieteen kaikkein keskeisimmistä tuloksista eli <strong>keskeisen raja-arvolauseeseen (KRL)</strong>.</p>
+<ul>
+<li><p>KRL:n olennainen ja intuitiivinen tulkinta merkitsee satunnaismuuttujien otoskeskiarvon taipumusta noudattaa normaalijakaumaa riippumatta satunnaismuuttujan taustalla olevan otosjakauman muodosta. Tällä on merkitystä monessa yhteydessä, joista mm. alempana tarkasteltava luottamusvälin muodostaminen on yksi esimerkki. Ylipäätään tämä hyvin tärkeä tulos on merkittävä peruste normaalijakauman keskeiselle asemalle tilastotieteessä.</p></li>
+<li><p>KRL:n tarkempi tarkastelu vaatii jälleen selvästi enemmän käytyjä tilastotieteen (ja matematiikan) opintoja.</p></li>
+</ul></li>
+</ul>
+</div>
+<div class="eblock">
+<p><strong>Esimerkki: Aritmeettisen keskiarvon otosjakauma normaalijakautuneen aineiston tapauksessa</strong></p>
+<p>Tarkastellaan seuraavaksi simuloidun esimerkin avulla aritmeettisen keskiarvon ominaisuuksia. Erityisesti klassisessa tilastotieteessä tilastollinen päättely, esimerkiksi luottamusvälien konstrulointi, perustuu ajatukselle toistetusta aineistonkeruusta. Tätä on helppoa havainnollistaa <strong>simuloimalla</strong> käyttäen moderneja tietoteknisiä ratkaisuja, joiden avulla voidaan generoida halutulla tavalla jakautuneiden satunnaismuuttujien realisaatioita.</p>
+<ul>
+<li><p>Aritmeettisen otoskeskiarvon tapauksessa tämä tarkoittaa sitä, miten realisoituneet otoskeskiarvot vaihtelevat satunnaisesti, kun otantaa samasta kohdepopulaatiosta toistetaan.</p></li>
+<li><p>Yllä esitetyn tuloksen nojalla otoskoko näyttelee keskeistä roolia otoskeskiarvojen vaihtelun suhteen.</p></li>
+</ul>
+<p>Olkoon <span class="math inline">\(Y_1^{(j)},\dots,Y_n{(j)}\)</span> (<span class="math inline">\(j\)</span>):s otos suuresta (äärettömästä) populaatiosta, jossa <span class="math inline">\(j=1,\dots,J\)</span> indeksoi eri otoksia. Oletetaan lisäksi, että <span class="math display">\[\begin{equation*}
+Y_i^{(j)} \sim \mathsf{N}(60,25)
+\end{equation*}\]</span> kaikille <span class="math inline">\(j=1,\dots,J\)</span> ja <span class="math inline">\(i=1,\dots,n\)</span> ja sm:jat (tilastoyksiköt) ovat keskenään riippumattomia kaikissa otoksissa. Toisin sanoen, kerätään (J) otosta kohdepopulaatiosta, joista jokaisessa tilastoyksiköt ovat samoin ja riippumattomasti jakautuneita.</p>
+<p>Tiedetään edellä esitellyn pohjalta, että normaalisti jakautuneen (ja laajemminkin ilman jakaumaoletusta) populaation tapauksessa otoskeskiarvo on odotusarvon harhaton estimaattori (ts. että <span class="math inline">\(\mathsf{E}(\bar{Y}) = \mu\)</span>) ja että sen otosjakauma on muotoa <span class="math inline">\(\bar{Y} \sim \text{N}(\mu,\frac{\sigma^2}{n})\)</span>. Täten selvästikin <strong>otoskoolla</strong> on suuri merkitys sille kuinka keskittynyt aritmeettisen keskiarvon otosjakauma on. Suurella otoskoolla tulisi teoriassa siis saada parempia arvioita aineiston generoineen jakauman odotusarvosta!</p>
+<p>Alla havainnollistetaan yllä kuvatun <em>toistetun aineistonkeruun</em> ajatusta aritmeettisen keskiarvon otosjakauman taustalla. Jakaumasta <span class="math inline">\(\mathsf{N}(60,25)\)</span> generoidaan (generoitiin) <span class="math inline">\(J=50\)</span> otosta, joista jokaisen otoskoko on <span class="math inline">\(n=30\)</span>. Seuraavassa kuviossa on havainnollistuksen vuoksi esitetty ensimmäisen kahdeksan otoksen (yhteensä <span class="math inline">\(J=50\)</span> otoksesta) histogrammit sekä näiden aritmeettiset keskiarvot (punaiset pisteet).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Njakotoksia.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Simulointikokeen kahdeksan ensimmäisen otoksen histogrammit ja niiden otoskeskiarvot (punaiset viivat).
+</center>
+<p>&nbsp;</p>
+<p>Seuraavassa kuvassa on kuvattu kaikkien (J=50) otoksen otoskeskiarvojen histogrammi. Lisäksi on laskettu otoskeskiarvojen keskiarvo, jonka pitäisi harhattomuuden vuoksi olla lähellä populaatiotason odotusarvoa <span class="math inline">\(\mu = 60\)</span>. Lisäksi on laskettu <strong>otoskeskiarvojen varianssi</strong>, jonka pitäisi saada arvo <span class="math inline">\(\frac{\sigma^2}{n} = \frac{25}{30} \approx 0.83\)</span>. Estimaatteja ja teoreettisia normaalijakauman parametreja vastaavat tiheysfunktiot on piirretty kuvaan.</p>
+<ul>
+<li>Osoittautuu, että tässä simuloinnissa otoskeskiarvojen keskiarvo on 60.10 ja otoskeskiarvojen varianssi 0.629.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Njakotoskat.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Simulointikokeen 50 toiston otoskeskiarvojen jakauma ja normaalijakauman teoreettinen ja nyt saavutettu empiirinen tiheysfunktio. “Teoreettisella keskiarvolla” viitataan otoskeskiarvojen odotettavissa olevaan keskiarvoon, joka populaatiotasolla tulisi vastata odotusarvoa <span class="math inline">\(\mu\)</span> (tässä tapauksessa <span class="math inline">\(\mu=60\)</span>).
+</center>
+<p>&nbsp;</p>
+<p>Mitä tapahtuu kun yksittäisen otoksen otoskokoa <span class="math inline">\(n\)</span> kasvatetaan? Teorian perusteella otoskeskiarvojen otosjakauman varianssi pitäisi pienentyä! Alla olevassa kuviossa havainnollistetaan tätä. Jälleen generoidaan/generoitiin <span class="math inline">\(J=50\)</span> otosta populaatiojakaumasta <span class="math inline">\(N(60,25)\)</span>, mutta tällä kertaa otoskokoa kasvatettiin tasolle <span class="math inline">\(n=2000\)</span>. Kuvassa on kuvattu kaikkien <span class="math inline">\(J=50\)</span> otoksen keskiarvojen histogrammi sekä otoskeskiarvojen teoreettista otosjakaumaa ja vastaavaa estimoitua otosjakaumaa vastaavat tiheysfunktiot. Edelleen otoskeskiarvojen pitäisi harhattomuuden vuoksi olla lähellä arvoa <span class="math inline">\(\mu = 60\)</span>, mutta tällä kertaa niiden varianssin pitäisi olla pienempi eli <span class="math inline">\(\frac{\sigma^2}{n} = \frac{25}{2000} = 0.0125\)</span>.</p>
+<ul>
+<li>Otoskeskiarvojen keskiarvoksi saatiin 60.02 ja varianssiksi 0.0138. Havaitaan, että nyt siis estimoitu otoskeskiarvojen varianssi on pienempi kuin edellisessä (<span class="math inline">\(n=30\)</span>) esimerkissä ja lisäksi olemme jälleen lähempänä todellista oikeaa odotusarvoa! Huomaa, että kuviossa myös vaaka-akseli muuttuu eli se kapenee merkittävästi edelliseen kuvioon ja tilanteeseen verrattuna.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Njakotoskat2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Simulointikokeen otoskeskiarvojen jakauma kun otoskoko on isompi eli 2000 havaintoa (<span class="math inline">\(n=2000\)</span>).
+</center>
+</div>
+<div class="defblock">
+<p><strong>Standardoidun aritmeettisen keskiarvon otosjakauma</strong>. Tarkastellaan <strong>standardoitua</strong> satunnaismuuttujaa <span class="math display">\[\begin{equation*}
+Z = \frac{\bar{Y} - \mathsf{E}(\bar{Y})}{\text{D}(\bar{Y})} = \frac{\bar{Y} - \mu}{\sigma / \sqrt{n}} = \sqrt{n} \Big(\frac{\bar{Y} - \mu}{\sigma}\Big).
+\end{equation*}\]</span> Tällöin (Z):n odotusarvo <span class="math inline">\(\mathsf{E}(Z) = 0\)</span> ja varianssi <span class="math inline">\(\mathsf{Var}(Z) = 1\)</span>.</p>
+<p>Jos lisäksi oletetaan <span class="math inline">\(Y_i \thicksim \text{N}(\mu, \sigma^2), i=1,\ldots,n\)</span>, niin tällöin (<span class="math inline">\(Z\)</span>) noudattaa standardoitua normaalijakaumaa: <span class="math display">\[\begin{equation*}
+Z \thicksim \text{N}(0,1).
+\end{equation*}\]</span> Tällä tuloksella on tärkeä merkitys mm. kun tarkastellaan luottamusvälien muodostamista</p>
+<ul>
+<li>Jälleen voidaan osoittaa, että <span class="math inline">\(Z\)</span>:taa koskeva jakaumatulos pätee asymptoottisesti (suurissa otoksissa) myös ilman sm:jien <span class="math inline">\(Y_i\)</span> normaalisuusoletusta.</li>
+</ul>
+</div>
+</section>
+<section id="alaluku92" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="alaluku92"><span class="header-section-number">12.2</span> Suhteellisen frekvenssin otosjakauma</h2>
+<div class="defblock">
+<p><strong>Frekvenssi ja suhteellinen frekvenssi</strong>. Oletetaan, että tapahtuman (A) todennäköisyys on <span class="math display">\[\begin{equation*}
+\text{P}(A) = p,
+\end{equation*}\]</span> jolloin tapahtuman (A) komplementtitapahtuman (vastatapahtuman) (A^c) todennäköisyys on <span class="math display">\[\begin{equation*}
+\text{P}(A^c) = 1- p = q.
+\end{equation*}\]</span></p>
+<p>Poimitaan satunnaisotos, jonka koko on <span class="math inline">\(n\)</span>. Tällöin <span class="math inline">\(A\)</span>-tyyppisten alkioiden frekvenssi eli lukumäärä kyseisessä otoksessa on <span class="math inline">\(f\)</span>. <strong>Suhteellinen frekvenssi</strong> eli osuus on tällöin <span class="math display">\[\begin{equation*}
+\widehat{p} = \frac{f}{n}.
+\end{equation*}\]</span> Sekä frekvenssi (lukumäärä) <span class="math inline">\(f\)</span> ja (täten myös) suhteellinen frekvenssi <span class="math inline">\(\widehat{p}\)</span> ovat satunnaismuuttujia, joiden saamat arvot vaihtelevat satunnaisesti otoksesta toiseen.</p>
+</div>
+<p>Ts. tässä pätee sama logiikka kuin yläpuolella otoskeskiarvon kohdalla ja normaalistijakautuneen satunnaismuuttujien tapauksessa. Näin ollen myös alapuolella käsiteltävissä (suhteellisen) frekvenssin otosjakauman käyttäymisessä on paljon samaa mitä aritmeettisen keskiarvon tapauksessa, mutta nyt toki merkinnät ja lopputulos koskee eri tilannetta.</p>
+<div class="defblock">
+<p><strong>Frekvenssin otosjakauma</strong>. Frekvenssillä <span class="math inline">\(f\)</span> on odotusarvo <span class="math display">\[\begin{equation*}
+\mathsf{E}(f) = np,
+\end{equation*}\]</span> ja varianssi <span class="math display">\[\begin{equation*}
+\mathsf{Var}(f) = npq = np(1-p).
+\end{equation*}\]</span> (Luvussa aiemmin tehtyjen oletusten ollessa voimassa) frekvenssi <span class="math inline">\(f\)</span> noudattaa binomijakaumaa parametrein <span class="math inline">\(n\)</span> ja <span class="math inline">\(p\)</span>: <span class="math display">\[\begin{equation*}
+f \thicksim \mathrm{Bin}(n,p).
+\end{equation*}\]</span></p>
+</div>
+<div class="defblock">
+<p><strong>Suhteellinen frekvenssi: Odotusarvo ja varianssi</strong>. Suhteellisen frekvenssin <span class="math inline">\(\widehat{p}\)</span> odotusarvo <span class="math display">\[\begin{equation*}
+\mathsf{E}(\widehat{p}) = \mathsf{E} \Big(\frac{f}{n} \Big) = p,
+\end{equation*}\]</span> ja varianssi <span class="math display">\[\begin{equation*}
+\mathsf{Var}(\widehat{p}) = \frac{pq}{n} = \frac{p(1-p)}{n}.
+\end{equation*}\]</span> Suhteellisen frekvenssin <span class="math inline">\(\widehat{p}\)</span> standardipoikkeamaa <span class="math display">\[\begin{equation*}
+\text{D}(\widehat{p}) = \sqrt{\mathsf{Var} (\widehat{p})} =  \sqrt{\frac{pq}{n}}
+\end{equation*}\]</span> voidaan kutsua <strong>suhteellisen frekvenssin keskivirheeksi</strong> ja se kuvaa suhteellisen frekvenssin otosvaihtelua odotusarvon <span class="math inline">\(p\)</span> ympärillä.</p>
+</div>
+<div class="defblock">
+<p><strong>Suhteellisen frekvenssin otosjakauma</strong>. Koska <span class="math inline">\(\mathsf{E}(\widehat{p}) = p\)</span> ja <span class="math inline">\(\mathsf{Var}(\widehat{p}) = \frac{pq}{n}\)</span>, niin suhteellisen frekvenssin otosjakauma keskittyy yhä voimakkaammin tapahtuman <span class="math inline">\(A\)</span> todennäköisyyden <span class="math inline">\(\text{P}(A) = p\)</span> ympärille, kun otoskoko <span class="math inline">\(n\)</span> kasvaa.</p>
+<ul>
+<li>Tämän näkee erityisesti nollaa lähestyvästä suhteellisen frekvenssin varianssin lausekkeesta, kun havaintojen lukumäärä <span class="math inline">\(n\)</span> kasvaa.</li>
+</ul>
+<p>Jälleen suurten otosten tapauksessa voidaan myös osoittaa, että suhteellinen frekvenssi noudattaa em. oletusten pätiessä normaalijakaumaa: <span class="math display">\[\begin{equation*}
+\widehat{p} \thicksim \text{N} \Big(p, \frac{pq}{n} \Big).
+\end{equation*}\]</span> Aritmeettisen keskiarvon tapaan standardoidulle satunnaismuuttujalle (ks. yllä) pätee <span class="math display">\[\begin{equation*}
+Z = \frac{\widehat{p} - p}{\sqrt{\frac{pq}{n}}} \thicksim \text{N}(0,1),
+\end{equation*}\]</span> eli tämä standardoitu sm. noudattaa suurissa otoksissa approksimatiivisesti standardoitua normaalijakaumaa.</p>
+</div>
+<div class="eblock">
+<p><strong>Suomen EU-kansanäänestys</strong> (Muokattu esimerkki kirjasta Mellin (2004, s. 307)). Oletetaan, että juuri ennen Suomen EU-kansanäänestyksessä vuonna 1994 jäsenyyttä kannattaneiden suhteellinen osuus eräässä gallupissa oli 0.54 (54 %).</p>
+<ul>
+<li>Lopulta kansanäänestyksessä kyllä-äänteen (kannattajien) osuus oli 56.9 %.</li>
+</ul>
+<p>Mikä olisi ollut tällöin todennäköisyys gallupiin perustuen, siis juuri ennen äänestystä, 200 havainnon otoksessa kyllä-osuus olisi ollut alle 50 %?</p>
+<p>Suhteellisen frekvenssin otosjakauman perusteella kyllä-kannatusosuuden jakauma olisi <span class="math display">\[\begin{equation*}
+\widehat{p} \thicksim \text{N} \Big(0.54, \frac{0.54 \times (1-0.54)}{200} \Big),
+\end{equation*}\]</span> jossa <span class="math inline">\(\frac{0.54 \times (1-0.54)}{200} = 0.0352^2\)</span>.</p>
+<p>Näin ollen haluttu todennäköisyys (ts. saada sellainen satunnaismuuttujan <span class="math inline">\(Z \thicksim \text{N}(0,1)\)</span> arvo että suhteellinen osuus on pienempi kuin 0.5) <span class="math display">\[\begin{equation*}
+P \Big(Z &lt; \frac{0.5-0.54}{0.0352} \Big) = P (Z &lt; -1.14) \approx 0.127.
+\end{equation*}\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="EU-kansanäänestys_250523_105018.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Standardinormaalijakauman tiheysfunktion alle jäävä värjätty osuus kuvaa todennäköisyyttä, jolla saadaan sellainen realisaatio että EU:n kannatuksen suhteellinen osuus on pienempi kuin 50 %.
+</center>
+</div>
+<p>&nbsp;</p>
+</section>
+<section id="luottamusvälit" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="luottamusvälit"><span class="header-section-number">12.3</span> Luottamusvälit</h2>
+<p>Tilastotieteen yleisen idean mukaisesti satunnaisesti saadusta aineistosta laskettujen tunnuslukujen luotettavuus on tilastollisen mallin parametrien estimoinnissa keskeinen tilastollinen kysymys.</p>
+<ul>
+<li><p>Otoksen poimintaan liittyvän satunnaisvaihtelun vuoksi <strong>emme voi varmuudella tietää</strong> onko saatu otokseen perustuva parametriestimaatti “lähellä” vai “kaukana” sen todellisesta arvosta.</p></li>
+<li><p>Täten tarvitaan jokin tapa, jolla saadun parametriestimaatin luotettavuutta voidaan arvioida.</p></li>
+</ul>
+<p><span class="marginnote">Luottamusväli</span></p>
+<div class="defblock">
+<p><strong>Luottamusväli</strong> on otoksen perusteella määrätty väli, joka tutkijan valitsemalla todennäköisyydellä, <strong>luottamustasolla</strong>, peittää tarkasteltavan tilastollisen mallin <span class="math inline">\(f(y;\theta)\)</span> parametrin <span class="math inline">\(\theta\)</span> tuntemattoman todellisen arvon. Se perustetaan otostunnusluvun, estimaattorin, otosjakaumaan.</p>
+</div>
+<ul>
+<li>Otoskoko on luottamusvälejä koskevissa tarkasteluissa keskeinen ja luottamusväleihin palataankin otoskoon käsittelyn yhteydessä.</li>
+</ul>
+<p><span class="marginnote">Merkitsevyystaso ja luottamustaso</span></p>
+<ul>
+<li><p>Valittua <strong>luottamustasoa</strong> merkitään usein <span class="math inline">\(1-\alpha\)</span>:lla, jossa <strong>merkitsevyystaso</strong> (<strong>riskitaso</strong>) <span class="math inline">\(\alpha\)</span> on esimerkiksi <span class="math inline">\(\alpha=0.05\)</span> eli 5 % (vrt. hypoteesien testaamisen esittely aiemmin).</p></li>
+<li><p><strong>Tulkinta</strong>: Jos <strong>otantaa</strong> jakaumasta <span class="math inline">\(f(y;\theta)\)</span> <strong>toistetaan</strong>, niin keskimäärin <span class="math inline">\(100 \times (1-\alpha)\%\)</span> otoksista konstruloiduista luottamusväleistä peittää parametrin <span class="math inline">\(\theta\)</span> todellisen arvon.</p></li>
+</ul>
+<!-- Oletetaan, että olemme tehneet johtopäätöksen, että konstruloitu luottamusväli peittää parametrin \(\theta\) tuntemattoman todellisen arvon. 
+- Tällöin otantaa toistettaessa luottamusvälin konstruktiosta seuraa, että tehty johtopäätös on oikea keskimäärin \(100 \times (1-\alpha)\%\) tapauksista. Vastaavasti taas \(100 \times \alpha \%\) ei peitä parametrin todellista arvoa.
+-->
+<!-- <div class="eblock"> 
+
+**Esimerkki: aritmeettisen keskiarvon otosjakauma normaalijakautuneen aineiston tapauksessa (jatkuu)**
+
+Mitä edellisen alaluvun esimerkissä tapahtuu kun otosten määrää \(J\) kasvatetaan? Teorian perusteella otoskeskiarvojen otosjakauman parametrien pitäisi lähestyä teoreettisia arvojaan. Kuviossa \ref{fig:otosjakaumat3} havainnollistetaan tätä. Nyt generoitiin \(J=1000\) otosta populaatiojakaumasta \(N(60,25)\), pitäen otoskokona \(n=100\). Paneelissa A on jälleen havainnollistuksen vuoksi esitetty ensimmäisen kahdeksan otoksen histogrammit sekä näiden aritmeettiset keskiarvot (punaiset pisteet). Paneelissa B on kuvattu kaikkien \(J=50\) otoksen keskiarvojen histogrammi sekä otoskeskiarvojen teoreettista otosjakaumaa ja vastaavaa estimoitua otosjakaumaa vastaavat tiheysfunktiot. Huomataan, että otosten määrää kasvattamalla otosjakauma lähestyy sen teoreettista jakaumaa!
+
+Huomioitavaa: useinkaan samasta kohdepopulaatiosta ei ole mahdollista saati järkevää poimia useaa otosta. Edellä havainnollistettu teoreettinen tulos kuitenkin mahdollistaa tilastollisen päättelyn ja parametriestimaattien luottamusvälien konstruloinnin yhteen otokseen perustuen!
+
+[KUVA Toistetun aineistonkeruun ajatus otosjakaumien taustalla. Vasemmalla on esitetty kahdeksan ensimmäisen otoksen histogrammit samasta jakaumasta, kun otoskoko on 100. Oikealla on yhteensä 1000 otoksesta laskettujen otoskeskiarvojen jakauma.]
+</div> -->
+<p><span class="marginnote">Virhemarginaali</span></p>
+<div class="defblock">
+<p>Luottamusväli on kenties tunnetumpi kansankieliseltä nimitykseltään <strong>virhemarginaali</strong>, joka on itse asiassa luottamusvälin puolikas.</p>
+<p>Kuten jatkossa tullaan havaitsemaan, virhemarginaalin suuruuteen vaikuttavat otosasetelma, otoskoko, luottamustaso ja tutkittavan tilastollisen tunnusluvun jakauma. Normaalisti mm. otoskoon kasvu pienentää virhemarginaalia.</p>
+</div>
+<p>Luottamusväleissä ei varsinaisesti ole kyse “virheestä” vaan saadun/muodostetun tiedon tarkkuudesta.</p>
+<p>Luottamusvälit, eli virhemarginaalit, siis (yleisesti) riippuvat valittavasta luottamustasosta <span class="math inline">\(1-\alpha\)</span> ja näin ollen samasta aineistosta on saatavissa useita virhemarginaaleja. Täten on tarkalleen ottaen virheellistä sanoa, että “tutkimuksen virhemarginaali on 3,5% puoleen tai toiseen”. Oikeammin olisi sanoa esimerkiksi “tutkimuksessa saadun kannatuksen virhemarginaali on 3,5 % puoleen tai toiseen 95 % luottamustasolla”.</p>
+<!-- - Virhemarginaali kasvaa, kun aineistoa lohkotaan: jos tuhannen hengen otoksesta esitetään tietoja, jotka kuvaavat erikseen miesten ja naisten ominaisuuksia, sukupuolittain lasketut ovat estimaatit epävarmempia kuin koko otoksesta esitetyt. -->
+<ul>
+<li>Vastaavasti on virheellistä sanoa että tutkimuksella olisi virhemarginaali, sillä virhemarginaali liittyy aina vain tutkimuksen antamiin numeerisiin arvoihin. Aitoja virhelähteitä ovat mm. otantatutkimukseen liittyvien kysymysten muotoilu, käsitteiden monitulkintaisuus, vastaajien valikoituminen ja vastauskato</li>
+</ul>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>Normaalijakauman odotusarvon luottamusväli</strong>. Käsittelemme seuraavassa (normaalijakauman) odotusarvon <span class="math inline">\(\mu\)</span> luottamusväliä. Ellei toisin mainita, oletetaan että taustalla oleva populaatio, <span class="math inline">\(N\)</span>, on “iso” (ääretön). Näin ollen ns. äärellisyyskorjausta ei käytetä (yksinkertaisuuden vuoksi).</p>
+<p>Tarkastellaan siis satunnaisotosta normaalijakaumasta <span class="math display">\[\begin{equation*}
+Y_1, \ldots, Y_n \perp \!\!\! \perp, \,\, Y_i \thicksim \text{N}(\mu, \sigma^2),\, i=1,\ldots,n,
+\end{equation*}\]</span> ja erityisesti normaalijakauman odotusarvon <span class="math inline">\(\mu\)</span> luottamusvälin määräämistä otannan avulla olettaen että jakauman varianssi <span class="math inline">\(\sigma^2\)</span> on tunnettu. Lisäksi muistetaan että normaalijakauman odotusarvoparametrin <span class="math inline">\(\mathsf{E}(Y_i) = \mu\)</span> harhaton estimaattori on aritmeettinen keskiarvo <span class="math display">\[\begin{equation*}
+\bar{Y} = \frac{1}{n} \sum_{i=1}^{n} Y_i.
+\end{equation*}\]</span></p>
+<p>Valitaan <strong>luottamustasoksi</strong> <span class="math inline">\(1-\alpha\)</span>, jossa <span class="math inline">\(\alpha\)</span> on siis valittu merkitsevyystaso. Yleinen valinta ihmistieteissä on <span class="math inline">\(\alpha = 0.05\)</span> tai <span class="math inline">\(\alpha = 0.1\)</span> vastaten 95 % ja 90 % prosentin luottamustasoa. Luonnontieteissä ja lääketieteellisissä sovelluksissa <span class="math inline">\(\alpha\)</span> on usein pienempi, kuten <span class="math inline">\(\alpha=0.01\)</span>.</p>
+<p>Määrätään <strong>luottamuskertoimet</strong> <span class="math inline">\(-z\_{\alpha/2}\)</span> ja <span class="math inline">\(z\_{\alpha/2}\)</span> (luottamusväli on ns. kaksisuuntainen), joille pätee <span class="math display">\[\begin{equation*}
+\text{P}(-z_{\alpha/2} \le Z \le z_{\alpha/2}) = 1-\alpha,
+\end{equation*}\]</span> jossa standardoitu satunnaismuuttuja (ks. aiemmat määritelmät edellä) <span class="math display">\[\begin{equation*}
+Z = \frac{\bar{Y} - \mu}{\sigma / \sqrt{n}} = \sqrt{n} \Big( \frac{\bar{Y} - \mu}{\sigma} \Big)
+\end{equation*}\]</span> ja <span class="math inline">\(\text{P}(\cdot)\)</span>:llä merkitään todennäköisyyttä, joka tässä tapauksessa liittyy normaalijakaumaan, ja <span class="math inline">\(z\_{\alpha/2}\)</span> on jakaumafunktion arvo pisteessä <span class="math inline">\(\alpha/2\)</span>.</p>
+<ul>
+<li>Ks. aiemmat alaluvut tässä luvussa osoittaen, että (tehdyillä oletuksilla) <span class="math inline">\(Z\)</span> noudattaa <span class="math inline">\(\text{N}(0,1)\)</span>-jakaumaa.</li>
+</ul>
+<p>Etsitään siis odotusarvoparametrille <span class="math inline">\(\mu\)</span> sellainen arvo, jolla oheinen epäyhtälö pätee ja siten päädytään luottamusväliin. Nyt ylläoleva epäyhtälöketju voidaan kirjoittaa muodossa <span class="math display">\[\begin{equation*}
+-z_{\alpha/2} \le  \frac{\bar{Y} - \mu}{\sigma / \sqrt{n}}  \le z_{\alpha/2},
+\end{equation*}\]</span> j oka voidaan kirjoittaa uudelleen muodossa <span class="math display">\[\begin{equation*}
+\bar{Y} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \le   \mu  \le
+\bar{Y} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}},
+\end{equation*}\]</span> kertomalla nimittäjällä puolittain ja vähentämällä sm:jien keskiarvo molemmin puolin. Normaalijakauman odotusarvon <span class="math inline">\((1-\alpha) \times 100\%\)</span> luottamusväli on siis <span class="math display">\[\begin{equation*}
+\Big(\bar{Y} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}},
+\bar{Y} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \Big).
+\end{equation*}\]</span> Luottamusväli on symmetrinen keskipisteensä <span class="math inline">\(\bar{Y}\)</span> suhteen. Siksi luottamusväli esitetään usein <span class="math display">\[\begin{equation*}
+\bar{Y} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}.
+\end{equation*}\]</span> Luottamusvälin pituus on <span class="math display">\[\begin{equation*}
+2 \cdot z_{\alpha/2} \frac{\sigma}{\sqrt{n}}.
+\end{equation*}\]</span> Näin ollen (tässä tilanteessa) virhemarginaali on luottamusvälin pituuden puolikas eli <span class="math display">\[\begin{equation*}
+z_{\alpha/2} \frac{\sigma}{\sqrt{n}}.
+\end{equation*}\]</span></p>
+</div>
+<ul>
+<li><p>Huomaa, että edellä tiettyyn otokseen liittyvä luottamusväli perustetaan tietysti realisoituneeseen otoskeskiarvoon <span class="math inline">\(\bar{y}=\frac{1}{n} \sum_{i=1}^{n} y_i\)</span>.</p></li>
+<li><p>Olisi toivottavaa pystyä konstruoimaan parametrille <span class="math inline">\(\mu\)</span> mahdollisimman lyhyt luottamusväli, johon liittyvä luottamustaso olisi samanaikaisesti mahdollisimman korkea. Molempien vaatimusten samanaikainen täyttäminen ei ole kuitenkaan mahdollista, jos otoskoko <span class="math inline">\(n\)</span> pidetään kiinteänä:</p>
+<ul>
+<li>Luottamustason kasvattaminen pidentää luottamusväliä, jolloin tieto parametrin <span class="math inline">\(\mu\)</span> todellisesta arvosta tulee epätarkemmaksi.</li>
+<li>Luottamusvälin lyhentäminen pienentää luottamustasoa, jolloin tieto parametrin <span class="math inline">\(\mu\)</span> todellisesta arvosta tulee epävarmemmaksi.</li>
+</ul></li>
+</ul>
+<!-- [KUVA Standardoitu normaalijakauma: Virhemarginaaleja] -->
+<div class="defblock">
+<p><strong>Normaalijakauman odotusarvon luottamusväli kun varianssi <span class="math inline">\(\sigma^2\)</span> on tuntematon.</strong> Normaalijakauman odotusarvon <span class="math inline">\((1-\alpha) \times 100\%\)</span> luottamusväli on nyt <span class="math display">\[\begin{equation*}
+\Big(\bar{Y} - t_{\alpha/2} \frac{S}{\sqrt{n}},
+\bar{Y} + t_{\alpha/2} \frac{S}{\sqrt{n}} \Big),
+\end{equation*}\]</span> jossa <strong>luottamuskertoimet</strong> <span class="math inline">\(-t_{\alpha/2}\)</span> ja <span class="math inline">\(t_{\alpha/2}\)</span> saadaan nyt <strong>t-jakaumasta</strong> <span class="math inline">\(t_{n-1}\)</span>, jossa <span class="math inline">\(S^2\)</span> on varianssin <span class="math inline">\(\sigma^2\)</span> harhaton estimaattori ja vapausasteiden lukumäärä on <span class="math inline">\(n-1\)</span>.</p>
+<ul>
+<li>(Studentin) <span class="math inline">\(t\)</span>-jakauma muistuttaa silmämääräisesti normaalijakaumaa, mutta se on <strong>paksuhäntäisempi</strong>. Vapausasteluvun kasvaesssa <span class="math inline">\(t\)</span>-jakauma lähestyy normaalijakaumaa.</li>
+<li>Suurissa otoksissa (<span class="math inline">\(n\)</span> iso) luottamuskertoimet voidaan poimia (approksimatiivisesti) myös normaalijakaumasta eli korvata edellä kertoimet <span class="math inline">\(t\_{\alpha/2}\)</span> aiemmin käytetyillä kertoimilla <span class="math inline">\(z\_{\alpha/2}\)</span>.</li>
+<li>Normaalijakauman odotusarvon luottamusväli (<span class="math inline">\(\sigma^2\)</span> tuntematon), <span class="math inline">\(t\)</span>-jakauma eri vapausastein <span class="math inline">\(df\)</span></li>
+</ul>
+</div>
+<p><span class="marginnote">t-jakauma</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="NjaTjakaumia.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Standardoidun normaalijakauman ja t-jakauman tiheysfunktioita t-jakauman kahteen eri vapauasteeseen liittyen. Vapausasteluvun kasvaessa t-jakauma lähestyy normaalijakaumaa.
+</center>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>Luottamusväli: Suhteellisen osuuden odotusarvo</strong>. Käsittelemme seuraavassa siis suhteellisen osuuden <span class="math inline">\(p\)</span> luottamusvälejä. Tässä tilanteessa tarkastellaan siis satunnaisotosta Bernoulli-jakaumasta <span class="math display">\[\begin{equation*}
+Y_1, \ldots, Y_n \perp \!\!\! \perp, \,\, Y_i \thicksim B(p),\, i=1,\ldots,n,
+\end{equation*}\]</span> jossa merkitään <span class="math inline">\(Y_i=1\)</span> jos tapahtuma A tapahtuu ja <span class="math inline">\(Y_i=0\)</span> jos tapahtuma A ei tapahdu.</p>
+<p>Bernoulli-jakauman odotusarvoparametrin <span class="math inline">\(p=\mathsf{E}(Y_i)\)</span> harhaton estimaattori on tapahtuman A suhteellinen otosfrekvenssi <span class="math display">\[\begin{equation*}
+\widehat{p} = \frac{1}{n} \sum_{i=1}^{n} Y_i.
+\end{equation*}\]</span> Bernoulli-jakauman (vrt. binomijakauma) ominaisuuksien perusteella <span class="math inline">\(\mathsf{E}(Y_i)=p\)</span> ja <span class="math inline">\(\mathsf{Var}(Y_i)=pq\)</span>, jossa <span class="math inline">\(q=1-p\)</span>.</p>
+<p>Näin ollen voimme normaalijakauman odotusarvoparametrin luottamusvälin konstruloinnin tapaan määritellä satunnaismuuttujan <span class="math inline">\(Z\)</span>: <span class="math display">\[\begin{equation*}
+Z = \frac{\widehat{p} - p}{\sqrt{\frac{p (1-p)}{n}}} =
+\sqrt{n} \Big(\frac{\widehat{p} - p}{\sqrt{p (1-p)}} \Big),
+\end{equation*}\]</span> joka noudattaa (suurissa otoksissa) <span class="math inline">\(\text{N}(0,1)\)</span>-jakaumaa. Suhteellisen frekvenssin hajonnan estimaattori on siis <span class="math display">\[\begin{equation*}
+\sqrt{\frac{\widehat{p} (1-\widehat{p})}{n}},
+\end{equation*}\]</span> jossa tuntematon <span class="math inline">\(p\)</span> on korvattu sen estimaattorilla (otosvastineella) <span class="math inline">\(\widehat{p}\)</span>.</p>
+<p>Luottamuskertoimet määrätään ylläpuolella nähtyyn tapaan: <span class="math display">\[\begin{equation*}
+\text{P}(-z_{\alpha/2} \le Z \le z_{\alpha/2}) = 1-\alpha.
+\end{equation*}\]</span></p>
+<p>Näin ollen odotusarvoparametrin (suhteellisen osuuden) <span class="math inline">\(p\)</span> <span class="math inline">\((1-\alpha)\)</span>% luottamusväliksi saadaan <span class="math display">\[\begin{equation*}
+\Big(
+\widehat{p} - z_{\alpha/2} \sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}},
+\widehat{p} + z_{\alpha/2} \sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}
+\Big)
+\end{equation*}\]</span> ja luottamusväli voidaan kirjoittaa <span class="math display">\[\begin{equation*}
+\widehat{p} \pm z_{\alpha/2} \sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}
+\end{equation*}\]</span> ja luottamusvälin pituus on (ja tämän puolikas siis virhemarginaali) <span class="math display">\[\begin{equation*}
+2 \times z_{\alpha/2} \sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}.
+\end{equation*}\]</span></p>
+</div>
+</section>
+<section id="bootstrap-ja-monte-carlo-menetelmät" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="bootstrap-ja-monte-carlo-menetelmät"><span class="header-section-number">12.4</span> Bootstrap ja Monte Carlo-menetelmät</h2>
+<p>Tilastotieteessä käytännön sovelluksissa turvaudutaan usein laskennallisiin menetelmiin, kun analyyttiset ratkaisut ovat hankalia tai mahdottomia. Tällaisia menetelmiä käytetään esimerkiksi juuri vaihtoehtona edellä esiteltyjen luottamusvälien muodostamiselle tai testisuureiden jakaumien arvioinnissa. Yksi keskeinen ja laajasti käytetty menetelmä on <strong>bootstrap</strong>, eli <strong>uusio-otanta</strong>. Emme käsittele tätä tällä kurssilla tarkemmin, mutta ohessa kuitenkin joitain keskeisiä yleisiä huomioita.</p>
+<p><span class="marginnote">Bootstrap</span></p>
+<div class="defblock">
+<p><strong>Bootstrap</strong> (“<strong>uusio-otanta</strong>”) on menetelmä, jolla luodaan mm. luottamusvälejä uudelleennäytteistämällä havaittua dataa sen sijaan, että oletettaisiin todennäköisyysmalli taustalla olevalle satunnaismuuttujalle.</p>
+</div>
+<p>Bootstrap perustuu ajatukseen, että havaittu otos sisältää riittävästi tietoa perusjoukosta, jotta siitä voidaan simuloida uusiotanta-aineistoja. Käytännössä tämä tarkoittaa sitä, että alkuperäisestä aineistosta poimitaan satunnaisotoksia takaisinpanolla (eli sama havainto voi esiintyä useita kertoja yhdessä bootstrap-otoksessa), ja näistä uusista otoksista lasketaan kiinnostavia tilastollisia tunnuslukuja, kuten keskiarvoja, mediaaneja tai regressiomallien tapauksessa parametriestimaatteja ja niiden keskivirheitä. Näin saadaan empiirinen arvio ko. tunnuslukujen jakaumista.</p>
+<p>Bootstrap ei ole yksi yksittäinen menetelmä, vaan pikemminkin yleistermi useille eri uusio-otantatekniikoille. Näitä ovat esimerkiksi (tämä ei ole suinkaan täydellinen lista):</p>
+<ul>
+<li><p>perinteinen (ei-parametrinen) bootstrap,</p></li>
+<li><p>parametrinen bootstrap, jossa oletetaan jokin jakauma ja simuloidaan siitä,</p></li>
+</ul>
+<!-- - stratifioitu bootstrap, jossa otanta tehdään ryhmittäin, ja -->
+<ul>
+<li>block bootstrap, jota käytetään aikasarjoissa säilyttämään riippuvuusrakenne.</li>
+</ul>
+<p>Käytettävä tarkempi menetelmä tulee aina valita aineiston rakenteen ja tutkimuskysymyksen mukaan, ja sen valinta on syytä perustella huolellisesti.</p>
+<p><span class="marginnote">Monte Carlo-menetelmät</span></p>
+<div class="defblock">
+<p><strong>Bootstrap ja Monte Carlo -menetelmät</strong>. Bootstrap on esimerkki laajemmasta laskennallisten menetelmien perheestä, jota kutsutaan usein nimellä Monte Carlo -menetelmät. Näiden menetelmien ytimessä on satunnaissimulointi: toistetaan suuri määrä satunnaisia kokeita tai otoksia ja tarkastellaan tulosten jakaumia ja eri tunnuslukuja.</p>
+</div>
+<p>Monte Carlo -menetelmät tarjoavat tilastotieteelle ja data-analyysille monia etuja:</p>
+<ul>
+<li><p>Joustavuus: Ne eivät (välttämättä) vaadi tiukkoja oletuksia jakaumista tai mallin muodosta.</p></li>
+<li><p>Sovellettavuus monimutkaisissa tilanteissa: Esimerkiksi silloin, kun analysoidaan epälineaarisia malleja, pieniä otoksia tai epäsymmetrisiä jakaumia.</p></li>
+<li><p>Visualisointi ja ymmärrettävyys: Simuloidut jakaumat voidaan helposti visualisoida, mikä helpottaa tulosten tulkintaa ja viestintää.</p></li>
+<li><p>Monte Carlo -menetelmät ovat keskeisiä myös bayesilaisessa tilastotieteessä, jossa posteriorijakaumia arvioidaan usein simuloimalla (ks. esim. ns. Markov Chain Monte Carlo (MCMC) menetelmät).</p></li>
+</ul>
+<p>&nbsp;</p>
+</section>
+<section id="otoskoko" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="otoskoko"><span class="header-section-number">12.5</span> Otoskoko</h2>
+<p>Tilastollisen päättelyn keskeinen tavoite on siis yleistää otoksen pohjalta tehty päättely koskemaan koko perusjoukkoa. Seuraavaksi käymme läpi seikkoja, jotka tulee ottaa huomioon <strong>otoskokoa</strong> (eli merkinnöissä <span class="math inline">\(n\)</span>) miettiessä.</p>
+<p>Kun on päätetty, millainen tutkimusaineisto halutaan kerätä, on päätettävä, kuinka suuri otoksen on oltava, jotta se edustaa tutkittavaa perusjoukkoa kattavasti.</p>
+<ul>
+<li><p>Liian pieni otos, eli pieni määrä otokseen poimittuja tilastoyksiköitä, voi <strong>sattumalta</strong> poiketa paljonkin perusjoukosta. Tämä ns. <strong>otantavirhe</strong> on sitä suurempi mitä pienempää otosta käytetään. Liian pienen otoksen vuoksi muuten hyvin toteuttu tutkimus- ja otanta-asetelma saattaa epäonnistua vastaamaan tutkimuksen mielenkiinnon kohteena olevaan kysymykseen.</p></li>
+<li><p>Vastaavasti todella suuren otoksen koostaminen voi olla <strong>työlästä</strong>, <strong>kallista</strong> tai joskus jopa <strong>täysin mahdotonta</strong> esimerkiksi siksi että käytettävissä olevat tutkimusyksiköt eivät ole käytettävissä ajallisten rajoitteiden vuoksi (kuten harvinaisten tautien kantajat). Toisaalta perusjoukon systemaattiset piirteet tulevat otoskoon kasvaessa paremmin esille, vaikka yksittäisten otosyksiköiden tilastolliset muuttujat saattavat vaihdella suuresti.</p></li>
+</ul>
+<p>Otoskoko siis vaikuttaa keskeisesti siihen, miten hyvin otoksesta tehdyt johtopäätökset voidaan yleistää koskemaan koko perusjoukkoa!</p>
+<ul>
+<li>Optimaalinen, tai ainakin tutkimusongelmaan vastaamisen kannalta vähintään riittävä arvio, otoskoosta voidaan usein määrätä etukäteen.</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Perusjoukon rooli otoskoon määrittämisessä</strong>. Ensiksi tulee pohtia käsillä olevaa tutkimusongelmaa esimerkiksi kysymällä: <strong>Millainen on perusjoukkosi?</strong></p>
+<ul>
+<li><p>Onko tutkittavan muuttujan arvoissa paljon vaihtelua? Jos on, niin tämä täytyy huomioida kasvattamalla otoskokoa.</p></li>
+<li><p>Esimerkiksi otosten keskiarvot alkavat käyttäytyä riittävän siististi otoskoon kasvaessa, kuten edellä nähtiin.</p></li>
+<li><p>Kuuluuko tutkimukseesi esimerkiksi otoksen sisällä olevien ryhmien keskiarvojen vertailua tai muita otoksen osajoukkojen tunnuslukujen vertailua? Jos kuuluu, niin otoskoko tulee valita pienimmän ryhmäkoon mukaan, jotta siitäkin saadaan tarpeeksi edustajia.</p></li>
+<li><p>Mitä isompaa otosta käytetään, sitä pienempi perusjoukossa esiintyvä ryhmien välinen ero pystytään otoksella tunnistamaan.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Tulosten vaaditun tarkkuuden vaikutus otoskokoon</strong>. Tarkastelemme pian esimerkin avulla, kuinka tarvittavaa otoskokoa voidaan approksimoida (arvioida) tulosten halutun tarkkuuden avulla. Tarkastellaan kuitenkin ensin minkälaiset kysymykset liittyvät otoskoon pohdintaan tulosten tarkkuuden osalta.</p>
+<ul>
+<li>Kuinka varma sinun on oltava, että tulokset ovat täsmällisiä? Tämä on virhemarginaalisi!</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkiksi</strong> vaalikannatuksen arvioimiseen 2 % virhemarginaalilla riittää huomattavasti pienempi otoskoko kuin 0.2 % virhemarginaalilla toimittaessa. Politiikan tutkija voisikin kasvattaa otoskokoa vaalien lähestyessä, mikäli mielii saada tarkempia tuloksia.</p>
+</div>
+<ul>
+<li>Kuinka varma haluat olla, että otos edustaa joukkoa oikein? Tämä on luottamustaso, josta keskusteltiin jo luottamusvälin määräämisen yhteydessä!</li>
+</ul>
+<!-- - Luottamustaso on todennäköisyys sille, että valitsemasi otos on tulosten kannalta oleellinen. -->
+<!-- - Jos joukosta poimitaan 30 otosta sattumanvaraisesti, kuinka usein yhdestä otoksesta saadut tulokset eroavat merkittävästi muista 30 otoksesta? Jos luottamustaso on 95 \%, samat johtopäätelmät saadaan 95 prosentissa tapauksista. -->
+<p>&nbsp;</p>
+<p><strong>Odotetun vastauskadon vaikutus otoskokoon</strong>. <strong>Kuinka suuri vastauskato tulee mahdollisesti olemaan?</strong></p>
+<ul>
+<li><p>Yleensä osa kyselytutkimukseen valituista jättää vastaamatta eli syntyy <strong>vastauskatoa</strong>. Kato vinouttaa otosta, jos vastaamatta jättäneet ovat mielipiteiltään erilaisia kuin vastanneet.</p></li>
+<li><p>Otoskoon kasvattaminen ei paranna kadon aiheuttamaa vinoutumista.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki</strong>: Jos Alkon myymälän asiakastutkimus suoritetaan ovensuukyselynä maanantaina aamupäivällä, niin vastaajat eivät luultavasti edusta myymälän koko asiakaskuntaa. Otantakehikko on tässä liian suppea ja seurauksena on todennäköisesti vinoutunut otos. Vinoutuma ei korjaannu vaikka otosta kasvatetaan maanantai-aamupäivän asiakkailla!</p>
+</div>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>Esimerkki: Otoskoko normaalijakauman odotusarvon estimoinnissa</strong>. Palautetaan mieleen normaalijakauman <span class="math inline">\(\text{N}(\mu,\sigma^2)\)</span> odotusarvon luottamusvälin määrääminen (kun varianssi <span class="math inline">\(\sigma^2\)</span> oletetaan tunnetuksi). Luottamusväliksi saatiin edellä johdetuksi <span class="math display">\[\begin{equation*}
+\bar{Y} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}},
+\end{equation*}\]</span> j a luottamusvälin symmetrisyydestä johtuen luottamusvälin pituus <span class="math display">\[\begin{equation*}
+2 \times z_{\alpha/2} \frac{\sigma}{\sqrt{n}}.
+\end{equation*}\]</span></p>
+<p>Oletetaan, että normaalijakauman odotusarvoparametrille <span class="math inline">\(\mu\)</span> halutaan konstruoida luottamusväli, jonka toivottu pituus on <span class="math inline">\(2d\)</span> (eli luottamusvälin pituus = <span class="math inline">\(2d\)</span>. Huomio siis luottamusvälin symmetrisyys). Luottamusvälin pituuden lausekkeesta (kun se asetetaan yhtäsuureksi <span class="math inline">\(2d\)</span>:n kanssa) saadaan yhtälöä järjestelemällä lauseke <span class="math display">\[\begin{equation*}
+n = \Big(\frac{z_{\alpha/2} \, \sigma}{d} \Big)^2.
+\end{equation*}\]</span></p>
+<ul>
+<li><p>Jos varianssi <span class="math inline">\(\sigma^2\)</span> on tuntematon, se voidaan kaavassa korvata havaitulla otosvarianssilla <span class="math inline">\(s^2\)</span>, jolloin <span class="math display">\[\begin{equation*}
+n = \Big(\frac{z_{\alpha/2} \, s}{d} \Big)^2.
+\end{equation*}\]</span></p></li>
+<li><p>Yksinkertaisuuden vuoksi pitäydytään tässä tapauksessa luottamuskertoimissa <span class="math inline">\(z_{\alpha/2}\)</span> vaikka varianssi <span class="math inline">\(\sigma^2\)</span> olisikin tuntematon.</p></li>
+</ul>
+</div>
+<div class="eblock">
+<p><strong>Esimerkki</strong>: <strong>Käytännön otoskoon määrääminen</strong>. Oletetaan, että haluamme määrätä otoskoon niin, että otoskeskiarvo poikkeaa populaatiokeskiarvosta korkeintaan yhden yksikön <span class="math inline">\((d = 1)\)</span> todennäköisyydellä <span class="math inline">\(0.05\)</span>. Oletetaan, että varianssi on aiemmissa tutkimuksissa ollut <span class="math inline">\(\sigma^2 = 5\)</span>. Oletetaan lisäksi, että taustallaoleva perusjoukko on iso (ääretön).</p>
+<p>Tällöin otoskoon tulisi olla <span class="math display">\[\begin{equation*}
+n \ge \Big(\frac{z_{\alpha/2} \, \sigma}{d} \Big)^2 = \Big(1.96 \sqrt{5} \Big)^2 \approx 19.2.
+\end{equation*}\]</span> Tarvittavan otoskoon tulisi siis olla tässä tapauksessa noin 20.</p>
+</div>
+<p><span class="marginnote">Äärellisyyskorjaus</span></p>
+<p><strong>Äärellisyyskorjaus</strong>. Äärellisyyskorjausta käytetään, jos otos poimitaan äärellisestä perusjoukosta palauttamatta ja (nyrkkisääntönä) <span class="math display">\[\begin{equation*}
+\frac{n}{N} &gt; 0.05,
+\end{equation*}\]</span> jossa <span class="math inline">\(n\)</span> on edelleen otoskoko, <span class="math inline">\(N\)</span> perusjoukon koko.</p>
+<ul>
+<li><p>Jos suhde <span class="math inline">\(n/N\)</span> on lähellä arvoa 1, tarkoittaa se, että perusjoukosta huomattava osa kuuluu otokseen. Tällöin otoskeskiarvon poikkeama populaatiokeskiarvosta on luonnollisesti pienempi kuin pienemmän otoksen tilanteessa.</p></li>
+<li><p>Otoskoon kasvattaminen lisää siis estimoinnin tarkkuutta, ja juuri äärellisyyskertoimen avulla hajonta “korjataan” vastaamaan käytettyä otoskokoa.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Otoskoko, äärellisyyskorjaus: Normaalijakauman odotusarvon estimointi</strong>. Oletetaan, että otannan taustalla oleva perusjoukko on äärellinen (pieni). Tällöin luottamusvälin konstruloinnissa huomioidaan äärellisyyskorjaus (vrt. aiemmat kaavat): <span class="math display">\[\begin{equation*}
+\bar{Y} \pm z_{\alpha/2} \sqrt{\Big(\frac{N-n}{N}\Big)\frac{\sigma^2}{n}}.
+\end{equation*}\]</span> Tarvittava otoskoko on tällöin (välivaiheiden jälkeen) <span class="math display">\[\begin{equation*}
+n =\frac{1}{\frac{d^2}{z^2_{\alpha/2} \sigma^2} + \frac{1}{N}}.
+\end{equation*}\]</span></p>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki: otoskoko (jatkoa)</strong>. Oletetaan aiemman esimerkin tilanne kuitenkin siten, että perusjoukon koko on nyt <span class="math inline">\(N=100\)</span>. Tällöin otoskooon tulisi olla <span class="math display">\[\begin{equation*}
+n  \ge \frac{1}{\frac{1}{1.96^2 \times 5} + \frac{1}{100}} \approx 16.11.
+\end{equation*}\]</span> Tarvittava otoskoko on siis noin 17.</p>
+</div>
+<div class="defblock">
+<p><strong>Otoskoko: Suhteellinen osuus</strong>. Palauta mieleen yläpuolelta Bernoulli-jakauman odotusarvoparametrin <span class="math inline">\(p\)</span> luottamusvälin muodostaminen. Kuten normaalijakauman odotusarvoparametrin tapauksessa, pyrimme muodostamaan mahdollisimman lyhyen luottamusvälin, johon liittyvä luottamustaso olisi samanaikaisesti mahdollisimman korkea.</p>
+<p>Oletetaan aiempaan tapaan, että <span class="math inline">\(p\)</span>:lle halutaan muodostaa luottamusväli, jonka toivottu pituus on <span class="math inline">\(2d\)</span>. Tarvittava otoskoko saadaan kaavasta (kun perusjoukko oletetaan äärettömäksi) <span class="math display">\[\begin{equation*}
+n = \Big(\frac{z_{\alpha/2} \,\, \sqrt{p(1-p)}}{d} \Big)^2.
+\end{equation*}\]</span></p>
+</div>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki: Otoskoko ja suhteellinen osuus</strong>. Geologi haluaa arvioida kallion kultapitoisuuden ottamalla kivinäytteen <span class="math inline">\(n\)</span>:tä eri pisteestä. Jokaisesta näytteestä havaitaan sisältyykö siihen kultaa. Kuinka suuri otos on poimittava, jotta kultapitoisuuden estimointivirheen <span class="math inline">\(d\)</span> arvo on korkeintaan <span class="math inline">\(0.05\)</span> todennäköisyydellä 0.95?</p>
+<ul>
+<li><p>Tässä kullan suhteellinen osuus on tuntematon, joten <span class="math inline">\(p\)</span>:lle asetetaan arvio <span class="math inline">\(p=0.5\)</span>.</p></li>
+<li><p>Äärellisyyskorjaus voidaan unohtaa, sillä näytteenottopisteiden pinta-alat ovat pieniä (eli niitä on äärettömän paljon, ts. tarkasteltavaan populaatioon niitä sisältyy hyvin suuri määrä).</p></li>
+</ul>
+<p>Tällöin otoskoko <span class="math display">\[\begin{equation*}
+n = \frac{1.96^2 \cdot 0.5 \cdot 0.5}{0.05^2} \approx 384.16.
+\end{equation*}\]</span></p>
+</div>
+<p><strong>Suhteellinen osuus, äärellisyyskorjaus</strong>. Tarvittava otoskoko saadaan äärellisyyskorjausta käytettäessä kaavasta <span class="math display">\[\begin{equation*}
+n = \frac{N p (1-p)}{\frac{(N-1) d^2}{z^2_{\alpha/2}} + p(1-p)}.
+\end{equation*}\]</span></p>
+<ul>
+<li><p>Voidaan osoittaa, että jos perusjoukko <span class="math inline">\(N\)</span> on iso (ääretön), niin tällöin tämä edellinen lauseke supistuu aiempaan otoskokoa osoittavaan lausekkeeseen.</p></li>
+<li><p>Usein otoskokoa määrättäessä suhteellisesta osuudesta ei ole olemassa arviota. Tällöin suhteellisen osuuden <span class="math inline">\(p\)</span> arvoksi asetetaan useimmiten <span class="math inline">\(p=0.5\)</span>, jolloin suhteellisen osuuden varianssi on suurin.</p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./11-til_päät.html" class="pagination-link" aria-label="Satunnaisotokset: Tilastollisen päättelyn näkökulma">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./13-regressioanalyysi.html" class="pagination-link" aria-label="Regressioanalyysi">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

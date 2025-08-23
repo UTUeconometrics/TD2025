@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Tilastotiede tieteenalana – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-sattuma.html" rel="next">
+<link href="./02-tieteellinen_tieto.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-tilastotiede_tieteenalana.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+        <div class="sidebar-tools-main">
+    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#mitä-tilastotiede-on-ja-mitä-se-ei-ole" id="toc-mitä-tilastotiede-on-ja-mitä-se-ei-ole" class="nav-link active" data-scroll-target="#mitä-tilastotiede-on-ja-mitä-se-ei-ole"><span class="header-section-number">3.1</span> Mitä tilastotiede on ja mitä se ei ole?</a></li>
+  <li><a href="#tilastotieteen-suhde-lähitieteisiin" id="toc-tilastotieteen-suhde-lähitieteisiin" class="nav-link" data-scroll-target="#tilastotieteen-suhde-lähitieteisiin"><span class="header-section-number">3.2</span> Tilastotieteen suhde lähitieteisiin</a></li>
+  <li><a href="#tilastotieteen-osa-alueet" id="toc-tilastotieteen-osa-alueet" class="nav-link" data-scroll-target="#tilastotieteen-osa-alueet"><span class="header-section-number">3.3</span> Tilastotieteen osa-alueet</a></li>
+  <li><a href="#tilastotieteen-sovellusaloja-ja-rajatieteitä" id="toc-tilastotieteen-sovellusaloja-ja-rajatieteitä" class="nav-link" data-scroll-target="#tilastotieteen-sovellusaloja-ja-rajatieteitä"><span class="header-section-number">3.4</span> Tilastotieteen sovellusaloja ja “rajatieteitä”</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>Tässä luvussa hahmottelemme tilastotieteen piirteitä tieteenalana.</p>
+<ul>
+<li>Käymme läpi tilastotieteelle ominaisia piirteitä, jotka erottavat sen niin lähitieteistä, kuten matematiikasta ja tietojenkäsittelytieteestä, sekä myös eri sovellusaloista.</li>
+<li>Usein näkee tilastotieteen typistettävän vain työkaluksi eri sovellusalojen empiiriseen tutkimukseen. Tämä siitäkin huolimatta että tilastotieteellä on oma rikas teoriapohjansa sekä kiistaton asema omana tieteenalanaan.</li>
+</ul>
+<p>Tieteenalan määritteleminen lyhyesti on aina hieman hankalaa. Tästä huolimatta seuraavassa yritämme osaltaan vastata seuraaviin kysymyksiin:</p>
+<ul>
+<li>Mitä tilastotiede on ja mitä se ei ole? Miksi tilastotiede ei ole vain sovellettua matematiikkaa tai matematiikalla höystettyä tietojenkäsittelyä?</li>
+<li>Mihin tilastotiedettä käytetään? Onko tilastotieteellä käyttöä ns. “akatemian” eli tutkimusyhteisön ulkopuolella?</li>
+</ul>
+<p>Tlastotiedettä kohtaan esitettyä tyypillistä kritiikkiä tarkastellaan vielä tämän materiaalin (Osan II) loppupuolella. Siis sen jälkeen kun olemme ensin tutustuneet tämän kurssin myötä tarkemmin mistä tilastotieteessä on kysymys!</p>
+<p>&nbsp;</p>
+<section id="mitä-tilastotiede-on-ja-mitä-se-ei-ole" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="mitä-tilastotiede-on-ja-mitä-se-ei-ole"><span class="header-section-number">3.1</span> Mitä tilastotiede on ja mitä se ei ole?</h2>
+<p>Aloitetaan tarkastelemalla erinäisiä <strong>tilastotieteen ‘’karakterisointeja’’</strong> eri tahojen ja tutkijoiden toimesta:</p>
+<ul>
+<li><strong>Tilastotiede on tietotuotannon teknologiaa</strong>, <em>jonka avulla voidaan suorittaa kvantitatiivisten tietojen joukkotuotantoa ja havaintoihin perustuvia tieteellisiä ja käytännöllisiä päätöksiä. Tilastotiede on siis yksikköjen muodostamaan joukkoon liittyvän numeerisen tietoaineiston keräämistä, analysointia ja tulkintaa koskeva tiede</em> (Leo Törnqvistin, Suomen ensimmäisen tilastotieteen professorin, esittämä luonnehdinta (Vartia, 1989))</li>
+<li><strong>Tilastotiede on yleinen menetelmätiede</strong>, <em>jota sovelletaan, jos reaalimaailman ilmiöstä halutaan tehdä johtopäätöksiä ilmiötä kuvaavien kvantitatiivisten tai numeeristen tietojen perusteella sellaisissa tilanteissa, joissa tietoihin liittyy epävarmuutta tai satunnaisuutta</em> (Mellin, 2004).</li>
+<li><strong>Vale, emävale, tilasto</strong> (Mark Twain, 1907).
+<ul>
+<li>Twain popularisoi tämän lausahduksen teoksessaan <em>Chapters from My Autobiography</em> jo vuonna 1907. Huomionarvoista toki on, että valtaosa “modernin” tilastotieteen teoriakehityksestä, jolle nykytilastotiede pohjautuu, on tapahtunut vasta Twainin teoksen julkaisun jälkeen. Esimerkiksi Ronald Fisher, jota pidetään modernin tilastotieteen isänä, julkaisi merkityksellisimmät työnsä vasta 1920- ja 30-lukujen aikana. Tällä lentävällä lausahduksella <strong>ei siis ole mitään tekemistä nykyisten tilastollisten menetelmien kanssa</strong>.</li>
+</ul></li>
+<li><em>Statistics concerns what can be learned from data</em> (Davison, 2003. <em>Statistical Models. Cambridge University Press</em>.)</li>
+<li><em>Maalaisjärjen tehostamista</em> (Sund, 2003)</li>
+</ul>
+<p>&nbsp;</p>
+<p>Tilastotieteen määrittelyä haettaessa on viimeistään tässä vaiheessa syytä esitellä tilastotieteen keskeinen (keskeisin) konsepti eli <strong>todennäköisyys</strong>. Todennäköisyys on tilastotieteen perusta, joka mahdollistaa datan analysoinnin, tulkinnan ja päätöksenteon epävarmuuden vallitessa.</p>
+<ul>
+<li><p>Se tarjoaa matemaattisen perustan epävarmuuden ja satunnaisuuden käsittelylle.</p></li>
+<li><p>Todennäköisyydellä on ratkaisevan tärkeä rooli tilastollisessa päättelyssä eri muodoissaan sekä mm. ennustamisessa ja ylipäätään data-analyysissä.</p></li>
+</ul>
+<p><span class="marginnote">Todennäköisyys</span></p>
+<div class="defblock">
+<p><strong>Todennäköisyys</strong> on epävarmuuden muodollinen matemaattinen ilmaus. Olkoon <span class="math inline">\(P(A)\)</span> tapahtuman <span class="math inline">\(A\)</span> todennäköisyys. Todennäköisyyden keskeisiä sääntöjä ovat:</p>
+<ul>
+<li><strong>Rajat</strong>: <span class="math inline">\(0 \leq P(A) \leq 1\)</span>, jossa <span class="math inline">\(P(A) = 0\)</span>, jos tapahtuma <span class="math inline">\(A\)</span> on mahdoton, ja <span class="math inline">\(P(A) = 1\)</span>, jos A on varma tapahtuma.
+<ul>
+<li>Komplementti: <span class="math inline">\(P(A) = 1 - P(\text{ei A})\)</span>.</li>
+</ul></li>
+<li>Yhteenlaskusääntö: Jos <span class="math inline">\(A\)</span> ja <span class="math inline">\(B\)</span> ovat toisensa <strong>poissulkevia</strong> tapahtumia, eli vain toinen voi tapahtua, <span class="math inline">\(P(A \text{ tai } B) = P(A) + P(B)\)</span>.</li>
+<li>Kertolaskusääntö: Minkä tahansa tapahtumien <span class="math inline">\(A\)</span> ja <span class="math inline">\(B\)</span> osalta, <span class="math inline">\(P(A \text{ ja } B) = P(A|B)P(B)\)</span>, jossa <span class="math inline">\(P(A|B)\)</span> edustaa <span class="math inline">\(A\)</span>:n todennäköisyyttä, kun <span class="math inline">\(B\)</span> on tapahtunut.
+<ul>
+<li><span class="math inline">\(A\)</span> ja <span class="math inline">\(B\)</span> ovat <strong>riippumattomia</strong>, jos ja vain jos <span class="math inline">\(P(A|B) = P(A)\)</span>, eli <span class="math inline">\(B\)</span>:n tapahtuminen ei vaikuta <span class="math inline">\(A\)</span>:n todennäköisyyteen. Tässä erikoistapauksessa siis <span class="math inline">\(P(A \text{ ja } B) = P(A)P(B)\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+<p>Todennäköisyyden käsitteelle voidaan esittää erilaisia tulkintoja, joista kolme tärkeimmät ovat seuraavat (esim. Mellin (2004, s. 240)):</p>
+<ul>
+<li>Todennäköisyyden tulkinta <em>suhteellisena frekvenssinä</em>. Tapahtuman tn. voidaan samaistaa tapahtuman suhteelliseen frekvenssiin, kun tarkasteltava satunnaisilmiö esiintyy toistuvasti. Jos tapahtuman suhteellinen frekvenssi lähestyy satunnaisilmiön toistuessa jotain lukua, on tuo luku tapahtuman empiirinen todennäköisyys, mikä puolestaan liittyy tilastotieteen keskeiseen tulokseen eli ns. <strong>suurten lukujen lakiin</strong>.</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkiksi</strong> harhattoman kolikon heittämisessä kruunien suhteellinen osuus kaikista heitoista lähestyy arvoa 1/2 eli 50% heittojen lukumäärän kasvaessa.</p>
+</div>
+<ul>
+<li>Todennäköisyyden tulkinta <em>subjektiivisena todennäköisyytenä ja vedonlyöntisuhteena</em>. Ainutkertaisten tapahtumien tn. on henkilökohtainen ja se voidaan määritellä sen vedonlyöntisuhteen avulla, johon henkilö suostuu.</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Oletetaan, että ennen Daavidin ja Goljatin kohtaamista vedonlyöntisuhteeksi ilmoitetaan 1:9. Tämä tarkoittaa vedonlyöjien uskovan Daavidin voittoon tn:llä 1/10 = 10 % ja Goljatin voittoon 9/10 = 90 %. Vedonlyöntisuhde on näiden todennäköisyyksien suhde. Sivuuttamalla edelleen vedonvälittäjien osuuden (komission), voidaan näistä päätellä että meille tutumpien kertoimien kautta Goljatin voitosta saisi kertoimen 1.11 ja Daavidin voitosta kertoimen 10.</p>
+</div>
+<ul>
+<li>Todennäkäisyystulkinta <em>klassisena todennäköisyytenä</em>. Tällöin satunnaisilmiö koostuu toisensa poissulkevista symmetrisistä alkeistapahtumista. Klassinen tn. saadaan määräämällä (päättelemällä) tapahtumalle suotuisten alkeistapahtumien lukumäärän suhteena kaikkiin mahdollisten alkeistapahtumien lukumäärään.</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Nopanheitto ja siihen kohdistuva tutkimuskysymys on esimerkki klassisesta todennäköisyydestä. Kuten esim. olkoon määrättävä todennäköisyys tapahtumalle, että kummallakin nopalla saadaan sama silmäluku. Osoittautuu, että tämän tn. on 1/6 eli 16.7 %.</p>
+</div>
+<p>Todennäköisyyden tarkempi käsittely, kuten edellä mainittujen ominaisuuksien tarkempi tarkastelu tapahtuu myöhemmillä todennäköisyyslaskennan ja tilastotieteen kursseilla.</p>
+<p>&nbsp;</p>
+<p><strong>Tilastolliset mallit ja todennäköisyyslaskenta</strong>. Tilastollisten mallien ajatusta esiteltiin jo aiemmin lyhyesti ja tähän palataan tarkemmin vielä myöhemmin. Ne perustuvat todennäköisyyslaskentaan ja niillä mallinnetaan reaalielämän ilmiöiden alla piileviä prosesseja ja mekanismeja. Näiden prosessien tuottamia tietoja (aineistoja) tiivistetään usein graafisiksi esityksiksi ja tunnusluvuiksi sekä lopulta erityisesti tilastollisten mallien parametreiksi, joiden pohjalta johtopäätöksiä tehdään. Tässä onnistuakseen tilastollisten menetelmien tuleekin pyrkiä erottelemaan <strong>sattuma</strong> ja <strong>systemaattisuus</strong> tarkasteltavissa ilmiöissä, tai tarkemmin, niitä kuvaavissa aineistoissa, jotta johtopäätökset olisivat luotettavia.</p>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>Tiivistetysti voidaan sanoa, että saadakseen tarkemmin selville mitä tilastotiede on, pitää opiskella tilastotiedettä ja sen käyttöä!</strong></p>
+</div>
+<p>&nbsp;</p>
+<p><strong>Mitä tilastotiede ei ole</strong></p>
+<ul>
+<li><strong>Tilastotiede ei ole vain tilastojen tuotantoa</strong> ja/tai <strong>oppia tilastoista ja niiden tekemisestä</strong>
+<ul>
+<li>Vaikka sana <strong>tilasto</strong> tuo useimmille ensimmäisenä mieleen yhteiskuntaa ja sen toimintaa kuvaavat <strong>numeeristen tietojen järjestelmälliset kokoelmat</strong>, tilastotiede ei suinkaan ole ainoastaan tilastojen ja niiden tekemisen oppia.
+<ul>
+<li>Tämä siitäkin huolimatta, että niiden menetelmien konstruointi, joilla tilastoja tuotetaan, jalostetaan ja analysoidaan on keskeinen osa tilastotiedettä. Tilastot ovat siis usein tilastotieteen soveltajan tutkimuskohteena ja tilastojen laadinnassa käytetään apuna tilastotieteen menetelmiä.</li>
+<li>Suomessa erityisesti Tilastokeskus (<a href="https://stat.fi/fi)" class="uri">https://stat.fi/fi)</a> toimii virallisena tilastoviranomaisena ja tilastotuottajana. Tätä <strong>tilastotuotannon</strong> kokonaisuutta nimitetään ajoittain <strong>tilastotoimeksi</strong>. <strong>Tilastotieteen käyttöalue on paljon tätä laajempi</strong>.</li>
+<li>Ajoittain käytettävää terminologiaa ja luokittelua: <span class="marginnote">Tilastoala ja tilastotoimi</span>
+<ul>
+<li>tilastoala = tilastotiede + tilastotoimi</li>
+<li>tilastotiede = teoreettinen tilastotiede + soveltava tilastotiede</li>
+<li>tilastotoimi = tilastojen tuotanto + tilastojen hyödyntäminen</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Tilastotieteen kannalta mikä tahansa reaalimaailman ilmiötä kuvaava <strong>numeeristen tai kvantitatiivisten tietojen järjestelmällinen kokoelma</strong> voi muodostaa <strong>tilastollisen aineiston</strong> ja siten tilastollisen tutkimuksen mahdollisen kohteen.
+<ul>
+<li>Esimerkiksi kaikki <strong>empiirisen</strong> tai <strong>kvantitatiivisen</strong> tutkimuksen tutkimus- tai havaintoaineistot ovat tilastotieteen kannalta tilastollisia aineistoja.</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<p>Tilastotiede sijoittuu tieteiden kentässä matematiikan, filosofian ja tietojenkäsittelytieteen rinnalle. Tästä huolimatta se ei kuitenkaan ole yksiselitteisesti minkään näiden osa-alue.</p>
+<p>&nbsp;</p>
+<p><strong>Tilastotiede ei ole matematiikan osa-alue</strong>, sillä tilastotiede lähestyy tieteellistä ongelmanratkaisua eri tavoin:</p>
+<ul>
+<li><p>Matematiikka on tietyllä tavalla eksaktia ja sen tulokset perustuvat formaaliin deduktioon ja loogisiin todistuksiin, johtaen useimmiten “eksaktiin” ratkaisuun tai matemaattisesti formaaliin ratkaisun loogiseen esitystapaan.</p></li>
+<li><p>Tilastotiede sen sijaan on aina konteksti- ja aineistopohjaista ja perustuu induktiiviseen päättelyyn. Saadut tulokset ovat aina epävarmoja, koska ne kuvailevat epävarmaa tietoa generoivia prosesseja (tarkasteltavan otoksen perusteella)!</p></li>
+</ul>
+<p>Tilastotiede on siis hyvä nähdä omana tieteenalanaan matemaattisesta esitystavastaan huolimatta. Eihän esimerkiksi myöskään fysiikkaa (sentään) pidetä matematiikan osa-alueena!</p>
+<p>&nbsp;</p>
+<p><strong>Tilastotiede ei ole myöskään tietojenkäsittelytieteen osa-alue</strong>, vaikkakin useiden laskennallisten menetelmien ja tehokkaan tietojenkäsittelyn rooli tilastollisissa analyyseissä on jatkuvasti kasvanut. <span class="marginnote">Tietojenkäsittelytiede</span></p>
+<ul>
+<li>Tietojenkäsittelytieteen teoria ei rakennu tilastotieteen tavoin ajatukselle epävarmoista ja satunnaisista reaalimaailman ilmiöistä.</li>
+</ul>
+<p>Vaikka matematiikka ja tietojenkäsittelytiede, ja jotkin muut alat, jakavat tilastotieteen kanssa useita piirteitä ja ominaisuuksia, on tilastotiede kuitenkin siis perustellusti oma tieteenalansa. Tämä erottelun vaikeus jo itsessään todistaa kuinka keskeinen rooli tilastotieteellä on eri aloilla!</p>
+<ul>
+<li>Tilastotiede ei siis kuulu yksiselitteisesti sen lähitieteiden alle, vaan <strong>muodostaa oman tieteenalan</strong> omine teorioineen ja tieteellisine premisseineen. <span class="marginnote">Datatiede/data science</span></li>
+<li>Käsittelemme myöhemmin tilastotieteen roolia matematiikan ja/tai <strong>datatieteiden</strong> (‘’data science’’) kokonaisuudessa ja keskustelemme tarkemmin näiden välisistä eroista.</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Mitä tilastotiede (ainakin) on</strong></p>
+<p><strong>Tilastotiede yleisenä menetelmätieteenä</strong>. Tieteellistä tietoa ympäröivästä maailmasta hankitaan tieteellisillä <strong>menetelmillä/metodeilla</strong> (ks. tieteellisen menetelmän kriteerit), joiden avulla tutkitaan jotain ilmiötä tai sen generoimaa kvantitatiivista mutta epävarmaa tietoa sisältävää aineistoa.</p>
+<ul>
+<li><p>Tilastotieteessä kehitetyt ja kehitettävät menetelmät antavat tutkijoille yhtenevät ja tiedeyhteisön hyväksymät raamit, jotka mahdollistavat (tilastollisen) päättelyn ja päätöksenteon epävarman tiedon vallitessa. Näin voidaan uskottavasti ja luotettavasti tiivistää tietoa, jota erilaiset aineistot sisältävät, perustaa johtopäätöksiä näille tiivistyksille ja saavuttaa uusia tieteellisiä löytöjä.</p></li>
+<li><p>Tilastotieteen menetelmien käyttö ja soveltaminen onkin siis aina alakohtaista. Tästä huolimatta tilastollisia menetelmiä sovelletaan (aina) johonkin <strong>aineistoon</strong>!</p></li>
+<li><p>Tilastotiede nähdäänkin usein kuuluvan ns. <strong>menetelmätieteisiin</strong>, joissa mm kehitetään työkaluja muiden tieteiden tutkimusongelmien ratkaisuksi ja jolla on myös oma sovelluksista vapaa teorianmuodostuksensa</p></li>
+</ul>
+<p>Summarisoidaan nyt mitä tilastotiede on:</p>
+<div class="defblock">
+<p><strong>Tilastotiede kehittää ja soveltaa tilastollisia menetelmiä ja malleja</strong> satunnaisilmiöitä kuvaaville kvantitatiivisia tietoja generoiville prosesseille, joiden avulla reaalimaailman ilmiöistä voidaan tehdä johtopäätöksiä ilmiöitä kuvaavien numeeristen tilastotietojen perusteella.</p>
+<ul>
+<li><p>Näin tilastotietoihin liittyy <strong>epävarmuutta ja satunnaisuutta</strong>.</p></li>
+<li><p>Tilastolliset mallit ja menetelmät perustuvat osaltaan todennäköisyyslaskentaan.</p></li>
+</ul>
+<p>Tilastollisten menetelmien avulla pyritään löytämään reaalimaailman satunnaisia ilmiöitä kuvaavista numeerisista (eli kvantitatiivisista) tiedoista <strong>systemaattisia piirteitä</strong> joita jalostetaan sellaiseen muotoon, että ilmiöistä voidaan tehdä päätelmiä. Tässä voidaankin nähdä olevan kysymys <strong>signaalin ja kohinan erottamisesta</strong> (ks. Silver, 2014).</p>
+</div>
+<p>Juuri sattuman ja epävarmuuden huomioiminen tutkimusasetelmissa erottaa tilastotieteen muista menetelmätieteistä!</p>
+<p>Tilastollisia menetelmiä voidaan soveltaa tietojen keruun, jalostuksen ja analysoinnin jokaisessa vaiheessa.</p>
+<ul>
+<li><p>Päämääränä on jalostaa tiedot muotoon, joka mahdollistaa tutkittavaa reaalimaailman ilmiötä koskevien johtopäätösten tekemisen (tilastollisessa päättelyssä) käytettävien menetelmien pohjalta.</p></li>
+<li><p>Tutkimuksessa on pystyttävä valitsemaan ja käyttämään menetelmiä, jotka antavat aineistosta vastauksia haluttuihin kysymyksiin. Tämä vaatii yhtä lailla sovellusalakohtaista osaamista, eli substanssiosaamista, kuin myös kattavaa menetelmäosaamista.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p><span class="marginnote">Aineisto (data)</span></p>
+<div class="defblock">
+<p><strong>Tilastotiede</strong>, jatkoa. Tilastotieteessä lähtökohtana ja ratkaisevassa asemassa on siis aina jonkin satunnaisilmiön generoima <strong>aineisto</strong> (<strong>data</strong>), josta haluamme oppia tai tietää lisää.</p>
+</div>
+<p>Tämä aineistokeskeisyys yhtäältä erottaa tilastotieteen rajatieteistään ja toisaalta tuo sen lähemmäksi niitä ja sovellusalojaan. Aineistoa <strong>analysoidaan</strong>, <strong>kuvaillaan</strong> ja <strong>mallinnetaan</strong> tilastollisin menetelmin, joiden kehittäminen on keskeinen osa tilastotiedettä.</p>
+<p>&nbsp;</p>
+<p>Pelkkä menetelmien kehittäminen kuuluu pitkälti <strong>matemaattisen/teoreettisen tilastotieteen</strong> osa-alueelle (palataan vielä myöhemmin).</p>
+<ul>
+<li><p>Toisaalta pelkkä aineistoon keskittyminen ja (mekaaninen) analysointi voi sen sijaan olla joissain tilanteissa pitkälti tietojenkäsittelyä.</p></li>
+<li><p><strong>Tilastollinen mallintaminen</strong> löytyykin näiden välistä ja se sisältää eri alojen sovelluksista kumpuavan tarpeen uusien menetelmien kehittämiseen. Tämä vuoropuhelu muodostaa tilastotieteelle luonnollisen “<strong>takaisinkytkennän</strong>” <strong>teoreettisen ja soveltavan puolen välillä</strong>: uudet teoreettiset menetelmät vastaavat soveltavan tilastotieteen ongelmiin mutta herättävät aina uusia kysymyksiä, jotka palautuvat taas teoreettisen tilastotieteilijän pöydälle!</p>
+<ul>
+<li><p>Luonnollisesti valtaosa tilastotieteilijöistä ja lähitieteiden tutkijoita (erityisosaajia) asettuvat näiden äärimmäisten luonnehdintojen välimaastoon eikä tarkkaa luokittelua ole sinänsä tarpeen tehdä ja korostaa.</p></li>
+<li><p>Joka tapauksessa tilastotieteen, ja sen osa-alueiden, kehityksen keskiössä ovat aina sovellusalakohtaiset ongelmat, joista useat palautuvat yleisemmälle tasolle teoreettisen tilastotieteen kehityspolkuihin.</p></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Teor-sov-tilt_250523_103422.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Teoreettinen ja soveltava tilastotiede (ja niihin liittyviä joitain kaavoja ja kuvioita)
+</center>
+<p>&nbsp;</p>
+</section>
+<section id="tilastotieteen-suhde-lähitieteisiin" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="tilastotieteen-suhde-lähitieteisiin"><span class="header-section-number">3.2</span> Tilastotieteen suhde lähitieteisiin</h2>
+<p>Oheinen kuvio (lähde: Duchesnay (2020): <a href="https://duchesnay.github.io/pystatsml/introduction/machine_learning.html)" class="uri">https://duchesnay.github.io/pystatsml/introduction/machine_learning.html)</a> tarjoaa karkean yleistyksen tietojenkäsittelytieteen (Computer Science), sovellusalan (Application domain) sekä tilastotieteen (Statistics) ja matematiikan (Mathematics) välisistä yhteyksistä. On selvää että tilastotieteellä on paljon päällekkäisyyksiä lähitieteidensä kanssa ja joskus näkeekin, huolimatta edellä tehdyistä huomioista, että tilastotiede niputetaan yhteen matematiikan tai tietojenkäsittelytieteen kanssa.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Tilastotiede-rajatieteet_250523_102818.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Tilastotieteen ja rajatieteiden yhteyksiä kuvaava Venn-diagrammi (ks. Duchesnay (2020) yläpuolella).
+</center>
+<p>&nbsp;</p>
+<p>Yritetään siis hahmotella tilastotieteen suhdetta sitä lähimpänä olevaan (soveltavaan/sovellettuun) <strong>matematiikkaan</strong>.</p>
+<ul>
+<li>Tilastotieteessä olennaisen otantateorian voisi ajatella olevan matemaattisesti määritelty teoria, jossa myös on aineiston käsite, mutta se ei tee siitä vielä varsinaisesti tilastotiedettä.</li>
+<li>Matematiikassa kuvataan ongelma ja esitetään se teorian muodossa, eli malli on <em>parametreista havaintoihin</em>. Tilastotieteessä ongelma on käänteinen, edetään <em>havainnoista parametreihin</em>, mutta ongelman matemaattinen kuvaus vaaditaan ensin. Tilastotiede esittää menetelmiä ja käsitteitä tämän käänteisen ongelman ratkaisemiseen.
+<ul>
+<li>Karkeasti erotellen tilastotieteessä käsiteltävät ongelmat lähtevät aina havainnoista eli aineistosta ja matematiikassa suunta on teoriasta aineistoon.</li>
+<li>Voidaankin siis sanoa, että tilastotieteen erottaa puhtaasta matematiikasta se, että siinä tutkitaan menetelmiä eli metodeja, jotka mahdollistavat päättelyn/tiedon hankinnan puutteellisesta tai epävarmasta tiedosta.</li>
+</ul></li>
+</ul>
+<p>Matemaattiset ja tilastolliset mallit voidaan jakaa <strong>deterministisiin</strong> ja <strong>stokastisiin</strong> malleihin.</p>
+<ul>
+<li><p>Deterministisen mallin tapauksessa, tiettyjen alkuehtojen (alkuarvojen) vallitessa, voidaan määrittää tarkasteltavan ilmiön lopputulos.</p>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong> ovat esim. monet fysiikan lait.</p>
+</div></li>
+<li><p>Stokastiset mallit perustuvat todennäköisyyslaskentaan. Stokastisia malleja käytetään kun alkuehtojen perusteella ei voida varmasti määrittää tarkasteltavan ilmiön lopputulosta. Tällöin eri vaihtoehtoihin liittyvät tietyt <strong>esiintymistodennäköisyydet</strong>.</p>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong> ovat mm. kolikonheitto tai sään ennustaminen.</p>
+</div></li>
+<li><p>Kun jotain ilmiötä kuvataan stokastisen mallin avulla, voidaan käyttää (joudutaan käyttämään) tilastollisia menetelmiä. Vaikka käytännössä laskenta hoidetaan tietokoneohjelmien avulla, meidän tilastotieteen tutkijoina ja käyttäjinä on huolehdittava tutkimusprosessin onnistuneesta toteutuksesta muilta osin.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p>Tilastotiede ei myöskään ole puhtaasti tietojenkäsittelyä, vaikka tilastotiede onkin luonteeltaan aineistopohjaista ja aineistojen sisältämää tietoa on käsitelty osin samoin kuin tietojenkäsittelyssä siitä asti kun se on ollut mahdollista (tietokoneen keksimisen myötä).</p>
+<ul>
+<li>Tilastotieteen ja tietojenkäsittelytieteen ero on lähitieteistä selvin: tilastotieteellä on “mekaanisesta” tai teoreettisesta tietojenkäsittelystä selkeästi erillinen ja oma teoriapohjansa.
+<ul>
+<li>Siinä missä tilastotieteen teoria perustuu aineiston stokastiselle mallintamiselle, tietojenkäsittely on enemmänkin algoritmista ajattelua, missä aineistolla on ratkaisevalla tavalla erilainen rooli.</li>
+</ul></li>
+<li>Lisäksi suomen kielessä tietojenkäsittely ymmärretään laajemmassa mielessä ohjelmoitavissa olevaksi automatisoimiseksi, jota tilastotiede ei perusolemukseltaan suinkaan ole.</li>
+</ul>
+<p>&nbsp;</p>
+<p>Tarkastellaan seuraavaksi tilastotieteen suhdetta viime vuosien aikana paljon suosiota keränneeseen <strong>datatieteeseen (data science)</strong>.</p>
+<div class="defblock">
+<p><strong>Datatiede</strong> (<strong>data science</strong>). Tieteenala, joka keskittyy tekniikoihin, joilla saadaan muodostettua analyysejä ja käsityksiä analysoitavasta aineistosta (datasta). Tämä sisältää algoritmien rakentamisen ennustamista varten, datan analysoinnin, visualisoinnin ja mallintamisen.</p>
+<p>Perinteinen tilastotiede on olennainen osa datatiedettä, mutta siihen luetaan kuuluvaksi myös vahva ohjelmoinnin ja datan hallinnan elementti. Datatiede hyödyntää monipuolisia menetelmiä ja työkaluja, kuten koneoppimista, tekoälyä, suurten datamäärien käsittelyä ja tilastollista analyysiä, jotta voidaan tehdä perusteltuja päätöksiä ja ennusteita.</p>
+</div>
+<p>Datatieteellä ei usein nähdä olevan omaa historiallisen tieteellisen prosessin luomaa teoriapohjaa vaan sen voidaan katsoa olevan kokoelma eri alojen tieteellisiä menetelmiä ja tuloksia, jotka voidaan yhdistää tavalla, jonka <strong>datavallankumous</strong> mahdollistaa ja jotka ovat keskeisessä roolissa dataintensiivisissä sovellutuksissa.</p>
+<ul>
+<li>Datavallankumouksella viitataan tässä jatkuvasti kasvaneeseen laskentakapasiteettiin ja datamassojen hallintaan mitä yhä paremmat tietokoneet, ja nyt myös tekoäly eri muodoissaan, mahdollistavat eri sovellusalueilla.</li>
+</ul>
+<p>&nbsp; <span class="marginnote">Koneoppiminen</span></p>
+<p>Yksi edeltävän kuvan alueista liittyy <strong>koneoppimiseen</strong>.</p>
+<div class="defblock">
+<p><strong>Koneoppimiseen (machine learning)</strong> luetaan menetelmiä ja algoritmeja, jotka liittyvät esim. luokittelun, ennustamisen tai klusteroinnin, saavutttamiseksi mahdollisesti monimutkaista aineistoa analysoitaessa. Koneoppiminen hyödyntää ja korostaa laskennallisia menetelmiä ja algoritmeja, joiden avulla tietokoneet voivat oppia ja tehdä päätöksiä mm. ilman tarkemman tilastollisen analyysimallin rakentamista.</p>
+<p>Koneoppimiseen luettavia menetelmiä käytetään monenlaisiin sovelluksiin, kuten kuvantunnistukseen, luonnollisen kielen käsittelyyn, suositusjärjestelmiin ja moniin muihin datan analysointitehtäviin</p>
+</div>
+<p>&nbsp;</p>
+<p>Datatieteeseen voidaan katsoa lukeutuvan piirteitä mm. seuraavilta aloilta:</p>
+<ul>
+<li>Tilastotiede ja matematiikka
+<ul>
+<li>Erityisesti tilastollinen data-analytiikka ja satunnaismekanismien perusteella saatujen aineistojen mallintaminen sekä soveltuvat soveltavan/sovelletun matematiikan osa-alueet.</li>
+</ul></li>
+<li>Tietojenkäsittely
+<ul>
+<li>Tietoteknologian kehityksen myötä taitavien tietojenkäsitteljöiden kysyntä on kasvanut merkittävästi. Lähes jokaisella alalla kerätään entistä enemmän dataa lähes kaikesta, ja jonkun pitäisi osata myös käsitellä näitä aineistoja!</li>
+<li>Datatieteen voidaankin osaltaan katsoa syntyneen tästä elinkeinoelämän tarpeesta asiantuntijoille, jotka osaavat käsitellä ja hallita suuria tietoaineistoja (dataa) sekä mallintaa niitä hyödyllisellä tavalla. Nämä piirteet korostavat tietojenkäsittelytiedettä.</li>
+</ul></li>
+<li>Sovellusala(t)
+<ul>
+<li>Datatiede on luonteeltaan pääosin soveltavaa ja sen alaan lukeutuvia menetelmiä sovelletaan aina johonkin tosielämän ongelmaan. Tästä syystä substanssiosaaminen tarkasteltavalta sovellusalalta on datatieteilijälle erityisen tärkeää ja nykypäivänä datatieteilijän rooli onkin pirstaloitunut yhä enemmän eri sovellusalojen datatieteisiin.</li>
+<li>Tästä huolimatta datatieteilijöiden käyttämät mallinnusmenetelmät ovat usein varsin samanlaisia (ellei olennaisesti aivan samoja), sillä ne pohjautuvat edelleen tilastotieteen ja matematiikan teoriapohjaan. Ilman jälkimmäisten riittävää osaamista, liikutaan datatieteen osalta vaarallisilla vesillä! Ks. oheisen kuvan <strong>danger zone</strong> ja keskustelu alla.</li>
+</ul></li>
+</ul>
+<div class="defblock">
+<p><strong>“Danger zone”</strong>. Oheisen Duchesnayn (2020) kuvan “danger zone” kuvaa tilannetta, jossa ilmiöiden ja toisaalta myös mallien/menetelmien, tilastotieteellinen perusta unohdetaan.</p>
+</div>
+<p>Tilastotieteen näkökulman ohittava (laiminlyövä) soveltaja ei aina kykene suhtautumaan kriittisesti muodostuvaa ennustemallia, tai ennustetulosta, kohtaan eikä täten päädy parhaisiin mahdollisiin (tarkimpiin) ennustetuloksiin tilanteessa, jossa jokin toinen malli kuvaisi ilmiötä paremmin.</p>
+<ul>
+<li><p>Ko. soveltaja ottaa mallin sekä sen antaman ennustetuloksen annettuna, eikä mieti <em>mistä kyseinen ennustetulos johtuu</em>. Jotta tarkat ennustetulokset toteutuvat jatkossakin (kun uutta aineistoa, dataa, tulee saataville), on ennustajan oleellista huomioida mitkä tekijät johtivat tarkkaan ennustetulokseen.</p></li>
+<li><p>Eri menetelmät sopivat eri sovelluskohteisiin. Tilastotieteilijä osaa useimmiten tunnistaa eri sovelluskohteisiin sopivat menetelmät paremmin kuin tietojenkäsittelijä. Vastaavasti tehokkaan/onnistuneen ohjelmointikoodin kirjoittamisessa tilanne on usein toisinpäin.</p>
+<ul>
+<li>Ajoittain sovelluskohteet tai ennusteongelmat ovat riippuvuusrakenteiltaan niin monimutkaisia, että kovin vahvoja tulkintoja ei ole edes mahdollista muodostaa!</li>
+</ul></li>
+</ul>
+<p>Hyvä toki korostaa vielä, että tilastotieteilijä voi myös erehtyä analyyseissään!</p>
+<p>&nbsp;</p>
+</section>
+<section id="tilastotieteen-osa-alueet" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="tilastotieteen-osa-alueet"><span class="header-section-number">3.3</span> Tilastotieteen osa-alueet</h2>
+<p>Tilastotiede on saanut alkunsa siitä, että yhteiskunnan modernisoituessa on tarvittu yhä enemmän tietoja erilaisiin hallinnollisiin tarpeisiin. Samalla on syntynyt tarve kehittää menetelmiä joiden avulla tilastojen luotettavuutta on voitu parantaa.</p>
+<ul>
+<li>Kehitys oli pitkään ns. ongelmasta menetelmään ja tutkimusalojen erilaisuudesta johtuen myös tilastotiede on kehittynyt vastaamaan monipuolisesti erilaisiin menetelmällisiin ongelmiin.</li>
+<li>Tämä on johtanut osaltaan siihen, että tilastotiede jakautuu moniin osa-alueisiin. Osa-alueita on niin paljon, että alan huiputkaan eivät voi hallita niitä kaikkia!</li>
+</ul>
+<p>&nbsp;</p>
+<p>Tilastotiede voidaan karkeasti jakaa <strong>teoreettiseen</strong> ja <strong>soveltavaan</strong> osa-alueeseen, jotka toimivat alituisessa vuoropuhelussa. <span class="marginnote">Soveltava tilastotiede</span></p>
+<div class="defblock">
+<p><strong>Soveltava tilastotiede</strong> on nimensä mukaisesti teoreettisen tilastotieteen kehittämien menetelmien soveltamista jonkin tutkimusalan empiiriseen ongelmaan. Suurin osa tilastotieteen menetelmistä on alun perin kehitetty jonkin konkreettisen tutkimusongelman innoittamana.</p>
+</div>
+<p>Yleisesti ottaen eri tieteenaloilla kohdattavat menetelmäsuuntaukset voidaan jakaa kahteen luokkaan tutkimusaineistojen tyypin perusteella:</p>
+<p><span class="marginnote">Kvantitatiivinen tutkimus</span></p>
+<div class="defblock">
+<p><strong>Kvantitatiivinen</strong> eli <strong>määrällinen tutkimus</strong> on tutkimusta, jossa tutkimusongelma on muotoiltu tarkasti etukäteen ja tutkimuskysymyksiin vastataan käyttäen tilastollisia menetelmiä pyrkien <strong>mallintamaan</strong>, <strong>selittämään</strong> ja/tai <strong>ennustamaan</strong> tutkimuksen kohteena olevaa ilmiötä.</p>
+<ul>
+<li><p>Täsmällisten ja laskennallisten tilastollisten menetelmien käyttäminen numeeriseen aineistoon on kvantitatiiviselle tutkimukselle ominaista.</p></li>
+<li><p>Perustuu yleensä satunnaisotokseen ja tutkimusaineisto on tiivistetty numeeriseksi havaintomatriisiksi, jolle oleellinen vaatimus on sen totuudellisuus.</p></li>
+</ul>
+</div>
+<p><strong>Kritiikki</strong>: määrällinen tutkimus on (paikoin) sokea tutkittavien ilmiöiden sellaiselle luonteelle, jota ei pystytä kvantifioimaan, eli muuntamaan numeeriseen muotoon. Näihin voidaan katsoa lukeutuvan mm. tunteet, merkitykset ja kokemukset, ellei tutkija keksi niiden numeeriselle mittaamiselle uskottavaa keinoa.</p>
+<p><span class="marginnote">Kvalitatiivinen tutkimus</span></p>
+<div class="defblock">
+<p><strong>Kvalitatiivinen</strong> eli <strong>laadullinen tutkimus</strong> on tutkimusta, jossa tutkimuksen kohteena olevaa ilmiötä ja sen merkitystä sekä tarkoitusta pyritään <strong>ymmärtämään</strong> kokonaisvaltaisella tavalla.</p>
+<ul>
+<li><p>Laadullisessa tutkimuksessa annetaan usein tilaa tutkimuksen kohteena olevien ilmiöiden ja/tai ihmisten näkökulmille, vaikuttimille, kokemuksille ja tuntemuksille. Tutkimusyksikköjen otanta on täten usein harkinnanvaraista.</p></li>
+<li><p>Laadullisessa tutkimuksessa tutkimusongelma muotoutuu (voi muotoutua) tutkimuksen edetessä ja sille tyypillistä on hypoteesittomuus, eli tutkimus on tarkoitus aloittaa mahdollisimman vähin ennakko-oletuksin. Ennakko-oletuksista on kuitenkin mahdotonta täysin irtautua, joten niiden ilmi tuominen esioletuksina tai “tutkimushypoteeseina” eli arvauksina tuloksista on osa tutkimusta.</p></li>
+</ul>
+</div>
+<p><strong>Kritiikkiä</strong>: laadullinen tutkimus ei pysty vastaamaan kysymykseen miksi, sillä ilman määrällisiä (numeerisia) aineistoja ei ilmiöiden välisiä riippuvuuksia kyetä tutkimaan:</p>
+<ul>
+<li><p><strong>Laadullisessa tutkimuksessa menetetäänkin mahdollisuus tutkia ilmiöiden todellisia syitä</strong>.</p></li>
+<li><p>Laadullinen tutkimus nähdään usein vähemmän objektiivisena ja sen otosta koskevia tuloksia ei useinkaan voida yleistää koskemaan perusjoukkoa.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Yleisenä menetelmätieteenä tilastotiedettä voidaan (ja myös pitäisi) soveltaa kaikilla reaalimaailmaa tutkivilla tieteenaloilla</strong>, joiden tutkimusaineistot voidaan esittää <strong>kvantitatiivisessa muodossa</strong>.</p>
+<ul>
+<li>Tilastollisten menetelmien käyttö on siis huomattavan paljon yleisempää määrällisessä kuin laadullisessa tutkimuksessa.</li>
+</ul>
+<p>Menetelmien soveltamisen tarkoituksena on (voi olla):</p>
+<ul>
+<li><strong>kuvailla ja tiivistää tietoa</strong>, jota havaittu aineisto sisältää</li>
+<li>sovellusalan oman <strong>teorian empiirinen testaus</strong> tai</li>
+<li>edellisten pohjalta tehtävä <strong>tilastollinen päättely</strong>.</li>
+</ul>
+<p><strong>Deskriptiivisellä eli kuvailevalla tilastotieteellä</strong> tarkoitetaan sellaisten menetelmien soveltamista, joiden avulla havaintoaineistosta voidaan esimerkiksi laskea tunnuslukuja, kuvata havaintomuuttujien jakaumia ja visualisoida aineiston generoimaa ilmiötä tai siitä johdettuja tunnuslukuja.</p>
+<p><strong>Tilastollinen päättely</strong> on sen sijaan aineiston tarkasteluun/kuvailuun sekä mallintamiseen perustuvaa päätöksentekoa, jossa kvantitatiiviseen aineistoon kuuluva epävarmuus ja satunnaisuus on otettu huomioon.</p>
+<ul>
+<li>Keskeinen tilastollisen päättelyn käyttötarkoitus soveltajille on usein <strong>teorian ja siihen liitettävien hypoteesien testaaminen</strong>, joka voi johtaa joko teorian vahvistumiseen (<em>verifiointiin</em>) tai sen vääräksi osoittamiseen (<em>falsifioimiseen</em>).
+<ul>
+<li>On myös syytä muistaa, että yksi tutkimus ei vielä osoita teoriaa oikeaksi tai vääräksi vaan siihen tarvitaan useita tutkimuksia sekä erilaisia tutkimusasetelmia ja -menetelmiä.</li>
+<li>Kuvaileva tilastotiede ja tilastollinen päättely kulkevat soveltavassa tilastollisessa tutkimuksessa käsi kädessä.</li>
+</ul></li>
+</ul>
+<p><span class="marginnote">Teoreettinen tilastotiede</span></p>
+<div class="defblock">
+<p><strong>Teoreettinen tilastotiede</strong> kehittää (tilasto)matemaattisia malleja kuvaamaan satunnaisilmiöitä- ja prosesseja, jotka generoivat reaalimaailman ilmiöitä kuvaavia numeerisia tai kvantitatiivisia tietoja, joihin liittyy epävarmuutta ja satunnaisuutta.</p>
+<p>Teoreettinen tilastotiede luo pohjan tilastollisten menetelmien ymmärtämiselle, soveltamiselle ja kehittämiselle. Ilman riittävää ymmärrystä tilastollisten menetelmien toimintaperiaatteista niiden soveltaja on vaarassa tehdä virhepäätelmiä!</p>
+</div>
+<p>&nbsp;</p>
+<p>Tilastolliset mallit perustuvat siis todennäköisyyslaskentaan, ja niitä kutsutaan tilastollisiksi malleiksi, tai ajoittain <strong>stokastisiksi malleiksi</strong> tai <strong>todennäköisyysmalleiksi</strong>.</p>
+<div class="defblock">
+<p><strong>Kaikki mallit ovat vääriä, mutta jotkut ovat käyttökelpoisia</strong>. (Box, 1976).</p>
+</div>
+<p>Todennäköisyyslaskenta luo tilastotieteelliselle epävarmuuden mallintamiselle vahvan ja uskottavan matemaattisen perustan. Vastaavasti tilastolliset mallit perustuvat laajalti niin kutsuttuun uskottavuusfunktioon, mikä vastaavasti liittyy tn-laskentaan. Se on malli, joka riippuu havaintoaineiston lisäksi yhdestä tai useammasta parametrista.</p>
+<ul>
+<li><p>Uskottavuusfunktion arvo kertoo kuinka todennäköisenä havaittua aineistoa voidaan pitää, mikäli sen oletetaan olevan peräisin vastaavasta mallista jollain parametriarvoilla. Ts. uskottavuuspäättelyn perusajatuksena on, että se tai ne parametriarvot (tehdyillä til. mallia koskevilla oletuksilla), joilla uskottavuusfunktion arvo maksimoituu kuvaa aineiston generoinutta prosessia parhaiten.</p></li>
+<li><p>Aineistoa koskevia hypoteeseja voidaan testata käyttäen uskottavuusfunktiota maksimia vastaavaa tilastollista mallia!</p></li>
+</ul>
+<p>Uskottavuusfunktiot perustuvat aina satunnaisilmiöiden mahdollisia arvoja kuvaaviin nk. <strong>tiheysfunktioihin</strong> ja diskreettien sm:jien tapauksessa (tähän palataan myöhemmin) <strong>pistetodennäköisyysfunktioihin</strong>.</p>
+<ul>
+<li>Nämä funktiot kuvaavat jonkin satunnaismuuttujan (satunnaisilmiön) saamien arvojen <strong>jakaumaa</strong>.</li>
+<li>Esimerkiksi kolikonheitto on satunnaisilmiö ja sillä on vain kaksi arvoa (kolikon kantilleen jäämistä ei tässä lasketa mahdolliseksi tapahtumaksi) ja kolikonheittoa voidaan kuvata nk. binomijakaumalla, jota merkitään ((n,p)), jossa (n) on heittojen lukumäärä ja (p) on kruunan todennäköisyys</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Eräs klassinen yksinkertainen todennäköisyyslaskennassa ja tilastotieteessä käytettävä esimerkki käsittelee <strong>kolikonheittoa</strong>.</p>
+<ul>
+<li><p>Kuvitellaan että olemme heittäneet kolikkoa 40 kertaa ja saatu kruuna 40/40 tapauksessa.</p></li>
+<li><p>Kolikonheittoa seuranneet havainnot muodostavat nyt havaintoaineiston, jonka pohjalta voidaan perustellusti kysyä, että onko uskottavaa että kolikonheitto noudataa binomijakaumaa ((40, 0.5))? (Binomijakauma esitellään tarkemmin tulevissa luvuissa)</p></li>
+<li><p>Toisin sanoen, kuinka uskottavana voidaan pitää sitä että kyseinen kolikko on tavallinen, painottamaton kolikko?</p></li>
+</ul>
+</div>
+<!-- - Todennäköisyyslaskentaa opetetaan tarkemmin (tätä kurssia seuraavilla) kursseilla TILM3553 Todennäköisyyslaskennan peruskurssi pääaineopiskelijoille, TILM3568 Todennäköisyyslaskenta sivuaineopiskelijoille ja SMAT5306 Todennäköisyyslaskennan jatkokurssi. -->
+<p>&nbsp;</p>
+</section>
+<section id="tilastotieteen-sovellusaloja-ja-rajatieteitä" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="tilastotieteen-sovellusaloja-ja-rajatieteitä"><span class="header-section-number">3.4</span> Tilastotieteen sovellusaloja ja “rajatieteitä”</h2>
+<p>Yleisenä menetelmätieteenä tilastotiedettä sovelletaan useilla eri tieteenaloilla. Jokaisella sovellusalalla on kuitenkin oma erillinen teoriapohjansa sekä empiiriset käytänteet, joten <strong>substanssitietous</strong> on sovellettaessa erityisen tärkeää.</p>
+<ul>
+<li>Huolimatta vaihtelevista empiirisistä käytännöistä sovellusmenetelmän taustalla on (lähes aina) kuitenkin tilastotieteen alalla kehitetty menetelmä.</li>
+<li>Sovellusaloilla ongelmanratkaisussa yhdistetäänkin metodiseen osaamiseen välttämättä myös substanssitietoutta. Tämän myötä soveltavan tilastollisen tutkimuksen kenttä on laaja ja rikas.</li>
+</ul>
+<p>Osa näistä sovelluskentistä on kehittynyt vahvassa yhteisvaikutuksessa tilastotieteen ja lähitieteiden, kuten kasvavissa määrin erityisesti koneoppimisen, yhteydessä. Usein on pystyttävä arvioimaan ongelmanasettelun ja tulosten tarkoituksenmukaisuutta ja pyrkiä välttymään siltä että tutkijan tieteelliset ja yhteisölliset sitoumukset heijastuisivat tutkimuksen kulkuun.</p>
+<ul>
+<li>Tilastotieteen pääaineopiskelun kannalta substanssitietous saavutetaan sivuaineopintojen perusteella. Vastaavasti toisinpäin muiden aineiden pääaineopiskelijoiden kohdalla tilastotiede voi yhtä hyvin toimia (laajalti opiskeltuna) vahvana sivuaineena.</li>
+</ul>
+<p>Jokaisella tieteenalalla, jonka tutkimusaineistot voidaan esittää numeerisessa tai kvantitatiivisessa muodossa voi soveltaa/voisi soveltaa/pitäisi soveltaa tilastollisia menetelmiä sekä tutkimusaineistoja kerättäessä että niitä analysoitaessa.</p>
+<ul>
+<li>Siten jokainen empiirisen tutkimuksen havaintoaineisto on tilastollisen tutkimuksen mahdollinen kohde. Esim. kokeellinen tutkimus käyttää apunaan tilastollisia menetelmiä.</li>
+</ul>
+<p>&nbsp;</p>
+<p>Koska tilastotieteellä on sovelluksensa miltei kaikilta tieteenhaaroilla, on siis syntynyt joukko nk. <strong>rajatieteitä</strong>:</p>
+<ul>
+<li>Sovellusaloja, joilla tilastotieteen soveltaminen on muodostunut omaksi tutkimuskohteekseen/tieteenlajikseen (ks. linkit):
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Psychometrics">Psykologia: psykometriikka</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sociometry">Sosiaalitieteet: sosiometria</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Econometrics">Taloustiede: ekonometria</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Chemometrics">Kemia: kemometria</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Biometrics">Bio- ja lääketiede: biometria</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Epidemiology">Epidemiologia</a></li>
+</ul></li>
+<li>Soveltavan (sovelletun) matematiikan tutkimusaloja, jotka ovat osaltaan päällekkäisiä tilastotieteen kanssa
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Information_theory">Informaatioteoria</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mathematical_statistics">Matemaattinen tilastotiede</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Probability">Todennäköisyyslaskenta</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Operations_research">Operaatioanalyysi</a></li>
+</ul></li>
+<li>Tietojenkäsittelytieteen alaan (osittain) lukeutuvia tutkimusaloja
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Computational_science">Laskennalliset menetelmät</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_mining">Data mining</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Knowledge_extraction">Knowledge discovery</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pattern_recognition">Hahmontunnistus</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Artificial_intelligence">Tekoäly</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Machine_learning">Koneoppiminen</a></li>
+</ul></li>
+</ul>
+<p>Ja paljon muita!</p>
+<p>&nbsp;</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-tieteellinen_tieto.html" class="pagination-link" aria-label="Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-sattuma.html" class="pagination-link" aria-label="Sattuma ja satunnaisuus tilastotieteessä">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

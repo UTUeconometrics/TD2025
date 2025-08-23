@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; Tilastollisesta ennustamisesta – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./15-til_rooli_uusitieto.html" rel="next">
+<link href="./13-regressioanalyysi.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-ennustaminen.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+        <div class="sidebar-tools-main">
+    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tilastollinen-selittäminen-vs.-ennustaminen" id="toc-tilastollinen-selittäminen-vs.-ennustaminen" class="nav-link active" data-scroll-target="#tilastollinen-selittäminen-vs.-ennustaminen"><span class="header-section-number">14.1</span> Tilastollinen selittäminen vs.&nbsp;ennustaminen</a></li>
+  <li><a href="#tilastolliseen-ennustamiseen-liittyviä-huomioita" id="toc-tilastolliseen-ennustamiseen-liittyviä-huomioita" class="nav-link" data-scroll-target="#tilastolliseen-ennustamiseen-liittyviä-huomioita"><span class="header-section-number">14.2</span> Tilastolliseen ennustamiseen liittyviä huomioita</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>Kuten olemme jo tähän menneessä nähneet, tilastollinen analyysi ja sen erottamattomana osana tilastollinen päättely on keskeinen vaihe tieteellistä tutkimusta. Vielä ennen tilastollisen selittämisen ja ennustamisen välisiä eroja koskevia pohdintoja muistutetaan minkälaisia tilastollisia analyysitilanteita ja menetelmiä olemme tähän mennessä sivunneet:</p>
+<ul>
+<li><p>Aineistojen perustunnuslukujen laskeminen ja kuvaileminen (ts. kuvaileva tilastotiede).</p>
+<ul>
+<li>Yksinkertaisin tilastollisen päättelyn muoto on hyödyntää aineistoa kuvailevia tunnuslukuja, kuten keskiarvoja ja hajontalukuja (kuten niitä on esitelty edellä). Niistä voidaan kuitenkin tehdä vain melko rajoittuneita päätelmiä. Kuvaileva tilastotiede toimii näissä yhteyksissä lähinnä alustavien analyysien ja aineistoon tutustumisen kautta.</li>
+</ul></li>
+<li><p>Muuttujien välisten (mahdollisten) yhteyksien tutkiminen</p>
+<ul>
+<li>Varsinkin havainnoivassa tutkimuksessa selvitetään, miten selittävät muuttujat ovat yhteydessä selitettävään vastemuuttujaan. Näissä yhteyksissä voidaan käyttää esim. lineaarista tai logistista regressiota (ja niiden monenmoisia laajennuksia) tai esim. aikasarja-analyysissä aikasarjoja analysoitaessa (aikasarjoista lyhyesti vielä myöhemmin). Näiden pohjalta voidaan arvioida muuttujien yhteyksiä ja riippuvuussuhteita, ja myöskin muodostaa ennusteita, kuten tässä luvussa tullaan tarkastelemaan.</li>
+</ul></li>
+<li><p>Hypoteesien testaaminen</p>
+<ul>
+<li>Hypoteesien testaamisella voidaan osaltaan arvioida kuinka uskottavaa on, että nyt havaittu käyttäytyminen tai ilmiö toistuu jatkossa ja mahdollisesti johtopäätelmät myös yleistyvät muihin tilanteisiin.</li>
+</ul></li>
+<li><p>Ryhmitteleminen, kuten dimension pienentäminen.</p>
+<ul>
+<li>Tätä ei ole käsitelty eikä käsitellä juurikaan vielä tällä kurssilla. Ajoittain tilastotieteellä pyritään löytämään aineistosta erilaisia ryhmiä ja luokkarakenteita. Tässä yhteydessä laajoja aineistoja saatetaan pystyä “puristamaan” pienemmiksi ja siten mahdollisesti helpommin analysoitaviksi ja tulkitattaviksi.</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<p>Nämä tavoitteet korostavat valtaosin aineiston mallintamis- ja selittämistavoitteita. Käytännössä tilastotieteen ja sen sovellusalueiden tutkimuksessa tulisi osata erottaa (tilastollinen) <strong>selittäminen</strong> ja <strong>ennustaminen</strong>. Tätä eroa koskevat tarkemmat yksityiskohdat ovat jälleen selvästi tämän kurssin ulkopuolella myöhemmissä tilastotieteen opinnoissa, mutta seuraavassa kuitenkin tehdään tähän eroavaisuuteen liittyviä keskeisiä huomioita.</p>
+<p>Ts. aineiston mallintaminen on tärkeää ja monesti erityisenä tavoitteena, mutta usein haluamme myös muodostaa ennusteita tulevaa kehitystä koskien. Tämä tarkoittaa siis uusien havaintojen arvojen ennustamista.</p>
+<p>&nbsp;</p>
+<section id="tilastollinen-selittäminen-vs.-ennustaminen" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="tilastollinen-selittäminen-vs.-ennustaminen"><span class="header-section-number">14.1</span> Tilastollinen selittäminen vs.&nbsp;ennustaminen</h2>
+<p>(Tilastollinen) <strong>selittäminen</strong> tarkoittaa esim. kahden muuttujan välisen yhteyden tutkimista</p>
+<ul>
+<li>Vrt. siis tämän kurssin yksinkertainen tilanne lineaarisen regressiomallin yhteydessä, jota voidaan suoraviivaisesti ja usein pitääkin laajentaa useiden selittävien (ennustavien) muuttujien samanaikaiseen käyttämiseen.</li>
+</ul>
+<p><span class="marginnote">Selitysmalli</span></p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Tutkijaa saattaa kiinnostaa esimerkiksi tupakoinnin vaikutus sepelvaltimotautikuolleisuuteen tai ylipainon vaikutus leikkauksen jälkeisiin infektioihin. Tällöin pyrkimyksenä on rakentaa “<strong>selitysmalli</strong>”, jossa on perustellut syy-seuraussuhteet selittävästä (selittävistä) muuttujista selitettävään muuttujaan.</p>
+</div>
+<p>(Tilastollinen) <strong>ennustaminen</strong> vastaavasti tarkoittaa, että tietyillä selittävän tai selittävien (tai ‘’ennustavien’’) muuttujien yhdistelmillä voidaan ennustaa ennustettavan muuttujan arvoa.</p>
+<ul>
+<li><p>Ts. siis ennustettavana muuttujana toimii tilastollisen mallin näkökulmasta katsoen vastemuuttujan arvo, jota pyritään ennustemallin avulla ennustamaan.</p></li>
+<li><p>Ennustemalleja rakennettaessa varsinaisilla selityssuhteilla ei välttämättä ole merkitystä. Tärkeintä on mallin ennustekyky, ei niinkään esim. yksittäisen regressiokertoimen arvo ja siihen liittyvät tarkemmat tulkinnat ja mahdollinen tilastollinen testaaminen. Tilastollisesti merkitsevä regressiokerroin ei tarkoita, että muuttujalla olisi välttämättä todellista ennustekykyä.</p></li>
+<li><p>Ennustekyky on siis tutkittava erikseen. Esimerkiksi lineaarisen mallin perinteiset tunnusluvut, kuten selitysaste, eivät vielä kerro mallin todellisesta ennustekyvystä paljoakaan, koska ennusteet koskevat havaintoja, joita ei käytetä mallin estimoinnissa (opettamisessa). Tästä huolimatta melko usein ennustemallin rakentaminen perustetaan pitkälle samoihin tilastollisen päättelyn ja estimointiteorian lähtökohtiin mitä olemme jo sivunneet tällä kurssilla.</p></li>
+<li><p>Hyvin usein tutkimuksissa raportoidaan, että tietty muuttuja “ennustaa” (<em>predict</em>) toista. Usein kuitenkin taustalla on tällöinkin usean muuttujan selitysmalli, jonka regressiokertoimien tilastollista merkitsevyyttä on tulkittu siihen tapaan mitä edellä kuvattiin. Yleensä tässä yhteydessä on kuitenkin siis kyse selittämisestä, ja kuten todettua, mallin ennustekyky pitää tutkia erikseen.</p></li>
+<li><p>Erityisesti aikasarja-analyysissä ennustaminen on perinteisesti ollut yksi kaikkein keskeisimmistä tavoitteista.</p></li>
+</ul>
+<p>&nbsp;</p>
+</section>
+<section id="tilastolliseen-ennustamiseen-liittyviä-huomioita" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="tilastolliseen-ennustamiseen-liittyviä-huomioita"><span class="header-section-number">14.2</span> Tilastolliseen ennustamiseen liittyviä huomioita</h2>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Kovin usein toistuvaa pohdiskelua ja jälkiviisautta jälkikäteen.</p>
+<p><em>“Olisihan se pitänyt tietää/arvata!”</em></p>
+<p>Vai olisiko sittenkään!? Tähän pohdiskeluun palataan alapuolella.</p>
+</div>
+<p>&nbsp;</p>
+<p>Ennustamista on kaikkialla ja se on korvaamatonta! Sen rooli on paljon keskeisempi osa meidän kaikkien arkea mitä ensiajatukselta saattaa tulla mieleen.</p>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong>. Kun valitsemme reitin työmatkalle, päätämmekö menemmekö toisille treffeille tai säästämme huonompia aikoja varten, teemme ennusteen tulevaisuuden kehityksestä ja siitä, miten mahdollisesti suunnitelmamme vaikuttavat suotuisan tuloksen todennäköisyyteen.</p>
+<ul>
+<li>Lisää pohdintaa ja esimerkkejä, kuten ylläolevat esimerkit, löytyvät Silverin kirjasta (2014) (ks. Oheislukemistoa).</li>
+</ul>
+<p>Arkiset ongelmat eivät aina vaadi ankaraa ajattelua ja pohdiskelua erilaisten vaihtoehtojen välillä niihin käytettävissä olevan ajan ollessa rajallinen. Tästä huolimatta teet ennusteita tiedostaen ja useimmiten tiedostamatta monta kertaa päivässä!</p>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Ennustevirhe</span></p>
+<div class="defblock">
+<p><strong>Ennustevirhe</strong>. Ennustetta <span class="math inline">\(\widehat{y}^e\)</span> verrataan toteutuneeseen arvoon tai kehitykseen <span class="math inline">\(y\)</span>. Näiden erotuksena muodostuu ennustevirhe <span class="math inline">\(y - \widehat{y}^e\)</span>.</p>
+<p>Riippuen ennustettavasta kohteesta (kuten riippuen tilastollisen mallin vastemuuttujan luonteesta eli onko se esimerkiksi jatkuva vai diskreetti sm.), ennustevirhe näyttäytyy eri muodoissa.</p>
+</div>
+<p>Lähtökohtana on (luonnollisesti) minimoida ennustevirheet. Käytännössä useinmiten mm. vastemuuttujan luonteen perusteella valitaan sopiva ennustevirheitä summarisoiva tunnusluku, kuten keskineliöennustevirhe (jatkuvat vastemuuttujat) tai luokitteluvasteiden tapauksessa väärin ennustettujen luokitteluiden suhteellinen osuus.</p>
+<p>Ajoittain ennustetarkkuutta on helpompi ja toisaalta sitten vaikeampi tarkkailla.</p>
+<ul>
+<li><p>Esim. taloustieteessä on paljon helpompi arvioida työttömyyttä koskevaa ennustetta kuin esimerkiksi ennustetta (jopa väitettä) velkaelvytyksen tehokkuudesta.</p></li>
+<li><p>Toisaalta valtio-opissa voidaan arvioida vaalitulosta koskevia ennusteita suoraviivaisesti vaalien jälkeen, mutta saattaa kulua vuosikymmeniä nähdä miten poliittisten instituutioiden ennusteisiin perustuvat ennakoidut muutokset vaikuttavat poliittisten päätösten tuloksiin.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki: Finanssikriisi 2008</strong>. Silverin kirjan (2014) luvun 1 pohdintaa ennustevirheestä vuosien 2007–2009 finanssikriisiin liittyen.</p>
+<ul>
+<li>Tuona aikana tapahtui pörssikurssien voimakas lasku, Lehman Brothersin kaltaisia aikoinaan arvostettuja yhtiöitä meni vararikkoon, luottomarkkinat olivat käytännössä “jäätyneet”, Las Vegasissa asuntojen hinnat laskivat 40 prosenttia (osoittaen osaltaan vallinnutta laajempaakin asuntokuplaa eli ts. perusteettoman korkeita asuntojen hintoja), työttömyys kasvoi räjähdysmäisesti jne.</li>
+</ul>
+<p>Pohditaan finanssikriisin ennustettavuutta <strong>hieman ennen kriisin alkamista</strong> eli tilanteessa kun <strong>ennusteita muodostettiin vielä näkemättä laajalti yllätyksenä tullutta kriisiä</strong>. Lopulta tapahtuneiden ennustevirheiden <strong>yhteisiä ja tyypillisiä piirteitä</strong> myös muita sovelluksia ajatellen:</p>
+<ol type="1">
+<li>Asunnonomistajat ja sijoittajat ajattelivat, että nousevat hinnat viittasivat siihen, että asuntojen hinnat jatkaisivat nousuaan (todellisuudessa historia viittasi siihen, että pankki- ja finanssikriisien yhteydessä niillä on taipumus laskea).</li>
+<li>Luottoluokistuslaitokset (samoin kuin Lehman Brothersin kaltaiset pankit) eivät ymmärtäneet, miten riskialttiita asuntovakuudelliset arvopaperit olivat. Ongelma ei varsinaisesti ollut siinä, että luokituslaitokset eivät nähneet asuntokuplaa. Sen sijaan niiden ennustemallit olivat täynnä huonoja oletuksia ja väärää “itseluottamusta” mahdollisten asuntojen hintojen romahduksen riskeistä.</li>
+<li>Laajasti ei ennakoitu, miten asuntokriisi laukaisee globaalin rahoituskriisin. Se johtui suurelta osin liiallisesta velkaantumisesta markkinoilla, jossa lyötiin erinäisten instrumenttien myötä kasvavissa määrin vetoa yhdysvaltalaisten halukkuuden puolesta sijoittaa uuteen kotiin.</li>
+<li>Rahoituskriisin välittömissä jälkimainingeissa ei osattu ennustaa, miten laajoja taloudellisia ongelmia se aiheuttaa. Finanssikriisit tyypillisesti tuottavat erittäin syviä ja pitkäkestoisia taloudellisia taantuma- ja lamajaksoja.</li>
+</ol>
+</div>
+<p>Edellä olevan esimerkin tilanteessa, ja laajemminkin vastaavissa tilanteissa ja sovelluksissa, joihin liittyy epäonnistuneita ennusteita, epäonnistumisissa on (ainakin yksi) tyypillinen <strong>yhteinen piirre</strong>. Ts. kussakin tapauksessa ennustajat (ammattilaiset tai tavanomaiset kansalaiset) <strong>jättävät/jättivät keskeisen asiayhteyteen liittyvän tekijän huomiotta</strong>.</p>
+<ul>
+<li>Olennainen kysymys kuuluu, olisiko tämä tekijä ollut ennakoitavissa ennen ennusteiden kohteena olevan tapahtuman tapahtumista? Ja jos se olisi ollut tiedossa, olisiko se voinut olla osa tilastollista (ennuste)mallia?</li>
+</ul>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki (jatkoa)</strong>: Jatketaan finanssikriisiä koskevan esimerkin käsittelyä. <strong>Mitä tekijöitä ei osattu nähdä</strong> ennen finanssikriisin puhkeamista (edellisen esimerkkikohdan numeroituihin kohtiin viitattuna):</p>
+<ol type="1">
+<li>Asunnonomistajien luottamus asuntojen hintoihin johtui ehkä siitä, että lähimenneisyydessä Yhdysvalloissa asuntojen hinnat eivät olleet laskeneet merkittävästi. <em>Kuitenkaan</em> koskaan aikaisemmin Yhdysvaltojen asuntojen hinnat eivät olleet nousseet niin laajalla alueella kuin romahdusta edeltävällä kaudella.</li>
+<li>Pankkien luottamus luottoluokituslaitosten (kuten Moody’s ja S&amp;P) kykyyn luokittaa asuntovakuudellisia arvopapereita ehkä perustui siihen, että laitoksina ne olivat onnistuneet pätevästi luokittamaan muunlaista rahoitusomaisuutta. <em>Kuitenkaan</em> luottoluokituslaitokset eivät olleet koskaan aikaisemmin luokittaneet yhtä uusia ja monimutkaisia arvopapereita mitä tuolloin.</li>
+<li>(Taloustietelijöiden) luottamus rahoitusjärjestelmän kykyyn kestää asuntokriisi syntyi ehkä siitä, että aikaisemmin asuntojen hintojen heilahtelulla ei yleensä ollut suuria vaikutuksia rahoitusjärjestelmässä. <em>Kuitenkaan</em> rahoitusjärjestelmä ei luultavasti koskaan aikaisemmin ole ollut yhtä vekkaantunut eikä vedonlyöntiä asuntojen hinnoista ollut tehty vastaavassa mittaluokassa.</li>
+<li>Poliittisten päättäjien luottamus siihen, että talous toipuu nopeasti rahoituskriiseistä syntyi ehkä viime vuosikymmenten taantumista saaduista kokemuksista. Useampia niitä oli seurannut nopea “V-muotoinen” toipuminen, kuten nyt myös myöhemmin mm. koronapandemian aikaan. <em>Kuitenkaan</em> nämä taantumat eivät olleet liittyneet rahoituskriiseihin ja rahoituskriisit ovat (yleensä) erilaisia.</li>
+</ol>
+</div>
+<p>&nbsp;</p>
+<p>Jokaista edellistä kohtaa yhdistää ennustamiseen hyvin keskeisesti liittyvä seikka: Pyrittiin ennustamaan tilannetta/ilmiötä, joka oli kuitenkin ns. <strong>otoksen ulkopuolella</strong> (engl. <strong>out-of-sample</strong>) eikä siis vastaavasta tilanteesta ollut aiempaa kokemusta (=dataa). Kun ennustaminen epäonnistuu merkittävällä tavalla, tämä sama seikka jättää yleensä runsaasti sormenjälkiä rikospaikalle.</p>
+<ul>
+<li>Miten tämä huomio näyttäytyy siis oheisen esimerkin tapauksessa?</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki (jatkoa)</strong>:</p>
+<ul>
+<li>Luottoluokituslaitos (kuten Moody’s) arvioi, missä määrin asuntolainojen hoitamatta jättämiset liittyivät toisiinsa, rakentamalla (luultavasti ainakin osin) tilastollisen mallin menneisyyden aineiston perusteella. Oletettavasti he käyttivät mallin rakentamiseen noin 1980-luvulle ulottuvaa Yhdysvaltain asuntomarkkina-aineistoa.</li>
+<li>Ongelmana oli, että 1980-luvulta 2000-luvun alkuvuosiin saakka asuntojen hinnat olivat aina vakaat tai nousevat Yhdysvalloissa. Tässä tilanteessa oletus, että asunnonomistajien asuntolainat eivät juurikaan liittyneet toisiinsa oli luultavasti perusteltu ja riittävän hyvä tilastollisen mallintamisen pohjaksi.</li>
+<li>Kuitenkaan menneessä aineistossa mikään ei olisi kuvannut mitä tapahtuu kun asuntojen hinnat alkavat laskea kauttaaltaan samanaikaisesti. Ts. asuntoromahdus oli <strong>otoksen ulkopuolinen tapahtuma</strong> ja tässä tilanteessa luottoluokituslaitosten mallit olivat lähtökohtaisesti huonoja lainojen hoitamatta jättämisen riskiä arvioitaessa.</li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p>Finanssikriisiä koskevan esimerkin tilanteessa otoksen ulkopuolisiä ilmiöitä koskeva ongelma realisoitui siten, että muodostettu tilastollinen malli, kuten vaikkapa lineaarisen regressiomallin sopiva laajennus, <strong>estimoitiin</strong>, tai koneoppimisesta tutussa kielenkäytössä ’’<strong>opetettiin</strong>”, <strong>opetusaineistolla</strong>, joka ei lopulta ollut relevantti juuri myöhemmin tapahtunutta kriisivaihetta ajatellen!</p>
+<ul>
+<li><p>Onkin tärkeää ymmärtää, että ‘’todellisessa’’ ennustetilanteessa joudumme käyttämään aiempaa aineistoa mallien ja algoritmien rakentamiseen.</p></li>
+<li><p>Näin ollen tilastollisten mallien/menetelmien ennustekykyä arvioitaessa onkin mentävä otoksen ulkopuolelle, koska ‘’otoksen sisällä’’ voimme opettaa kyseisiä malleja (ääritilanteessa) niin, että ne ovat periaatteessa äärettömän tarkkoja. Ne eivät kuitenkaan takaa missään mielessä hyvää ennustekykyä tulevia tapahtumia ennustettaessa.</p></li>
+</ul>
+<!-- Vastaavalla tavalla karakterisoidaan nykyään hyvin suosittujen koneoppimismenetelmien keskeinen piirre:  
+- Ne ja tarkasteltavat sovellukset perustuvat käytännössä (vielä) pitkälle ennustesovelluksiin. 
+-->
+<p><span class="marginnote">Opetus- ja testiaineisto</span></p>
+<div class="defblock">
+<p><strong>Opetus- ja testiaineisto</strong>. Mallien ja algoritmien opettaminen ns. <strong>opetusaineistolla</strong> ja ennustekyvyn arviointi <strong>ennusteotoksen</strong> avulla pitää erottaa toisistaan.</p>
+<ul>
+<li><p>Seuraavassa oletetaan, että opetusaineisto=otos, jota esim. regressiomallin tapauksessa käytettiin mallin sovittamiseen.</p></li>
+<li><p>Opetusaineistolla <span class="math inline">\((x_i,y_i),\, i=1,...,n\)</span> siis opetetaan (estimoidaan/optimoidaan) käytettävän ennustemallia/algoritmia ja sen parametreja.</p></li>
+<li><p>Lopulta muodostetaan ennusteita opetusaineiston ulkopuoliselle testiaineistolle.</p>
+<ul>
+<li>Merkitään testiaineistoa <span class="math inline">\((x^e_j,y^e_j),\, j=1,...,n^e\)</span>. Muodostuvia ennusteita merkitään <span class="math inline">\(\widehat{y}^e_j,\, j=1,...,n^e\)</span>. Tässä ei oteta tarkempaa kantaa minkälaista mallia/algoritmia käytetään näiden muodostamiseen.</li>
+<li>Testiaineistoa ei siis käytetä mallin/algoritmin opettamiseen, vaan ainoastaan ennusteiden hyvyyden arviointiin.</li>
+</ul></li>
+<li><p>Voidaan muodostaa ennustekykyä kuvaavia tunnuslukuja, kuten</p>
+<ul>
+<li>Jatkuvien sm:jien tapauksessa keskineliöennustevirhe (MSFE): <span class="math inline">\(\frac{1}{n^e}\sum_{j=1}^{n^e} (y^e_j - \widehat{y}^e_j)^2\)</span>. Tässä tapauksessa MSFE:ssä on myös ennustevirheiden neliöiden summa jaettu testiaineiston havaintojen lukumäärällä (näin ei aina toimita).</li>
+<li>Diskreettien, kuten binääristen ja siten luokittelutilanteeseen muodostettavien ennusteiden kohdalla voidaan käyttää esimerkiksi oikein tai väärin ennustettujen (luokiteltujen) havaintojen suhteellista osuutta testiaineistossa.</li>
+</ul></li>
+<li><p>Tähän tapaan voidaan vertailla kahden, tai usemman, ennustemallin paremmuutta todellisessa ennustetilanteessa. Esimerkiksi keskineliöennustevirheen tapauksessa suositaan mallia, joka tuottaa testiaineiston perusteella pienimmän keskineliöennustevirheen.</p></li>
+</ul>
+</div>
+<div class="eblock">
+<p><strong>Esimerkki, jatkoa</strong>. Palataan vielä <strong>isien ja poikien pituuksia</strong> koskevaan esimerkkiin. Tehdään pieni ennustekokeilu, jossa tavoitteena on havainnollistaa tämän luvun keskeisiä huomioita.</p>
+<p>Jaetaan tarkasteltava aineisto opetusaineistoon ja testiaineistoon</p>
+<ul>
+<li>Otetaan ensimmäiset 700 havaintoa opetusaineistoon ja estimoidaan lin. malli uudestaan näillä opetusaineiston havainnoille. Ts. nyt vain näitä havaintoja käytetään mallin opettamiseen.</li>
+<li>Loput havainnot muodostavat testiaineiston. Opetusaineistolla opetetun mallin (ml. estimoidut parametrit) perusteella tehdään ennusteet <span class="math inline">\(\widehat{y}^e_j, j=1,...,n^e\)</span>, jossa <span class="math inline">\(n^e=378\)</span>.</li>
+</ul>
+<p>Osoittautuu, että lineaarisen mallin (jossa siis isän pituudella nyt ennustetaan testiaineiston havaintoja poikien pituudesta) tapauksessa keskineliöennustevirhe on MSFE = 39.59.</p>
+<p>Otetaan vertailumalliksi, selvästikin liian yksinkertainen malli, jossa poikien pituusennuste olisi suoraaan opetusaineiston poikien keskipituus. Ts. lineaarinen malli supistuu niin, että isien pituutta koskeva ennustava muuttuja jätetään mallista pois. Tällöin MSFE=51.49.</p>
+<ul>
+<li>Näemme siis kuinka lineaarisella mallilla (ml. isien pituus ennustavana muuttujana) saadaan selvästi pienempi testiaineistolle saatava keskineliöennustevirhe. On siis hyödyllistä käyttää isän pituutta ennustavana tekijänä myös ennustamisen näkökulmasta. Tämä vahvistaa osaltaan, että isien pituuden sisältämä ennusteinformaatio poikien pituudesta sisältää todellista <em>signaalia</em>, eikä tämä suhde ole siis <em>kohinaa</em>.</li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p>Pienenä lisähuomiona vielä edelliseen eli ajoittain opetus- ja testiaineiston lisäksi määritellään vielä erillinen validointiaineisto mallin/algoritmin validointia varten ennen varsinaista testiaineiston käsittelyä.</p>
+<p>&nbsp;</p>
+<p><span class="marginnote">Otoksen sisäinen sovittaminen</span></p>
+<p><strong>Otoksen sisäiseen sovittamiseen</strong> (engl. <strong>in-sample</strong> tai <strong>training sample</strong> estimation tai “prediction”) liittyy ennustamisen näkökulmasta katsoen ns. <strong>ylisovittamisen</strong> vaara. On siis mahdollista, että yritämme puristaa lähes puhtaasta kohinasta signaaleja, jotka eivät missään mielessä tule olemaan valideja otoksen ulkopuolisessa ennustamistilanteessa.</p>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>Ylisovittaminen</strong> (ylisovitettu tilastollinen malli) merkitsee tilastollisen mallin rakentamista siten, että se oppii opetusaineiston liian(kin) hyvin (malli on liian mukautettu opetusaineistoon), jolloin sen ennustamiskyky (yleistämiskyky) uusia havaintoja testiotoksessa ennustettaessa alkaa heikentyä. Tämä tarkoittaa, että malli oppii liikaa opetusaineiston sellaisia yksityiskohtia, jotka ovat kohinaa, eikä malli yleisty hyvin uusille, mallin sovittamisen aikaan tuntemattomille testiaineiston havainnoille.</p>
+<p>Ylisovittaminen voi siis johtaa, ja usein johtaakin, huonoon suorituskykyyn todellisissa ennustustehtävissä ja siten verrattaen suuriin ennustevirheisiin.</p>
+</div>
+<p>&nbsp;</p>
+<p>Vastaavasti <strong>alisovitettu malli</strong> ei kuvaa aineistoa tyydyttävällä tavalla. On odotettavissa, että jos malli ei sovitu edes opetusaineiston tapauksessa hyvin, niin sen todellinen ennustekyky on tyypillisesti myös heikko.</p>
+<p>&nbsp;</p>
+<p><span class="marginnote">Harha-varianssi-kompromissi</span></p>
+<div class="defblock">
+<p><strong>Harhan ja varianssin välinen kompromissi</strong> (<em>bias-variance trade-off</em>). Kun sovitetaan tilastollista mallia/algoritmia ennustamista varten, mallin/algoritmin lisääntyvä monimutkaisuus johtaa lopulta malliin, jossa on vähemmän harhaa siinä mielessä, että sillä on suurempi potentiaali mukautua taustalla olevan prosessin yksityiskohtiin. Toisaalta samanaikaisesti syntyy enemmän varianssia, mikä perustuu siihen että pienetkin muutokset opetusaineistossa muuttavat mallin/algoritmin parametreja ja siten lopulta saatavia sovitteita (opetusaineisto) ja/tai ennusteita (testiaineisto). Näiden kahden tavoitteen välillä tulee siis tasapainotella, jotta vältetään ylisovittaminen.</p>
+<p>Harhan ja varianssin kompromissi on <strong>fundamentaalinen tulos</strong> tilastotieteen, mutta erityisesti myös koneoppimiseen ja tekoälyyn pohjautuvien uusien menetelmien käyttökelpoisuudelle erilaisissa sovelluksissa.</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="BV-tradeoff_250523_081137.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Harhan ja varianssin kompromissi ennustevirheen ja mallin monimutkaisuuden kesken.
+</center>
+<p>&nbsp;</p>
+<p>Jotta asiat eivät olisi liian yksinkertaisia, aivan viime vuosien aikana uusimmassa tutkimuskirjallisuudessa on jo haastettu oheisen kuvan ja harhan ja varianssin välisen kompromissin paikkaansapitävyyttä. Tämä perustuu siihen mitä tapahtuu, jos siirtyisimme vielä enemmän kuvassa oikealle. Ts. ns. <strong>yliparametrisoituihin malleihin ja menetelmiin</strong>. On voitu osoittaa, että tietyissä tilanteissa testiaineiston ennustevirhe lähtee uudelleen laskuun!</p>
+<ul>
+<li>Tämän yksityiskohdan tutkimus kuitenkin jatkuu edelleen ja sen tarkempi käsittely on jälleen selvästi tämän kurssin ulkopuolella.</li>
+</ul>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki, jatkoa</strong>. Jatketaan vielä <strong>pituus-esimerkkiä</strong> ja siihen edellä kohdistettua ennustekokeilua. Otetaan tarkasteluun mukaan myös yksi usein (tilastollisen) koneoppimisen lukuun luettava menetelmä/algoritmi eli ns. tukivektoriregressio (SVR, support vector regression).</p>
+<ul>
+<li>Emme käsittele tätä menetelmää/algoritmia tällä kurssilla sen tarkemmin. Keskeistä on vain todeta, että kyseessä on periaatteessa lineaariseen regressioon verrattuna selvästi monimutkaisempi menetelmä.</li>
+</ul>
+<!-- Mm. SVR sisältää yli 180cm isien tapauksessa oman selittävän tekijän. -->
+<p>Vertaillaan ensin lineaarisen mallin ja SVR:n kykyä mallintaa 700 havainnon opetusaineiston havaintoja. Tarkastellaan menetelmien perusteella saatavien residuaalien (havainnot-sovitteet) neliöiden summaa jaettuna 700:lla, eli MSFE:tä vastaavaa tunnuslukua opetusaineistolle. Tällöin lineaarisen mallin sovitteiden perusteella luku on 37.76 ja SVR:n tapauksessa 37.64.</p>
+<ul>
+<li>Ts. SVR tuottaa tarkempia sovitteita opetusaineistolle, mikä ei ole suinkaan yllättävää. Päinvastoin, tämä on täysin odotettua, kun puhutaan mallin/algoritmin kyvystä “sovittua” opetusaineistoon. Tämä näkyy ylläolevassa kuvassa laskevana opetusaineiston ennustevirhettä kuvaavana käyränä menetelmän monimutkaistuessa.</li>
+</ul>
+<p>Siirrytään nyt tarkastelemaan opetusaineiston perusteella muodostettujen lineaarisen mallin ja SVR:n tuottamia ennusteita testiaineistolle. Saadaan lineaariselle mallille MSFE=39.59 ja SVR:n tapauksessa MSFE= 40.21!</p>
+<ul>
+<li>Ts. ennustekykyä vertailtaessa monimutkaisempi, ja opetusaineistolle paremmin sopiva, SVR tuottaa heikompia ennusteita mitä lineaarinen malli. Tässä siis toteutuu edellisen kuvion tilanne, jossa välttämättä monimutkaisempi malli/algoritmi, kuten tässä tapauksessa SVR, ei tuota parempia ennusteita!</li>
+</ul>
+<p>On syytä korostaa, että <strong>tämä on vain yksi esimerkki</strong> eikä suinkaan tarkoita, etteikö koneoppimiseen luettavilla menetelmillä olisi paljon annettavaa ennustamiselle monien sovellusten yhteydessä.</p>
+</div>
+<p>&nbsp;</p>
+<p>Jälleen kerran näistä tämän luvun teemoista keskustellaan tarkemmin myöhemmin tilastotieteen aine- ja syventävien opintojen erikoiskursseilla.</p>
+<p>&nbsp;</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./13-regressioanalyysi.html" class="pagination-link" aria-label="Regressioanalyysi">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./15-til_rooli_uusitieto.html" class="pagination-link" aria-label="Tilastotieteen rooli uuden tiedon tuottamisessa">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
