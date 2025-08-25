@@ -1,0 +1,187 @@
+body {
+  margin-right: 10px; /* Adjust the width as needed */
+  margin-left: 30px;
+}
+
+
+/* Adjust font size for inline math */
+.math.inline {
+  font-size: 0.9em; /* Adjust this value to match the surrounding text size */
+}
+
+/* Adjust font size for display math */
+.math.display {
+  font-size: 0.85em; /* Adjust this value to match the surrounding text size */
+}
+
+
+.marginnote {
+  position: absolute;
+  right: 0px; /* Adjust the distance from the main content */
+  width: 100px; /* Adjust the width as needed */
+  background-color: #f9f9f9;
+  padding: 5px; /* Adjust the padding as needed */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.8em; /* Adjust the font size as needed */
+  color: #555;
+  text-align: center; /* Center the text horizontally */
+  display: flex;
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+}
+
+.marginnotevideo {
+  position: absolute;
+  right: -120px; /* Adjust the distance from the main content */
+  width: 140px; /* Adjust the width as needed */
+  background-color: #75ff33;
+  padding: 5px; /* Adjust the padding as needed */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.8em; /* Adjust the font size as needed */
+  color: #555;
+  text-align: center; /* Center the text horizontally */
+  display: flex;
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+}
+
+
+
+
+/* Custom CSS for styling the toggle button and link */
+
+.toggle-button {
+  border: 1px solid #333; /* Slightly darker black border */
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+/* R code button */
+.toggle-button-r {
+  background-color: white; /* White background */
+  color: black; /* Black text color */
+  position: relative; /* Position relative to place the "R" letter */
+  padding-left: 35px; /* Add padding to make space for the "R" letter and circle */
+  border: 1px solid #333; /* Optional: Add a border to match other buttons */
+}
+
+.toggle-button-r::before {
+  content: "R"; /* The "R" letter */
+  color: white; /* White color for the "R" letter */
+  background-color: #4682B4; /* Medium blue background for the circle */
+  position: absolute; /* Position absolute to place it in the top-left corner */
+  top: 5px; /* Adjust as needed */
+  left: 5px; /* Adjust as needed */
+  font-weight: bold; /* Bold font for better visibility */
+  border-radius: 50%; /* Make it a circle */
+  width: 20px; /* Circle width */
+  height: 20px; /* Circle height */
+  display: flex; /* Center the "R" letter inside the circle */
+  align-items: center; /* Center the "R" letter inside the circle */
+  justify-content: center; /* Center the "R" letter inside the circle */
+}
+
+/* Example button */
+.toggle-button-example {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+}
+
+/* Extra information button */
+.toggle-button-extra {
+  background-color: #FF9800; /* Orange background */
+  color: white;
+}
+
+/* Exercises button */
+.toggle-button-exercises {
+  background-color: #8A2BE2; /* Blue-violet background */
+  color: white;
+}
+
+.toggle-link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.toggle-link:hover {
+  color: #0056b3;
+}
+
+
+
+
+
+.main-content {
+  position: relative;
+}
+
+
+
+
+/* Define the color */
+.my-orange {
+    background-color: rgb(255, 205, 138);
+}
+
+/* Define the box style */
+.eblock {
+    color: black;
+    background-color: rgb(255, 205, 138); /* Use the defined color directly */
+    border: 1px solid rgba(255, 205, 138, 0.25);
+    padding: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+
+/* Title style */
+.eblock::after {
+    content: attr(data-title);
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+}
+
+
+
+/* Define the colors */
+.my-purple {
+    background-color: rgb(204, 180, 225);
+}
+
+.myboxcolor {
+    color: blue;
+}
+
+/* Define the box style */
+.defblock {
+    color: black;
+    background-color: rgb(204, 180, 225); /* Use the defined color directly */
+    border: 1px solid rgba(204, 180, 225, 0.25);
+    padding: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+
+/* Title style */
+.defblock::after {
+    content: attr(data-title);
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+}
+
+
+
+.caption-prefix {
+ display: none !important;
+}
