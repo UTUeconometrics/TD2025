@@ -99,7 +99,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles-TD.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -127,9 +126,6 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Tilastotiede ja data</a> 
-        <div class="sidebar-tools-main">
-    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -595,17 +591,17 @@ Y_1, \ldots, Y_n \perp \!\!\! \perp, \,\, Y_i \thicksim \text{N}(\mu, \sigma^2),
 \bar{Y} = \frac{1}{n} \sum_{i=1}^{n} Y_i.
 \end{equation*}\]</span></p>
 <p>Valitaan <strong>luottamustasoksi</strong> <span class="math inline">\(1-\alpha\)</span>, jossa <span class="math inline">\(\alpha\)</span> on siis valittu merkitsevyystaso. Yleinen valinta ihmistieteissä on <span class="math inline">\(\alpha = 0.05\)</span> tai <span class="math inline">\(\alpha = 0.1\)</span> vastaten 95 % ja 90 % prosentin luottamustasoa. Luonnontieteissä ja lääketieteellisissä sovelluksissa <span class="math inline">\(\alpha\)</span> on usein pienempi, kuten <span class="math inline">\(\alpha=0.01\)</span>.</p>
-<p>Määrätään <strong>luottamuskertoimet</strong> <span class="math inline">\(-z_{\alpha/2}\)</span> ja <span class="math inline">\(z_{\alpha/2}\)</span> (luottamusväli on ns. kaksisuuntainen), joille pätee <span class="math display">\[\begin{equation*}
+<p>Määrätään <strong>luottamuskertoimet</strong> <span class="math inline">\(-z\_{\alpha/2}\)</span> ja <span class="math inline">\(z\_{\alpha/2}\)</span> (luottamusväli on ns. kaksisuuntainen), joille pätee <span class="math display">\[\begin{equation*}
 \text{P}(-z_{\alpha/2} \le Z \le z_{\alpha/2}) = 1-\alpha,
 \end{equation*}\]</span> jossa standardoitu satunnaismuuttuja (ks. aiemmat määritelmät edellä) <span class="math display">\[\begin{equation*}
 Z = \frac{\bar{Y} - \mu}{\sigma / \sqrt{n}} = \sqrt{n} \Big( \frac{\bar{Y} - \mu}{\sigma} \Big)
-\end{equation*}\]</span> ja <span class="math inline">\(\text{P}(\cdot)\)</span>:llä merkitään todennäköisyyttä, joka tässä tapauksessa liittyy normaalijakaumaan, ja <span class="math inline">\(z_{\alpha/2}\)</span> on jakaumafunktion arvo pisteessä <span class="math inline">\(\alpha/2\)</span>.</p>
+\end{equation*}\]</span> ja <span class="math inline">\(\text{P}(\cdot)\)</span>:llä merkitään todennäköisyyttä, joka tässä tapauksessa liittyy normaalijakaumaan, ja <span class="math inline">\(z\_{\alpha/2}\)</span> on jakaumafunktion arvo pisteessä <span class="math inline">\(\alpha/2\)</span>.</p>
 <ul>
 <li>Ks. aiemmat alaluvut tässä luvussa osoittaen, että (tehdyillä oletuksilla) <span class="math inline">\(Z\)</span> noudattaa <span class="math inline">\(\text{N}(0,1)\)</span>-jakaumaa.</li>
 </ul>
 <p>Etsitään siis odotusarvoparametrille <span class="math inline">\(\mu\)</span> sellainen arvo, jolla oheinen epäyhtälö pätee ja siten päädytään luottamusväliin. Nyt ylläoleva epäyhtälöketju voidaan kirjoittaa muodossa <span class="math display">\[\begin{equation*}
 -z_{\alpha/2} \le  \frac{\bar{Y} - \mu}{\sigma / \sqrt{n}}  \le z_{\alpha/2},
-\end{equation*}\]</span> joka voidaan kirjoittaa uudelleen muodossa <span class="math display">\[\begin{equation*}
+\end{equation*}\]</span> j oka voidaan kirjoittaa uudelleen muodossa <span class="math display">\[\begin{equation*}
 \bar{Y} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}} \le   \mu  \le
 \bar{Y} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}},
 \end{equation*}\]</span> kertomalla nimittäjällä puolittain ja vähentämällä sm:jien keskiarvo molemmin puolin. Normaalijakauman odotusarvon <span class="math inline">\((1-\alpha) \times 100\%\)</span> luottamusväli on siis <span class="math display">\[\begin{equation*}
@@ -635,7 +631,7 @@ z_{\alpha/2} \frac{\sigma}{\sqrt{n}}.
 \end{equation*}\]</span> jossa <strong>luottamuskertoimet</strong> <span class="math inline">\(-t_{\alpha/2}\)</span> ja <span class="math inline">\(t_{\alpha/2}\)</span> saadaan nyt <strong>t-jakaumasta</strong> <span class="math inline">\(t_{n-1}\)</span>, jossa <span class="math inline">\(S^2\)</span> on varianssin <span class="math inline">\(\sigma^2\)</span> harhaton estimaattori ja vapausasteiden lukumäärä on <span class="math inline">\(n-1\)</span>.</p>
 <ul>
 <li>(Studentin) <span class="math inline">\(t\)</span>-jakauma muistuttaa silmämääräisesti normaalijakaumaa, mutta se on <strong>paksuhäntäisempi</strong>. Vapausasteluvun kasvaesssa <span class="math inline">\(t\)</span>-jakauma lähestyy normaalijakaumaa.</li>
-<li>Suurissa otoksissa (<span class="math inline">\(n\)</span> iso) luottamuskertoimet voidaan poimia (approksimatiivisesti) myös normaalijakaumasta eli korvata edellä kertoimet <span class="math inline">\(t_{\alpha/2}\)</span> aiemmin käytetyillä kertoimilla <span class="math inline">\(z_{\alpha/2}\)</span>.</li>
+<li>Suurissa otoksissa (<span class="math inline">\(n\)</span> iso) luottamuskertoimet voidaan poimia (approksimatiivisesti) myös normaalijakaumasta eli korvata edellä kertoimet <span class="math inline">\(t\_{\alpha/2}\)</span> aiemmin käytetyillä kertoimilla <span class="math inline">\(z\_{\alpha/2}\)</span>.</li>
 <li>Normaalijakauman odotusarvon luottamusväli (<span class="math inline">\(\sigma^2\)</span> tuntematon), <span class="math inline">\(t\)</span>-jakauma eri vapausastein <span class="math inline">\(df\)</span></li>
 </ul>
 </div>

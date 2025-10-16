@@ -1,0 +1,393 @@
+---
+title: "Tilastolliset aineistot, niiden kerääminen ja mittaaminen"
+---
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+Edellä käsiteltiin tilastotieteen suhtautumista satunnaisilmiöihin. Tässä luvussa tarkastelemme lähemmin miten reaalimaailman satunnaisilmiöistä kerätään tietoa ja miten niitä voidaan mitata. Ts. miten käytännössä, tässä kohtaa yleisellä tasolla, havaintoaineistot muodostuvat ja miten niiden analysointia lähestytään.
+
+Tilastotiede rakentuu ajatukselle ilmiöiden tutkimisesta rajallisen ja epävarman tiedon vallitessa. Käytännössä tämä tarkoittaa sitä, että tutkimuksen kohteena olevat rajalliset aineistot sisältävät niin systemaattista kuin satunnaisuudesta johtuvaa vaihtelua. Tilastollisten menetelmien avulla **pyrimme erottamaan systemaattisen vaihtelun satunnaisesta**, eli **erottamaan signaalin kohinasta**, tekemällä tilastollista päättelyä aineiston generoimasta mekanismista. Lyhyesti tämä tarkoittaa aineiston systemaattisen vaihtelun tilastollista mallintamista, pitäen näin sisällään mm. tarkasteltavan tilastollisen mallin tuntemattomien parametrien estimoinnin otoksen pohjalta, joka kattaa vain (pienen) osajoukon koko populaation (perusjoukon) tilastoyksiköistä.
+
+Voidaksemme tehdä uskottavaa päättelyä "havainnoista parametreihin", tulee käytettävän aineiston, usein **otoksen**, olla riittävän **edustava**. Tämän luvun keskeisin oppi onkin, että miten **otanta** tulisi suorittaa, jotta havaintoaineisto olisi **edustava otos** populaatiosta. Vaikka aineiston hankinta vaatii yleensä runsaasti käytännön työtä, kannattaa se suunnitella ja tehdä huolellisesti, sillä huonosti toteutetun otannan vuoksi tutkimusongelman kannalta keskeisiä johtopäätöksiä ei voida (useimmiten) tehdä myöhemmässä vaiheessa jo muodostunutta aineistoa analysoitaessa.
+
+## Kokonaistutkimus ja otantatutkimus
+
+Lähtökohtaisesti tilastollinen tutkimus voi olla joko **kokonaistutkimus** tai **otantatutkimus**.
+
+[Kokonaistutkimus]{.marginnote}
+
+:::: defblock
+**Kokonaistutkimus** on tutkimus, jossa tutkitaan kaikki tutkimuksen kohteena olevan perusjoukon alkiot. Ts. kaikki ajateltavissa olevat kohteet tutkitaan.
+
+-   Kokonaistutkimus on yleinen tutkimustapa silloin, kun kohdeperusjoukko on selvästi määritelty ja sen alkioita koskevat tilastolliset muuttujat ovat helposti mitattavissa.
+
+::: eblock
+**Esimerkkejä**. Jos tutkitaan Suomen kuntia, niin kokonaistutkimuksessa tutkitaan kaikki kunnat. Kunnista on useimmissa tilanteissa mahdollista kerätä mielenkiinnon kohteena olevia aineistoja eli tilastollisten muuttujien arvoja.
+
+Toisaalta, jos tutkitaan jonkin lääkeaineen vaikutuksia ihmisiin, niin kokonaistutkimuksessa tutkittaisiin jokainen ihminen erikseen. Selvää on, että tällainen kokonaistutkimus olisi liian vaikeaa ja järjetöntäkin käytännössä toteuttaa.
+:::
+::::
+
+ 
+
+[Otantatutkimus]{.marginnote}
+
+:::: defblock
+**Otantatutkimus**. Otantatutkimuksessa tutkimus kohdistetaan johonkin (populaation/perusjoukon) osajoukkoon, joka poimitaan sopivaa **otantamenetelmää** käyttäen (ks. Osa II) ja populaatiota/perusjoukkoa koskevat johtopäätelmät tehdään tähän otokseen perustuen.
+
+-   Otantatutkimus on usein luonnollinen valinta, sillä koko populaation tutkiminen ei useinkaan ole mahdollista tai kannattavaa.
+
+-   Perusjoukosta otokseen poimittuja alkioita kutsutaan **otosyksiköiksi** ja niiden muodostama osajoukko, eli **otos**, on se osa perusjoukkoa, joka tutkitaan tutkimusaineiston keräämisen jälkeen.
+
+::: eblock
+**Esimerkkejä**. Esimerkiksi aseiden patruunoita valmistava tehtailija ei voi tutkia toimivatko kaikki ammukset! Myöskään valaisimien valmistaja tuskin tekee kokonaistutkimuksia valmistamiensa tuotteiden kestoajan selvittämiseksi.
+
+Lääketutkimusta tehdäänkin poikkeuksetta otantatutkimuksena (ja kontrolloituina kokeina), jolloin lääkettä testataan vain osajoukolla koko ihmispopulaatiosta ja tämän osajoukon alkiot ovat otosyksiköitä. Näin toimimalla, ja riittävän edustavalla otoksella, saadaan kuitenkin tarpeeksi tietoa lääkeaineen vaikutuksista ja tulokset voidaan yleistää populaatiotasolle ja lääke ottaa käyttöön.
+:::
+::::
+
+Otantatutkimuksessa keskitytään siis perusjoukkoa edustavan mutta pienemmän, mieluusti satunnaisesti valitun otoksen tutkimiseen. Otantatutkimus on halvempi kuin kokonaistutkimus ja tulokset saadaan nopeammin!
+
+-   Otantatutkimuksissa tiedot kerätään useimmiten haastattelemalla, kirjallisella/sähköisellä kyselyllä tai suoraan tietorekistereistä. Tiedonkeruun toteuttaminen (eri sovelluksissa) määrää osaltaan käytettävän otantamenetelmän.
+
+-   Teoriassa äärelliseen perusjoukkoon kohdistuvat kokonaistutkimukset voidaan aina tulkita otantatutkimuksiksi! Tällöin siis perusjoukko tulkitaan otokseksi hypoteettisesta äärettömästä perusjoukosta!
+
+    ::: eblock
+    **Esimerkki**. Esimerkiksi Galilein tekemät painovoiman vaikutusta kappaleiden putoamisaikaan liittyneet mittaukset. Koetuloksia (mittauksia) voidaan pitää otoksena äärettömästä mahdollisten koetulosten joukosta.
+    :::
+
+Ehkä hieman yllättäen, otantatutkimuksen tulokset voivat olla myös luotettavampia kuin kokonaistutkimuksen. Otantatutkimuksessa voidaan panostaa enemmän huolelliseen ja tarkkaan mittaamiseen sekä valitun otoksen tavoittamiseen. Kokonaistutkimuksessa vastauskato ja tarkasteltavan populaation valintavirhe ovat mahdollisia siinä missä otantatutkimuksessakin.
+
+ 
+
+Otantateoria onkin yksi tilastotieteen keskeisimpiä oppeja ja tarjoaa teoreettisen kehikon useiden empiiristen tutkimusten tulosten yleistämiseen. Otannan tarkempaa onnistunutta toteuttamista, ml. yksityiskohtia eri otantamenetelmistä, tarkastellaan Osassa II.
+
+ 
+
+## Mittaaminen
+
+Kumpaa tahansa tutkimusotetta (kokonais- tai otantatutkimus) noudatettaessa tietojen keräämisessä on olennaisena osana kohteiden ominaisuuksien **mittaaminen**. Tilastotieteellinen tutkimus perustuu aina mitattaviin satunnaisilmiöihin. Tavoitteena on mittaamalla liittää jokin luku ilmiötä kuvaavaan ominaisuuteen, jota todennäköisyyslaskennan näkökulmasta katsoen mallinnettaisiin satunnaismuuttujan kautta.
+
+-   Mittaaminen vaatii aina mittauksen kohteen, hyvin määritellyn mitattavan ominaisuuden ja **mittarin**, joka liittää mielekkäät lukuarvot mitattavaan ominaisuuteen.
+
+-   Erilaiset mittarit heijastavat ilmiön ominaisuuksia eri tavoin ja eri tarkkuudella. Esimerkiksi, jos tutkitaan opiskelijoiden pituuden kehitystä, niin mitataan pituutta eri aikoina. Pituudet voidaan mitata senttimetreissä, metreissä, kilometreissä tai vaikkapa tuumissa.
+
+[Mittari]{.marginnote}
+
+::: defblock
+**Mittari on hyvä**, jos sen antama mittaus on
+
+(i) **validi** eli mittaus esittää oikein mitattavaa ominaisuutta (senttimetri mittaa pituutta, gramma ei), ja
+
+(ii) **luotettava** eli mittaus on **harhaton** ja **toistettavissa**.
+:::
+
+Määritellään nämä termit vielä erikseen, sillä ne ovat keskeisiä laajemminkin tilastotieteessä.
+
+::: defblock
+**Mittarin harhattomuus**. Mittari on harhaton, jos se ei systemaattisesti ali- tai yliarvioi mitattavan ominaisuuden määrää.
+:::
+
+Harhaton mittari siis antaa keskimäärin oikeita mittauksia mitattavasta ominaisuudesta. Harhattomuutta pidetään myös yhtenä keskeisimmistä hyvistä ominaisuuksista joita tilastollisten mallien parametrien estimaattoreilta voidaan vaatia. Tähän palataan Osassa II.
+
+::: defblock
+**Mittarin toistettavuus**. Mittari on toistettava, jos se tuottaa keskimäärin samanlaisia mittauksia samanlaisista otoksista eli se on johdonmukainen ja mittausvirheet ovat pieniä.
+:::
+
+Huonosti toistettava mittari antaa tilastoyksiköiden samankaltaisille ominaisuuksille hyvin erilaisia arvoja riippuen otoksesta. **Mittausten reliabiliteettia/luotettavuutta** arvioidessa voidaan pohtia esimerkiksi seuraavia kysymyksiä:
+
+-   Kuinka hyvin mittaustulokset ovat toistettavissa? Kuinka paljon niissä on ei-sattumanvaraisuutta?
+
+-   Mittausten validiteetti: kuinka hyvin pystyttiin mittaamaan sitä, mitä oli tarkoitus mitata?
+
+Kun mittaaminen on luotettavaa ja validia, tutkimusaineisto on **sisäisesti luotettavaa**. Aineiston **ulkoinen luotettavuus** toteutuu silloin, kun tutkittu otos edustaa perusjoukkoa eli on edustava.
+
+-   Validi mittaaminen ei pelasta otosta, jos se ei ole edustava!
+
+Jokaisen tutkimuksen tulosten luotettavuuden perusteena on käytetty aineisto, kuinka se on hankittu ja mistä lähteestä. Kun käytetään luotettavaksi havaittuja mittareita, voidaan kustakin aineistosta laskea erikseen tunnuslukuja mittauksen luotettavuudelle. Esimerkkinä tästä on mm. ns. **luottamusväli** eli väli, joka vaihtelee otoksesta toiseen ja rakennetaan siten, että se sisältää mielenkiinnon kohteena olevan parametrin arvon tietyllä varmuudella, kun otantakoetta toistetaan!
+
+-   Luottamusväliä käytetään siis osaltaan määrittämään saatavan estimaatin luotettavuutta.
+
+Luotettavuudella voidaan tarkoittaa myös tutkimuksen **objektiivisuutta**.
+
+-   **Objektiivinen totuus**: tutkimustulokset ovat samat riippumatta siitä kuka pätevä tutkija tutkimuksen on tehnyt. Tulosten tulisi olla luotettavia, mutta luotettavatkin tulokset voivat olla vikaantuneita siinä mielessä, että ne tarkastelevat asiaa vain yhdestä näkökannalta!
+
+::: eblock
+**Esimerkiksi**. Tarkastellaan C-vitamiinin vaikutusta syövän hoidossa. Annettiin C-vitamiinia 100:lle terminaalivaiheen syöpäpotilaalle ja seurattiin kuolleisuutta (Cameron and Pauling, 1976).
+
+-   Pyrittiin luomaan tärkeiden ominaisuuksien suhteen samanlaisia verrokkiryhmiä ja valittiin kutakin potilasta kohden 10 verrokkia, jotka olivat samanlaisia iän, sukupuolen, primääri-kasvaimen sijaintipaikan ja histologisen kasvaintyypin suhteen.
+
+-   Seuranta-aika: aika hetkestä, jolloin todettiin tavanomaisten hoitojen olevan tehottomia, kuolinhetkeen saakka.
+
+-   Tulos: C-vitamiinia saaneet käsittelyryhmän potilaat elivät 4 kertaa kauemmin (p-arvo \< 0.0001)
+
+-   Ristiriitaista evidenssiä saatiin tutkimuksessa, jossa on vastaava tutkimusongelma, mutta toteutettu satunnaistettuna kokeena (Moertel et al.\~1985). Satunnaistettiin potilaat, joilla pitkälle edennyt paksunsuolen tai peräsuolen syöpä, C-vitamiinia saavien ja lumelääkettä saavien ryhmiin.
+
+-   Tulos: kontrolliryhmän potilaat elivät keskimäärin hieman pidempään, mutta ero ei tilastollisesti merkitsevä.
+
+Mistä näiden kahden tutkimuksen erot johtuivat?
+
+-   "Huonolla tuurilla" kaltaistetut verrokit erosivat käsittelyryhmän potilaista joillakin merkittävillä tavoilla, joita ei oltu mitattu! Miten kvantifioida "huonoa tuuria"?
+
+-   Tilastolliset menetelmät ja tässä tapauksessa p-arvo tekevät juuri tämän: "Mikä on todennäköisyys, että havaittu tulos (tai sitä enemmän nollahypoteesista poikkeava tulos) olisi syntynyt vain sattumalta?"
+
+-   Ilman satunnaistamista tuota kenties merkittävää ei-mitattua eroa ei pystytä varmuudella kontrolloimaan.
+
+Todellisuudessa ero johtui siitä, että ensin mainitun tutkimuksen kontrollit valittiin jo kuolleista syöpäpotilaista, eikä heihin liittynyt enää mitään satunnaisuutta!
+:::
+
+ 
+
+## Mitta-asteikot
+
+[Mitta-asteikot]{.marginnote}
+
+::: defblock
+**Mitta-asteikot**. Kuten satunnaismuuttujia koskeneessa luvussa opittiin, satunnaisilmiöillä on erilaisia tulosvaihtoehtoja, jotka osaltaan määrittävät myös satunnaismuuttujien todennäköisyysjakaumia. Ilmiön luonteesta riippuen voidaan näille tulosvaihtoehdoille käyttää erilaisia **mitta-asteikkoja**:
+
+-   Laatueroasteikko (luokitteluasteikko, nominaaliasteikko)
+
+-   Järjestysasteikko (ordinaaliasteikko)
+
+-   Välimatka-asteikko (intervalliasteikko)
+
+-   Suhdeasteikko
+:::
+
+ 
+
+[Luokitteluasteikko]{.marginnote}
+
+:::: defblock
+**Laatueroasteikko/luokitteluasteikko** (nominaaliasteikko): Muuttujan mittaustaso on tällöin sellainen, että sen arvot voidaan luokittaa toisistaan eroaviin luokkiin. Ts. mihin luokkaan kohde kuuluu mitattavan ominaisuuden perusteella?
+
+-   Havainnot (tilastoyksiköt) luokitellaan ennaltamääriteltyihin luokkiin ja yksittäinen havainto vain yhteen luokkaan. Luokkien järjestyksellä ei ole merkitystä.
+-   Kukin tilastoyksikkö kuuluu vain yhteen luokkaan. Tällöin kahdesta tilastoyksiköstä/havainnosta voidaan päätellä vain kuuluvatko ne saamaan luokkaan vai eivät.
+-   Emme pysty määrittelemään empiirisesti mielekästä järjestystä havaintoarvojen välillä.
+
+::: eblock
+**Esimerkkejä**: Sukupuoli, veriryhmä tai kotikunta.
+:::
+::::
+
+On syytä huomauttaa, että vaikka mitattava ilmiö ei olisikaan numeerinen, se voidaan aina "koodata" eli muuntaa numeeriseksi. Esimerkiksi perinteisen kaksiarvoisen mies-nainen -muuttujan tapauksessa voidaan käyttää tunnuksia 0 ja 1.
+
+ 
+
+[Järjestysasteikko]{.marginnote}
+
+:::: defblock
+**Järjestysasteikko** (ordinaaliasteikko): Tällöin muuttujan arvot voidaan luokittelun lisäksi asettaa (empiirisesti) mielekkääseen järjestykseen. Tällöin siis mittauksen kohteella on "enemmän mitattavaa ominaisuutta" kuin jollakin toisella kohteella.
+
+-   Tilastoyksiköt luokitellaan ennalta määrättyihin luokkiin, joilla on yksikäsitteinen järjestys.
+
+::: eblock
+**Esimerkkejä**: Sotilasarvo, sosiaaliryhmä, kilpailun tulos tai sairauksien tarttuvuus.
+:::
+::::
+
+ 
+
+[Välimatka-asteikko]{.marginnote}
+
+:::: defblock
+**Välimatka-asteikko** (intervalliasteikko): Luokittamisen ja järjestyksen asettamisen lisäksi havaintoarvojen välimatkalla on empiirisesti mielekäs tulkinta. Ts. intervalliasteikon tasoisen muuttujan arvoista voidaan sanoa, kuinka paljon toinen arvo on toista suurempi (pienempi).
+
+-   Välimatka-asteikolla pystytään mittaamaan yksittäisten luokkien tai havaintoarvojen ero. Kuinka paljon kahden mittauksen kohteen ominaisuudet eroavat toisistaan?
+
+-   Intervalliasteikon tasoisen muuttujan arvoista voidaan sanoa, kuinka paljon toinen arvo on toista suurempi (pienempi). Muuttujan voidaan siis ajatella (useimmiten) saavan minkä tahansa reaalilukuarvon.
+
+-   Absoluuttista nollapistettä ei kuitenkaan ole vs. suhdeasteikko. Mittarin nollapiste on "keinotekoinen" ja siten vapaasti valittavissa. Samoin voidaan valita käytettävä mittayksikkö vapaasti sekä yhteen- ja vähennyslasku ovat sallittuja. Oleellista on se, että havaintojen välisellä välimatkalla on aina empiirisesti mielekäs tulkinta.
+
+::: eblock
+**Esimerkkejä**: Lämpötilan mittaaminen celcius-asteina. Pystymme numeroarvoina ilmoittamaan onko tänään lämpimämpi, yhtä lämmin vai kylmempi sää kuin eilen ja kuinka monta astetta muutos on. Sen sijaan, jos ilman lämpötila on 0 (celciusastetta), ei se tarkoita, että lämpöä ei ole.
+:::
+::::
+
+ 
+
+[Suhdeasteikko]{.marginnote}
+
+:::: defblock
+**Suhdeasteikko**: Intervalliasteikon ominaisuuksien lisäksi on määriteltynä yksikäsitteinen mittalukujen absoluuttinen nollapiste, minkä myötä havaintoarvojen suuruuksien keskinäiset suhteet voidaan määritellä.
+
+::: eblock
+**Esimerkiksi** kuuden euron hintainen tuote on kaksi kertaa niin kallis kuin kolmen euron tuote.
+
+Toisaalta toisena esimerkkinä kunnan veroäyri tai henkilön pituus: Absoluuttinen nollapiste on 0.
+:::
+
+-   Nollapisteen ollessa absoluuttinen, se "pysyy paikallaan" ja mittalukujen suhteet pysyvät samoina.
+::::
+
+ 
+
+Tavallisesti eroon väli- ja suhdeasteikon välillä ei tarvitse kiinnittää (liikaa) huomiota. Sen sijaan tärkeää ja useimmiten myös helppoa tehdä ero nominaali-, ordinaari ja väli-tai suhdeasteikollisten muuttujien välillä.
+
+ 
+
+Mitattavien ominaisuuksien luonne voidaan siis selvästikin jakaa kahteen luokkaan:
+
+-   **Kvalitatiiviset** ominaisuudet ja siten kvalitatiiviset/laadulliset muuttujat
+
+    -   Tutkimuksen kohteet voidaan luokitella kvalitatiivisesti eli laadullisesti toisistaan eroaviin kategorioihin eli luokkiin.
+
+    -   Kvalitatiivista muuttujaa kutsutaan usein myös kategoriseksi muuttujaksi.
+
+    -   Tällöin muuttujien arvot kuvaavat vain tilastoyksiköiden laadullisia piirteitä.
+
+-   **Kvantitatiiviset ominaisuudet**
+
+    -   Mittaukseen liittyy tällöin suoraviivaisesti lukuja (ei siis sellaisiksi koodattavia ominaisuuksia)
+
+Luokittelu- ja järjestysasteikkoa kutsutaan ajoittain myös **kvalitatiivisiksi asteikoiksi**. Vastavasti välimatka- ja suhdeasteikkoa kutsutaan myös **kvantitatiivisiksi asteikoiksi**, koska tällöin mittaluvut kuvaavat jonkin ominaisuuden määrää.
+
+Tilastollisen analyysin kannalta mitta-asteikkojen merkitys on siinä, että tilastollisten (matemaattisten) operaatioiden sallittavuus määräytyy muuttujan mitta-asteikon mukaan. Mitä "korkeampi" mitta-asteikko, sitä enemmän on käytettävissä olevia analyysimenetelmiä.
+
+::: eblock
+**Esimerkki**. Esimerkiksi keskiarvon laskeminen on eräs tilastollinen operaatio, ja se ei ole sallittu kvalitatiivisille muuttujille.
+:::
+
+ 
+
+```{=html}
+<!-- Tämän jakson lopuksi, erilaisia tilastollisia **aineistotyyppejä**, myöskin mittaamiseen ja mitta-asteikkoihin liittyen, käsitellään tarkemmin vielä myöhemmin Osassa II
+
+, mutta alla on lueteltuna yleisimpiä aineistotyyppejä, jotka usein määräävät sen, millaisia tilastollisia malleja tutkimuksessa käytetään. 
+
+  - Poikkileikkausaineisto: Tietoja useista tutkimuskohteista yhdeltä ajanhetkeltä tai aikäväliltä
+  - Aikasarja-aineisto: Tietoja samasta tutkimuskohteesta eri ajanhetkiltä
+  - Paneeliaineisto: Tietoja useilta ajanhetkiltä useista tutkimuskohteista
+  - Tapahtumahistoria-aineisto: Tietoja tapahtumahetkiltä
+
+&nbsp;  
+-->
+```
+
+## Kontrolloidut kokeet ja suorat havainnot \label{alaluku54}
+
+Tarkastellaan seuraavaksi kahta tyyppiesimerkkiä tilastollisen tutkimusaineiston keräämisen asetelmista:
+
+[Kontrolloidut kokeet]{.marginnote}
+
+::: defblock
+**Kontrolloidut kokeet** ovat sellaisia kokeellisia tutkimusasetelmia, joissa tutkimuksen kohteet altistetaan suunnitelmallisesti erilaisiin koeolosuhteisiin, jotta voidaan selvittää miten kohteet reagoivat muutoksiin.
+:::
+
+ 
+
+[Suorat havainnot]{.marginnote}
+
+::: defblock
+**Suoria havaintoja** kerätessä koeolosuhteita ei pyritä aktiivisesti muuttamaan vaan ainoastaan seurataan miten erilaiset olosuhteet ja niissä tapahtuvat muutokset vaikuttavat kohteisiin.
+:::
+
+Näistä tutkimusasetelmista kontrolloidut kokeet ovat tietenkin ihanteellisempia tutkimuksen tekemiselle, sillä tutkijan on tällöin mahdollista tarkastella tutkittavaa asiaa koeolosuhteissa eli ikäänkuin "eristyksissä" (muiden tekijöiden suhteen). Kontrolloidut kokeet eivät kuitenkaan ole aina mahdollisia, jolloin on käytettävä suoria havaintoja.
+
+-   Tällöin tutkimuskohdetta ei suunnitelmallisesti altisteta koeolosuhteille (''käsittelyille'') vaan muuttuvien olosuhteiden vaikutuksia tilastoyksikköihin seurataan passiivisesti.
+-   Toisin sanoen tutkimuksen kohteena olevat tilastoyksiköt eivät välttämättä edes tiedä osallistuvansa tutkimukseen.
+
+Lisäksi usein tehdään hoito- ja käsittelyvastetta koskevia vertailuja erilaisissa olosuhteissa, mitkä osaltaan vaikuttavat tulosten uskottavuuteen, sillä tutkittaviin tilastoyksiköihin voi vaikuttaa olosuhteiden muutosten lisäksi muut ulkopuoliset tekijät.
+
+-   Näiden **selittävien** ja **sekoittavien tekijöiden** vaikutusten kontrollointi on suoria havaintoja tehtäessä vaativa tehtävä.
+
+-   Mikäli ulkopuolisia tekijöitä ei havaita ja/tai pystytä mittaamaan, tai muuten jostain syystä olla lisätty ja käytetty käytettävässä tilastollisessa mallissa, voi kyseeseen tulla ns. **puuttuvien selittäjien harha**.
+
+    -   Tämä tarkoittaa sitä, että syystä tai toisesta jotain keskeistä tekijää ei ole huomioitu tilastollisessa analyysissa.
+
+    -   Esimerkiksi havaittuihin tuloksiin vaikuttaa jokin havaitsematon tekijä, jonka vaikutusta ei kyetä kvantifioimaan puutteellisten havaintoarvojen vuoksi.
+
+ 
+
+[Kausaalisuus]{.marginnote} Suoria havaintoja tehtäessä ei voida (usein) selvittää vasteen ja olosuhteiden **kausaalista yhteyttä**. Suorilla havainnoilla voidaan lähinnä saada selville onko vasteella ja olosuhteilla jokin yhteys (korrelaatio).
+
+::: defblock
+Tilastolliset **kausaalisuhteet** ovat muuttujien välisiä syy-seuraus -suhteita, joita pyritään todentamaan tilastollisin menetelmin empiirisissä tutkimuksissa.
+
+-   **On syytä korostaa**, että kahden muuttujan välinen riippuvuus, kuten (lineaarinen) korrelaatio, **ei ole** suoraan tulkittavissa syy-seuraus -suhteeksi, sillä riippuvuus voi aiheutua esim. puuttuvasta kolmannesta muuttujasta.
+
+-   Kausaaliyhteyden toteaminen perustuu sekä teoriaan että muuttujien tilastolliseen käsittelyyn.
+
+-   Kausaalisuuden suuntaa on usein vaikeaa todentaa, koska kausaalisuuden matemaattiset kriteerit ovat hyvin tiukkoja.
+:::
+
+ 
+
+Suorien havaintojen keräämiseen liittyy olennaisesti joitain riskejä ja toisaalta rajoituksia. Riskit liittyvät käytännössä otoksen harhaisuuteen, kuten erityisesti ns. valikoitumisharhaan. Tämä tilastoyksiköiden **valikoituminen** otokseen aiheuttaa harhaa, sillä otokseen valikoituva osajoukko saattaa ylikorostaa perusjoukon joitain ominaisuuksia. Näin tapahtuu esimerkiksi, jos havaintoja tehtäessä suositaan systemaattisesti joitakin tulosvaihtoehtoja. Tämä suosiminen voi olla tahallista tai tahatonta. [Valikoituminen]{.marginnote}
+
+::: defblock
+**Valikoituminen**. Valikoitumista tapahtuu, jos otokseen poiminta ei ole riippumatonta tilastoyksikön ominaisuuksista. Tätä kutsutaan valikoitumisharhaksi.
+
+-   Esimerkiksi verrattaessa sydän- ja verisuonitautipotilaiden hoitotoimenpiteitä potilaat eivät mahdollisesti ole valikoituneet yhtä todennäköisesti pallolaajennukseen, ohitusleikkaukseen tai lääkehoitoryhmään, sillä taudin vakavuus saattaa jo määritellä mikä hoitotoimenpide valitaan.
+
+-   Valikoituminen on iso ongelma seurantatutkimuksissa, sillä harhaisten havaintotulosten, eli harhaisen otoksen, perusteella ei voida tehdä luotettavia johtopäätöksiä perusjoukosta!
+:::
+
+Harhan syntymistä pyritään välttämään valitsemalla havaintojen kohteet perusjoukosta satunnaisesti (ellei tavoitteena ole tutkia kaikkia perusjoukon alkioita). Tämä merkitsee satunnaisotannan soveltamista havaintojen kohteiden valintaan, eli otokseen poimittavien tilastoyksiköiden valintaan sovelletaan **satunnaistamista**, jolloin sattuma määrää mitkä perusjoukon alkioista tulevat poimituksi otokseen (tutkimuksen kohteiksi). [Satunnaistaminen]{.marginnote}
+
+::: defblock
+**Satunnaistaminen** on tilastoyksiköiden poimimista populaatiosta otokseen riippumatta muiden yksiköiden poiminnasta tai kyseisten (poimittavien) yksiköiden ominaisuuksista.
+
+-   Satunnaistaminen takaa sen, että mahdolliset sekoittavat tekijät ovat jakaantuneet tasaisesti tutkittavassa joukossa. Tällöin sekoittavat tekijät eivät aiheuta harhaa otokseen ja tutkimuksen tulokset voidaan yleistää koko populaatioon.
+
+-   Satunnaistaminen poistaa otannasta valikoitumisharhan, sillä otokseen poiminta suoritetaan riippumatta tilastoyksiköiden ominaisuuksista.
+:::
+
+ 
+
+Palataksemme vielä kontrolloituihin kokeisiin, niissä satunnaistaminen jakaa yksilöt riippumatta yksilön omista ilmiöön vaikuttavista muuttujista joko **käsittely- tai kontrolliryhmään** (eng. treatment ja control groups).
+
+-   Se takaa, ettei valikoitumista jonkin käsittelyä edeltävän ominaisuuden mukaan esiinny.
+-   Tämä tarkoittaa **altisteen** (käsittely, *treatment*) antamista (täysin) satunnaisesti kokeeseen valituille yksilöille, riippumatta näiden taustamuuttujien arvoista.
+-   Nämä yksilöt sinänsä voivat olla satunnaisotos jostain populaatiosta (tai ainakin niiden toivotaan olevan), mutta satunnaistaminen tarkoittaa siis käsittelyn kohdentamista koeyksilöille, ei satunnaisotantaa sinänsä.
+-   Esimerkiksi tutkittavat voidaan satunnaistaa lääkehoito- ja placeboryhmiin, jotta mahdolliset erot tutkittavien iässä, sukupuolessa ja muissa taustamuuttujissa eivät aiheuta systemaattista harhaa, kun tutkitaan lääkehoidon vaikutusta.
+
+ 
+
+Satunnaistaminen (osaltaan) mahdollistaa tilastollisen päättelyn, jonka avulla otoksesta saatuja tietoja voidaan hyödyntää tehtäessä päätelmiä koko perusjoukosta. Johtopäätelmien pätevyys riippuu mm. siitä, kuinka hyvin otanta on suoritettu. Tämän vuoksi on tärkeää ymmärtää otannan perusperiaatteet ja erilaisten otantamenetelmien luonne.
+
+ 

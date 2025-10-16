@@ -1,0 +1,79 @@
+---
+title: "Tilastotieteen kehityksen nykytrendejä"
+---
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+Seuraavassa vielä joitain tilastotiedettä parhaillaan koskevia kehitystrendejä, joita olemme myös osaltaan sivunneet tämän kurssimateriaalin myötä:
+
+-   **Aineistot kasvavat ja monimutkaistuvat**. Näin ollen tilastotietedettä ja tilastollisten menetelmien kehitystyötä tullaan tarvitsemaan (yhä enemmän) jatkossakin.
+
+-   Informaatiota on tarjolla (paljon) enemmän kuin osaamme sitä hyödyntää. **Informaatio ei ole enää niukka hyödyke**. Keskeistä on kuitenkin, että (useimmiten) suhteellisen pieni osa informaatiosta on hyödyllistä.
+
+    -   Havaitsemme informaatiota (osin) valikoivasti ja subjektiivisesti. Luulemme haluavamme lisää informaatiota, kun todellisuudessa haluamme tietoa (ts. signaaleja kun vastaavasti kasvava määrä kohinaa yrittää vaikeuttaa tätä signaalin erottamista kohinasta).
+
+-   **Laskennallisuus kasvaa**. Tietokoneiden laskentakapasiteetti nousee vaikkakin suhteellinen kasvu ei ehkä olekaan enää niin suurta mitä muutamat viime vuosikymmenet.
+
+-   Osin laskennallisuuteen liittyvä **koneoppimisen** kehittyminen ja sen ''rajatieteiden'' yhteyteen integroituneet käytännöt ja menetelmäkehitystyö tulee jatkumaan.
+
+    -   Toisaalta ''perinteiselle'' tilastotieteelle on edelleen myöskin vahva oma roolinsa monilla eri tieteenaloilla.
+
+-   **Analyysien automatisointi**. Tilastolliset ohjelmat alkanevat jatkossa tulkita tuloksia osin automaattisesti. Mihin tarvitaan tilastotieteilijää? Kokonaisvaltaiseen tutkimusprosessin valvontaan(?)
+
+    -   Osin edelliseen liittyen jo nyt ja jatkossa luultavasti yhä enemmän korostuu se, että melkein kuka vaan voi tehdä tilastollisia analyysejä. Niin valmiita paketteja jne. on jo saatavilla. "Tilastotieteellinen faktantsekkaus" noussee vahvemmin esille eli tilastollisten menetelmien käyttäjän on sittenkin edelleen kyettävät arvioimaan ovatko tulokset uskottavia ja vapaita ilmeisistä hankaluuksista.
+
+    -   Näiltä osin yksi keskeinen kehityssuunta on jo vahvasti yleistyneet laajat tekoälymallit, kuten kielimallit. ChatGPT:tä, ja vastaavia tekoälysovelluksia, käytetäänkin jo laajalti (vuonna 2025) mm. tilastollisen ohjelmoinnin apuvälineenä. Nopeasta kehityksestä huolimatta ChatGPT:n antamat vastaukset ovat kuitenkin paikoin epäluotettavia, joten sen käytössä korostaa edelleen vahvan tilastotieteellisen osaamisen lisäksi substanssiosaaminen.
+
+-   **Poikkitieteellisyys tulennee entisestäänkin vahvistumaan**. Ts. substanttitietouden ja tilastotieteen yhdistäminen ja sen tärkeys ei tule ainakaan vähenemään. Sivuaineopintoja kannattaa siis käydä ja ottaa opinto-ohjelmaan!
+
+    -   Tämän lisäksi kokonaisvaltaisesti tilastotieteen ytimen osaajien osaamista tulla kysymään jatkossakin.
+
+ 
+
+Oheisten huomioiden ohella lopuksi on syytä korostaa tilastotieteen opiskelun näkökulmasta, että oikotietä ei ole! **Oikaista ei siis voi**: Ensin on rakennettava vahva tilastollisen ajattelun ja menetelmien perusta (alkaen seuraavaksi **todennäköisyyslaskennasta** ja **tilastollisesta päättelystä** TY:n näitä teemoja koskevien peruskurssien myötä), jotta myöhemmin voi kehittyä ja omata todellisia kykyjä ottaa vastaan monia jo varsin monimutkaisia tilastollisia menetelmiä!
+
+   

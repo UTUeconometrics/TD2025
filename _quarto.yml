@@ -1,0 +1,53 @@
+project:
+  type: book
+  output-dir: "docs/fe4927b5672e3096825373968ceffa7a24ce58e1"
+
+
+book:
+  title: "Tilastotiede ja data"
+  author: "Henri Nyberg & Roope Rihtamo"
+  date: "`r Sys.Date()`"
+  downloads: [pdf]
+  output-file: "TD2025"
+  chapters:
+    - index.qmd
+    - 01-johdanto.qmd
+    - 02-tieteellinen_tieto.qmd
+    - 03-tilastotiede_tieteenalana.qmd
+    - 04-sattuma.qmd
+    - 05-tilastolliset_aineistot.qmd
+    - 06-otannan_idea.qmd
+    - 07-perustunnusluvut.qmd
+    - 08-til_riippuvuus.qmd
+    - 09-osa1_yhteenveto.qmd
+    - 10-otanta_til.qmd
+    - 11-til_päät.qmd
+    - 12-otosjakaumat.qmd
+    - 13-regressioanalyysi.qmd
+    - 14-ennustaminen.qmd
+    - 15-til_rooli_uusitieto.qmd
+    - 16-aineisto_asetelmat.qmd
+    - 17-koulukunnat.qmd
+    - 18-kritiikki.qmd
+    - 19-trendit.qmd
+    - part: "Liitteet"
+      chapters:
+      - 20-LiiteA.qmd
+
+language:
+  ui:
+    chapter-title: "Luku "
+  labels:
+    fig: "Kuvio "
+
+format:
+  html:
+    theme: cerulean
+    css: styles-TD.css
+  pdf:
+    documentclass: scrreprt
+
+
+editor: visual
+
+

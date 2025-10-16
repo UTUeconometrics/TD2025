@@ -1,0 +1,90 @@
+---
+title: "Tilastotieteen koulukunnat: Frekventistisyys vs. Bayesiläisyys"
+---
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+Tilastotiede voidaan karkeasti jakaa kahteen merkittävään paradigmaan sen mukaan, miten **tilastolliseen päättelyyn**, ml. hypoteeseihin ja niiden testaamiseen, suhtaudutaan. Näitä ovat **klassinen eli frekventistinen tilastotiede** sekä **Bayesilainen tilastotiede**.
+
+Tarkastellaan seuraavaksi minkälaisia eroja ja yhtäläisyyksiä näiden koulukuntien välillä on.
+
+[Frekventistinen tilastotiede]{.marginnote} **Frekventistinen tilastotiede**
+
+-   Klassisessa eli frekventistisessä tilastotieteessä ajatellaan että hypoteesien testaaminen tulee perustua yksinomaan havaittuun aineistoon ja siihen liitettävään tilastolliseen malliin.
+
+    -   Tämän materiaalin tilastollista päättelyä koskevat kohdat ja esitellyt lähestymistavat ja menetelmät lukeutuvat klassisen tilastotieteen koulukuntaan.
+
+-   Nimi ''frekventistinen'' juontuu siitä, että tilastollisen mallin perustana oleva todennäköisyysjakauma määrittää satunnaismuuttujan mahdollisten arvojen todennäköisyydeksi niiden suhteellisen osuuden äärettömästä määrästä realisaatioita, ts. niiden suhteellisen frekvenssin.
+
+-   Klassisessa tilastotieteessä havaittuun aineistoon sovitetaan tilastollinen malli, joka vastaa saatua aineistoa parhaiten.
+
+    -   Tämä tilastollinen malli voidaan (useimmiten) perustaa uskottavuusfunktioon, joka on siis aineiston sekä yhden tai useamman parametrin funktio ja joka saavuttaa suurimman arvonsa suurimman uskottavuuden pisteessä. Uskottavuusfunktio kertoo kuinka todennäköisenä havaittua aineistoa voidaan pitää, mikäli sen oletetaan olevan peräisin vastaavasta mallista jollain parametriarvolla. Täten ne parametriarvot, joilla uskottavuusfunktion arvo maksimoituu, *kuvaavat aineiston generoimaa prosessia parhaiten*, annettuna mallissa tehdyt oletukset, kuten jakaumaoletus/oletukset.
+
+-   Tutkimuskysymyksen mukaisia hypoteeseja testataan tilastollisen mallin avulla: havaittu aineisto määrittää uskottavuusfunktion perusteella sellaiset hypoteesit, jotka jäävät joko voimaan tai tulevat hylätyiksi.
+
+-   Klassisessa tilastotieteessä hypoteesien testaus perustuu siis vain aineistoon eli tilastollinen päättely on induktiivista: aineiston avulla otosta koskeva päätelmä voidaan yleistää koskemaan perusjoukkoa.
+
+    -   Kaikki päättely on toki alisteista tehdyille oletuksille koskien käytettävää tilastollista mallia.
+
+ 
+
+[Bayesiläinen tilastotiede]{.marginnote} **Bayesilainen tilastotiede**
+
+-   Bayesilainen tilastotiede on tilastotieteen toinen suuri paradigma ja on saanut nimensä englantilaiselta harrastelijamatemaatikko ja presbyteeripappi Thomas Bayesilta, jota pidetään bayesilaisen tilastotieteen isänä.
+
+-   Bayesilainen tilastotiede ulottaa todennäköisyyskäsityksen, eli todennäköisyysjakauman, myös aineistoa koskevien hypoteesien puolelle: kuinka todennäköisenä jotain hypoteesia voidaan pitää jo ennen tutkimusaineiston keräämistä?
+
+    -   Myös bayesilaisessa tilastotieteessä hyödynnetään uskottavuusfunktiota, mutta hypoteesien testaus ei perustu niinkään frekventistiseen ajatukseen todennäköisyyksistä suhteellisina osuuksina äärettömässä sarjassa.
+    -   Bayesilaiset perustavat sen sijaan hypoteesien testaamisen tutkimuskysymystä koskevien ennakkokäsitysten päivittämiselle sen jälkeen, kun aineisto on havaittu.
+    -   Nämä ennakkokäsitykset voidaan kuvata todennäköisyysjakaumana, priorijakaumana, jota päivitetään ns. posteriorijakaumaksi kun aineisto havaitaan. Näin päättely perustuu priorijakauman ja aineiston uskottavuusfunktion väliselle kompromissille.
+
+-   Ajatusta ennakkokäsityksistä todennäköisyyksinä käytetään niin bayesilaisen tilastotieteen kritiikkinä kuin puolustuksena.
+
+    -   Lopulta olemme kaikki bayesilaisia: jokaisella on sisäisiä ennakkokäsityksiään, myös tutkijoilla! Nämä ennakkokäsitykset voivat perustua esimerkiksi aiempaan tutkittuun tietoon, mutta myös uskomuksiin.
+    -   Prioritiedon hyödyntäminen tilastollisessa tutkimuksessa on usein perusteltua, mutta prioritiedon käyttämistä voidaan pitää myös subjektiivisena ja täten ongelmallisena tulosten luotettavuuden kannalta.
+
+ 

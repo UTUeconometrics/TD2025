@@ -99,7 +99,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles-TD.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -127,9 +126,6 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Tilastotiede ja data</a> 
-        <div class="sidebar-tools-main">
-    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -368,11 +364,12 @@ function toggleCode(id) {
 <div class="defblock">
 <p><strong>Sisältymistodennäköisyys</strong> kuvaa sitä (tunnettua) todennäköisyyttä, jolla perusjoukon alkio tulee poimituksi otokseen.</p>
 </div>
-<p>Käytännössä otoksen poiminta suoritetaan niin, että <span class="math inline">\(n\)</span>:n alkion otos (<span class="math inline">\(n\)</span> on tässä siis edelleen otoskoko) poimitaan jollakin satunnaisotannan menetelmällä <span class="math inline">\(N\)</span>:n alkion perusjoukosta (<span class="math inline">\(N\)</span> on siis edelleen perusjoukon koon merkintä).</p>
+<p>&nbsp;</p>
+<p>Käytännössä otoksen poiminta suoritetaan niin, että (n):n alkion otos ((n) on tässä siis edelleen otoskoko) poimitaan jollakin satunnaisotannan menetelmällä (N):n alkion perusjoukosta ((N) on siis edelleen perusjoukon koon merkintä).</p>
 <ul>
-<li><p>Perusjoukon yksittäinen alkio (tilastoyksikkö) <span class="math inline">\(k\)</span> tulee poimituksi <span class="math inline">\(n\)</span>:n alkion otokseen (tutkimusaineistoon) tunnetulla <strong>sisältymistodennäköisyydellä</strong> <span class="math inline">\(\pi_k\)</span>, <span class="math display">\[\begin{equation*}
+<li><p>Perusjoukon yksittäinen alkio (tilastoyksikkö) (k) tulee poimituksi (n):n alkion otokseen (tutkimusaineistoon) tunnetulla <strong>sisältymistodennäköisyydellä</strong> (_k), <span class="math display">\[\begin{equation*}
 0 &lt; \pi_k \le 1, \quad k = 1, \ldots, N,
-\end{equation*}\]</span> jossa siis <span class="math inline">\(N\)</span> on perusjoukon alkioiden lukumäärä. Toisin sanoen, kaikilla perusjoukon alkioilla on oma nollaa suurempi todennäköisyytensä (voi olla 1), <span class="math inline">\(\pi_k\)</span>, tulla poimituksi otokseen.</p></li>
+\end{equation*}\]</span> jossa siis (N) on perusjoukon alkioiden lukumäärä. Toisin sanoen, kaikilla perusjoukon alkioilla on oma nollaa suurempi todennäköisyytensä (voi olla 1), (_k), tulla poimituksi otokseen.</p></li>
 <li><p>Sisältymistodennäköisyys voi olla sama kaikille perusjoukon alkioille tai vaihdella perusjoukon eri osajoukkojen (alkioryhmien) välillä. Tämä tulee huomioida otantamenetelmän valinnassa, jotta saadun otoksen edustavuus ei vaarannu.</p></li>
 <li><p>Sisältymistodennäköisyyttä voidaan käyttää monimutkaisemmassa otantateoriassa <strong>asetelma</strong>- ja <strong>analyysipainojen</strong> muodostamisessa sekä uudelleenpainotuksessa (vastauskadon korjaus).</p></li>
 </ul>
@@ -384,6 +381,7 @@ function toggleCode(id) {
 <li><strong>Ositettu otanta</strong>: perusjoukko (populaatio) jaetaan ominaisuuksiltaan yhtenäisiin eli homogeenisiin <strong>ositteisiin</strong>, joista jokaisesta poimitaan erillinen otos.</li>
 <li><strong>Ryväsotanta</strong> tai joskus myös <strong>moniasteinen otanta</strong>: hyödynnetään perusjoukossa esiintyvää kerroksellisuutta eli hierarkkisuutta otannassa.</li>
 </ul>
+<p>&nbsp;</p>
 </section>
 <section id="yksinkertainen-satunnaisotanta" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="yksinkertainen-satunnaisotanta"><span class="header-section-number">10.2</span> Yksinkertainen satunnaisotanta</h2>
@@ -401,6 +399,7 @@ function toggleCode(id) {
 <li><p>Toisin sanoen, todennäköisyys tulla poimituksi ei riipu tilastoyksikön ominaisuuksista tai siitä minkälaisia ominaisuuksia jo poimituilla otosyksiköillä on.</p></li>
 <li><p>Satunnaisotanta siis selvästi korjaa valikoitumisharhaa satunnaistamalla otokseen valikoitumisen täysin! YSO voidaankin aina tulkita arvonnaksi. Käytännön työssä arvonta onkin oiva satunnaistamisen keino.</p></li>
 </ul>
+<p>&nbsp;</p>
 <p><strong>YSO:n toteuttaminen</strong>. Käytännössä yksinkertainen satunnaisotanta etenee vaiheittain:</p>
 <ul>
 <li>Tutkimuksen alussa tutkijalla tulisi olla käytettävänään (ts. tulisi koostaa) <strong>lista</strong> kaikista perusjoukon havaintoyksiköistä <strong>(alkioista)</strong>. Tämä muodostaa tutkimuksen <strong>otantakehikon</strong>.</li>
@@ -409,9 +408,10 @@ function toggleCode(id) {
 <li>Otantakehikosta arvotaan perusjoukon alkiot otokseen yksi kerrallaan.</li>
 <li>Käytännössä arvonta voidaan toteuttaa satunnaislukuja generoimalla (tuottamalla) niin että jokaisen otantakehikon alkion sisältymistodennäköisyys on yhtä suuri.</li>
 </ul>
+<p>&nbsp;</p>
 <p><strong>YSO:n poimintastrategiat</strong>. Käytännössä yksinkertainen satunnaisotanta voidaan suorittaa kahdella eri tavalla: <strong>palauttaen</strong> tai <strong>palauttamatta</strong>.</p>
 <ul>
-<li>Tarkastellaan, aiemman mukaisesti, <strong>äärellistä populaatiota</strong> (perusjoukkoa), jossa on <span class="math inline">\(N\)</span> alkiota ja tarkoituksena on poimia <span class="math inline">\(n\)</span>:n alkion kokoinen otos (huom. <span class="math inline">\(n&lt;N\)</span>). Olkoon (<em>i</em>) yksittäisen alkion indeksiluku (ts. jokainen alkio on numeroitu esimerkiksi tavalla <span class="math inline">\(i = 1,\ldots,N\)</span>).</li>
+<li>Tarkastellaan, aiemman mukaisesti, <strong>äärellistä populaatiota</strong> (perusjoukkoa), jossa on (N) alkiota ja tarkoituksena on poimia (n):n alkion kokoinen otos (huom. (n&lt;N)). Olkoon (i) yksittäisen alkion indeksiluku (ts. jokainen alkio on numeroitu esimerkiksi tavalla (i = 1,,N)).</li>
 </ul>
 <div class="defblock">
 <p><strong>YSO:n poiminta palauttaen</strong>. Kun poiminta suoritetaan <strong>palauttaen</strong>, niin poimittu alkio palautetaan aina ennen uuden alkion arpomista takaisin perusjoukkoon, jolloin alkio voi tulla poimituksi otokseen useita kertoja.</p>
@@ -419,7 +419,8 @@ function toggleCode(id) {
 <li><p>Kyseessä on siis otanta <strong>takaisinpanolla</strong> (<em>with replacement</em>).</p></li>
 <li><p>Tällöin alkioiden arvonnat ovat riippumattomia: alkion todennäköisyys tulla poimituksi otokseen ei riipu siitä kuinka monta alkiota otokseen on jo poimittu.</p></li>
 <li><p>Alkion <span class="math inline">\(k\)</span> <strong>poimintatodennäköisyys</strong> poimintakierroksella/“otositeraatiolle” <span class="math inline">\(j\)</span> (<span class="math inline">\(j=1,\ldots,n\)</span>, jossa <span class="math inline">\(n\)</span> on tavoiteltava otoskoko) on tällöin selvästi <span class="math display">\[\begin{equation*}
-\frac{1}{N} \quad \forall \, k=1,\ldots,N, \end{equation*}\]</span> eli sama todennäköisyys kaikille alkioille <span class="math inline">\(k=1,\ldots,N\)</span>.</p></li>
+\frac{1}{N} \quad \forall \, k=1,\ldots,N,
+\end{equation*}\]</span> eli sama todennäköisyys kaikille alkioille <span class="math inline">\(k=1,\ldots,N\)</span>.</p></li>
 <li><p>Otantaan palauttaen liittyviä todennäköisyyksiä hallitaan <strong>binomijakauman</strong> avulla, joka johtaa yksinkertaiseen <strong>tilastolliseen malliin</strong> YSO:a käytettäessä.</p></li>
 <li><p>Poiminta palauttaen (otanta takaisinpanolla) on toisaalta usein varsin epärealistinen otantamenetelmä eri tutkimustilanteissa ja sovelluksissa.</p></li>
 </ul>
@@ -427,6 +428,7 @@ function toggleCode(id) {
 <p><strong>Esimerkiksi</strong> lienee mahdotonta testata samaa lääkettä useaan otteeseen samaan aikaan yhdellä koehenkilöllä.</p>
 </div>
 </div>
+<p>&nbsp;</p>
 <div class="defblock">
 <p><strong>YSO:n poiminta palauttamatta</strong>. Kun poiminta suoritetaan <strong>palauttamatta</strong>, poimittua alkiota ei palauteta perusjoukkoon poiminnan jälkeen eikä se täten voi tulla poimituksi otokseen kuin kerran.</p>
 <ul>
@@ -434,19 +436,17 @@ function toggleCode(id) {
 <li>Tällöin alkioiden arvonnat eivät enää ole riipumattomia: alkion todennäköisyys tulla poimituksi otokseen riippuu siitä kuinka monta alkiota otokseen on jo poimittu.</li>
 <li>Alkion <span class="math inline">\(k\)</span> <strong>poimintatodennäköisyys</strong> on tällöin vastaavasti (niin kauan kun alkio ei ole jo poimittu otokseen) poimintakierroksella <span class="math inline">\(j\)</span> (<span class="math inline">\(j=1,\ldots,n\)</span>) <span class="math display">\[\begin{equation*}
 \frac{1}{N - A_k},
-\end{equation*}\]</span> ja kun <span class="math inline">\(k\)</span>:s alkio tulee poimituksi, niin tämän jälkeen poimintatodennäköisyys on 0. Tässä <span class="math inline">\(A_k\)</span> on jo poimittujen alkioiden lukumäärä ennen kyseistä poimintakierrosta/otositeraatiota: ensimmäisen poiminnan kohdalla <span class="math inline">\(A_k = 0\)</span>, toisen kohdalla <span class="math inline">\(A_k = 1\)</span> ja niin edespäin. Ts. <span class="math inline">\(A_k = j-1\)</span>.</li>
+\end{equation*}\]</span> ja kun <span class="math inline">\(k\)</span>:s alkio tulee poimituksi, niin tämän jälkeen poimintatodennäköisyys on 0. Tässä (A_k) on jo poimittujen alkioiden lukumäärä ennen kyseistä poimintakierrosta/otositeraatiota: ensimmäisen poiminnan kohdalla (A_k = 0), toisen kohdalla (A_k = 1) ja niin edespäin. Ts. <span class="math inline">\(A_k = j-1\)</span>.</li>
 </ul>
-<!-- - Ilman takaisinpanoa populaatiosta voidaan poimia $\binom{N}{n}$
- erilaista otosta. 
+<!-- - Ilman takaisinpanoa populaatiosta voidaan poimia $N \choose n$ erilaista otosta. 
 
-  - Kun otosyksiköiden järjestyksellä ei ole merkitystä. $\binom{N}{n}$
- on ns. binomikerroin, joka saadaan kaavasta $\frac{N!}{n!(N-n)!}$, jossa $N! = N \cdot (N-1) \cdot (N-2) \cdots 1$ on $N$:n kertoma. -->
+  - Kun otosyksiköiden järjestyksellä ei ole merkitystä. $N \choose n$ on ns. binomikerroin, joka saadaan kaavasta $\frac{N!}{n!(N-n)!}$, jossa $N! = N \cdot (N-1) \cdot (N-2) \cdots 1$ on $N$:n kertoma. -->
 <ul>
-<li><p>Ilman takaisinpanoa populaatiosta voidaan poimia <span class="math inline">\(\binom{N}{n}\)</span> erilaista otosta.</p></li>
-<li><p>Kun otosyksiköiden järjestyksellä ei ole merkitystä. <span class="math inline">\(\binom{N}{n}\)</span> on ns. binomikerroin, joka saadaan kaavasta <span class="math inline">\(\frac{N!}{n!(N-n)!}\)</span>, jossa <span class="math inline">\(N! = N \cdot (N-1) \cdot (N-2) \cdots 1\)</span> on <span class="math inline">\(N\)</span>:n kertoma.</p></li>
+<li><p>Ilman takaisinpanoa populaatiosta voidaan poimia <span class="math inline">\(\frac{N!}{n!(N-n)!}\)</span> erilaista otosta, jossa <span class="math inline">\(N! = N \cdot (N-1) \cdot (N-2) \cdots 1\)</span> on <span class="math inline">\(N\)</span>:n kertoma.</p></li>
 <li><p>Otantaan palauttamatta liittyviä todennäköisyyksiä hallitaan <strong>hypergeometrisen jakauman</strong> avulla, joka johtaa (melko) yksinkertaiseen <strong>tilastolliseen malliin</strong> YSO:a käytettäessä.</p></li>
 </ul>
 </div>
+<p>&nbsp;</p>
 <div class="eblock">
 <p><strong>Esimerkki yksinkertaisen satunnaisotannan poimintastrategioista</strong>. Poimitaan palloja kulhosta satunnaisesti.</p>
 <ul>
@@ -454,6 +454,7 @@ function toggleCode(id) {
 <li><p>Vastaavasti, jos pallo voi tulla valituksi vain kerran, eli pallo poistetaan kulhosta sen poiminnan jälkeen, on kyseessä otanta ilman takaisinpanoa.</p></li>
 </ul>
 </div>
+<p>&nbsp;</p>
 <p><strong>Otoskoon vaikutus YSO:n</strong></p>
 <ul>
 <li>Yksinkertaisen satunnaisotannan erot takaisinpanolla ja ilman takaisinpanoa riippuvat otantakehikon (tai yleisemmin perusjoukon) koosta. Mikäli poimittava otos muodostaa suuren osan perusjoukosta (ts. (<span class="math inline">\(\frac{n}{N}\)</span>) on “suuri”, eli lähellä 1:tä) menetelmät poikkeavat olennaisesti.</li>
@@ -483,7 +484,7 @@ function toggleCode(id) {
 <ul>
 <li><p>Yksinkertainen satunnaisotanta voidaan kuitenkin nähdä systemaattisen otannan erikoistapauksena (eli systemaattinen otanta voidaan toteuttaa satunnaisotantana), missä perusjoukon alkiot järjestetään jonoon <strong>satunnaistamalla</strong>.</p>
 <ul>
-<li>Ts. jonon järjestys on satunnainen, eli joka <span class="math inline">\(k\)</span>. jonon alkio on “satunnaisotos” otantakehikosta. Systemaattinen otanta tuottaa tällöin samat johtopäätelmät kuin yksinkertainen satunnaisotanta, jos perusjoukon alkioiden järjestys on tutkittavan ilmiön kannalta satunnainen! Toisin sanoen, harhaa ei synny mikäli perusjoukon alkioiden järjestys ei riipu sellaisesta ominaisuudesta, jota tutkitaan.</li>
+<li>Ts. jonon järjestys on satunnainen, eli joka (<span class="math inline">\(k\)</span>). jonon alkio on “satunnaisotos” otantakehikosta. Systemaattinen otanta tuottaa tällöin samat johtopäätelmät kuin yksinkertainen satunnaisotanta, jos perusjoukon alkioiden järjestys on tutkittavan ilmiön kannalta satunnainen! Toisin sanoen, harhaa ei synny mikäli perusjoukon alkioiden järjestys ei riipu sellaisesta ominaisuudesta, jota tutkitaan.</li>
 </ul></li>
 </ul>
 <p><strong>Mahdolliset ongelmat</strong>: Systemaattisen otannan suhteen potentiaaliseksi ongelmaksi muotoutuu havaintoyksikkölistan mahdollinen säännöllinen jaksollisuus, jota systemaattinen poiminta ei havaitse ja jolloin satunnaisotanta toimisi (kenties) paremmin.</p>

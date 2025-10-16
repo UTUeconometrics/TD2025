@@ -1,0 +1,249 @@
+---
+title: "Tilastotieteen rooli uuden tiedon tuottamisessa"
+---
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+Tilastotieteen yhteiskunnallisesta roolista alustettiin keskustelua jo aiemmissa luvuissa. Tilastotieteen keskeinen yhteiskunnallinen rooli liittyy elimellisesti juuri uuden tieteellisen tiedon tuottamiseen
+
+-   Tilastotiede liittyy olennaisesti melkein kaikkeen tieteentekemiseen, joten ei liene yllätys että tilastotiede on jossain määrin tuttua kaikille tieteentekijöille.
+
+-   Tilastotiede tarjoaa pohjan uuden tiedon tuottamiselle, mutta toisaalta voitaisiin myös ajatella teoreettisen tilastotieteen ja siellä luotujen menetelmien ylipäätään mahdollistaneen uskottavan tieteenteon. Tässä luvussa emme kuitenkaan takerru tähän ''muna vai kana''-ongelmaan, vaan tarkastelemme yleisemmällä tasolla tilastotieteen roolia tieteenteossa.
+
+Ensiksi tarkastelemme tilastollisia menetelmiä hyödyntävistä ongelmanasetteluista löydettäviä yhteisiä elementtejä. Nämä elementit ovat niin yleisiä että niitä voidaan tarkastella ja kuvata ilman yhteyttä mihinkään yksittäiseen ongelmaan.
+
+Tämän jälkeen tarkastelemme, yleisellä tasolla, tilastollisia menetelmiä hyödyntävän tieteellisen tutkimusprosessin eri vaiheita yleisesti.
+
+-   On kuitenkin mahdotonta koostaa yleisiä ''tee se näin''-listoja tilastollisen tutkimuksen toteuttamiseksi, joten tarkastelemme kurssilla käsiteltyjä aihekokonaisuuksia ja niitä yleisiä periaatteita, joita jokaisen tieteentekijän tulee hallita.
+
+ 
+
+## Tilastollisen tutkimuksen tyypillisiä elementtejä
+
+1.  **Satunnaisvaihtelu**. Satunnaisilmiöiden generoima havaintoaineisto on aina tilastollisen tutkimuksen tutkimuskohde. Täten kaikki tieteellinen tutkimus, joka koskee satunnaisvaihtelua ilmentävää aineistoa on (tai tulisi olla) tilastotieteellistä.
+
+-   Tilastollisen tutkimuksen tavoitteena on (useimmiten) pyrkiä erottamaan satunnaisilmiön systemaattinen ja satunnainen vaihtelu eli signaali ja kohina. Tämä vaatii **substanssiosaamisen** lisäksi **menetelmäosaamista** sekä hyvää **tilastotieteellistä intuitiota**.
+-   Satunnaisvaihtelun "välttämättömyys" satunnaisilmiöiden tutkimuksessa on tiedostettava ja ymmärrettävä. Tämä on tärkeää niin luotettavan tiedontuotannon kuin tutkijan oman uskottavuuden vuoksi. Tilastollisten menetelmien huonon osaamisen vuoksi tehty (ja mahdollisesti julkaistu) tutkimus voi pahimmillaan asettaa kyseisen aiheen tutkimuksen vuosiksi väärille raiteille!
+
+ 
+
+[Substanssitietous]{.marginnote}
+
+::: defblock
+**Substanssitietous** tarkoittaa syvällistä ja asiantuntevaa tietoa jostakin tietystä aihealueesta tai alasta. Se viittaa siihen, että henkilöllä on:
+
+-   Laaja ja syvällinen ymmärrys tietystä aiheesta (esim. lääketiede, oikeustiede, kasvatustiede, tekniikka).
+
+-   Kyky soveltaa tietoa käytännön tilanteissa, ongelmanratkaisussa tai päätöksenteossa.
+
+-   Ajankohtainen ja luotettava tieto, joka perustuu tutkimukseen, kokemukseen tai koulutukseen.
+
+Substanssitietous eroaa esimerkiksi yleissivistyksestä siinä, että se on spesifiä ja syvällistä, kun taas yleissivistys on laajempaa ja pinnallisempaa tietoa monista eri aiheista.
+:::
+
+ 
+
+2.  **Ilmiön ja ongelman hahmottaminen järjestelmäksi**. Tutkimusongelman substanssiosaaminen on erityisen tärkeää tilastollisessa tutkimuksessa
+
+-   On osattava tunnistaa kaikki satunnaisilmiöön mahdollisesti vaikuttavat osatekijät, jotka muodostavat satunnaisen "järjestelmän".
+    -   "Järjestelmä" on joukko toisiinsa liittyviä asioita tai osia, jotka toimivat yhdessä tai ovat jonkinlaisessa yhteydessä siten, että niiden voidaan ajatella muodostavan eriteltävissä olevan kokonaisuuden. Tarvitaan siis kuvaus järjestelmään liittyvistä olioista, ilmiöistä ja toisaalta myös rajoituksista.
+-   Lisäksi tutkimusongelman holistinen käsittely on tilastollisen tutkimuksen kannalta tärkeää: ilmiöön liittyvien tärkeiden ominaisuuksien unohtuminen tarkastelusta saattaa johtaa esimerkiksi *puuttuvan muuttujan harhaan*!
+
+Tilastolliset menetelmät auttavat tutkijaa vastaamaan kysymyksiin siitä, mitkä tilastolliset muuttujat ovat tutkimuskysymyksen kannalta oleellisia.
+
+-   Varsinkin nykypäivänä kun datan määrä kasvaa alati kiihtyvällä tahdilla, olemme ihmiskuntana informaatiotulvan edessä paikoin aseettomia: mitkä ympäröivistä ilmiöistä liittyvät toisiinsa ja miten?
+
+-   Erityisesti teoreettisen tilastotieteen kentällä on viimeisten vuosikymmenien aikana kehitetty lukuisia edistyksellisiä menetelmiä nk. **dimension pienennyksen** alalla. Näiden menetelmien tavoitteena on löytää rakenteita tai olennaisia piirteitä aineistosta, jossa jokaiselta tutkimusyksiköltä mitataan suuri määrä muuttujia – esimerkiksi genomitutkimuksessa, jossa yksilöiltä voidaan mitata satojatuhansia geneettisiä markkereita. Tilastotieteessä nämä menetelmät menevät valtaosin **monimuuttujamenetelmien** alle ja niitä käsitellään tarkemmin monimuuttujamenetelmiä koskevilla erikoiskursseilla
+
+    <!-- , kuten TILM3704 Monimuuttujamenetelmät sekä TILM3611 Monimuuttujamenetelmien jatkokurssi -->
+
+-   **Hahmottamisen vaiheet**
+
+    -   "Todellisen" järjestelmän operationalisointi kvantitatiiviseksi kuvaukseksi järjestelmästä.
+    -   Tilastollisen mallin ja järjestelmästä mitattavissa olevan aineiston yhteensovittaminen.
+    -   Mallin antamien tulosten muotoilu sellaiseen muotoon, että ne auttavat ymmärtämään mitä aineisto kertoo todellisesta ilmiöstä.
+
+ 
+
+3.  **Tilastollisen mallin muodostaminen ja siihen perustuva päättely**.
+
+Muistetaan tunnetun tilastotieteen professorin George Boxin kuvaava sitaatti: "Kaikki mallit ovat vääriä, mutta jotkut ovat käyttökelpoisia". Tilastollinen malli on tosiaan "vain" kuvaus aineiston sisältämästä vaihtelusta: se ei käytännössä ikinä täydellisesti ja tyhjentävästi vastaa aineiston generoinutta prosessia, mutta sitä voidaan silti käyttää kyseisen ilmiön kuvaamiseen.
+
+-   Kuinka saada malliin mukaan kaikki ongelmanasettelun kannalta keskeiset tekijät sellaisella tavalla, ettei oletuksiin ja abstraktioihin liittyvä informaation häviäminen kyseenalaista saatavia tuloksia?
+
+    -   Tutkimuskysymyksen kohteena olevan ilmiön taustateoria ja aiheen aiemman tutkimuskirjallisuuden hyvä osaaminen auttaa tässä.
+
+    -   Vaikutusten eritteleminen voi olla vaikeaa, mutta tilastollinen malli on yksi tapa ajatella, kuinka erittely voidaan tehdä. Esimerkkinä tällaisesta mallista on mm. edellä käsitelty yksinkertainen lineaarinen regressiomalli.
+
+ 
+
+4.  **Synteesi**. Tilastollisia tarkasteluja tehdään, koska substanssitietous ei aina riitä haluttuun käyttöön. Yhdistämällä tilastotieteen keinoja sekä substanssitietoutta saadaan ongelma ratkaistua vakuuttavalla ja perustellulla tavalla.
+
+-   Tilastollisen (soveltavan) tutkimuksen tavoitteena on tuottaa substanssitietoon perustuen ja tilastotieteen menetelmiä hyödyntäen uutta tietoa: lopputulos on menetelmä- ja substanssiosaamisen **synteesi**, joka tuottaa uutta substanssitietoutta (sekä joskus myös uusia ongelmia teoreettisen tilastotieteen menetelmäkehitykselle).
+
+-   **Jokaisen tutkijan tulisi siis olla tilastotieteilijä ja jokaisen tilastotieteilijän tutkija**. Järkevä yhteistyö!
+
+ 
+
+5.  **Muita osatekijöitä:**
+
+-   Rikas mielikuvitus. Ilman mielikuvitusta uusia yhteyksiä ei keksi etsiä!
+
+-   Kriittinen ajattelu: Miksi tämä olisi nyt se oikea vastaus?
+
+ 
+
+## Tutkimusprosessi
+
+Soveltavassa tilastotieteessä tutkimusongelman asettelulla on erityisen tärkeä rooli. Tämä alaluku nojaa soveltavilta osin erityisesti Sundin (2003) kurssimateriaaliin.
+
+-   Yksi soveltavan tilastotieteen osa-alue on juuri kokeiden suunnittelu ja analysointi. Kokeen suunnittelussa, toteutuksessa ja tulosten analysoinnissa sovelletaan mm. seuraavia tilastollisia menetelmiä: koesuunnittelu, otanta, estimointi ja testaus.
+
+Tutkimusta ei yleensä ole mahdollista jakaa täysin selvästi erillisiin ja ajallisesti tosiaan seuraaviin vaiheisiin.
+
+-   Tutkimusprosessin vaiheet toistuvat vuorotellen ja limittäin, sillä tutkimuksen aikana tehdyt havainnot muokkaavat tutkimuksen kulkua.
+-   Tutkimuksen tekeminen vaikuttaa lopulta saataviin johtopäätelmiin. Aineiston ja itse ilmiön tuntemus kasvaa tutkimuksen kuluessa.
+-   Päätelmien tieteellisyyden (periaatteellinen) tarkistusmahdollisuus, ja nykyään yhä useammin jo toistettavuus, on tärkeää.
+
+ 
+
+Usein saattaa olla järkevää jäsentää tutkimuksessa kohdattavia tehtäviä ja vaiheita sekä niiden välisiä suhteita osana tutkimusprosessia. Palataan siis tässä kohtaa aiemmin tämän materiaalin alkupuolella käsiteltyyn **PPDAC/OSAAT-syklin** eri vaiheisiin. Siis nyt kun olemme ehtineet tähän mennessä käsitellä monia tilastotieteellisen tutkimuksen perusasioita ja vaiheita.
+
+ 
+
+**Vaihe 1**: **Ongelma**
+
+Tutkimuksen lähtökohtana on jokin ongelma, johon tutkimuksen avulla etsitään vastausta.
+
+-   Tieto ei voi ylittää historiallisia rajojaan, joten tieteelliset teoriat ovat vain loogisia apuvälineitä, joita voidaan käyttää ilmiön tutkimuksen välineenä tai keinona sillä ehdolla, että sekä ilmiö että teoria asemoidaan ja tulkitaan suhteessa vallitseviin olosuhteisiin ja tieteelliseen keskusteluun.
+
+ 
+
+**Vaihe 2**: **Suunnitelma**
+
+Mitä mitataan ja miten? Tämä mm. seuraavien vaiheiden pohdintaa.
+
+Määritelmät:
+
+-   Ilmiöitä ei voida tutkia sellaisenaan, vaan vain niiden ilmentymien kautta ja käsitteiden avulla
+-   Tutkimus edellyttää arkikieltä täsmällisempää kommunikaatiota (kuten olemme käyneet lävitse), joten ongelmaan liittyvien käsitteiden huolellinen määritteleminen ja erittely on tarpeellista.
+-   Määritelmät eivät korvaa empiiristä tietoa, mutta ne vaikuttavat tiedon järjestymiseen ja sen perusteella tehtävien päätelmien tekemiseen.
+
+Havaittava tieto:
+
+-   Yleensä ajatellaan, että todellisuudesta saadaan tietoa tavalla taikka toisella havaintoja tekemällä.
+-   Havaittava tieto ei mitenkään pysty kattamaan kaikkea tutkimuskohteeseen liittyvää ja toisaalta ymmärtämiseen tarvittava havaintomaailman hahmotus tuottaa ideologisesti ja historiallisesti sitoutuneita yksinkertaistavia sekä luonteeltaan usein hyvin teoreettisia abstraktioita.
+
+"Operationalisointi": Teoriasta empiriaan siirtyminen. Havainnoiminen ja mittaaminen joudutaan suhteuttamaan valittuun käsitejärjestelmään.
+
+-   Tilastollista mittaamista käsittelimme jo aiemmin, kuten erilaisia mitta-asteikoita. Numeerisen mittauksen onnistumiseksi käsitteen muotoilu on kiinnitettävä mittariksi. Numeeristen mittaustenkin tulkinta edellyttää, että niitä on tulkittava siinä kontekstissa, josta ne ovat peräisin. On esim. mahdollista, että esitetty kysymys ei välttämättä vastaa tutkimuskohteen ominaisuuksia.
+
+-   Usein joudutaankin tekemään kompromisseja mittauksen eksaktisuus- ja systemaattisuusvaatimusten ja arkielen monimerkityksellisyyden välillä. On siis *operationalisoitava* tutkimusasetelma sellaiseksi, että tutkittavasta ilmiöstä pystytään tuottamaan ongelmaratkaisun kannalta tarkoituksenmukaista tietoa.
+
+-   Näkökulman kiinnittäminen: Operationalisoinnin avulla siirrytään teorian tasolta empirian tasolle ja samalla tulee määritellyksi näkökulma, josta ongelmaa tarkastellaan. Käsitteet ja niiden yhteyksistä esitettävät näkemykset voivat ajoittain vaihtua tutkimuksen kuluessa.
+
+ 
+
+**Vaihe 3**: **Aineisto eli data**
+
+-   Aineisto edustaa tutkimuksessa empiiristä maailmaa ja se muodostetaan ongelmanasettelun perusteella.
+
+-   Tarvitaan systemaattinen aineisto, jonka avulla on mahdollista vastata tutkimuskysymyksiin.
+
+-   Aineiston tuottamiseen liittyy useita valintoja, jotka implisiittisesti määräävät myös mahdolliset analyysimenetelmät. Näitä olemme käsitelleet useissa tämän materiaalin luvuissa.
+
+-   Aineiston esikäsittely: Aineisto ei ole keräämiseen jälkeen yleensä koskaan suoraan käytettävissä vaan vaatii erinäistä käsittelyä. Esikäsittelyssä aikaisemmin tehtyjen valintojen myötä aineistossa esiintyvät ilmentyvät sovitetaan vastaamaan ongelmankäsittelyä.
+
+ 
+
+**Vaihe 4**: **Analyysi**
+
+-   Analyysivaiheessa sopivasti käsitelty aineisto ja ongelma pyritään sovittamaan yhteen siten, että ongelmaan saataisiin perusteltu ratkaisu (selitys ja lopulta tulkinta).
+
+-   Keskeistä on, että tehtävät oletukset sisältävät ongelmanratkaisun kannalta keskeiset tekijät sellaisella tavalla, ettei oletuksiin liittyvä informaation häviäminen kyseenalaista saatavia tuloksia.
+
+-   Analyysien tulokset on useimmiten lopulta tulkittava eli käännettävä ne takaisin empiirian kieleltä teorian kielelle. Tavoitteena on siis substanssitietouteen perustuen tuottaa uutta tietoa siten, että se lisää myös substanssitietoutta
+
+-   Tulkinnan voi ajatella olevan operationalisoinnin käänteistapahtuma: Tutkimuksen läpiviennin sekä tulkinnan kannalta onnistunut operationalisointi ovat loppujen lopuksi yksi ja sama asia.
+
+ 
+
+**Vaihe 5**: **Tulokset, tulkinnat ja johtopäätelmät**
+
+-   Parhaimmillaan tulokset tiivistävä tutkimusraportti on vakuuttava, ja periaatteessa (ja toivottavasti) toiston mahdollistava, kuvaus tutkimusprosessin kaikista vaiheista, jolloin tutkija voi itse arvioida kuinka uskottavina tuloksia voidaan pitää.
+
+-   Keskeistä on tuoda esille, mitä uutta kyseessä oleva tutkimus on paljastunut ilmiöstä ja suhteuttaa se olemassa olevaan tietoon.
+
+-   Tulosten perustelu: Tutkimuksen pätevyyttä ja yleistettävyyttä ja analyysin arvioitavuutta ja uskottavuutta tulisi pohtia raportissa. Tutkimuksen kuluessa tehdyt valinnat tulisi perustella tiedostaen mukaan myös mahdolliset omat arvopainoitteiset valinnat ja oletukset.
+
+ 
+
+::: eblock
+**Esimerkki: Tilastolliset kyselytutkimukset**. Mielipiteitä selvitetään kyselytutkimuksilla, joiden kohteeksi poimitaan tyypillisesti esim. noin 1000-2000 suomalaista. Kyselytutkimuksen tavoitteena on tehdä kyselyn tulosten perusteella johtopäätöksiä mielipiteiden jakautumisesta kaikkien suomalaisten joukossa. Päätöksentekijät ja tiedotusvälineet kartoittavat säännöllisin välein suomalaisten mielipiteet erilaisista yhteiskuntaa koskevista kysymyksistä.
+
+Esimerkkejä:
+
+-   Miten suomalaiset suhtautuvat NATO-jäsenyyteen?
+-   Miten suomalaiset suhtautuvat ydinvoiman lisärakentamiseen (osana vihreää siirtymää)?
+-   Mitkä ovat poliittisten puolueiden kannatusosuudet?
+:::
+
+ 
+
+**Miten esim. 1000-2000 suomalaiseen kohdistetun kyselyn tulokset voidaan yleistää koskemaan kaikkia suomalaisia**?
+
+-   Kyselyn tulokset voidaan yleistää, jos kyselyn kohteiksi poimittujen suomalaisten joukko muodostaa **edustavan pienoiskuvan** Suomen kansasta. Ts. onnistuneen otannan idea ja erityisesti **edustavan otoksen vaatimukset** tulee täyttyä. Otannan avulla on siis mahdollista päästä tähän tavoitteeseen.
+
+-   Pienoiskuva on edustava, jos mielipiteet jakautuvat kyselyn kohteiksi poimittujen joukossa samalla tavalla kuin kaikkien suomalaisten muodostamassa perusjoukossa.
+
+-   Kyselyn kohteiden poiminta arpomalla on ainoa menetelmä, joka mahdollistaa edustavan pienoiskuvan saamisen.
+
+-   Yleistyksen luotettavuutta ei pystytä arvioimaan, ellei kokeen kohteiden poiminnassa ole käytetty satunnaisotantaa.
+
+-   Kyselyn kohteiden poimintaa kaikkien suomalaisten muodostamasta perusjoukosta arpomalla voidaan nähdä satunnaisotantana ja tutkimuksen kohteeksi poimittua perusjoukon osa on tässä tapauksessa (satunnais)otos. Arvonnan käyttö kyselyn kohteiden poiminnassa merkitsee sitä, että kyselyn tulokset ovat satunnaisia seuraavassa mielessä: Jos arvontaa toistettaisiin, kysely tuottaisi (suurella todennäköisyydellä) joka kerran (ainakin jonkin verran) erilaiset tulokset, koska eri arvonnoissa kyselyyn poimittaisiin (suurella todennäköisyydellä) eri henkilöt.
+
+ 

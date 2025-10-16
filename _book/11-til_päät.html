@@ -133,7 +133,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles-TD.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -161,9 +160,6 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Tilastotiede ja data</a> 
-        <div class="sidebar-tools-main">
-    <a href="./TD2025.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -391,43 +387,46 @@ function toggleCode(id) {
 <li><p>Tämä ja seuraava luku toimivat esimerkkeinä formaaliin matemaattiseen esitykseen perustuvan <strong>tilastollisen päättelyn perusteista</strong> (otannan ja otantajakaumien näkökulmasta), jonka yleinen iso idea on yleisesti tehdä luotettavia johtopäätöksiä perusjoukosta otoksen perusteella.</p></li>
 <li><p>Tällä kurssilla käydään läpi (vain) tarvittavia yksityiskohtia sekä rakennetaan pohjia todennäköisyyslaskennan ja tilastollisen päättelyn peruskurssille.</p></li>
 </ul>
+<p>&nbsp;</p>
 <section id="satunnaisotos-yhteisjakauma-ja-tilastollinen-malli" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="satunnaisotos-yhteisjakauma-ja-tilastollinen-malli"><span class="header-section-number">11.1</span> Satunnaisotos, yhteisjakauma ja tilastollinen malli</h2>
 <p>Aiemmista luvuista muistamme, että tilastollisen tutkimuksen kohteena ovat satunnaisilmiöt, joita kuvataan satunnaismuuttujia käyttäen. Satunnaismuuttujilla on todennäköisyysjakaumat, joita tilastotieteessä kuvataan diskreettien sm:jien tapauksessa <strong>pistetodennäköisyysfunktion</strong> ja jatkuvien sm:jien tapauksessa <strong>tiheysfunktion</strong> avulla.</p>
 <ul>
-<li><p>Merkitään satunnaismuuttujaa edelleen isolla kirjaimella, <span class="math inline">\(Y\)</span>, ja satunnaismuuttujan realisaatiota pienellä kirjaimella <span class="math inline">\(y\)</span>. Otoskokoa, eli otokseen osallistuvien tilastoyksiköiden määrää merkitään <span class="math inline">\(n\)</span>:llä ja tilastoyksiköitä indeksöidään alaindeksillä <span class="math inline">\(i=1,\ldots,n\)</span>.</p></li>
-<li><p>Otoksen poimimisen jälkeen satunnaismuuttujat <span class="math inline">\(Y_1, \ldots, Y_n\)</span> saavat havaituiksi arvoikseen havaintoarvot <span class="math inline">\(y_1, \ldots, y_n\)</span> (ts. <span class="math inline">\(Y_1=y_1, \ldots, Y_n = y_n\)</span>).</p></li>
+<li><p>Merkitään satunnaismuuttujaa edelleen isolla kirjaimella, (Y), ja satunnaismuuttujan realisaatiota pienellä kirjaimella (y). Otoskokoa, eli otokseen osallistuvien tilastoyksiköiden määrää merkitään (n):llä ja tilastoyksiköitä indeksöidään alaindeksillä (i=1,,n).</p></li>
+<li><p>Otoksen poimimisen jälkeen satunnaismuuttujat (Y_1, , Y_n) saavat havaituiksi arvoikseen havaintoarvot (y_1, , y_n) (ts. (Y_1=y_1, , Y_n = y_n)).</p></li>
 <li><p>Näin havaintoaineisto on siis <strong>satunnaisotos</strong>, joka voidaan määritellä tarkemmin seuraavasti.</p></li>
 </ul>
 <div class="defblock">
-<p><strong>Satunnaisotos</strong>. Olkoot <span class="math inline">\(Y_1, \ldots, Y_n\)</span> riippumattomia ja samoinjakautuneita satunnaismuuttujia, joiden tiheysfunktiota (tf., tai pistetodennäköisyysfunktiota (ptnf)) merkitään <span class="math inline">\(f(y, \theta)\)</span>:llä, jossa <span class="math inline">\(y\)</span>:n on yksittäisen sm:n <span class="math inline">\(Y\)</span> reaalisaatio ja <span class="math inline">\(\theta\)</span> on jokin jakauman muodon määräävä parametri (tai parametrit).</p>
-<p>Parametrin <span class="math inline">\(\theta\)</span> arvoa ei yleensä tunneta ja tavoitteena onkin päätellä, <strong>estimoida</strong>, sen arvo käytettävissä olevasta aineistosta.</p>
+<p><strong>Satunnaisotos</strong>. Olkoot (Y_1, , Y_n) riippumattomia ja samoinjakautuneita satunnaismuuttujia, joiden tiheysfunktiota (tf., tai pistetodennäköisyysfunktiota (ptnf)) merkitään (f(y, )):llä, jossa (y):n on yksittäisen sm:n (Y) reaalisaatio ja () on jokin jakauman muodon määräävä parametri (tai parametrit).</p>
+<p>Parametrin () arvoa ei yleensä tunneta ja tavoitteena onkin päätellä, <strong>estimoida</strong>, sen arvo käytettävissä olevasta aineistosta.</p>
 </div>
+<p>&nbsp;</p>
 <p><strong>Satunnaisotoksen tilastollinen malli</strong></p>
 <ul>
-<li><p>Havaintoarvot <span class="math inline">\(y_1, \dots, y_n\)</span> ovat kiinteitä lukuja, mutta ne vaihtelevat satunnaisesti otoksesta toiseen. Satunnaisotannassa <strong>satunnaisuus liittyy siis havaintoarvojen vaihteluun satunnaisesti otoksesta toiseen</strong>.</p>
+<li><p>Havaintoarvot (y_1, , y_n) ovat kiinteitä lukuja, mutta ne vaihtelevat satunnaisesti otoksesta toiseen. Satunnaisotannassa <strong>satunnaisuus liittyy siis havaintoarvojen vaihteluun satunnaisesti otoksesta toiseen</strong>.</p>
 <ul>
 <li>Satunnaisuus ei siis liity otannan tuloksena saatuihin havaintoarvoihin, vaan otoksen poimintaan. Toisin sanoen, yksittäisen tilastoyksikön havaintoarvo (esim. pituus) on kiinteä luku. Satunnaisotannassa satunnaisuus kumpuaa siis siitä, että tilastoyksikkö tulee valituksi otokseen sattumanvaraisesti.</li>
 </ul></li>
 </ul>
-<p><span class="marginnote">Yhteisjakauma</span> - Satunnaismuuttujien <span class="math inline">\(Y_1, \ldots, Y_n\)</span> <strong>yhteisjakauma</strong> muodostaa <strong>tilastollisen mallin</strong> havaintoarvojen satunnaiselle vaihtelulle eri otoksissa.</p>
+<p><span class="marginnote">Yhteisjakauma</span> - Satunnaismuuttujien (Y_1, , Y_n) <strong>yhteisjakauma</strong> muodostaa <strong>tilastollisen mallin</strong> havaintoarvojen satunnaiselle vaihtelulle eri otoksissa.</p>
 <ul>
-<li><p>Yhteisjakaumaa merkitään <span class="math inline">\(f(y_1,\dots,y_n;\theta)\)</span>, jossa havaitut arvot <span class="math inline">\(y_i\)</span> ovat kiinteitä ja parametri <span class="math inline">\(\theta\)</span> on tuntematon.</p></li>
-<li><p>Koska tällä kurssilla satunnaismuuttujat <span class="math inline">\(Y_1, \ldots, Y_n\)</span> oletetaan <strong>riippumattomiksi toisiinsa nähden</strong>, niiden yhteisjakauma on tulomuotoa</p></li>
+<li><p>Yhteisjakaumaa merkitään (f(y_1,,y_n;)), jossa havaitut arvot (y_i) ovat kiinteitä ja parametri () on tuntematon.</p></li>
+<li><p>Koska tällä kurssilla satunnaismuuttujat (Y_1, , Y_n) oletetaan <strong>riippumattomiksi toisiinsa nähden</strong>, niiden yhteisjakauma on tulomuotoa</p></li>
 </ul>
 <p><span class="math display">\[\begin{equation*}
   f(y_1, \ldots, y_n; \theta) = f(y_1; \theta) \cdots f(y_n; \theta).
-\end{equation*}\]</span></p>
-<p>Tilastollisen päättelyn ensimmäinen tavoite ja tehtävä on pyrkiä havaitun aineiston <span class="math inline">\(y_1,\dots,y_n\)</span> avulla estimoimaan parametrin <span class="math inline">\(\theta\)</span> arvo niin, että havaintojen yhteisjakauma kuvaa aineistoa parhaalla mahdollisella tavalla.</p>
+  \end{equation*}\]</span></p>
+<p>Tilastollisen päättelyn ensimmäinen tavoite ja tehtävä on pyrkiä havaitun aineiston (y_1,,y_n) avulla estimoimaan parametrin () arvo niin, että havaintojen yhteisjakauma kuvaa aineistoa parhaalla mahdollisella tavalla.</p>
 <ul>
-<li>Tässä <span class="math inline">\(f(y_1, \ldots, y_n; \theta)\)</span> on siis (tilastomatemaattisessa mielessä) tilastollinen malli. Tilastollisen mallin monimutkaisuus ilmenee sen parametrien määrästä eli ts. kuinka monta parametria sisältyy <span class="math inline">\(\theta\)</span>:aan. Mitä enemmän parametreja (erit. suhteessa havaintojen määrään), sitä monimutkaisempi malli.</li>
+<li>Tässä (f(y_1, , y_n; )) on siis (tilastomatemaattisessa mielessä) tilastollinen malli. Tilastollisen mallin monimutkaisuus ilmenee sen parametrien määrästä eli ts. kuinka monta parametria sisältyy <span class="math inline">\(\theta\)</span>:aan. Mitä enemmän parametreja (erit. suhteessa havaintojen määrään), sitä monimutkaisempi malli.</li>
 </ul>
 <p><span class="marginnote">Parsimoonisuusperiaate</span> - Useimmiten ja perinteisesti ajatellaan, että on käytettävä niin yksinkertaisia menetelmiä kuin mahdollista, mutta ei yhtään yksinkertaisempia. Tämä on ns. <strong>parsimoonisuusperiaate</strong> eli <strong>vähäparametrisuus-</strong> tai <strong>säästeliäisyysperiaate</strong>.</p>
 <p><span class="marginnote">Harhan ja varianssin kompromissi</span> - Vähäparametrisuusperiaatteen voidaan nähdä perustuvan ns. Occamin partaveitsen -periaatteeseen, jonka mukaan <em>“ilmiöitä selittävien tekijöiden määrän tulee olla mahdollisimman vähäinen”</em>, ts. tilastotieteessä menetelmien (mallien) tulee olla mahdollisimman yksinkertaisia, mutta silti riittäviä. Tämä periaate ja sen suhde ns. <strong>varianssin ja harhan väliseen kompromissiin</strong> on erityisen tärkeää tilastollisen ennustamisen ja viime vuosikymmeninä yleistyneen tilastollisen (kone)oppimisen sovellutuksissa. Tähän palataan vielä myöhemmin ennustamista koskevassa luvussa.</p>
 <ul>
 <li>Mallin muodon määrää tutkijan tekemä aineistoa koskeva jakaumaoletus satunnaismuuttujille <span class="math inline">\(Y_i, \, i=1,...,n\)</span>, mikä voi paikoin olla hyvinkin monimutkainen.</li>
 </ul>
-<p>Oletetaan, että <span class="math inline">\(Y_1, \ldots, Y_n\)</span> ovat aiempien oletusten pätiessä riippumattomia sm:jia ja että ne muodostavat satunnaisotoksen jakaumasta, jonka odotusarvo on <span class="math inline">\(\mu\)</span> ja varianssi on <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>&nbsp;</p>
+<p>Oletetaan, että (Y_1, , Y_n) ovat aiempien oletusten pätiessä riippumattomia sm:jia ja että ne muodostavat satunnaisotoksen jakaumasta, jonka odotusarvo on () ja varianssi on (^2).</p>
 <ul>
 <li>Ts. oletamme</li>
 </ul>
@@ -436,21 +435,22 @@ function toggleCode(id) {
 \mathsf{Var}(Y_i) = \sigma^2, \quad i=1,\ldots,n.
 \end{equation*}\]</span></p>
 <ul>
-<li><p>Tässä tapauksessa mielenkiinnon kohteena olevat parametrit ovat siis <span class="math inline">\(\mu\)</span> ja <span class="math inline">\(\sigma^2\)</span> eli <span class="math inline">\(\theta = (\mu \quad \sigma^2)\)</span>. Tässä <span class="math inline">\(\theta\)</span> on siis vektori, joka koostuu kahdesta parametrista.</p></li>
+<li><p>Tässä tapauksessa mielenkiinnon kohteena olevat parametrit ovat siis () ja (^2) eli (= (^2)). Tässä <span class="math inline">\(\theta\)</span> on siis vektori, joka koostuu kahdesta parametrista.</p></li>
 <li><p>Tutkimuskysymyksestä johdetut hypoteesit voisivat koskea esimerkiksi näitä parametreja, tai tarkemmin niiden oikeita arvoja, jotka ovat siis lähtökohtaisesti tuntemattomia.</p></li>
 <li><p>Tilastollisten mallien tehtävänä on siis estimoida nämä todennäköisyysjakaumien parametrit havaitun aineiston perusteella, joten keskeinen tilastollinen kysymys on, <strong>että miten estimointi suoritetaan luotettavasti</strong>? Estimointi voidaan perustaa (tiettyjen oletusten pätiessä) nk. <strong>uskottavuusfunktion</strong> käyttöön ja <strong>suurimman uskottavuuden (SU) menetelmään</strong>, mitä sivuttiin hyvin lyhyesti Osassa I ja tarkastellaan tarkemmin myöhemmissä tilastotieteen opinnoissa.</p></li>
 </ul>
 <div class="eblock">
-<p><strong>Esimerkki: Satunnaisotos normaalijakaumasta</strong>. Normaalijakautuneiden satunnaismuuttujien satunnaisotokselle <span class="math inline">\(Y_1, \ldots, Y_n\)</span> pätee <span class="math inline">\(Y_i \thicksim \text{N}(\mu, \sigma^2),,, i=1,\ldots,n)\)</span>.</p>
+<p><strong>Esimerkki: Satunnaisotos normaalijakaumasta</strong>. Normaalijakautuneiden satunnaismuuttujien satunnaisotokselle pätee <span class="math inline">\((Y_1, \ldots, Y_n), \,\, Y_i \thicksim \text{N}(\mu, \sigma^2),,, i=1,\ldots,n)\)</span>.</p>
 <ul>
-<li>Huom. tässä pätee myös oletus että sm:t <span class="math inline">\(Y_1,\ldots,Y_n\)</span> ovat riippumattomia ja samoin jakautuneita. Toisinaan käytetään lyhenteitä <strong>iid</strong> tai <em>i.i.d</em>, jotka tulevat englannin kielen ilmaisusta “independent and identically distributed”.
+<li>Huom. tässä pätee myös oletus että sm:t (<span class="math inline">\(Y_1,\ldots,Y_n\)</span>) ovat riippumattomia ja samoin jakautuneita. Toisinaan käytetään lyhenteitä <strong>iid</strong> tai <em>i.i.d</em>, jotka tulevat englannin kielen ilmaisusta “independent and identically distributed”.
 <ul>
 <li><p>Jos tätä oletusta vahvistetaan vielä normaalisuusoletuksella, kuten yläpuolella, niin käytettäisiin lyhennettä <strong>nid</strong> eli <em>normally and independently distributed</em>.</p></li>
 <li><p>Merkintä soveltuu käytettäväksi muidenkin jakaumien tapauksessa.</p></li>
 </ul></li>
-<li>Esimerkiksi R-ohjelmassa voidaan generoida 10 havainnon <span class="math inline">\((n=10)\)</span> satunnaisotos standardinormaalijakaumasta, eli kun <span class="math inline">\(\mu=0\)</span> ja <span class="math inline">\(\sigma^2=1\)</span> (ts. <span class="math inline">\(Y_i \thicksim \text{N}(0,1), \,\, i=1,\ldots,10\)</span>) komennolla rnorm(10).</li>
+<li>Esimerkiksi R-ohjelmassa voidaan generoida 10 havainnon (<span class="math inline">\((n=10)\)</span>) satunnaisotos standardinormaalijakaumasta, eli kun <span class="math inline">\(\mu=0\)</span> ja <span class="math inline">\(\sigma^2=1\)</span> (ts. <span class="math inline">\((Y_i \thicksim \text{N}(0,1),, i=1,\ldots,10)\)</span>) komennolla rnorm(10).</li>
 </ul>
 </div>
+<p>&nbsp;</p>
 </section>
 <section id="tilastollisia-jakaumia" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="tilastollisia-jakaumia"><span class="header-section-number">11.2</span> Tilastollisia jakaumia</h2>
@@ -459,27 +459,28 @@ function toggleCode(id) {
 <h3 data-number="11.2.1" class="anchored" data-anchor-id="normaalijakauma"><span class="header-section-number">11.2.1</span> Normaalijakauma</h3>
 <p><span class="marginnote">Normaalijakauma</span></p>
 <div class="defblock">
-<p>Jos satunnaismuuttuja <span class="math inline">\(Y\)</span> noudattaa <strong>normaalijakaumaa</strong> odotusarvolla <span class="math inline">\(\mathsf{E}(Y)= \mu\)</span> ja varianssilla <span class="math inline">\(\mathsf{Var}(Y) = \sigma^2\)</span>, niin tällöin merkitään <span class="math inline">\(Y \thicksim \text{N}(\mu, \sigma^2)\)</span>.</p>
+<p>Jos satunnaismuuttuja (<span class="math inline">\(Y\)</span>) noudattaa <strong>normaalijakaumaa</strong> odotusarvolla (<span class="math inline">\(\mathsf{E}(Y)= \mu\)</span>) ja varianssilla (<span class="math inline">\(\mathsf{Var}(Y) = \sigma^2\)</span>), niin tällöin merkitään (<span class="math inline">\(Y \thicksim \text{N}(\mu, \sigma^2)\)</span>).</p>
 <ul>
-<li><p><span class="math inline">\(Y\)</span>:n tiheysfunktio on normaalijakauman tapauksessa muotoa (ks. myös Osan I normaalijakauman tiheysfunktioiden kuvaajia eri parametriarvojen tapauksessa) <span class="math display">\[\begin{equation*}
-f(y; \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \, e^{-\frac{1}{2} \Big(\frac{y- \mu}{\sigma} \Big)^2}
+<li><p>(<span class="math inline">\(Y\)</span>):n tiheysfunktio on normaalijakauman tapauksessa muotoa (ks. myös Osan I normaalijakauman tiheysfunktioiden kuvaajia eri parametriarvojen tapauksessa) <span class="math display">\[\begin{equation*}
+f(y; \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \, e^{-\frac{1}{2} \Big(\frac{y- \mu}{\sigma} \Big)^2} =
 = \frac{1}{\sqrt{2 \pi \sigma^2}} \, \mathrm{exp}\Big(-\frac{1}{2} \Big(\frac{y- \mu}{\sigma} \Big)^2\Big),
-\end{equation*}\]</span> jossa <span class="math inline">\(e\)</span> viittaa potenssia laskettaessa Neperin lukuun <span class="math inline">\(e \approx 2.71828\)</span>.</p></li>
-<li><p>Ylläoleva tiheysfunktio määrittelee parven normaalijakaumia kun parametreille (vakioille) <span class="math inline">\(\mu\)</span> ja <span class="math inline">\(\sigma^2\)</span> annetaan erilaisia arvoja. Nämä kaksi parametria määräävät normaalijakauman tarkemman muodon.</p></li>
+\end{equation*}\]</span> jossa (<span class="math inline">\(e\)</span>) viittaa potenssia laskettaessa Neperin lukuun (<span class="math inline">\(e \approx 2.71828\)</span>).</p></li>
+<li><p>Ylläoleva tiheysfunktio määrittelee parven normaalijakaumia kun parametreille (vakioille) (<span class="math inline">\(\mu\)</span>) ja (<span class="math inline">\(\sigma^2\)</span>) annetaan erilaisia arvoja. Nämä kaksi parametria määräävät normaalijakauman tarkemman muodon.</p></li>
 </ul>
 </div>
 <div class="eblock">
 <p><strong>Esimerkki: Miesten pituus</strong>. Tutkitaan miesten pituutta hyvin määritellyssä joukossa, kuten varusmiespalvelusta tiettynä vuonna suorittavien joukossa (vrt. jo aiemmin esitelty Pearsonin klassinen isien ja poikien pituusesimerkki)</p>
 <ul>
 <li><p>Pituus on ominaisuus, jonka voidaan nähdä määräytyvän monista perintö- ja ympäristötekijöistä. Pituutta voidaan siis pitää satunnaismuuttujana.</p></li>
-<li><p>Oletetaan, että pituus noudattaa normaalijakaumaa. Näin ollen sm. <span class="math inline">\(Y\)</span> on valitun miehen pituus ja <span class="math inline">\(Y \thicksim \text{N}(\mu, \sigma^2)\)</span>.</p></li>
-<li><p>Tuntemattomien parametrien <span class="math inline">\(\mu\)</span> ja <span class="math inline">\(\sigma^2\)</span> tulkinta:</p>
+<li><p>Oletetaan, että pituus noudattaa normaalijakaumaa. Näin ollen sm. (<span class="math inline">\(Y\)</span>) on valitun miehen pituus ja <span class="math inline">\(Y \thicksim \text{N}(\mu, \sigma^2)\)</span>.</p></li>
+<li><p>Tuntemattomien parametrien (<span class="math inline">\(\mu\)</span>) ja (<span class="math inline">\(\sigma^2\)</span>) tulkinta:</p>
 <ul>
-<li><p>Odotusarvo <span class="math inline">\(\mu = \mathsf{E}(Y)\)</span> on satunnaisesti valitun miehen pituuden odotettavissa oleva arvo.</p></li>
-<li><p>Varianssi <span class="math inline">\(\sigma^2 = \mathsf{Var}(Y) = \mathsf{E} \left[\left(Y- \mu \right)^2 \right]\)</span> kuvaa valitun miehen pituuden odotusarvostaan määrätyn poikkeaman (keskihajonnan) neliön odotettavissa olevaa arvoa (kuvaten ts. pituuksien jakauman keskittyneisyyttä/hajaantuneisuutta pituuksien odotusarvon ympärillä).</p></li>
+<li><p>Odotusarvo (<span class="math inline">\(\mu = \mathsf{E}(Y)\)</span>) on satunnaisesti valitun miehen pituuden odotettavissa oleva arvo.</p></li>
+<li><p>Varianssi (<span class="math inline">\(\sigma^2 = \mathsf{Var}(Y) = \mathsf{E} \left[\left(Y- \mu \right)^2 \right]\)</span>) kuvaa valitun miehen pituuden odotusarvostaan määrätyn poikkeaman (keskihajonnan) neliön odotettavissa olevaa arvoa (kuvaten ts. pituuksien jakauman keskittyneisyyttä/hajaantuneisuutta pituuksien odotusarvon ympärillä).</p></li>
 </ul></li>
 </ul>
 </div>
+<p>&nbsp;</p>
 </section>
 <section id="bernoulli--ja-binomijakauma" class="level3" data-number="11.2.2">
 <h3 data-number="11.2.2" class="anchored" data-anchor-id="bernoulli--ja-binomijakauma"><span class="header-section-number">11.2.2</span> Bernoulli- ja binomijakauma</h3>
@@ -527,6 +528,7 @@ f(y; p) = \text{P}(Y=y) = p^y (1-p)^{(1-y)},
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>| Perheiden lkm  | 3  | 24 | 104 | 286 | 670 | 1033 | 1343 | 1112 | 829 | 478 | 181 | 45 | 7  |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Tässä tilantessa mielenkiinnon kohteena saattaisi olla hypoteesi, jonka mukaan pojan (miehen) syntymätodennäköisyys (<span class="math inline">\(\text{P}(\mathrm{mies}) = p\)</span> on <span class="math inline">\(p=0.5\)</span>.</p>
 </div>
+<p>&nbsp;</p>
 </section>
 <section id="poisson-jakauma" class="level3" data-number="11.2.3">
 <h3 data-number="11.2.3" class="anchored" data-anchor-id="poisson-jakauma"><span class="header-section-number">11.2.3</span> Poisson-jakauma</h3>

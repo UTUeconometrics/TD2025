@@ -1,0 +1,365 @@
+---
+title: "Otannan tilastollisia perusteita"
+---
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+ 
+
+ 
+
+<center><font size="10"> **OSA II** </font></center>
+
+<!-- {#part-osa-ii} -->
+
+Tässä luvussa jatketaan otannan tarkastelua. Erityisesti tarkastellaan miten satunnaisotos kohdepopulaatiosta voidaan käytännössä kerätä. **Otantamenetelmiksi** kutsutaan niitä menetelmiä, joilla kohdepopulaatiosta **edustava otos** kerätään.
+
+Satunnaisuuden hyödyntäminen näyttelee keskeistä roolia otoksen edustavuuden varmentamisessa. Kohdepopulaation koko, maantieteellinen jakauma, ikärakenne ja muut yksityiskohdat vaikuttavat kuitenkin keskeisellä tavalla siihen, miten otanta tulee käytännössä suorittaa.
+
+## Otantamenetelmät {#alaluku71}
+
+Tässä jaksossa tarkastellaan erilaisia **otantamenetelmiä**. Näiden menetelmien tarkoitus on suorittaa otosaineiston (tutkimusaineiston) kerääminen niin, että se huomioi aiemmin esitellyt hyvän otannan kriteerit, ts. että sen tuottama otos on edustava ja luotettava. Näin ollen otos kuvaa koko perusjoukkoa.
+
+-   Otantamenetelmän, joskus myös **otanta-asetelman**, valinta on tietenkin vahvasti sovellusalakohtainen: käytettävät aineistot ja täten otantamenetelmät määräytyvät pitkälti tehtävän tutkimuksen luonteen perusteella. Ts. käytännön tilanteet poikkeavat toisistaan lopulta varsin paljon ja eri tilanteisiin tarvitaan omat menetelmänsä.
+-   Otanta-asetelmalla tarkoitetaan erityisesti otoksen poimintaan käytettyä **satunnaistuksen menetelmää**.
+
+Otannan tavoitteena on tietenkin **edustava otos**. Otoksen edustavuuteen vaikuttaa käytännön otannassa se, miten todennäköistä kullakin perusjoukon alkiolla (populaation tilastoyksiköllä) on tulla poimituksi otokseen. Tätä kutsutaan **sisältymistodennäköisyydeksi**.
+
+::: defblock
+**Sisältymistodennäköisyys** kuvaa sitä (tunnettua) todennäköisyyttä, jolla perusjoukon alkio tulee poimituksi otokseen.
+:::
+
+
+Käytännössä otoksen poiminta suoritetaan niin, että $n$:n alkion otos ($n$ on tässä siis edelleen otoskoko) poimitaan jollakin satunnaisotannan menetelmällä $N$:n alkion perusjoukosta ($N$ on siis edelleen perusjoukon koon merkintä).
+
+-   Perusjoukon yksittäinen alkio (tilastoyksikkö) $k$ tulee poimituksi $n$:n alkion otokseen (tutkimusaineistoon) tunnetulla **sisältymistodennäköisyydellä** $\pi_k$, 
+\begin{equation*}
+    0 < \pi_k \le 1, \quad k = 1, \ldots, N,
+\end{equation*} 
+jossa siis $N$ on perusjoukon alkioiden lukumäärä. Toisin sanoen, kaikilla perusjoukon alkioilla on oma nollaa suurempi todennäköisyytensä (voi olla 1), $\pi_k$, tulla poimituksi otokseen.
+
+-   Sisältymistodennäköisyys voi olla sama kaikille perusjoukon alkioille tai vaihdella perusjoukon eri osajoukkojen (alkioryhmien) välillä. Tämä tulee huomioida otantamenetelmän valinnassa, jotta saadun otoksen edustavuus ei vaarannu.
+
+-   Sisältymistodennäköisyyttä voidaan käyttää monimutkaisemmassa otantateoriassa **asetelma**- ja **analyysipainojen** muodostamisessa sekä uudelleenpainotuksessa (vastauskadon korjaus).
+
+ 
+
+Tässä luvussa esitellään seuraavaksi erilaisia perinteisiä otantamenetelmiä (niiden paikoin yksinkertaistettuja kuvauksia ja toteutuksia) sekä sitä, minkälaisten perusjoukkojen tilanteissa mikäkin otantamenetelmä on sopivin.
+
+-   **Yksinkertainen satunnaisotanta** (YSO): perinteisin otantamenetelmä, jossa jokaisella tietyn kokoisella otoksella sama mahdollisuus tulla valituksi.
+-   **Systemaattinen otanta** (SYS): eli tasavälisessä otannassa poimintakehikkoon (perusjoukkoon) kuuluvat alkiot järjestetään jonoon ja siitä poimitaan otokseen joka $k$. alkio.
+-   **Ositettu otanta**: perusjoukko (populaatio) jaetaan ominaisuuksiltaan yhtenäisiin eli homogeenisiin **ositteisiin**, joista jokaisesta poimitaan erillinen otos.
+-   **Ryväsotanta** tai joskus myös **moniasteinen otanta**: hyödynnetään perusjoukossa esiintyvää kerroksellisuutta eli hierarkkisuutta otannassa.
+
+## Yksinkertainen satunnaisotanta
+
+[Yksinkertainen satunnaisotanta]{.marginnote}
+
+::: defblock
+**Yksinkertaisessa satunnaisotannassa** (YSO) jokaisella tilastoyksiköllä (perusjoukon alkiolla) on nollasta poikkeava todennäköisyys tulla valituksi otokseen.
+:::
+
+YSO:ssa otannan satunnaisuus tulee siis siitä, että jokainen tilastoyksikkö poimitaan otokseen *satunnaisesti*!
+
+-   YSOaa pidetään otannan perusmuotona, jossa jokaisella perusjoukon alkiolla on lähtökohtaisesti yhtä suuri todennäköisyys tulla valituksi otokseen.
+
+-   YSO on periaatteiltaan intuitiivinen ja helppo ymmärtää. Lisäksi se on tietyissä tilanteissa usein helppo toteuttaa.
+
+Tällöin on selvää että myös jokaisella perusjoukon samankokoisella osajoukolla on sama todennäköisyys tulla valituksi.
+
+-   Toisin sanoen, todennäköisyys tulla poimituksi ei riipu tilastoyksikön ominaisuuksista tai siitä minkälaisia ominaisuuksia jo poimituilla otosyksiköillä on.
+
+-   Satunnaisotanta siis selvästi korjaa valikoitumisharhaa satunnaistamalla otokseen valikoitumisen täysin! YSO voidaankin aina tulkita arvonnaksi. Käytännön työssä arvonta onkin oiva satunnaistamisen keino.
+
+**YSO:n toteuttaminen**. Käytännössä yksinkertainen satunnaisotanta etenee vaiheittain:
+
+-   Tutkimuksen alussa tutkijalla tulisi olla käytettävänään (ts. tulisi koostaa) **lista** kaikista perusjoukon havaintoyksiköistä **(alkioista)**. Tämä muodostaa tutkimuksen **otantakehikon**.
+-   Tämän jälkeen jokaiseen perusjoukon alkioon voidaan liittää numeeriset tunnukset.
+-   Sitten valitaan haluttu otoksen koko. Otoskoon määrittäminen on keskeinen osa koesuunnittelua.
+-   Otantakehikosta arvotaan perusjoukon alkiot otokseen yksi kerrallaan.
+-   Käytännössä arvonta voidaan toteuttaa satunnaislukuja generoimalla (tuottamalla) niin että jokaisen otantakehikon alkion sisältymistodennäköisyys on yhtä suuri.\footnote{Satunnaislukujen generointia käsitellään ja opetellaan mm. kursseilla TILM3517 R-kielen alkeet ja TILM3705 Johdatus laskennalliseen tilastotieteeseen.}
+
+
+**YSO:n poimintastrategiat**. Käytännössä yksinkertainen satunnaisotanta voidaan suorittaa kahdella eri tavalla: **palauttaen** tai **palauttamatta**.
+
+-   Tarkastellaan, aiemman mukaisesti, **äärellistä populaatiota** (perusjoukkoa), jossa on $N$ alkiota ja tarkoituksena on poimia $n$:n alkion kokoinen otos (huom. $n<N$). Olkoon (*i*) yksittäisen alkion indeksiluku (ts. jokainen alkio on numeroitu esimerkiksi tavalla $i = 1,\ldots,N$).
+
+:::: defblock
+**YSO:n poiminta palauttaen**. Kun poiminta suoritetaan **palauttaen**, niin poimittu alkio palautetaan aina ennen uuden alkion arpomista takaisin perusjoukkoon, jolloin alkio voi tulla poimituksi otokseen useita kertoja.
+
+-   Kyseessä on siis otanta **takaisinpanolla** (*with replacement*).
+
+-   Tällöin alkioiden arvonnat ovat riippumattomia: alkion todennäköisyys tulla poimituksi otokseen ei riipu siitä kuinka monta alkiota otokseen on jo poimittu.
+
+-   Alkion $k$ **poimintatodennäköisyys** poimintakierroksella/"otositeraatiolle" $j$ ($j=1,\ldots,n$, jossa $n$ on tavoiteltava otoskoko) on tällöin selvästi \begin{equation*}
+    \frac{1}{N} \quad \forall \, k=1,\ldots,N, \end{equation*} eli sama todennäköisyys kaikille alkioille $k=1,\ldots,N$.
+
+-   Otantaan palauttaen liittyviä todennäköisyyksiä hallitaan **binomijakauman** avulla, joka johtaa yksinkertaiseen **tilastolliseen malliin** YSO:a käytettäessä.
+
+-   Poiminta palauttaen (otanta takaisinpanolla) on toisaalta usein varsin epärealistinen otantamenetelmä eri tutkimustilanteissa ja sovelluksissa.
+
+::: eblock
+**Esimerkiksi** lienee mahdotonta testata samaa lääkettä useaan otteeseen samaan aikaan yhdellä koehenkilöllä.
+:::
+::::
+
+
+::: defblock
+**YSO:n poiminta palauttamatta**. Kun poiminta suoritetaan **palauttamatta**, poimittua alkiota ei palauteta perusjoukkoon poiminnan jälkeen eikä se täten voi tulla poimituksi otokseen kuin kerran.
+
+-   Kyseessä on siis otanta **ilman takaisinpanoa** (*without replacement*).
+-   Tällöin alkioiden arvonnat eivät enää ole riipumattomia: alkion todennäköisyys tulla poimituksi otokseen riippuu siitä kuinka monta alkiota otokseen on jo poimittu.
+-   Alkion $k$ **poimintatodennäköisyys** on tällöin vastaavasti (niin kauan kun alkio ei ole jo poimittu otokseen) poimintakierroksella $j$ ($j=1,\ldots,n$) \begin{equation*}
+    \frac{1}{N - A_k},
+    \end{equation*} ja kun $k$:s alkio tulee poimituksi, niin tämän jälkeen poimintatodennäköisyys on 0. Tässä $A_k$ on jo poimittujen alkioiden lukumäärä ennen kyseistä poimintakierrosta/otositeraatiota: ensimmäisen poiminnan kohdalla $A_k = 0$, toisen kohdalla $A_k = 1$ ja niin edespäin. Ts. $A_k = j-1$.
+
+```{=html}
+<!-- - Ilman takaisinpanoa populaatiosta voidaan poimia $\binom{N}{n}$
+ erilaista otosta. 
+
+  - Kun otosyksiköiden järjestyksellä ei ole merkitystä. $\binom{N}{n}$
+ on ns. binomikerroin, joka saadaan kaavasta $\frac{N!}{n!(N-n)!}$, jossa $N! = N \cdot (N-1) \cdot (N-2) \cdots 1$ on $N$:n kertoma. -->
+```
+
+-   Ilman takaisinpanoa populaatiosta voidaan poimia $\binom{N}{n}$
+ erilaista otosta. 
+  - Kun otosyksiköiden järjestyksellä ei ole merkitystä. $\binom{N}{n}$ on ns. binomikerroin, joka saadaan kaavasta $\frac{N!}{n!(N-n)!}$, jossa $N! = N \cdot (N-1) \cdot (N-2) \cdots 1$ on $N$:n kertoma.
+
+-   Otantaan palauttamatta liittyviä todennäköisyyksiä hallitaan **hypergeometrisen jakauman** avulla, joka johtaa (melko) yksinkertaiseen **tilastolliseen malliin** YSO:a käytettäessä.
+:::
+
+
+::: eblock
+**Esimerkki yksinkertaisen satunnaisotannan poimintastrategioista**. Poimitaan palloja kulhosta satunnaisesti.
+
+-   Jos yksittäinen pallo (alkio) voi tulla poimituksi useammin kuin kerran, eli pallo palautetaan kulhoon sen poiminnan jälkeen, on kyseessä yksinkertainen satunnaisotanta takaisinpanolla.
+
+-   Vastaavasti, jos pallo voi tulla valituksi vain kerran, eli pallo poistetaan kulhosta sen poiminnan jälkeen, on kyseessä otanta ilman takaisinpanoa.
+:::
+
+
+**Otoskoon vaikutus YSO:n**
+
+-   Yksinkertaisen satunnaisotannan erot takaisinpanolla ja ilman takaisinpanoa riippuvat otantakehikon (tai yleisemmin perusjoukon) koosta. Mikäli poimittava otos muodostaa suuren osan perusjoukosta (ts. ($\frac{n}{N}$) on "suuri", eli lähellä 1:tä) menetelmät poikkeavat olennaisesti.
+-   Toisaalta, jos perusjoukko on ääretön, niin menetelmillä ei ole käytännössä eroa
+    -   Toisin sanoen, kun ($N \longrightarrow \infty)$, niin ($\frac{n}{N} \longrightarrow 0$) eli todennäköisyys että sama alkio poimittaisiin otokseen useammin kuin kerran lähestyy nollaa otoskoon lähestyessä ääretöntä.
+-   Monesti onkin (teoreettiselta) kannalta järkevää olettaa että otos poimitaan äärettömästä perusjoukosta vaikka perusjoukko tosiasiallisesti olisikin äärellinen, mutta siis riittävän "iso".
+-   Tällöin voidaan olettaa käytettävän otantaa takaisinpanolla, sillä siinä käytettävät tilastolliset mallit ovat yksinkertaisempia kuin otannassa ilman takaisinpanoa ja tämä helpottaa tilastollisessa päättelyssä käytettäviä kaavoja.
+
+
+**YSO:n potentiaaliset ongelmat**
+
+-   Monissa tapauksissa ei kuitenkaan ole helppoa saada listaa kaikista perusjoukon havaintoyksiköistä (jolloin menetelmän käyttö on periaatteessa mahdotonta).
+
+-   Kyselytutkimuksissa perusjoukko on usein suuri ja laajalle alueelle hajaantunut. Henkilökohtaisten, kasvotusten toteutettavien, haastattelujen tekeminen vaatisi suuria resursseja. Haastattelijat joutuisivat esim. matkustamaan ympäri Suomea satunnaisotokseen valikoituneiden henkilöiden asuinpaikkojen mukaan. Tällaisissa tutkimustilanteissa voidaankin käyttää muunlaisia otantamenetelmiä.
+
+
+## Systemaattinen otanta
+
+[Systemaattinen otanta]{.marginnote}
+
+::: defblock
+**Systemaattisessa**, eli tasavälisessä, **otannassa** poimintakehikkoon (perusjoukkoon) kuuluvat alkiot järjestetään jonoon ja siitä poimitaan otokseen joka ($k$). alkio.
+
+-   Esimerkiksi, jos oletetaan että perusjoukkoon kuuluu 1000 tilastoyksikköä ja valittu otoskoko on 100, niin otos voidaan poimia perusjoukon alkioiden järjestetystä listasta poimimalla siitä joka kymmenes yksikkö.
+:::
+
+Systemaattinen otanta ei oikeastaan kuulu satunnaisotannaksi laskettaviin menetelmiin, koska siinä ei sovelleta arvontaa.
+
+-   Yksinkertainen satunnaisotanta voidaan kuitenkin nähdä systemaattisen otannan erikoistapauksena (eli systemaattinen otanta voidaan toteuttaa satunnaisotantana), missä perusjoukon alkiot järjestetään jonoon **satunnaistamalla**.
+
+    -   Ts. jonon järjestys on satunnainen, eli joka $k$. jonon alkio on "satunnaisotos" otantakehikosta. Systemaattinen otanta tuottaa tällöin samat johtopäätelmät kuin yksinkertainen satunnaisotanta, jos perusjoukon alkioiden järjestys on tutkittavan ilmiön kannalta satunnainen! Toisin sanoen, harhaa ei synny mikäli perusjoukon alkioiden järjestys ei riipu sellaisesta ominaisuudesta, jota tutkitaan.
+
+
+**Mahdolliset ongelmat**: Systemaattisen otannan suhteen potentiaaliseksi ongelmaksi muotoutuu havaintoyksikkölistan mahdollinen säännöllinen jaksollisuus, jota systemaattinen poiminta ei havaitse ja jolloin satunnaisotanta toimisi (kenties) paremmin.
+
+-   Ongelmia syntyy esimerkiksi silloin, jos tiedot perusjoukosta koostuvat heteropariskunnista ja poimintaintervalli on parillinen luku. Tällöin seurauksena voi olla, että otokseen saattaisi valikoitua ainoastaan joko miehiä tai naisia.
+
+-   Myös systemaattisessa otannassa tarvitaan siis lista tai rekisteri kaikista perusjoukon havaintoyksiköistä ja sitä sovelletaankin tavallisesti YSO:n sijasta silloin, kun perusjoukon alkioista on käytettävissä tietorekisteri, luettelo tai havaintoja kerätään ajassa tai tilassa.
+
+::: eblock
+**Esimerkkejä**
+
+-   Esimerkiksi mielipidekyselyn kohteet poimitaan (voitiin poimia) puhelinluettelosta (tai vastaavasta rekisteristä) valitsemalla haastateltavaksi jokaiselta aukeamalta ensimmäisenä esiintyvä henkilö tai jotain tuotetta valmistavan tehtaan laaduvalvonnassa valitsemalla laatuarviointiin joka sadas tuote, joka hihnalta valmistuu.
+
+-   Muita esimerkkejä ovat esim. liikenne-, jäsenrekisteri- tai kassajonossa seisovien otantayksiköiden poiminta otokseen.
+:::
+
+
+## Ositettu otanta
+
+[Ositettu otanta]{.marginnote}
+
+::: defblock
+**Ositettu otanta** on sopiva menetelmä tilanteisiin, joissa perusjoukko koostuu jonkin ominaisuuden suhteen homogeenisista ryhmistä eli ts. alkioryhmistä (osista). Ositettu otanta pyrkii varmistamaan, että tutkittava otos on edustava kaikkien (tutkimuksen kannalta) olennaisten ryhmien osalta.
+:::
+
+::: eblock
+**Esimerkkinä** voitaisiin tutkia jonkin maan erilaisten ja usein hyvin eri kokoisten kieliryhmien taloudellista asemaa.
+
+-   Kaikista ryhmistä tulisi saada edustava otos.
+-   Tällöin maan koko populaatioon kohdistettu yksinkertainen satunnaisotanta ei olisi järkevää, sillä otoskoon pitäisi olla (todennäköisesti) hyvin suuri, että jokaisesta kieliryhmästä saataisiin poimittua edustava otos.
+
+Ositetun otannan avulla otos voitaisiin kerätä niin, että jokaisesta ryhmästä (ositteesta) poimitaan osaotos yksinkertaisella satunnaisotannalla tai systemaattisella otannalla ja nämä osaotokset yhdistetään yhdeksi otokseksi.
+:::
+
+Ositettu otanta voi (oikein toteutettuna ja sopivassa asetelmassa) tuottaa paljon tarkempaa tietoa kuin yksinkertainen satunnaisotanta samaa otoskokoa käytettäessä! Voidaan esimerkiksi käyttää tietoa siitä, että otosyksiköt ovat joka ositteessa keskenään samankaltaisia.
+
+-   Ositetun otannan käyttöön suurissa kyselytutkimuksissa liittyy samoja ongelma kuin yksinkertaiseen ja systemaattiseen satunnaisotantaan.
+
+-   Otokseen valikoituneet vastaajat voivat olla mm. levittäytyneinä suurelle maantieteelliselle alueelle. Näin ollen otannan suorittaminen vaatii suuria kustannuksia.
+
+-   Onko (järkevä) osittaminen ylipäätään mahdollista toteuttaa tarkasteltavassa sovelluksessa?
+
+
+## Ryväsotanta
+
+[Ryväsotanta]{.marginnote}
+
+::: defblock
+**Ryväsotanta** (klusteriotanta) soveltuu tilanteisiin, joissa perusjoukko on "ryvästeistä" eli se voidaan jakaa luonnollisiin ryhmiin eli rypäisiin (eng. *clusters*). Rypäät indikoivat aineiston luontaista hierarkkista eli monitasoista- tai asteista rakennetta.
+:::
+
+::: eblock
+**Esimerkkejä** tällaisista ryhmistä ovat erilaiset yritykset tai koululuokat. Esimerkiksi yritykset muodostavat luonnollisesti eri rypäitä, joiden alkiot ovat työntekijöitä ja koululuokat muodostavat koulun sisällä omia luonnollisia rypäitään ja opiskelijat ovat alkioita näissä rypäissä.
+:::
+
+Huomionarvoista on, että toisin kuin ositetussa otannassa, ryväsotannassa rypäiden oletetaan olevan toistensa kanssa riittävän samankaltaisia, että jokaista rypästä ei tarvitse erikseen tutkia.
+
+-   Tämä onkin yksi ryväsotannan tärkeimpiä etuja, sillä sitä usein perustellaan kustannustehokkuudella. Tavoitteena on vähentää tietojen keruun aiheuttamia kustannuksia samalla varmistaen, että otos on kuitenkin mahdollisimman edustava!
+
+::: eblock
+**Esimerkki**. Sen sijaan että poimitaan satunnaisia koululaisia mahdollisesti suuresta määrästä kouluja, voidaan poimia satunnaisia rypäitä (kouluja), joista tutkimusyksiköt eli koululaiset poimitaan.
+
+Lisäksi koulun sisällä koululuokat muodostavat alirypäitä, joista voidaan edelleen poimia satunnaisotos, jotta päästään tutkimaan perusjoukon alkioita eli koululaisia esim. haastattelututkimuksen muodossa.
+:::
+
+ 
+
+Ryväsotannan voi suorittaa yksi- tai kaksivaiheisena (ts. kyseessä on yksiasteinen/kaksiasteinen ryväsotanta).
+
+::: defblock
+**Kaksivaiheinen ryväsotanta**
+
+-   **Ensimmäisessä vaiheessa** poimitaan joukko rypäitä kaikkien rypäiden joukosta, eli vain osa rypäistä on mukana lopullisessa otoksessa.
+
+-   **Toisessa vaiheessa** poimitaan ensimmäisessä vaiheessa poimituista rypäistä alkiotason otokset.
+:::
+
+**Yksivaiheisessa ryväsotannassa** toisessa vaiheessa valitaan kaikki ensimmäisen vaiheen otosrypäiden alkiot, jolloin toisen vaiheen otanta typistyy ensimmäisen vaiheen rypäiden alkioiden kokonaistutkimukseksi.
+
+-   Poiminnan eri vaiheissa voidaan soveltaa yksinkertaista satunnaisotantaa tai systemaattista otantaa.
+
+ 
+
+Ryväsotantaa käytetään usein suuria haastattelututkimuksia tehtäessä. Ryväsotantaa voidaan erityisesti hyödyntää myös silloin, kun tutkijalla ei ole käytettävissään kattavaa listaa kaikista havaintoyksiköistä, mutta näiden muodostamat rypäät ovat määritettävissä.
+
+Ryväsotannan heikkoutena pidetään sitä, ettei aina ole helppoa muodostaa rypäitä, jotka ovat toistensa kaltaisia. Tulosten tarkkuus myös riippuu monin paikoin siitä, kuinka hyvin rypäisiin jako onnistuu.
+
+::: eblock
+**Esimerkkejä ryväsotannasta**.
+
+Esimerkki 1: Poimitaan oppilaitoksen opiskelijoista otos arpomalla ensin otos luokkahuoneista (=rypäistä). Arvotuissa luokkahuoneissa käydään sitten suorittamassa kysely.
+
+-   Esim. Oppilaitoksen opiskelijoista voidaan poimia otos arpomalla ensin otos luokkahuoneista, jolloin luokkahuoneet ovat rypäitä.
+-   Mahdollisia ongelmia? Miten huomoida päivä- ja iltaopiskelijat? Tämän voisi toteuttaa arpomalla otos luokkahuoneista päiväsaikaan ja toinen otos ilta-aikaan. Tässä yhdistetään ryväsotantaan ositettu otanta, jolla taataan päivä- ja iltaopiskelijoiden edustus.
+
+Esimerkki 2: Tutkittaessa tänä vuonna peruskoulun aloittavia voidaan ensin poimia otos kouluista, jolloin koulut ovat rypäitä. Tämän jälkeen arvotaan kustakin otokseen tulleesta koulusta tietty määrä tutkimuksen kohderyhmään kuuluvia oppilaita.
+:::
+
+ 
+
+## Esimerkkejä otantatutkimuksista
+
+::: eblock
+**Esimerkki: Työllisyys ja työttömyys, Tilastokeskuksen työvoimatutkimus** (toukokuussa 2025)
+
+<https://stat.fi/tilasto/dokumentaatio/tyti>
+
+Työvoimatutkimus antaa tuoreen ja kattavan kuvan työvoimasta ja työmarkkinoiden muutoksista. Julkisuudessa seurataan kuukausittain erityisesti työllisyyden ja työttömyyden muutoksia edellisen vuoden vastaavasta kuukaudesta. Erityisesti kausitasoitettuja aikasarjoja ja trendiaikasarjoja käytetään seurattaessa pitkän aikavälin kehitystä ja suhdannevaihtelua. (Aikasarja-aineistoja esitellään vielä tarkemmin myöhemmin)
+
+-   Työvoimatutkimus on otostutkimus, jonka avulla tilastoidaan 15–89-vuotiaan väestön työmarkkinoille osallistumista, työllisyyttä, työttömyyttä ja työaikaa kuukausittain, neljännesvuosittain ja vuosittain.
+
+-   Tutkimuksen tietosisältö perustuu EU:n asetukseen, ja tutkimuksen otokseen kuuluu joka kuukausi noin 12 500 henkilöä.
+
+-   Työvoimatilastoja käytetään työvoimapoliittisten ennusteiden ja suunnitelmien laadinnassa, toimien seurannassa ja päätöksenteon tukena.
+
+    -   Työmarkkina-aseman perusluokittelussa väestö jaetaan työllisiin, työttömiin ja työvoiman ulkopuolisiin.
+    -   Työlliset ja työttömät muodostavat työvoiman.
+
+-   Tilasto perustuu kuukausittain verkkokyselylomakkeella ja haastattelemalla kerättävään otosaineistoon.
+
+-   Työvoimatutkimuksen **perusjoukon** muodostavat Suomessa vakinaisesti asuvat 15--89-vuotiaat henkilöt.
+
+    -   Perusjoukkoon kuuluvat myös tilapäisesti ulkomailla (alle vuoden) oleskelevat sekä Suomen väestötietojärjestelmään rekisteröidyt ulkomaalaiset, joiden oleskelu Suomessa kestää vähintään vuoden.
+
+-   Työvoimatutkimuksen otos poimitaan **ositetulla systemaattisella otannalla** väestön keskusrekisteriin perustuvasta Tilastokeskuksen väestötietokannasta kahdesti vuodessa.
+
+    -   Ositteiden muodostamisessa käytetään NUTS1-jakoa ja ikätietoa. Ositteet ovat: Manner-Suomi (15–74-vuotiaat), Ahvenanmaan maakunta (15–74-vuotiaat) ja 75–89-vuotiaiden ikäryhmä.
+
+-   Tutkimus on paneelitutkimus, jossa samaa henkilöä haastatellaan viisi kertaa. Haastattelut tehdään kolmen kuukauden välein, paitsi neljäs haastattelu, joka tehdään kuuden kuukauden kuluttua kolmannesta haastattelusta.
+:::
+
+ 
+
+::: eblock
+**Esimerkki: Terveys 2000**
+
+<https://thl.fi/tutkimus-ja-kehittaminen/tutkimukset-ja-hankkeet/terveys-2000-2011/terveys-2000-tiiviisti>
+
+Terveys 2000 -tutkimuksen tavoite oli tuottaa ajankohtainen kattava kuva työikäisen ja iäkkään väestön terveydestä ja toimintakyvystä selvittämällä tärkeimpien terveysongelmien yleisyyttä ja syitä sekä niihin liittyvän hoidon, kuntoutuksen ja avun tarvetta.
+
+-   Tutkimus koskee (koski) 18 vuotta täyttänyttä Suomen aikuisväestöä (perusjoukko), josta valitaan valtakunnallisesti edustava 10 000 henkilön otos.
+
+-   Poimittiin kaksivaiheinen ryväsotos terveyskeskuspiireistä.
+
+    -   Ositus perustui yliopistosairaaloiden vastuualuiden väestömäärään suhteutettuun kiintiöintiin.
+
+    -   Suurimmat 15 terveyskeskuspiiriä poimittiin otokseen ja lopuista 65:stä piiristä poimittiin loppuotos kussakin ositteessa systemaattisella (PPS) otannalla (sisältymistodennäköisyys suhteessa alkion kokoon).
+:::
+
+ 

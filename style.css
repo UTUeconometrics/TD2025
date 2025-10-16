@@ -1,0 +1,60 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+.eblock {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px SaddleBrown;
+  border-radius: 10px;
+  background: rgb(255,205,138) 5px center/3em no-repeat;
+  background-image: url("images/sigma.png");
+}
+
+.defblock {
+  color: black;
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px DarkBlue;
+  border-radius: 10px;
+  background: rgb(204,180,225) 5px center/3em no-repeat;
+  background-image: url("images/delta.png");
+}
+
+
+.center {
+  text-align: center;
+}
+
+.book.with-summary .book-header.fixed {
+    left: 300px;
+}
+
+.book.with-summary .book-body {
+    left: 300px;
+}
+
+.book .book-summary {
+    width: 300px;
+}
+
+
+.table{
+  width:auto;
+  font-size: 12px;
+}
+
+.verysmall .table{
+  font-size: 8px;
+}

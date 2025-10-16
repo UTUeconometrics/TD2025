@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Perustunnusluvuista – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-til_riippuvuus.html" rel="next">
+<link href="./06-otannan_idea.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-perustunnusluvut.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#perustunnuslukuja" id="toc-perustunnuslukuja" class="nav-link active" data-scroll-target="#perustunnuslukuja"><span class="header-section-number">7.1</span> Perustunnuslukuja</a></li>
+  <li><a href="#otoskeskiarvo-ja-otosvarianssi-estimaattoreina" id="toc-otoskeskiarvo-ja-otosvarianssi-estimaattoreina" class="nav-link" data-scroll-target="#otoskeskiarvo-ja-otosvarianssi-estimaattoreina"><span class="header-section-number">7.2</span> Otoskeskiarvo ja otosvarianssi estimaattoreina</a></li>
+  <li><a href="#muita-tunnuslukuja" id="toc-muita-tunnuslukuja" class="nav-link" data-scroll-target="#muita-tunnuslukuja"><span class="header-section-number">7.3</span> Muita tunnuslukuja</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>Perehdytään seuraavaksi muutamiin keskeisiin <strong>tilastollisiin tunnuslukuihin</strong> ja sitä myöden <strong>estimaattoreihin</strong> käyttäen tilastotieteessä tarvittavaa matemaattista notaatiota.</p>
+<p><span class="marginnote">Tunnusluku</span></p>
+<div class="defblock">
+<p><strong>Tunnusluku</strong> (engl. statistic) tarkoittaa aineistosta laskettua lukuarvoa, joka kuvaa otoksen ominaisuuksia.</p>
+<ul>
+<li>Esimerkkejä tunnusluvuista ovat otoskeskiarvo, otosvarianssi ja mediaani.</li>
+</ul>
+<p>Kun tarkastellaan satunnaismuuttujia, tunnusluku ei ole enää kiinteä luku vaan satunnaismuuttuja. Tämä johtuu siitä, että otosaineisto koostuu satunnaisista havainnoista, ja siten myös siitä laskettu tunnusluku vaihtelee otoksesta toiseen.</p>
+</div>
+<p>&nbsp;</p>
+<section id="perustunnuslukuja" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="perustunnuslukuja"><span class="header-section-number">7.1</span> Perustunnuslukuja</h2>
+<p>Välimatka- tai suhdeasteikollisen muuttujan havaintoarvojen jakaumaa voidaan karakterisoida mm. seuraavilla perustunnusluvuilla, joita tyypillisesti raportoidaan tilastollisten analyysien yhteydessä.</p>
+<ul>
+<li>Havaintoarvojen keskimääräistä sijaintia kuvataan aritmeettisilla keskiarvoilla.</li>
+<li>Havaintoarvojen hajaantuneisuutta tai keskittyneisyyttä kuvataan otosvarianssilla tai otoskeskihajonnalla.</li>
+<li>Kahden muuttujan havaintoarvojen parien (lineaarista) riippuvuutta kuvataan otoskovarianssilla ja otoskorrelaatiokertoimella (ks. seuraava luku).</li>
+</ul>
+<p>Ts. oletetaan seuraavassa, että meillä on käytettävissä välimatka- tai suhdeasteikollisen muuttujan havaittuja arvoja eli <strong>otoskooltaan</strong> <span class="math inline">\(n\)</span>:n havainnon suuruinen otos havaintoja <span class="math inline">\((y_1, y_2, \ldots, y_n)\)</span>. Käsitellään seuraavassa otoskeskiarvoa ja otosvarianssia.</p>
+<p><span class="marginnote">Otoskeskiarvo</span></p>
+<div class="defblock">
+<p>Havaintoarvojen (y_1, y_2,, y_n) aritmeettinen <strong>otoskeskiarvo</strong> on <span class="math display">\[\begin{equation*}
+\bar{y} = \frac{1}{n} \sum_{i=1}^{n} y_i = \frac{1}{n}(y_1+\cdots+y_n).
+\end{equation*}\]</span> Havaintoarvojen aritmeettinen keskiarvo kuvaa havaintoarvojen keskimääräistä arvoa. Osoittautuu, että (aritmeettinen) keskiarvo toimii tilastollisessa mielessä hyvänä estimaattorina satunnaismuuttujan (Y) odotusarvolle <span class="math inline">\(\mathsf{E}(Y)\)</span>.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Tarkastellaan tämän luvun läpi seuraavaa pientä tilastoaineistoa (otosta), jossa havaintoarvot <span class="math inline">\(y_i\)</span> ovat 45, 67, 23, 89, 45, 56, 78, 34, 45, 67, 90, 12. Ts. <span class="math inline">\(y_1=45, y_2=67\)</span>, ja lopulta <span class="math inline">\(y_{12}=12\)</span> eli selvästikin otoskoko <span class="math inline">\(n=12\)</span>.</p>
+<p>Otoskeskiarvo on tällöin <span class="math display">\[\begin{equation*}
+\bar{y} = \frac{1}{12} \sum_{i=1}^{12} y_i = \frac{1}{12}(45+67+23+89+45+56+78+34+45+67+90+12) = 54.25.
+\end{equation*}\]</span></p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Otosvarianssi</span></p>
+<div class="defblock">
+<p><strong>Otosvarianssi</strong>: Havaintoarvojen <span class="math inline">\((y_1, y_2,\ldots, y_n)\)</span> otosvarianssi on muotoa <span class="math display">\[\begin{equation*}
+s^2_y = \frac{1}{n-1} \sum_{i=1}^{n} (y_i - \bar{y})^2,
+\end{equation*}\]</span> jossa (<span class="math inline">\(\bar{y}\)</span>) on y-havaintoarvojen aritmeettinen otoskeskiarvo (määriteltiin yläpuolella).</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>, <strong>jatkoa</strong>. Jatketaan ylläolevan aineiston parissa. Otosvarianssi saadaan siis seuraavasti <span class="math display">\[\begin{equation*}
+s^2_y = \frac{1}{11} \sum_{i=1}^{12} (y_i - 54.25)^2 = \frac{1}{11}\Big((45-54.25)^2 + \cdots +(12-54.25)^2 \Big) = 618.75.
+\end{equation*}\]</span></p>
+</div>
+</div>
+<p>Vastaavalla tavalla mitä edellä voidaan määritellä esimerkiksi <span class="math inline">\(x\)</span> havaintoarvojen otoskeskiarvo <span class="math inline">\(\bar{x}\)</span> ja otosvarianssi <span class="math inline">\(s^2_x\)</span>. Havaintoarvojen varianssi mittaa havaintoarvojen hajaantuneisuutta tai keskittyneisyyttä havaintoarvojen aritmeettisen keskiarvon suhteen.</p>
+<p><span class="marginnote">Otoskeskihajonta</span></p>
+<div class="defblock">
+<p><strong>Otoskeskihajonta</strong>: Havaintoarvojen (y_1, y_2,, y_n) otoskeskihajonta <span class="math display">\[\begin{equation*}
+s_y = \sqrt{s^2_y} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (y_i - \bar{y})^2},
+\end{equation*}\]</span> jossa <span class="math inline">\(\bar{y}\)</span> on y-havaintoarvojen aritmeettinen keskiarvo. Huomaa suhde otosvarianssiin (neliöjuuri siitä).</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>, <strong>jatkoa</strong>. Otoskeskihajonta saadaan siis otosvarianssista suoraviivaisesti <span class="math display">\[\begin{equation*}
+s_y = \sqrt{s^2_y} = \sqrt{\frac{1}{11} \sum_{i=1}^{12} (y_i - 54.25)^2} = \sqrt{\frac{1}{11}\Big((45-54.25)^2 + \cdots +(12-54.25)^2 \Big)} \approx 24.87.
+\end{equation*}\]</span></p>
+</div>
+</div>
+<p>Jälleen vastaavalla tavalla voidaan määritellä <span class="math inline">\(x\)</span>-havaintoarvojen otoskeskihajonta <span class="math inline">\(s_x\)</span>. Havaintoarvojen keskihajonta (ja varianssi) mittaa siis havaintoarvojen hajaantuneisuutta tai keskittyneisyyttä havaintoarvojen aritmeettisen keskiarvon suhteen.</p>
+<p>&nbsp;</p>
+</section>
+<section id="otoskeskiarvo-ja-otosvarianssi-estimaattoreina" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="otoskeskiarvo-ja-otosvarianssi-estimaattoreina"><span class="header-section-number">7.2</span> Otoskeskiarvo ja otosvarianssi estimaattoreina</h2>
+<p>Tilastollisessa tutkimuksessa on tavoitteena estimoida aineiston generoineen todennäköisyysjakauman tuntemattomat parametrit käyttäen havaintoaineistoa. Edellä esiteltiin jo havaintoaineistolle laskettavia tyypillisiä tunnuslukuja.</p>
+<p>Miten luodaan tilastomatemaattinen yhteys edellisen luvun aineistoon ja sille laskettuihin konkreettisiin numeerisiin tunnuslukujen arvoihin? Seuraavassa muodostetaan tilastotieteelle keskeistä yhteyttä parametrien ja niitä arvioivien, “estimoivien”, <strong>estimaattorien</strong> välille.</p>
+<p>Tässä luvussa keskitytään lyhyesti vain otoskeskiarvoon ja otosvarianssiin normaalijakauman parametrien estimaattoreina ja siihen miten tämä näkökulma liittyy ja toisaalta eroaa edellä esitellyistä tietylle yksittäiselle otokselle laskettavista tunnusluvuista.</p>
+<p>&nbsp;</p>
+<p>Merkitään satunnaismuuttujaa yhä <span class="math inline">\(Y\)</span> (isolla kirjaimella) ja satunnaismuuttujan realisaatiota pienellä kirjaimella <span class="math inline">\(y\)</span>.</p>
+<ul>
+<li><p>Otoskokoa, eli otokseen osallistuvien tilastoyksiköiden määrää, merkitään edelleen <span class="math inline">\(n\)</span>:llä ja tilastoyksiköitä indeksoidaan alaindeksillä (i=1,,n).</p></li>
+<li><p>Otoksen poimimisen jälkeen satunnaismuuttujat (Y_1, , Y_n) saavat havaituiksi arvoikseen havaintoarvot (y_1, , y_n) (ts. (Y_1=y_1, , Y_n = y_n)). Näin jo edellä analysoitu yksittäinen havaintoaineisto on siis yksi <strong>satunnaisotos</strong> siitä jakaumasta, jota satunnaismuuttuja <span class="math inline">\(Y\)</span> noudattaa.</p></li>
+<li><p><span class="marginnote">Otosvaihtelu</span> Tämä tarkoittaa siis sitä, että kun otos poimitaan useita kertoja, niin saamme käytännössä aina erilaisen havaitun/realisoituneen satunnaisotoksen (y_1, , y_n). Tätä vaihtelua kutsutaan myös <strong>otosvaihteluksi</strong>.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Satunnaisotos normaalijakaumasta</strong>. Olkoot (Y_1, , Y_n) riippumattomia ja normaalisti jakautuneita satunnaismuuttujia, joille pätee (<span class="math inline">\(Y_i \thicksim \mathsf{N}(\mu,\sigma^2)\)</span>), jossa (<span class="math inline">\(\mu\)</span>) ja (<span class="math inline">\(\sigma^2\)</span>) ovat normaalijakauman muodon määräävät parametrit. Parametrien (<span class="math inline">\(\mu\)</span>) ja (<span class="math inline">\(\sigma^2\)</span>), eli normaalijakauman odotusarvon ja varianssin (ks. odotusarvon ja varianssin määritelmät), arvoja ei tunneta ja tavoitteena onkin päätellä, <strong>estimoida</strong>, niiden arvot käytettävissä olevaa aineistoa käyttäen.</p>
+</div>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>Otoskeskiarvo</strong>. <strong>Satunnaismuuttujien</strong> (huom!) (Y_1, , Y_n) <strong>otoskeskiarvo</strong> on <span class="math display">\[\begin{equation*}
+\bar{Y} = \frac{1}{n}(Y_1 + \cdots + Y_n) = \frac{1}{n} \sum_{i=1}^{n} Y_i.
+\end{equation*}\]</span> Yksittäisen otoksen otoskeskiarvo on tällöin sm:jien realisaatioiden aritmeettinen keskiarvo (ks. edellä ja esimerkki konkreettisesta otoksesta) <span class="math display">\[\begin{equation*}
+\bar{y} = \frac{1}{n} \sum_{i=1}^{n} y_i.
+\end{equation*}\]</span></p>
+<p>Otoskeskiarvo <span class="math inline">\(\bar{Y}\)</span> on siis satunnaismuuttuja, jonka saama arvo <span class="math inline">\(\bar{y}\)</span> vaihtelee satunnaisesti otoksesta toiseen johtuen satunnaisotannasta.</p>
+</div>
+<p>Voidaan osoittaa, että kun satunnaismuuttujat ovat samoin jakautuneet (noudattavat samaa jakaumaa) odotusarvoltaan (), on otoskeskiarvo jakauman odotusarvon harhaton estimaattori. Ts. pätee tulos <span class="math display">\[\begin{equation*}
+\mathsf{E}(\bar{Y}) = \mu.
+\end{equation*}\]</span> Täten aineiston otoskeskiarvo kuvaa aineiston perusjoukon tilastollisen mallin odotusarvoa. Ts. <strong>otoskeskiarvo on estimaattori</strong>, joka estimoi <strong>harhattomasti</strong> aineistoa generoivan todennäköisyysjakauman odotusarvoa!</p>
+<ul>
+<li>Huomioi, että satunnaisuudesta johtuen yksittäinen numeerinen otoskeskiarvo voi poiketa paljonkin jakauman odotusarvosta. Tästä huolimatta otoskeskiarvo on kuitenkin (tietyssä mielessä) paras mahdollinen arvio todellisen jakauman odotusarvosta.</li>
+</ul>
+<p>&nbsp;</p>
+<div class="defblock">
+<p><strong>Populaatiovarianssi</strong> on satunnaismuuttujan kautta ajateltuna on <span class="math inline">\(\sigma^2 = \mathsf{E}[(Y-\mu)^2]\)</span>.</p>
+<!-- Vastaavasti laskennallinen kaava kun populaation muodostavat arvot $y_1,\ldots,y_N$ tunnetaan on 
+\begin{equation*} 
+\sigma^2 = \frac{1}{N} \sum_{j=1}^{N} (y_j - \mu)^2,
+\end{equation*}
+jossa populaation koko on $N$ ja se kuvaa sm:jien vaihtelua perusjoukon tasolla.-->
+<p>Populaatiovarianssia voidaan harhattomasti estimoida käyttäen <strong>otosvarianssia</strong> (satunnaismuuttujille) <span class="math display">\[\begin{equation*}
+S^2= \frac{1}{n-1} \sum_{i=1}^{n} (Y_i - \bar{Y})^2.
+\end{equation*}\]</span> Tämän yksi realisaatioista perustuu yksittäiselle aineistolle laskettuun otosvarianssiin (merkitään <span class="math inline">\(s^2\)</span> tai <span class="math inline">\(s^2_y\)</span>), ks. edellä olevat kaavat.</p>
+</div>
+<p>Ts. <strong>tämän (ala)luvun keskeinen huomio on</strong>, että otoskeskiarvo (<span class="math inline">\(\bar{Y}\)</span>) ja otosvarianssi (<span class="math inline">\(S^2\)</span>) ovat siis satunnaismuuttujien kautta asiaa ajateltaessa satunnaismuuttujia, joiden saamat konkreettiset numeeriset arvot (<span class="math inline">\(\bar{y}\)</span> ja <span class="math inline">\(s^2\)</span>) vaihtelevat satunnaisesti otoksesta toiseen, ja toimivat saatavilla olevasta aineistosta laskettuna kohdepopulaation jakauman parametrien estimaattoreina.</p>
+<p>Estimaattoreihin, niiden ominaisuuksiin ja tarkempaan perusteoriaan perehdytään tarkemmin Osassa II.</p>
+<p>&nbsp;</p>
+</section>
+<section id="muita-tunnuslukuja" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="muita-tunnuslukuja"><span class="header-section-number">7.3</span> Muita tunnuslukuja</h2>
+<p>Tilastollisia analyysejä tehtäessä johtopäätösten ja objektiivisten tulkintojen tueksi tarvitaan tunnuslukuja. (Otos)keskiarvoa ja (otos)varianssia tunnuslukuina tarkasteltiin jo edellä. Tunnuslukuja on paljon, ja jokainen niistä valottaa muuttujan jakaumaa eri näkökulmista.</p>
+<p>Jakaumien tunnusluvut voidaan jakaa sijaintilukuihin, hajontalukuihin ja muihin tunnuslukuihin. Kahdesta ensimmäisestä esimerkkejä ovat (kuten edellä nähtiin) keskiarvo ja varianssi tai keskihajonta (välimatka- ja suhdeasteikon havaintojen tapauksessa).</p>
+<ul>
+<li>Todetaan tässä kohtaa havaintojen hajaantuneisuutta mittaavista tunnusluvuista, että erityisesti järjestysasteikollisten muuttujien tapauksessa hajaantuneisuutta voidaan perustaa ns. <strong>järjestystunnuslukuihin</strong>. Ts. havaintoarvot voidaan järjestää suuruusjärjestykseen pienimmästä suurempaan. Ts. <span class="math inline">\(k\)</span>. järjestystunnusluku on <span class="math inline">\(k\)</span>. havaintoarvo suuruusjärjestyksessä. Jo aiemmin esitelty <strong>prosenttipiste</strong> liittyy kiinteästi suuruusjärjestykseen järjestettyyn aineistoon.</li>
+</ul>
+<p>Esitellään seuraavassa vielä lyhyesti muutamia muita tunnuslukuja.</p>
+<p><span class="marginnote">Moodi</span></p>
+<div class="defblock">
+<p><strong>Moodi</strong> eli tyyppiarvo on havaintoaineiston yleisin muuttujan arvo tai se on luokka, jolla on suurin frekvenssi.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>, <strong>jatkoa</strong>. Jatketaan ylläolevan 12 havainnon esimerkkiaineiston käsittelyä. Ko. aineiston moodi on 45.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Mediaani</span></p>
+<div class="defblock">
+<p><strong>Mediaani</strong> on järjestetyn havaintoaineiston keskimmäinen arvo. Mediaani siis jakaa järjestetyn havaintoaineiston kahteen osaan siten, että puolet arvoista on mediaania pienempiä ja puolet arvoltaan mediaania suurempia.</p>
+<ul>
+<li>Jos havaintoarvoja on parillinen määrä, niin tällöin esitetään jompikumpi keskimmäisistä arvoista tai joskus niiden keskiarvo.</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki</strong>, <strong>jatkoa</strong>. Tarkasteltavan esimerkkiaineiston mediaania etsittäessä järjestetään havainnot suuruusjärjestykseen: 12, 23, 34, 45, 45, 45, 56, 67, 67, 78, 89, 90. Tällöin mediaanina voidaan pitää havaintoarvojen 45 ja 56 keskiarvoa eli 50.5.</p>
+</div>
+</div>
+<p>Luokitteluasteikolla mitattaville muuttujille ei ole olemassa luontevia sijaintilukuja keskilukujen yhteydessä pl. moodi.</p>
+<p>&nbsp;</p>
+<p><span class="marginnote">Fraktiilit ja desiilit</span></p>
+<div class="defblock">
+<p>Järjestysasteikolla mitatuille muuttujille voidaan mediaanin lisäksi määrittää <strong>fraktiileja</strong>: pp %:n fraktiili jakaa tilastoaineiston kahteen osaan siten, että kyseistä fraktiilia pienempiä havaintoarvoja on pp %.</p>
+<ul>
+<li>Eniten käytettyjä fraktiileja ovat <strong>kvartiilit</strong>. <strong>Alakvartiili</strong> (Q_1) on 25 %:n fraktiili, ja <strong>yläkvartiili</strong> (Q_3) on 75 % fraktiili. Ts. alakvartiili on mediaania pienempien havaintoarvojen mediaani ja yläkvartiili on mediaania suurempien havaintoarvojen mediaani.</li>
+<li>Tietyistä fraktiileista käytetään nimitystä <strong>desiili</strong>. Ensimmäinen desiili on 10 % fraktiili ja esim. yhdeksäs desiili on 90 % fraktiili.</li>
+</ul>
+<p>&nbsp;</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Mediaani_Q1_Q3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Mediaani, ala- ja yläkvartiili esimerkkitilanteessa (kyseessä ei ole sama aineisto mitä tarkastellaan alapuolella!).
+</center>
+<p>&nbsp;</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>, <strong>jatkoa</strong>. Tarkasteltavan esimerkkiaineiston (ks. yllä) alakvartiili (Q1) on 42.25 ja yläkvartiili (Q3) 69.75.</p>
+<p>Alakvartiili (Q1, 25 %): <span class="math display">\[\begin{align*}
+Q_1^{\text{pos}} &amp;= 1 + (n - 1) \cdot 0.25 = 1 + 11 \cdot 0.25 = 3.75 \\\\
+Q_1 &amp;= y^{(3)} + 0.75 \cdot (y^{(4)} - y^{(3)}) \\
+    &amp;= 34 + 0.75 \cdot (45 - 34) \\
+    &amp;= 34 + 8.25 \\
+    &amp;= 42.25,
+\end{align*}\]</span> jossa <span class="math inline">\(y^{(k)}\)</span> on <span class="math inline">\(k\)</span>:nnes järjestetty tarkasteltavan otoksen havaintoarvo (sen järjestetyssä jonossa).</p>
+<p>Yläkvartiili (Q3, 75 %): <span class="math display">\[\begin{align*}
+Q_3^{\text{pos}} &amp;= 1 + (n - 1) \cdot 0.75 = 1 + 11 \cdot 0.75 = 9.25 \\\\
+Q_3 &amp;= y^{(9)} + 0.25 \cdot (y^{(10)} - y^{(9)}) \\
+    &amp;= 67 + 0.25 \cdot (78 - 67) \\
+    &amp;= 67 + 2.75 \\
+    &amp;= 69.75.
+\end{align*}\]</span></p>
+<p>Huom. ala-ja yläkvartiilin muodostuksessa voidaan käyttää muita/erilaisia valintoja mitä edellä ja siten lopputulos voi olla myös (hieman) erilainen.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><strong>Hajontalukuja</strong>: Varianssin/keskihajonnan lisäksi, jos muuttuja on mitattu vähintään järjestysasteikolla, sille voidaan määrittää vaihteluväli ja kvartiiliväli.</p>
+<p><span class="marginnote">Vaihteluväli</span></p>
+<div class="defblock">
+<p><strong>Vaihteluväli</strong> kuvaa aineiston kokonaispeittoa ja siinä ilmoitetaan aineiston pienin havainto ja suurin havainto. Ts. vaihteluväli=(pienin havainto, suurin havainto). Voidaan myös laskea suurimman ja pienimmän havainnon välinen erotus.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>, <strong>jatkoa</strong>. Tarkasteltavan esimerkkiaineiston tapauksessa vaihteluväli on selvästikin (12,90). Näiden välinen erotus 90-12=78.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Vinous ja kurtoosi (ja ylihuipukkuus)</span></p>
+<p>Satunnaisotoksille voidaan laskea myös niiden jakauman muotoa kuvaavat tunnusluvut <strong>vinous</strong> ja <strong>kurtoosi</strong> (ks. Alho ym., 2023), jota kutsutaan ajoittain myös <strong>huipukkuudeksi</strong>. Vinous ja kurtoosi/huipukkuus voidaan määrittää välimatka- ja suhdeasteikon muuttujille.</p>
+<div class="defblock">
+<p><strong>Vinous</strong> ja <strong>kurtoosi</strong>. Tarkastellaan satunnaismuuttujaa <span class="math inline">\(Y\)</span>, jolla on odotusarvo <span class="math inline">\(\mu = \mathsf{E}(Y)\)</span> sekä keskusmomentit <span class="math inline">\(\mu_k = \mathsf{E}[(Y − \mu)^k], k = 2, 3, 4\)</span>, keskihajonnan ollessa <span class="math inline">\(\sigma = \sqrt{\mu_2}\)</span> (ks. keskihajonnan määritelmä).</p>
+<p>Standardoitua 3. momenttia <span class="math inline">\(\mu_3 / \sigma^3\)</span> kutsutaan (jakauman) <strong>vinoudeksi</strong> (eng. <strong>skewness</strong>).</p>
+<ul>
+<li><p>Normaalijakauma on symmetrinen jakauma ja sen vinous on siten 0.</p></li>
+<li><p>Vinoutunut jakauma (skewed distribution) kuvaa tilannetta, jossa aineiston jakauma ei ole symmetrinen, vaan se kallistuu voimakkaasti jompaan kumpaan suuntaan.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Vinoja-jakaumia.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Vastaavasti standardoitua 4. momenttia <span class="math inline">\(\gamma = \mu_4 / \sigma_4\)</span> kutsutaan <strong>kurtoosiksi</strong> (<strong>huipukkuudeksi</strong>, eng. <strong>kurtosis</strong>).</p>
+<ul>
+<li><p>Ajoittain kurtoosi määritellään vielä <span class="math inline">\(\kappa = \gamma -3\)</span>, josta käytetään englanniksi termiä <strong>excess kurtosis</strong> (suoraviivaisena käännöksenä <strong>ylihuipukkuus</strong>). Jos <span class="math inline">\(Y\)</span> noudattaa normaalijakaumaa, niin tällöin <span class="math inline">\(\gamma=3\)</span> ja siten <span class="math inline">\(\kappa=0\)</span>.</p></li>
+<li><p>Jakaumille joille <span class="math inline">\(\kappa &lt;0\)</span>, <span class="math inline">\(\kappa=0\)</span> ja <span class="math inline">\(\kappa&gt;0\)</span> käytetään englanninkielisiä termejä <em>platykurtic</em>, <em>mesokurtic</em> ja <em>leptokurtic</em>. Näiden suomenkieliset käännökset ovat (ks. Alho ym., 2023) <em>platykurttinen</em>, <em>mesokurttinen</em> ja <em>leptokurttinen</em>.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Kurtoosi-jakaumat.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Vinous ja kurtoosi mittaavat siis kumpikin omalla tavallaan jakauman poikkeamaa normaalijakaumasta. Alho ym. (2023) ehdottavat termin kurtoosi käyttöä kun viitataan pelkästään standardoituun 4. momenttiin <span class="math inline">\(\gamma\)</span> tai sen muunnokseen <span class="math inline">\(\kappa\)</span> ja/tai ao. suureiden arvoihin. Synonyymeiksi soveltuvat <em>peakedness</em> ja <em>huipukkuus</em> silloin, kun puhutaan jakauman muodosta yleisellä tasolla ao. ominaisuuden tarkastelun perustuessa asianmukaisesti määriteltyyn järjestysrelaatioon ja sitä noudattavaan huipukkuusmittaan.</p>
+<p>&nbsp;</p>
+<p>Vinoutuneet jakaumat ovat yleisiä esimerkiksi tulo- ja myyntidatassa, joissa pieni osa havaintoja voi vaikuttaa voimakkaasti kokonaisuuteen. Tällöin perinteiset tunnusluvut, kuten keskiarvo ja keskihajonta, voivat antaa harhaanjohtavan kuvan, koska ne ovat herkkiä poikkeaville arvoille. Siksi on tärkeää käyttää analyysimenetelmiä ja tunnuslukuja, jotka huomioivat vinoutuneisuuden – kuten mediaani ja kvartiiliväli. Tämänkaltainen datan monipuolinen tarkastelu auttaa paljastamaan aineiston mahdollisia yksityiskohtia, jotka muuten jäisivät piiloon tavanomaisia perusmenetelmiä käytettäessä.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Alla olevassa kuvassa on kuvattuna oikealla satunnaisotos jakaumasta, joka on oikealle vino ja huipukas.</p>
+<ul>
+<li><p>Vertailun vuoksi vasemmalla on myös normaalijakaumaa noudattava aineisto, jossa otoskeskiarvo ja mediaani ovat samalla kohdalla.</p></li>
+<li><p>Huomataan, että oikealle vinossa jakaumassa suuremmat realisaatiot ovat suhteellisesti todennäköisempiä kuin pienemmät. Kuvatun aineiston vinous on (1.4), joka tarkoittaa oikealle vinoa jakaumaa. Vastaavasti negatiiviset arvot vinoudelle kuvaavat vasemmalle vinoa jakaumaa.</p></li>
+<li><p>Vastaavasti huomataan että aineiston havainnot ovat verrattain keskittyneitä, eli että jakauma josta aineisto on peräisin on <em>huipukas</em>/<em>kurtoosinen</em>. Kuvatun aineiston kurtoosi saa yli 6:n olevan arvon, eli se on selvästi huipukkaampi kuin normaalijakauma (kurtoosi <span class="math inline">\(\gamma=3\)</span>). Tällöin on siis kysymys ylihuipukkuudesta (excess kurtosis) on yli kolmen.</p></li>
+<li><p>Vinoa ja huipukasta jakaumaa ilmentävät havaintoaineistot ovat tyypillisiä tutkimusta tehdessä ja niiden käsittely, mallintaminen ja niihin sovellettavat tilastollisen päättelyn menetelmät vaativat jälleen pidemmälle meneviä tilastotieteen opintoja!</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="normaalijavinoutunutjakauma.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Esimerkkikuva symmetrisestä ja vinosta jakaumasta.
+</center>
+</div>
+<p>&nbsp;</p>
+<p>Vinoutuneisiin jakaumia (normaalijakaumaan verrattuna) ja ylipäätään jakaumien “<strong>häntätodennäköisyyksien</strong>” tärkeyttä korostaa myös Nassim Nicholas Taleb teoksissaan The Black Swan (2007) ja Antifragile (2012). Normaalijakaumaan perustuva ajattelu voi johtaa harhaan erityisesti epävarmoissa ja monimutkaisissa järjestelmissä. <span class="marginnote">Mustat joutsenet</span> Hänen mukaansa niin sanotut <strong>mustat joutsenet</strong> – harvinaiset, yllättävät mutta vaikutuksiltaan suuret tapahtumat – eivät ole poikkeuksia, vaan usein juuri ne, jotka muovaavat historiaa ja taloutta ratkaisevasti.</p>
+<p>Taleb kritisoi riskimallinnusta, joka sivuuttaa paksuhäntäisten jakaumien merkityksen: ääripäät eivät ole vain tilastollisia poikkeuksia, vaan voivat hallita koko ilmiön käyttäytymistä. Hänen viestinsä on, että meidän tulisi suhtautua epävarmuuteen vakavasti ja rakentaa järjestelmiä, jotka eivät vain kestä sokkeja – vaan jopa hyötyvät niistä (antifragiliteetti).</p>
+<!-- - Talebin viestin mukaan äärimmäiset tapahtumat – niin sanotut **mustat joutsenet** – eivät ole (aivan "niin") harvinaisia poikkeavia tapahtumia, vaan usein tärkeitä ja ratkaisevia voimia, jotka muovaavat maailmaa enemmän kuin keskimääräiset tapahtumat. Hän varoittaa, että normaalijakaumaan perustuva ajattelu voi sokeuttaa meidät todellisilta riskeiltä ja mahdollisuuksilta. 
+
+- Talebin mukaan meidän tulisi suhtautua epävarmuuteen ja poikkeaviin arvoihin vakavasti – ei sivuuttaa niitä keskiarvon varjossa. Hänen osaltaan popularisoima käsite **paksuhäntäisistä** (*"fat tail"*) jakaumista viittaa juuri siihen, että ääripäät eivät ole vain tilastollisia kuriositeetteja, vaan usein koko ilmiön kannalta keskeisiä ja mahdollisesti todellisuudessa todennäköisempiä mitä esim. normaalijakauma antaisi ymmärtää. -->
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06-otannan_idea.html" class="pagination-link" aria-label="Otannan idea">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-til_riippuvuus.html" class="pagination-link" aria-label="Tilastollinen riippuvuus, korrelaatio ja kausaalisuus">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

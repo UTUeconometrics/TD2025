@@ -1,0 +1,36 @@
+# Liite A: Kreikkalaiset aakkoset {.unnumbered}
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+| Iso kirjain | Pieni kirjain | Nimi    | Latin. vastine |
+|-------------|---------------|---------|----------------|
+| $Α$         | $α$           | alpha   | a              |
+| $Β$         | $β$           | beta    | b              |
+| $Γ$         | $γ$           | gamma   | g              |
+| $Δ$         | $δ$           | delta   | d              |
+| $Ε$         | $ε$           | epsilon | e              |
+| $Ζ$         | $ζ$           | zeta    | z              |
+| $Η$         | $η$           | eta     | e              |
+| $Θ$         | $θ$           | theta   | th             |
+| $Ι$         | $ι$           | iota    | i              |
+| $Κ$         | $κ$           | kappa   | k              |
+| $Λ$         | $λ$           | lambda  | l              |
+| $Μ$         | $μ$           | mu      | m              |
+| $Ν$         | $ν$           | nu      | n              |
+| $Ξ$         | $ξ$           | xi      | x              |
+| $Ο$         | $ο$           | omicron | o              |
+| $Π$         | $π$           | pi      | p              |
+| $Ρ$         | $ρ$           | rho     | r              |
+| $Σ$         | $σ$           | sigma   | s              |
+| $Τ$         | $τ$           | tau     | t              |
+| $Υ$         | $υ$           | upsilon | y / u          |
+| $Φ$         | $φ$           | phi     | f / ph         |
+| $Χ$         | $χ$           | chi     | kh             |
+| $Ψ$         | $ψ$           | psi     | ps             |
+| $Ω$         | $ω$           | omega   | O              |

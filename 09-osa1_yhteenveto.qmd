@@ -1,0 +1,103 @@
+---
+title: "Osan I yhteenvetoa signaalin ja kohinan näkökulmasta"
+---
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+Palataan vielä Osan I lopuksi yhteenvetoon tähän mennessä opitusta. Kuten todettua, tilastollisessa tutkimuksessa mielenkiinnon kohteena on satunnaisilmiöiden tutkiminen ja erityisesti **systemaattisen ja satunnaisen vaihtelun** eli **signaalin ja kohinan erottaminen toisistaan**. Tämä saattaa näyttäytyä selvimmin (tähän mennessä opitun pohjalta) edellä käsitellyssä kahden muuttujan (lineaarista) riippuvutta koskevassa kohdassa. Ylipäätään siis **muuttujien välisten riippuvuuksien tutkiminen** on keskiössä kun pyrimme löytämään signaalin tai signaaleja ja erottamaan ne puhtaasta kohinasta.
+
+[Signaali ja kohina]{.marginnote}
+
+::: defblock
+**Signaali ja kohina (tilastotieteessä)** perustuu ajatukselle, että havaittu aineisto (= data) koostuu kahdesta komponentista: (deterministisestä) signaalista, joka on se, mistä olemme erityisesti kiinnostuneita, ja satunnaisesta kohinasta, joka muodostaa satunnaisen jäännösvirheen. Tilastollisen analyysin (ml. tilastollisen päättelyn) haasteena on tunnistaa nämä kaksi oikein ja **olla erehtymättä luulemaan kohinaa signaaliksi**.
+:::
+
+On syytä vielä korostaa, että kun dataa analysoidaan signaalit tulevat aina kohinan kanssa. Tämän vuoksi niiden erottaminen toisistaan tekee aiheesta mielenkiintoisen! Havaittu data sisältää sekä todellista informaatiota (signaalia) että satunnaista vaihtelua (kohinaa).
+
+-   Väistämätön satunnaisvaihtelusta johtuva vaihtelu (kun kyse on satunnaisilmiöistä!) vaikeuttaa tätä tunnistamisoperaatiota.
+
+-   Tästä vaihtelusta johtuen rakennamme tilastollisia malleja, jotka ovat hyödyllisiä abstraktioita tarkasteltavalle ilmiölle. Mallit auttavat kuvaamaan ja ymmärtämään datan vaihtelua ja epävarmuutta tarjoamalla matemaattisen kehyksen, jonka avulla voidaan tehdä ennusteita ja arvioida, kuinka hyvin mallit sopivat havaittuun aineistoon.
+
+ 
+
+::: eblock
+**Esimerkki**. Elämänviisautta pohdittavaksi signaalin kehittymisestä suhteessa kohinaan (ts. miten signaali ja kohina näyttäytyvät tässä?):
+
+"*I'm greater believer in luck, and I find the harder I work the more I have of it*"
+
+(Thomas Jefferson, Yhdysvaltojen 3. presidentti 1801--1809)
+:::
+
+ 
+
+Soveltavassa tilastotieteessä kiinnostuksen kohteena on siis hyvin harvoin vain jokin yksittäinen tunnusluku, kuten keskiarvo, varianssi tai korrelaatio. Kysymys on lähes aina useiden tunnuslukujen ja viime kädessä formaalin tilastollisen mallin täsmentämisen kautta pyrkimyksestä mahdollisimman hyvään signaalin erottamiseen kohinasta.
+
+-   Tähän tavoitteeseen pyrittäessä olemme nyt nähneet edellä ensimmäisiä ja alustavia askeleita, mutta matkaa on vielä runsaasti jäljellä tämän vaiheen jälkeen!
+
+ 
+
+**Tieteen popularisointi** on yksi tutkijoiden ja yliopistojen tiedeyhteisön tärkeimmistä yhteiskunnallisista tehtävistä, mutta valitettavan usein se typistyy yksittäisen viimeisimmän tutkimustuloksen esittelyksi. Kuinka usein kyseessä on lopulta lähinnä kohinasta signaalin sijaan?
+
+-   Yliopistoyhteisössä kuitenkin, luonnollisesti, luotamme kumuloituneeseen tutkittuun tietoon ja tiedämme, kuten luvuissa tähän asti olemme käyneet lävitse, että **yksittäinen tutkimus on vasta hyvä alku**.
+
+    -   Ihmistieteitä, kuten ilmeisesti erityisesti psykologiaa sekä osin myös mm. lääke- ja taloustiedettä, on viimeisen vuosikymmenen ajan puhuttanut paljon ns. **replikaatiokriisi**, sillä useaa arvostettuakaan tutkimusta ei ole saatu **toistettua eli replikoitua**. On ymmärrettävää, että replikaatiokriisi, varsinkin jos se on (alakohtaisesti) laajalle levinnyttä, murentaa kansalaisten luottamusta tieteellisiin tuloksiin.
+
+    -   Toistettavuus on yksi tutkimuksen peruskriteereistä, joka erottaa tieteellisen tiedon muista tietolähteistä, joten sen puuttuminen herättää ymmärrettävästi huolta tieteellisen prosessin toimivuudesta.
+
+    -   Replikaatiokriisin voi kuitenkin myös tulkita toisin: ilman kriittisyyttä omia (ja muiden) tuloksia kohtaan, ei mitään kriisiä olisikaan, joten silkka sen olemassaolo on osoitus tieteellisen prosessin toimivuudesta.
+
+-   Kun tuntee ja tunnistaa sattuman voiman ja ymmärtää mahdolliset satunnaisuuden lähteet, jotka altistavat tutkimusprosessin virheille, tulee samalla ymmärtäneeksi että eri tavoin koeteltu, useassa tutkimuksessa kumuloitunut tieto tulisi olla kaiken tieteen popularisoinnin keskiössä yksittäisten, mahdollisesti uusien ja yllättävien tutkimustulosten sijaan.
+
+Tähän mennessä olemme jo oppineet, että tälle (tutkimustulosten vaihtelulle ja kehittymiselle) on myös vahvat tilastolliset perustelut: **satunnaisen tiedon maailmassa mikään ei ole täysin varmaa**, ei edes kaikkein edistyneimpien tilastomenetelmien avulla!
+
+-   Erityisesti nykypäivänä ei-tieteellinen tieto ja tarkoituksellinen **disinformaatio**, joita perustellaan heppoisin havainnoin, leviävät internetissä kulovalkean tavoin.
+
+-   Voidaan sanoa, että on tiedeyhteisön ja tutkijoiden moraalinen vastuu taistella näitä uskomuksia vastaan **popularisoimalla tiedettä**.
+
+Tieteen (liiankin vahvat) popularisointipyrkimykset saattavat kuitenkin ajoittain jopa pahentaa ongelmaa, sillä tutkijoilta voi unohtua **satunnaisuuden voima**. Eli se, mitä olemme osaltaan hahmotelleet edellä, kuten millä tavalla tilastoaineistot muodostuvat ja mitä mahdollisia ongelmia näihin vaiheisiin voi liittyä.
+
+ 

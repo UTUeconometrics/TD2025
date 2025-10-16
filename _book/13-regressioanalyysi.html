@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; Regressioanalyysi – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./14-ennustaminen.html" rel="next">
+<link href="./12-otosjakaumat.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-regressioanalyysi.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#johdatus-regressioanalyysin-ideaan" id="toc-johdatus-regressioanalyysin-ideaan" class="nav-link active" data-scroll-target="#johdatus-regressioanalyysin-ideaan"><span class="header-section-number">13.1</span> Johdatus regressioanalyysin ideaan</a></li>
+  <li><a href="#yhden-selittäjän-lineaarinen-regressiomalli" id="toc-yhden-selittäjän-lineaarinen-regressiomalli" class="nav-link" data-scroll-target="#yhden-selittäjän-lineaarinen-regressiomalli"><span class="header-section-number">13.2</span> Yhden selittäjän lineaarinen regressiomalli</a></li>
+  <li><a href="#muita-regressiomalleja" id="toc-muita-regressiomalleja" class="nav-link" data-scroll-target="#muita-regressiomalleja"><span class="header-section-number">13.3</span> Muita regressiomalleja</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>Tilastollinen riippuvuus ja korrelaatio -jakson laajennuksena pyrimme tässä luvussa vastaamaan seuraavaan kysymykseen:</p>
+<p><em>Miten jonkin selitettävän muuttujan tilastollista riippuvuutta joistakin toisista selittäviksi muuttujiksi kutsutuista muuttujista voidaan mallintaa</em>?</p>
+<p>Muuttujien välisten riippuvuuksien, eli erilaisten tosielämän ilmiöiden välisten yhteyksien, analysointi on tavallisesti keskeinen kysymys tieteellisessä tutkimuksessa.</p>
+<p><strong>Regressioanalyysi</strong> on yksi tunnetuimpia ja eniten sovellettuja <strong>tilastollisia menetelmiä</strong> kuvaamaan kahden muuttujan <strong>tilastollista riippuvuutta</strong>. Jos tilastoaineistossa on havaittavissa säännönmukaisuutta ja muuttujien välillä näyttäisi olevan järkevä (asialooginen) yhteys, niin päästään “malliajatteluun”. Ts. pyritään rakentamaan tilastollista mallia ko. aineistolle, mikä valitun kriteeristön perusteella parhaiten kuvaa analysoitavaa aineistoa..</p>
+<section id="johdatus-regressioanalyysin-ideaan" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="johdatus-regressioanalyysin-ideaan"><span class="header-section-number">13.1</span> Johdatus regressioanalyysin ideaan</h2>
+<p>Regressioanalyysi pyrkii havaintoaineiston perusteella mallintamaan tilastoyksikköjen tilastollisten muuttujien välistä riippuvuutta.</p>
+<p><span class="marginnote">Selitettävä ja selittävät muuttujat</span></p>
+<ul>
+<li><p>Regressiomallissa tilastollisia muuttujia on kahdenlaisia: <strong>selitettävä muuttuja</strong>, jonka tilastollista vaihtelua pyritään selittämään <strong>selittävän muuttujan</strong>, tai <strong>selittävien muuttujien</strong>, avulla.</p></li>
+<li><p>Toisin sanoen, pyritään erottamaan se selitettävän muuttujan arvojen vaihtelu, joka voidaan selittää selittävän muuttujan (selittävien muuttujien) arvojen vaihtelulla siitä vaihtelusta, joka on täysin satunnaista. Jälleen on siis kysymys signaalista ja kohinasta!</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkiksi</strong> voitaisiin tutkia selittääkö vaaleissa puolueiden/ehdokkaiden vaalimainontabudjetti heidän äänimääriään, ja jos selittää, niin kuinka suuren osan äänimääristä?</p>
+</div>
+<p>Jos <strong>tilastollisesti merkitsevä osa</strong> selitettävän muuttujan havaittujen arvojen vaihtelusta voidaan selittää selittävien muuttujien arvojen vaihtelun avulla, sanomme, että selitettävä muuttuja <strong>riippuu tilastollisesti</strong> merkitsevästi selittäjinä käytetyistä muuttujista.</p>
+<p>Yleisemmin regressioanalyysi pyrkii vastaamaan seuraaviin kysymyksiin koskien tilastollisten muuttujien välistä riippuvuutta:</p>
+<ul>
+<li>Muuttujien välisten <strong>riippuvuuksien kuvaaminen</strong>. Millainen on riippuvuuden muoto (kuten lineaarinen vai epälineaarinen)? Kuinka voimakasta riippuvuus on?</li>
+<li>Muuttujien välisten <strong>riippuvuuksien selittäminen</strong>. Tilastollisen riippuvuuden luonteen kuvaaminen ja tiivistäminen.</li>
+<li>Selitettävän muuttujan käyttäytymisen <strong>ennustaminen</strong>.</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Lineaarinen regressioanalyysi</strong> (teknisesti) rajoittuu muuttujien <em>lineaaristen</em> riippuvuuksien kuvaamiseen. Kuitenkin, laajemmin asiaa pohdittaessa, lineaaristen regressiomallien suuri käyttökelpoisuus muuttujien välisten riippuvuuksien tilastollisessa analyysissa perustuu (ainakin) seuraaviin seikkoihin:</p>
+<ul>
+<li>Lineaarisella regressiomallilla voidaan ajoittain kohtuullisella tarkkuudella approksimoida (siis jossain määrin, malli on toki virheellinen) epälineaarisiakin muuttujien välisiä riippuvuuksia.</li>
+<li>Muuttujien välinen epälineaarinen riippuvuus voidaan usein myös linearisoida käyttäen sopivia muunnoksia alkuperäisiin muuttujiin.</li>
+<li>Epälineaariset regressiomallit muodostavat oman tilastollisten (regressio)mallien luokkansa (joita ei käsitellä tarkemmin vielä tällä kurssilla, mutta kylläkin myöhemmissä tilastotieteen opinnoissa).</li>
+</ul>
+<p>Regressiomalleja käytetään apuvälineinä monilla tilastotieteen osa-alueilla. Esimerkkejä regressiomallien käyttökohteista tilastotieteessä:</p>
+<ul>
+<li>Varianssianalyysi</li>
+<li>Koesuunnittelu <!-- - Monimuuttujamenetelmät --></li>
+<li>Biometria/biostatistiikka</li>
+<li>Aikasarja-analyysi ja ennustaminen</li>
+<li>Ekonometria</li>
+</ul>
+<p>Regressioanalyysissa sovellettavat tilastolliset mallit voidaan luokitella usealla eri periaatteella.</p>
+<ul>
+<li>Luokittelu regressiomallin funktionaalisen muodon mukaan:
+<ul>
+<li>Lineaariset regressiomallit</li>
+<li>Epälineaariset regressiomallit</li>
+</ul></li>
+<li>Luokittelu regressiomallin yhtälöiden lukumäärän mukaan:
+<ul>
+<li>Yhden yhtälön regressiomallit</li>
+<li>Moniyhtälömallit</li>
+</ul></li>
+</ul>
+<p><span class="marginnote">Yhden selittäjän lin. malli</span> Tällä kurssilla käsitellään seuraavaksi käytännössä vain <strong>yhden selittäjän lineaarista regressiomallia</strong>. Myöhemmin esitellään kuitenkin lyhyesti minkälaisia laajennuksia tälle regressioanalyysin perustilanteelle tyypillisesti hyödynnetään tilastollisissa analyyseissä.</p>
+</section>
+<section id="yhden-selittäjän-lineaarinen-regressiomalli" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="yhden-selittäjän-lineaarinen-regressiomalli"><span class="header-section-number">13.2</span> Yhden selittäjän lineaarinen regressiomalli</h2>
+<p>Yhden selittäjän lineaarinen regressiomalli pyrkii selittämään selitettävän muuttujan havaittujen arvojen vaihtelua yhden selittävän muuttujan havaittujen arvojen vaihtelun avulla. Se on siis yksinkertaisin esimerkki yhden selittäjän lineaarisista regressiomalleista, sillä se sisältää vain yhden selittävän muuttujan useamman sijaan.</p>
+<ul>
+<li>Selitettävää muuttujaa kutsutaan usein myös <em>vastemuuttujaksi, vasteeksi, riippuvaksi muuttujaksi tai tulosmuuttujaksi</em></li>
+<li>Vastaavasti selittävää muuttujaa kutsutaan ajoittain myös <em>selittäjäksi, riippumattomaksi muuttujaksi tai ennustavaksi muuttujaksi</em>.</li>
+</ul>
+<p>Tässä luvussa tarkastellaan lyhyesti ja tiivistetysti seuraavia yhden selittävän muuttujan lineaarisen regressiomallin soveltamiseen liittyviä kysymyksiä:</p>
+<ul>
+<li>Miten malli formuloidaan?</li>
+<li>Mitkä ovat mallin osat ja mitkä ovat osien tulkinnat?</li>
+<li>Mitkä ovat mallia koskevat tavanomaiset oletukset?</li>
+<li>Miten mallin parametrit estimoidaan?</li>
+<li>Miten mallin parametreja koskevia hypoteeseja testataan?</li>
+<li>Miten mallin hyvyyttä mitataan?</li>
+<li>Miten mallilla ennustetaan?</li>
+</ul>
+<p>Oletetaan, että selitettävän muuttujan (Y) havaittujen arvojen vaihtelua halutaan selittää selittävän muuttujan eli selittäjän (x) havaittujen arvojen vaihtelun avulla. Tulkitaan selittävä muuttuja tässä kohtaa kiinteäksi eli sen arvot oletetaan tunnetuksi.</p>
+<ul>
+<li>Kyseinen muuttuja voidaan myös tulkita satunnaismuuttujana eikä seuraavat tarkastelut muutu ratkaisevasti tämän seurauksena.</li>
+</ul>
+<!-- - Lineaarisen regressiomallin perusoletuksiin kuuluu se, että selittävien muuttujien arvot ovat ei-satunnaisia. On kuitenkin syytä korostaa (jo tässä vaiheessa), että selittävän muuttujan arvojen satunnaisuus ei kuitenkaan vaikuta mallin estimoinnissa ja testauksessa käytettäviin menetelmiin seuraavissa tilanteissa: -->
+<!-- - Tavanomaiset mallista tehdyt oletukset pätevät (sopivasti modifioituina), kun siirrytään tarkastelemaan selittävän muuttujan ehdollista odotusarvoa selittäjien suhteen.  -->
+<!-- - Voidaan (ajoittain) olettaa, että selitettävä muuttuja ja selittäjät noudattavat yhdessä **multinormaalijakaumaa** eli aiemmin esitellyn yksiulotteisen normaalijakauman moniulotteista laajennusta. -->
+<p>Tehdään siis seuraavat oletukset:</p>
+<ol type="i">
+<li>Selitettävä muuttuja <span class="math inline">\(Y\)</span> on suhdeasteikollinen satunnaismuuttuja.</li>
+<li>Selittävä muuttuja <span class="math inline">\(x\)</span> on kiinteä eli ei-satunnainen muuttuja.</li>
+</ol>
+<p>Olkoot <span class="math inline">\(y_1, y_2,\ldots, y_n\)</span> selitettävän muuttujan <span class="math inline">\(Y\)</span> ja <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> selittävän muuttujan <span class="math inline">\(x\)</span> havaittuja arvoja. Oletetaan lisäksi, että havaintoarvot <span class="math inline">\(x_i\)</span> ja <span class="math inline">\(y_i\)</span> liittyvät samaan havaintoyksikköön kaikille <span class="math inline">\(i=1, 2, \ldots, n\)</span>, eli tarkastellaan havaintopareja <span class="math inline">\((x_i,y_i)\)</span>.</p>
+<ul>
+<li>Matemaattisemmin tämä tarkoittaa sitä, että tällöin havaintoarvot muodostavat pisteitä 2-ulotteisessa avaruudessa <span class="math inline">\((x_i, y_i)\)</span>.</li>
+</ul>
+<div class="defblock">
+<p><strong>Yhden selittäjän lineaarinen regressiomalli</strong>. Oletetaan, että havaintoarvojen <span class="math inline">\(y_i\)</span> ja <span class="math inline">\(x_i\)</span> välillä on <strong>lineaarinen tilastollinen riippuvuus</strong>, joka voidaan ilmaista yhtälöllä <span class="math display">\[\begin{equation*}
+  Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i, \quad i=1,\ldots, n.
+  \end{equation*}\]</span> Tämä yhtälö määrittelee yhden selittäjän lineaarisen regressiomallin, jossa</p>
+<ul>
+<li><span class="math inline">\(y_i\)</span> on selitettävän satunnaismuuttujan <span class="math inline">\(Y_i\)</span> havaittu arvo havaintoyksikölle <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(x_i\)</span> selittävän muuttujan eli selittäjän <span class="math inline">\(x\)</span> ei-satunnainen ja havaittu arvo havaintoyksikölle <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\varepsilon_i\)</span> on <strong>virhetermi</strong> ja sen satunnainen ja ei-havaittu arvo havaintoyksikölle (i). Se vastaa siitä osuudesta sm:jan <span class="math inline">\(Y_i\)</span> satunnaisvaihtelusta mitä mallin systeemaattinen osa <span class="math inline">\(\beta_0 + \beta_1 x_i\)</span> ei kykene mallintamaan.</li>
+</ul>
+<p>Yhden selittäjän lineaarisen regressiomallin regressiokertoimista:</p>
+<ul>
+<li><p><span class="math inline">\(\beta_0\)</span> on ei-satunnainen ja tuntematon vakio, ja sitä kutsutaan <strong>vakioselittäjän</strong> regressiokertoimeksi. Nimitys johtuu siitä, että kerrointa <span class="math inline">\(\beta_0\)</span> vastaa keinotekoinen selittäjä, joka saa kaikille havaintoyksiköille <span class="math inline">\(i=1, 2, \ldots, n\)</span> vakioarvon 1. Tämä lisätään malliin olennaisesti aina (ellei ole jotain todella erityisiä syitä toimia toisin).</p>
+<ul>
+<li>Huomautus: Jatkossa esitettävät kaavat eivät välttämättä päde esitettävässä muodossa, jos mallissa ei ole vakiota (vakioselittäjää), joka yleensä automaattisesti lisätään aina mukaan malliin.</li>
+</ul></li>
+<li><p><span class="math inline">\(\beta_1\)</span> on ei-satunnainen ja tuntematon vakio, ja siis selittäjään <span class="math inline">\(x\)</span> liittyvä regressiokerroin, jota kutsutaan ajoittain myös kulmakertoimeksi (se määrittelee regressiosuoran kulmakertoimen).</p>
+<ul>
+<li>Huomautus: Huomaa, että regressiokertoimet <span class="math inline">\(\beta_0\)</span> ja <span class="math inline">\(\beta_1\)</span> on oletettu samoiksi kaikille havaintoyksiköille <span class="math inline">\(i\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+<p><span class="marginnote">Regressiokerroin</span></p>
+<div class="defblock">
+<p><strong>Regressiokertoimella</strong> tarkoitetaan tilastollisen mallin (lopulta aineiston perusteella estimoidun) parametrin arvoa, joka ilmaisee selittävän muuttujan ja vastemuuttujan välisen suhteen voimakkuuden regressiomallissa. Kertoimen tulkinta vaihtelee sen mukaan, onko vastemuuttuja jatkuva muuttuja (kuten yllä lineaarisessa regressiomallissa), binäärinen tai ajoittain myös osuus (logistinen regressio) tai esimerkiksi lukumäärä (Poisson-regressio).</p>
+<p>Regressiokerroin kuvaa, kuinka paljon ja mihin suuntaan selittävän muuttujan muutos vaikuttaa vastemuuttujaan.</p>
+<ul>
+<li><p>Esimerkiksi lineaarisessa regressiossa (kuten edellä) lopulta estimoitu regressiokerroin <span class="math inline">\(\widehat{\beta}_1\)</span> kertoo, kuinka paljon vastemuuttujan arvo muuttuu, kun selittävä muuttuja <span class="math inline">\(x\)</span> kasvaa yhdellä yksiköllä, pitäen muut muuttujat vakiona (=ennallaan). Yhden selittäjän tapauksessa tämä toteutuu tietysti automaattisesti.</p></li>
+<li><p>Logistisessa regressiossa (binääriselle vastemuuttujalle) kerroin kuvaa todennäköisyyden muutosta, kun taas Poisson-regressiossa se kuvaa odotettujen tapahtumien lukumäärän muutosta.</p></li>
+</ul>
+</div>
+<p>Keskustellaan hetken aikaa <strong>virhetermin</strong> <span class="math inline">\(\varepsilon_i\)</span> <strong>roolista</strong>. Havaintoyksikkökohtaisista (huom riippuvat indeksistä <span class="math inline">\(i\)</span>!) virhetermeistä <span class="math inline">\(\varepsilon_i\)</span> tehdään oletuksia, jotka liittyvät tilastollisen mallin rakentamiseen. Ns. standardioletukset ovat seuraavat:</p>
+<ol type="i">
+<li><span class="math inline">\(\mathsf{E}(\varepsilon_i) = 0, \, i=1,2,\ldots,n\)</span>.</li>
+<li>Virhetermeillä on vakiovarianssi eli ne ovat homoskedastisia: <span class="math inline">\(\mathsf{Var}(\varepsilon_i)= \sigma^2, \, i=1,\ldots,n\)</span>. Virhetermien <span class="math inline">\(\varepsilon_i\)</span> tässä yhteiseksi oletettua varianssia kutsutaan ajoittain jäännösvarianssiksi.</li>
+<li>Virhetermit ovat korreloimattomia: <span class="math inline">\(\mathsf{Cov}(\varepsilon_i, \varepsilon_l)=0, \, i \neq l\)</span>, eli niiden välinen kovarianssi on siis 0.</li>
+<li>Lisäksi ajoittain tehdään normaalisuusoletus eli että virhetermit ovat normaalisti jakautuneita: <span class="math inline">\(\varepsilon_i \thicksim \text{N}(0, \sigma^2), \, i=1,2,\ldots,n\)</span>.</li>
+</ol>
+<ul>
+<li><p>Huomautus: Oletus (iv) sisältää oletukset (i) ja (ii) (tämä liittyy normaalijakauman ominaisuuksiin)</p></li>
+<li><p>Oletus (i) on keskeisin. Sen sijaan kaikki oletukset (ii)–(iv) eivät ole (yhdessä) välttämättömiä ja melko usein eri tilastotieteen osa-alueilla ja sovelluksissa virhetermistä tehdään vähemmän tai lievempiä oletuksia mitä (ii)–(iv) olettavat.</p></li>
+</ul>
+<p>Regressioanalyysille voidaan esittää kaksi asialoogisesti varsin erilaista lähtökohtaa, joilla on kuitenkin myös monia yhtymäkohtia:</p>
+<ol type="i">
+<li>Ongelmat determinististen mallien (ks. aiempi keskustelu determinististen ja stokastisten mallien välillä) sovittamisessa havaintoihin: Havainnoille esitetty malli ei sovi täsmällisesti kaikkiin havaintoihin. Tämä onkin osaltaan tilastollisen mallinnuksen yksi ominaispiirteistä: Täydellistä sopivuutta aineiston kanssa ei käytännössä koskaan saavuteta tavanomaisen lineaarisen mallin avulla.</li>
+<li>Tavoitteena on tarkemmin ottaen moniulotteisen todennäköisyysjakauman regressiofunktion parametrien estimointi. Vaikka moniulotteisten todennäköisyysjakaumien regressiofunktiot ovat yleisesti epälineaarisia, lineaariset regressiomallit muodostavat tärkeän ja paljon sovelletun malliluokan.</li>
+</ol>
+<p>&nbsp;</p>
+<p><strong>Parametrien estimointi</strong></p>
+<p>Koska regressiokertoimet <span class="math inline">\(\beta_0\)</span> ja <span class="math inline">\(\beta_1\)</span> sekä jäännösvarianssi <span class="math inline">\(\sigma^2\)</span> ovat (tavallisesti) tuntemattomia, niiden arvot on <strong>estimoitava</strong> muuttujien <span class="math inline">\(x\)</span> ja <span class="math inline">\(Y\)</span> havaittuja arvoja <span class="math inline">\(x_i\)</span> ja <span class="math inline">\(y_i\)</span>, <span class="math inline">\(i=1,2, \ldots, n,\)</span> käyttäen.</p>
+<p>Lineaaristen regressiomallien parametrien estimointiin käytetään tavallisesti <strong>pienimmän neliösumman (PNS) menetelmää</strong>. Tämän estimointimenetelmän tarkemmat yksityiskohdat ovat myöhempien tilastotieteen kurssien asioita. Seuraavassa kuitenkin muutamia yksityiskohtia mihin PNS-menetelmä perustuu yhden selittäjän tapauksessa.</p>
+<p>PNS-menetelmässä edellä esitellyn yhden selittäjän lineaarisen regressiomallin regressiokertoimien <span class="math inline">\(\beta_0\)</span> ja <span class="math inline">\(\beta_1\)</span> estimaattorit määrätään minimoimalla virhetermien <span class="math inline">\(\varepsilon_i\)</span> neliösummaa <span class="math display">\[\begin{equation*}
+S(\beta_0,\beta_1) = \sum_{i=1}^{n} \varepsilon^2_i = \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1 x_i)^2
+\end{equation*}\]</span> regressiokertoimien <span class="math inline">\(\beta_0\)</span> ja <span class="math inline">\(\beta_1\)</span> suhteen.</p>
+<ul>
+<li>Tämä minimointi tapahtuu tavanomaiseen tapaan derivoimalla funktio <span class="math inline">\(S(\beta_0,\beta_1)\)</span> kertoimien <span class="math inline">\(\beta_0\)</span> ja <span class="math inline">\(\beta_1\)</span> suhteen ja merkitsemällä derivaatat nolliksi: <span class="math display">\[\begin{eqnarray*}
+\frac{\partial S(\beta_0,\beta_1)}{\partial \beta_0} &amp;= -2 \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1 x_i) = 0 \\
+\frac{\partial S(\beta_0,\beta_1)}{\partial \beta_1} &amp;= -2 \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1 x_i) x_i = 0.
+\end{eqnarray*}\]</span> Nämä ns. <strong>normaaliyhtälöt</strong> johtavat lopulta pienen sieventämisen jälkeen regressiokertoimien <span class="math inline">\(\beta_0\)</span> ja <span class="math inline">\(\beta_1\)</span> pienimmän neliösumman (PNS-) estimaattoreihin ja lopulta käytännössä analysoitavasta aineistosta laskettaviin PNS-estimaatteihin <span class="math display">\[\begin{eqnarray*}
+\widehat{\beta}_0 &amp;=&amp; \bar{y} - \widehat{\beta}_1 \bar{x}, \qquad \mathrm{ja} \\
+\widehat{\beta}_1 &amp;=&amp; \frac{s_{xy}}{s^2_x} = r_{xy} \frac{s_y}{s_x},
+\end{eqnarray*}\]</span> josta nähdään yhteys aiemmin Osassa I esiteltyihin <span class="math inline">\(x\)</span>:n ja <span class="math inline">\(y\)</span>:n otoskeskiarvoihin, otoskeskihajontoihin sekä otoskovarianssiin ja otoskorrelaatiokertoimeen <span class="math inline">\(x\)</span>:n ja <span class="math inline">\(y\)</span>:n välillä.</li>
+</ul>
+<p>PNS-estimaatit <span class="math inline">\(\widehat{\beta}_0\)</span> ja <span class="math inline">\(\widehat{\beta}_1\)</span> määrittelevät suoran (matemaattisesti katsoen) kaksiulotteisessa avaruudessa: <span class="math display">\[\begin{equation*}
+  \widehat{y}_i = \widehat{\beta}_0 + \widehat{\beta}_1 x_i,
+  \end{equation*}\]</span> jossa</p>
+<ul>
+<li><span class="math inline">\(\widehat{\beta}_0\)</span> on estimoidun regressiosuoran ja pistekuvion y-akselin leikkauspiste</li>
+<li><span class="math inline">\(\widehat{\beta}_1\)</span> on estimoidun regressiosuoran kulmakerroin</li>
+</ul>
+<p><span class="marginnote">Sovitteet</span> - Tämän estimoidun suoran tuottamat arvot <span class="math inline">\(\widehat{y}_i\)</span> ovat käytännössä eri havainnoille <span class="math inline">\(y_i\)</span> saatavat <strong>sovitteet</strong> (<span class="math inline">\(i=1,...,n\)</span>) valittuun lineaariseen malliin perustuen. Näiden perusteella voidaan osaltaan tehdä estimoidusta mallista tulkintoja ja tutkia myös mallin sopivuutta aineistoon.</p>
+<p><strong>Estimoidun mallin tulkintoja</strong></p>
+<p>Tarkastellaan estimoidun (yhden selittäjän) lineaarisen mallin seurauksia. Sijoitetaan regressiokertoimien <span class="math inline">\(\beta_0\)</span> ja <span class="math inline">\(\beta_1\)</span> PNS-estimaattoreiden lausekkeet estimoidun regressiosuoran lausekkeeseen. Tällöin estimoidun regressiosuoran yhtälö voidaan kirjoittaa muodossa: <span class="math display">\[\begin{equation*}
+  \widehat{y}_i = \bar{y} + r_{xy} \, \frac{s_y}{s_x} (x_i-\bar{x})
+  \end{equation*}\]</span> Yhtälöstä nähdään, että estimoitu regressiosuora kulkee havaintopisteiden <span class="math inline">\((x_i , y_i), i = 1,2, \ldots, n,\)</span> painopisteen kautta. Voidaan siis nähdä, että estimoidulla regressiosuoralla on seuraavat ominaisuudet:</p>
+<ul>
+<li><ol type="i">
+<li>Jos <span class="math inline">\(r_{xy} &gt; 0\)</span>, suora on nouseva.</li>
+</ol></li>
+<li><ol start="2" type="i">
+<li>Jos <span class="math inline">\(r_{xy} &lt; 0\)</span>, suora on laskeva.</li>
+</ol></li>
+<li><ol start="3" type="i">
+<li>Jos <span class="math inline">\(r_{xy} = 0\)</span>, suora on vaakasuorassa.</li>
+</ol></li>
+<li><ol start="4" type="i">
+<li>Suora jyrkkenee (loivenee), jos</li>
+</ol>
+<ul>
+<li>korrelaation itseisarvo <span class="math inline">\(|r_{xy}|\)</span> kasvaa (pienenee)</li>
+<li>keskihajonta <span class="math inline">\(s_y\)</span> kasvaa (pienenee)</li>
+<li>keskihajonta <span class="math inline">\(s_x\)</span> pienenee (kasvaa)</li>
+</ul></li>
+</ul>
+<p><span class="marginnote">Residuaalit</span> Tarkastellaan vielä estimoituun lineaariseen malliin liittyviä <strong>residuaaleja</strong>, jotka saadaan havaintojen ja sovitteiden erotuksena <span class="math display">\[\begin{equation*}
+\widehat{\varepsilon}_i = y_i - \widehat{y}_i = y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i, \quad i=1,2,\ldots,n.
+\end{equation*}\]</span></p>
+<ul>
+<li><p>Sovite on estimoidun regressiosuoran yhtälön selitettävälle muuttujalle antama arvo havaintopisteessä <span class="math inline">\(x_i\)</span>. Vastaavasti residuaali on selitettävän muuttujan havaitun arvon <span class="math inline">\(y_i\)</span> ja sovitteen <span class="math inline">\(\widehat{y}_i\)</span> eli estimoidun regressiosuoran yhtälön selitettävälle muuttujalle havaintopisteessä <span class="math inline">\(x_i\)</span> antaman arvon erotus.</p></li>
+<li><p>Estimoitu regressiomalli selittää selitettävän muuttujan havaittujen arvojen vaihtelua sitä paremmin mitä lähempänä estimoidun mallin sovitteet <span class="math inline">\(\widehat{y}_i\)</span> ovat selitettävän muuttujan havaittuja arvoja <span class="math inline">\(y_i\)</span>. Yhtäpitävästi estimoitu regressiomalli selittää selitettävän muuttujan havaittujen arvojen <span class="math inline">\(y_i\)</span> vaihtelua sitä paremmin mitä lähempänä nollaa estimoidun mallin residuaalit <span class="math inline">\(\widehat{\varepsilon}_i\)</span> ovat.</p></li>
+</ul>
+<p><span class="marginnote">Selittäjän til. merkitsevyys</span> <strong>Selittäjän tilastollinen merkitsevyys</strong>. Yhden selittäjän lineaarisessa mallissa erityisen mielenkiinnon kohteena on (ks. esim. ylläolevat tulkinnat) testata nollahypoteesin <span class="math display">\[\begin{equation*}
+H_0:\beta_1=0
+\end{equation*}\]</span> paikkansa pitävyyttä. Tätä hypoteesia voidaan testata ns. <strong>t-testillä</strong>, mikä perustuu mm. R:n tai RStudion tuottamiin t-arvoihin (“t values”), jotka saadaan kertoimen <span class="math inline">\(\beta_1\)</span> estimaatin <span class="math inline">\(\widehat{\beta}_1\)</span> ja sen keskivirheen (eli estimoidun hajonnan) osamääränä. Jos saatava t-testisuureen arvo on itseisarvoltaan verrattaen suuri, erityisesti itseisarvoltaan suurempi kuin 2, niin ko. tilastollisen testin p-arvo on pienempi kuin 5 %, ja selittäjä <span class="math inline">\(x\)</span> on täten tilastollisesti merkitsevä selittävä muuttuja 5 % merkitsevyystasolla.</p>
+<p>&nbsp;</p>
+<p><span class="marginnote">Selitysaste</span> Liittyen vielä estimoidun mallin sopivuuden tarkasteluun, estimoidun regressiomallin hyvyyttä mitataan (tavanomaisesti) mm. <strong>selitysasteella</strong> <span class="math inline">\((R^2)\)</span>.</p>
+<ul>
+<li>Selitysasteen määritelmä perustuu ns. varianssianalyysihajotelmaan, jossa selitettävän muuttujan havaittujen arvojen vaihtelua kuvaava neliösumma on jaettu kahdeksi neliösummaksi, joista toinen kuvaa mallin ja havaintojen yhteensopivuutta ja toinen mallin ja havaintojen yhteensopimattomuutta.</li>
+</ul>
+<p>Selitysaste saa arvoja nollan ja ykkösen väliltä (kun lineaarisessa regressiomallissa on mukana vakiotermi).</p>
+<ul>
+<li><p>Arvo 0 tarkoittaa, että malli (yhden selittäjän mallissa käytännössä siis selittäjä <span class="math inline">\(x\)</span>) ei selitä <span class="math inline">\(y\)</span>:n lineaarista vaihtelua yhtään (yli vakiotermin). Ts. määritelty malli ei ollenkaan selitä selitettävän muuttujan havaittujen arvojen vaihtelua.</p></li>
+<li><p>Vastaavasti arvo <span class="math inline">\(R^2 = 1\)</span> tarkoittaa, että malli sopii täydellisesti aineistoon. Ts. selitysaste mittaa lineaarisen regressiomallin selittämää osuutta selitettävän muuttujan havaittujen arvojen kokonaisvaihtelusta.</p></li>
+<li><p>Korkea selitysasteen arvo on siis sinänsä usein toivottava lopputulos lineaarisen mallin käytön yhteydessä. Tämän liian mekaaninen tavoittelu johtaa kuitenkin ajoittain muihin ongelmiin, kuten <strong>ylisovittamiseen</strong> usean selittäjän lineaarisia malleja käsiteltäessä.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki: isän ja pojan pituus, jatkoa</strong>. Jatketaan isän (<span class="math inline">\(x\)</span>) ja heidän poikiensa (<span class="math inline">\(y\)</span>) pituutta koskevan aineiston tarkastelua (ks. Osa I). Periytyykö isän pituus heidän pojilleen? Käytännössä jo aiemmin tarkastelimme Pearsonin klassista havaintoaineistoa isän ja heidän poikiensa pituuksien muodostamista lukupareista.</p>
+<p>Estimoidun regressiosuoran yhtälö on (ks. myös alla oleva kuva) <span class="math display">\[\begin{equation*}
+\widehat{y}_i = 86.09 + 0.514 x_i, \quad i=1,2,...,1078.
+\end{equation*}\]</span> Suoran kulmakertoimen <span class="math inline">\(\widehat{\beta}_1\)</span> = 0.514 tulkinta on siis, että jos isä A on 1 cm pitempi kuin isä B, isä A:n poika on keskimäärin 0.514 cm pitempi kuin isä B:n poika.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="isapoikasovite.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Havainnot ja pojan pituuden sovitteet lineaarisesta regressiomallista (punainen suora).
+</center>
+<p>Ohessa vielä tarkemmin R:n (RStudion) lm-funktion tuottama regressiotulostus:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="an">Coefficients:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">            Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>(Intercept) 86.08771    4.65555   18.49   &lt;2e-16 ***</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Father       0.51401    0.02706   19.00   &lt;2e-16 ***</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Residual standard error: 6.193 on 1076 degrees of freedom</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Multiple R-squared:  0.2512,    Adjusted R-squared:  0.2505 </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>F-statistic: 360.9 on 1 and 1076 DF,  p-value: &lt; 2.2e-16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Edellä keskusteluihin seikkoihin liittyen nähdään mm. seuraavaa:</p>
+<ul>
+<li><p>Selitysaste (“Multiple R-squared”) on 0.251 eli poikien pituuden lineaarisesta vaihtelusta kyetään selittämään n.&nbsp;25 % isien pituuden avulla.</p></li>
+<li><p>Testattaessa isän pituuteen liittyvää regressiokerrointa, eli nollahypoteesia <span class="math inline">\(H_0:\beta_1=0\)</span>, niin saamme t-suhteeksi (t-testisuureeksi) n.&nbsp;19.00 ja p-arvoksi 0.000 (2e-16 on R:n tapa antaa hyvin pieni luku, olennaisesti siis nolla tässä tapauksessa). Näin ollen voimme kaikilla tyypillisillä tilastollisilla merkitsevyystasoilla <span class="math inline">\(\alpha\)</span>, kuten <span class="math inline">\(\alpha=0.05\)</span>, hylätä tämän nollahypoteesin eli isän pituudella on tilastollisesti merkitsevää informaatiota pojan pituutta koskien.</p></li>
+<li><p>Huomaa kuitenkin, mitä myös mm. selitysaste kuvaa, että pituuksien välinen suhde ei ole täysin deterministinen vaan aika runsaasti jää kuitenkin vielä satunnaista vaihtelua jäljelle.</p></li>
+</ul>
+</div>
+<p><span class="marginnote">Ennusteet</span> <strong>Ennusteen muodostaminen</strong>. Mainitaan vielä tässä kohtaa ennusteen muodostamisesta. Edellä mallin sovittaminen tarkoittaa, että käytämme kaikkia havaintoja/havaintopareja <span class="math inline">\((x_i,y_i), \, i=1,...n,\)</span> mallin sovittamiseen (“opettamiseen”). Tämän tuloksena saadaan edellä mainitut sovitteet ja esimerkiksi edeltävän kuvan lineaarisen suoran tässä yhden selittäjän tapauksessa.</p>
+<p>Sen sijaan mm. koneoppimisen suosion kasvusta johtuen ennusteilla tarkoitetaan yhä useammin tilastotieteellisessä kirjallisuudessa uusille havainnoille ja/tai tietylle selittävän muuttujan arvolle <span class="math inline">\(x\)</span> perustuvaa <span class="math inline">\(y\)</span>:n ennustetta. Ts. jos muuttuja <span class="math inline">\(x\)</span> saa arvon <span class="math inline">\(x=x^e\)</span>, jossa <span class="math inline">\(x^e\)</span> on jokin x:lle asetettava arvo ennusteen pohjaksi, niin ennuste on tällöin <span class="math inline">\(\widehat{y}^e = \widehat{\beta}_0 + \widehat{\beta}_1 x^e\)</span>.</p>
+<p>Ennusteiden muodostusta ja laajempaa roolia tilastollisissa analyyseissä ja tietysti erityisesti ennustamisessa tarkastellaan vielä tulevassa luvussa erikseen, kun tehdään myös mm. ero opetus- ja testiaineiston välille.</p>
+</section>
+<section id="muita-regressiomalleja" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="muita-regressiomalleja"><span class="header-section-number">13.3</span> Muita regressiomalleja</h2>
+<p>Yksinkertaista lineaarista regressiomallia voidaan laajentaa monin tavoin ja monenlaisiin erilaisiin tilanteisiin. Käydään seuraavassa hyvin lyhyesti ja johdantomaisesti läpi muutamia mahdollisia ja tyypillisiä tilanteita.</p>
+<p><span class="marginnote">Usean selittäjän lin. malli</span> <strong>Usean selittäjän lineaarinen regressiomalli</strong>: yhden selittäjän sijaan käytetään useita selittäviä muuttujia.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Jos haluamme mallintaa opiskelijan arvosanaa (olisi tässä siis vastemuuttuja <span class="math inline">\(Y_i\)</span>), voimme ottaa huomioon paitsi opiskelutunnit, mutta myös unen määrän, stressitason ja aiemmat suoritukset. Malli näyttäisi tässä tapauksessa tältä (vrt. yhden selittäjän tapaus): <span class="math display">\[\begin{equation*}
+\mathrm{arvosana}_i = \beta_0 + \beta_1 \times \mathrm{opiskelutunnit}_i + \beta_2 \times \mathrm{uni}_i + \beta_3 \times \mathrm{stressi}_i + \beta_4 \times \mathrm{aiemmat\, arvosanat}_i + \varepsilon_i.
+\end{equation*}\]</span></p>
+</div>
+<p><span class="marginnote">Epälineaarinen regressiomalli</span> Lineaarisen mallin sijaan malli voi olla myös <strong>epälineaarinen</strong>.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Logistinen kasvukäyrämalli on esimerkki epälineaarisesta mallista. Se voidaan esittää seuraavassa muodossa: <span class="math display">\[\begin{equation*}
+Y_i = \frac{a}{1 + \exp(-k(t_i - t_0))} + \varepsilon_i,
+\end{equation*}\]</span> jossa</p>
+<ul>
+<li><span class="math inline">\(Y_i\)</span> on opiskelijan arvosana (vaste),</li>
+<li><span class="math inline">\(t_i\)</span> on opiskelijan käyttämä opiskeluaika (esimerkiksi tuntia viikossa),</li>
+<li><span class="math inline">\(a\)</span> on vasteen maksimiarvo (esimerkiksi 10),</li>
+<li><span class="math inline">\(k\)</span> on kasvun jyrkkyyttä säätelevä parametri,</li>
+<li><span class="math inline">\(t_0\)</span> on kohta, jossa kasvu on nopeinta,</li>
+<li><span class="math inline">\(\varepsilon_i\)</span> on satunnaisvirhe, joka kuvaa lineaarisen mallin tapaan mallin ulkopuolista vaihtelua.</li>
+</ul>
+<p>Tämä malli on epälineaarinen muotonsa eli parametrien suhteen. Se kuvaa tilannetta, jossa vaste kasvaa nopeasti alussa, mutta lähestyy ylärajaa <span class="math inline">\(a\)</span> asymptoottisesti. Malli soveltuu hyvin tilanteisiin, joissa vasteen kasvu hidastuu resurssien lisääntyessä, kuten oppimisen tai esimerkiksi esim. biologisen kasvun yhteydessä.</p>
+</div>
+<p>Erityisen tärkeitä yhden selittäjän lineaarisen mallin laajennuksia ilmenee kun <strong>vastemuuttuja on muuta muotoa</strong> mitä edellä oletetaan lineaarisissa regressiomalleissa, joissa käytännössä oletetaan että vaste on suhdeasteíkollinen muuttuja, kuten jokin reaaliluku. Vaste voi hyvin olla myös <strong>diskreettiarvoinen</strong>, kuten <strong>binäärinen</strong> <span class="math inline">\(Y_i=0\)</span> tai <span class="math inline">\(Y_i=1\)</span> tai <strong>lukumäärä</strong> <span class="math inline">\(Y_i \in {0,1,2,3,\ldots}\)</span></p>
+<p><span class="marginnote">Logistinen regressio</span> Mikäli vaste on binäärinen, niin tällöin tyypillinen tarkasteltava ja täsmennettävä tilastollinen malli on <strong>logistinen regressiomalli</strong> (tunnetaan myös <strong>logistisena regressiona</strong> tai <strong>logit-mallina</strong>).</p>
+<div class="eblock">
+<p><strong>Esimerkki logistisesta regressiosta</strong>. Kuvitellaan, että haluamme ennustaa, onnistuuko työnhakija saamaan työpaikan. Meillä on tietoa hakijan koulutuksesta, työkokemuksesta ja siitä, onko hän osallistunut työhaastatteluun. Vastemuuttuja <span class="math inline">\(Y_i\)</span> on binäärinen: Työnhakija <span class="math inline">\(i\)</span> sai työpaikan (eli <span class="math inline">\(y_i=1\)</span>) tai ei saanut (<span class="math inline">\(y_i=0\)</span>). Logistinen regressiomalli voisi tällöin olla <span class="math display">\[\begin{equation*}
+\mathrm{logit}(p_i) = \log \Big(\frac{p_i}{1-p_i}\Big) = \beta_0 + \beta_1 \times \mathrm{koulutus}_i + \beta_2 \times \mathrm{kokemus}_i + \beta_3 \times \mathrm{haastattelu}_i, \quad i=1,...,n,
+\end{equation*}\]</span> jossa <span class="math inline">\(\mathrm{logit}(p_i)\)</span> tarkoittaa siis logaritmista suhdetta työpaikan saamistodennäköisyyden <span class="math inline">\(p_i\)</span> ja sen vastatodennäköisyyden <span class="math inline">\(1-p_i\)</span> välillä eli sen todennäköisyyden kesken, että hakija ei saa työpaikkaa. Mallin avulla voimme arvioida, kuinka todennäköistä on, että hakija saa työpaikan, kun tiedämme hänen taustatekijänsä eli mallin sovitteena saadaan todennäköisyyksiä <span class="math inline">\(\widehat{p}_i\)</span>, jotka ovat tunnetusti nollan ja yhden välillä. Tämä on erittäin hyödyllistä esimerkiksi rekrytointiprosessien kehittämisessä tai koulutuksen vaikuttavuuden arvioinnissa.</p>
+<ul>
+<li><p>Huomaa eroavaisuudet lineaariseen malliin! Ts. mitä tapahtuu malliyhtälön vasemmalla puolella eikä myöskään mitään erillistä virhetermiä ilmene malliyhtälön oikealla puolella.</p></li>
+<li><p>Kaikki tarkemmat yksityiskohdat ovat tämän kurssin ulkopuolella.</p></li>
+</ul>
+</div>
+<p><span class="marginnote">Poisson-regressio</span> Jos vaste on lukumäärä, niin tällöin yksi mahdollinen malliluokka on ns. <strong>Poisson-regressiomalli</strong>. Tässä yhteydessä oletetaan siis, että sm. <span class="math inline">\(Y_i\)</span> noudattaa Poisson-jakaumaa ja regressiomalli rakennetaan tämän oletuksen ympärille.</p>
+<div class="eblock">
+<p><strong>Esimerkkejä</strong>. Yksi mahdollinen esimerkki voisi olla tutkia tarkempaa Poisson-regressiomallia aiemmin käsiteltyyn jalkapallo-ottelun kotijoukkueen ja vierasjoukkueen maalimääriä koskevalle aineistolle.</p>
+<p>Toinen esimerkki saattaisi olla esimerkiksi seuraaava. Kuvitellaan, että haluamme mallintaa, kuinka monta asiakaspalvelupyyntöä yritys saa päivässä. Meillä on tietoa viikonpäivästä (niiden vaikutuksesta asiakaspalvelupyyntöihin), mainoskampanjoista ja verkkosivun kävijämääristä. Vaste on lukumäärä: kuinka monta pyyntöä tulee. Poisson-regressiomalli olisi tällöin muotoa <span class="math display">\[\begin{equation*}
+\mathrm{log}(\lambda_i) = \beta_0 + \beta_1 \times \mathrm{viikonpäivä}_i + \beta_2 \times \mathrm{kampanja}_i + \beta_3 \times \mathrm{kävijät}_i, \quad i=1,...,n,
+\end{equation*}\]</span> jossa <span class="math inline">\(\lambda_i\)</span> on odotettavissa oleva pyyntöjen lukumäärä. Malli kertoo meille, miten eri tekijät vaikuttavat asiakaspalvelun kuormitukseen – ja auttaa esimerkiksi resurssien suunnittelussa. Mallin sovitteina saadaan lukumääräsovitteita havainnoille <span class="math inline">\(y_i\)</span>.</p>
+</div>
+<p>Kuten nämäkin kaksi diskreettien vastemuuttujien mallityyppiä osoittavat ja korostavat, <strong>vastemuuttujan roolin/luonteen selvittäminen on hyvin keskeistä tilastollista mallia rakennettaessa</strong>. Tässä siis pätee samat eroavaisuudet mitkä tulevat tutuiksi todennäköisyyslaskennan kursseilla kun käsitellään diskreettien ja jatkuva-arvoisten satunnaismuuttujien jakaumia ja niihin liittyviä yksityiskohtia.</p>
+<p>Pitemmälle meneviä regressioanalyysin kysymyksiä käsitellään useilla myöhemmillä tilastotieteen kursseilla (Turun yliopistossa) tilastotieteen aineopinnoissa, kuten erityisesti tilastollista päättelyä sekä lineaarisia ja yleistettyjä lineaarisia malleja koskevilla kursseilla.</p>
+<!-- - Erityisesti aineopintojen kurssien TILM3561 Tilastollinen päättely I ja TILM3707 Tilastollinen päättely II jälkeisellä TILM3588 Lineaariset ja yleistetyt lineaariset mallit -kurssilla, jossa tarvitaan myös lineaarialgebran ja matriisilaskennan tietoja, joita tilastotieteen yhteydessä käydään läpi TILM3574 Matriisilaskenta tilastotieteessä -kurssilla. 
+- Tämän jälkeen regressiomallien käsittely jatkuu useilla eri aineopintojen ja syventävien opintojen erikoiskursseilla.
+-->
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./12-otosjakaumat.html" class="pagination-link" aria-label="Otosjakaumat ja epävarmuuden arvioiminen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./14-ennustaminen.html" class="pagination-link" aria-label="Tilastollisesta ennustamisesta">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; Tilastollinen riippuvuus, korrelaatio ja kausaalisuus – Tilastotiede ja data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./09-osa1_yhteenveto.html" rel="next">
+<link href="./07-perustunnusluvut.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-til_riippuvuus.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Tilastotiede ja data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Esipuhe/kurssi-informaatiota</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-johdanto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Johdantoa tilastotieteeseen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-tieteellinen_tieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tilastotiede_tieteenalana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tilastotiede tieteenalana</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-sattuma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sattuma ja satunnaisuus tilastotieteessä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tilastolliset_aineistot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tilastolliset aineistot, niiden kerääminen ja mittaaminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-otannan_idea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Otannan idea</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-perustunnusluvut.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-til_riippuvuus.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-osa1_yhteenveto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-otanta_til.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Otannan tilastollisia perusteita</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-til_päät.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Satunnaisotokset: Tilastollisen päättelyn näkökulma</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-otosjakaumat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Otosjakaumat ja epävarmuuden arvioiminen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-regressioanalyysi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regressioanalyysi</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-ennustaminen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tilastollisesta ennustamisesta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-til_rooli_uusitieto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tilastotieteen rooli uuden tiedon tuottamisessa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-aineisto_asetelmat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Aineisto- ja tutkimustyypit ja koeasetelmat</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-koulukunnat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tilastotieteen koulukunnat: Frekventistisyys vs.&nbsp;Bayesiläisyys</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-kritiikki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Tilastotieteeseen kohdistunutta kritiikkiä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-trendit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tilastotieteen kehityksen nykytrendejä</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Liitteet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-LiiteA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Liite A: Kreikkalaiset aakkoset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#muuttujien-välisistä-riippuvuuksista" id="toc-muuttujien-välisistä-riippuvuuksista" class="nav-link active" data-scroll-target="#muuttujien-välisistä-riippuvuuksista"><span class="header-section-number">8.1</span> Muuttujien välisistä riippuvuuksista</a></li>
+  <li><a href="#kahden-muuttujan-havaintoaineiston-kuvaaminen" id="toc-kahden-muuttujan-havaintoaineiston-kuvaaminen" class="nav-link" data-scroll-target="#kahden-muuttujan-havaintoaineiston-kuvaaminen"><span class="header-section-number">8.2</span> Kahden muuttujan havaintoaineiston kuvaaminen</a></li>
+  <li><a href="#alaluku64" id="toc-alaluku64" class="nav-link" data-scroll-target="#alaluku64"><span class="header-section-number">8.3</span> Satunnaismuuttujien kovarianssi ja korrelaatio</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tilastollinen riippuvuus, korrelaatio ja kausaalisuus</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+<!-- Use JavaScript to Disable Right-Click -->
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<!-- Custom JavaScript for toggling code visibility -->
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+<p>Tarkastelemme tässä luvussa tilastollisia tutkimusasetelmia, joissa on mukana <strong>kaksi tai useampia muuttujia</strong>. Pyrimme tässä luvussa vastaamaan (ainakin) seuraaviin kysymyksiin:</p>
+<ul>
+<li>Miten kahden (tai useamman) muuttujan samanaikainen tarkastelu vaikuttaa tilastolliseen analyysiin?</li>
+<li>Mitä tarkoitetaan kahden muuttujan tilastollisella riippuvuudella ja miten se eroaa eksaktista riippuvuudesta?</li>
+<li>Mitä tarkoitetaan korrelaatiolla?</li>
+<li>Mikä on korrelaation ja riippuvuuden suhde?</li>
+<li>Miten korrelaatiota ja sen voimakkuutta voidaan estimoida?</li>
+</ul>
+<p>Käsittelemme myöhemmin Osassa II <strong>regressioanalyysia yhden selittäjän lineaarisen regressiomallin</strong> tapauksessa. Pitemmälle meneviä regressioanalyysin kysymyksiä käsitellään koko tilastotieteen opinto-ohjelman lävitse, kuten perusteellisesti lineaarisia ja yleistettyjä lineaarisia malleja koskevilla kursseilla.</p>
+<p>&nbsp;</p>
+<section id="muuttujien-välisistä-riippuvuuksista" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="muuttujien-välisistä-riippuvuuksista"><span class="header-section-number">8.1</span> Muuttujien välisistä riippuvuuksista</h2>
+<p>Tieteellisen tutkimuksen tärkeimmät ja mielenkiintoisimmat kysymykset liittyvät tavallisesti <strong>tutkimuksen kohteena olevaa ilmiötä kuvaavien muuttujien välisiin riippuvuuksiin</strong>.</p>
+<ul>
+<li><p>Jos tilastollisen tutkimuksen kohteena olevaan ilmiöön liittyy useampia kuin yksi muuttuja, yhden muuttujan tilastolliset menetelmät antavat tavallisesti vain rajoittuneen kuvan ilmiöstä.</p></li>
+<li><p>Sovellusten kannalta ehkä merkittävin osa tilastotiedettä käsittelee kahden tai useamman muuttujan välisten riippuvuuksien kuvaamista ja mallintamista.</p></li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkkejä riippuvuustarkasteluista</strong>:</p>
+<ul>
+<li><p>Miten työttömyysaste Suomessa (% työvoimasta) riippuu BKT:n (bruttokansantuotteen) kasvuvauhdista Suomessa, Suomen viennin volyymista sekä BKT:n kasvuvauhdista muissa EU-maissa ja USA:ssa? Taloustieteilijät pyrkivät yleisesti löytämään muitakin lainalaisuuksia.</p></li>
+<li><p>Millainen on riskin ja tuoton välinen suhde osakesijoittamisessa? Oletettavasti hajauttaminen pienentää riskiä ja/tai alhainen korkotaso suosii sijoittamista pörssiin.</p></li>
+<li><p>Miten alkoholin kulutus (l per capita vuodessa) riippuu alkoholijuomien hintatasosta, ihmisten käytettävissä olevista tuloista ja alkoholin saatavuudesta?</p></li>
+<li><p>Miten todennäköisyys sairastua keuhkosyöpään riippuu tupakoinnin määrästä ja kestosta?</p></li>
+<li><p>Miten vehnän hehtaarisato (t/ha) riippuu kesän keskilämpötilasta ja sademäärästä sekä maan muokkauksesta, lannoituksesta ja tuholaisten torjunnasta?</p></li>
+<li><p>Miten betonin lujuus (kg/cm2) riippuu sen kuivumisajasta?</p></li>
+<li><p>Miten kemiallisen aineen saanto (%) riippuu valmistusprosessissa käytettävästä lämpötilasta?</p></li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Tilastollinen riippuvuus</span></p>
+<div class="defblock">
+<p><strong>Eksakti</strong> vs.&nbsp;<strong>tilastollinen riippuvuus</strong>. Tarkastelemme tässä esityksessä yksinkertaisuuden vuoksi pääasiassa kahden muuttujan välistä riippuvuutta:</p>
+<ol type="i">
+<li><p>Muuttujien välinen riippuvuus on <strong>eksaktia</strong>, jos toisen arvot voidaan mallintaa/ennustaa tarkasti (täydellisesti) toisen saamien arvojen perusteella.</p></li>
+<li><p>Muuttujien välinen riippuvuus on <strong>tilastollista</strong>, jos niiden välillä ei ole eksaktia riippuvuutta, mutta toisen muuttujan arvoja voidaan käyttää apuna toisen muuttujan arvojen mallintamisessa ja mahdollisesti myös ennustamisessa.</p></li>
+</ol>
+</div>
+<p>&nbsp;</p>
+<p><span class="marginnote">Korrelaatio</span></p>
+<div class="defblock">
+<p><strong>Tilastollinen riippuvuus ja korrelaatio</strong>. Kahden muuttujan välistä (lineaarista) tilastollista riippuvuutta kutsutaan tilastotieteessä <strong>korrelaatioksi</strong>.</p>
+<ul>
+<li><p>Korrelaation voimakkuutta mittaavia tilastollisia tunnuslukuja kutsutaan korrelaatiokertoimiksi.</p></li>
+<li><p>Korrelaatiot muodostavat perustan muuttujien välisten riippuvuuksien ymmärtämiselle.</p></li>
+</ul>
+</div>
+<p>Vaikka korrelaatiot muodostavat perustan muuttujien välisten riippuvuuksien ymmärtämiselle, riippuvuuksia halutaan tavallisesti analysoida vielä paljon tarkemmin ja formaalimmin valittavan tilastollisen mallin kautta. Tämä tapahtuu perinteisesti mm. regressioanalyysiä hyödyntäen.</p>
+<ul>
+<li>Viime vuosina erityisesti koneoppimisen ja tilastollisen oppimisen myötä myös muita kehittyneitä vaihtoehtoja on käsitelty kiihtyvällä tahdilla.</li>
+</ul>
+<p><span class="marginnote">Regressioanalyysi</span></p>
+<div class="defblock">
+<p><strong>Regressioanalyysi</strong> on tilastollinen menetelmä, jossa jonkin ns. selitettävän muuttujan tilastollista riippuvuutta joistakin toisista ns. selittävistä muuttujista pyritään mallintamaan regressiomalliksi kutsuttavalla tilastollisella mallilla.</p>
+<ul>
+<li>Käsittelemme regressioanalyysiä koskevaa johdantoa myöhemmin Osassa II.</li>
+</ul>
+</div>
+<p>&nbsp;</p>
+</section>
+<section id="kahden-muuttujan-havaintoaineiston-kuvaaminen" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="kahden-muuttujan-havaintoaineiston-kuvaaminen"><span class="header-section-number">8.2</span> Kahden muuttujan havaintoaineiston kuvaaminen</h2>
+<p>Kuten yhden muuttujan havaintoaineistojen tapauksessa, lähtökohdan kahden tai useamman muuttujan havaintoaineistojen kuvaamiselle muodostaa tutustuminen havaintoarvojen jakaumaan.</p>
+<ul>
+<li><p>Havaintoarvojen jakaumaa kokonaisuutena voidaan kuvata sopivasti valituilla graafisilla esityksillä.</p></li>
+<li><p>Havaintoarvojen jakauman karakteristisia ominaisuuksia voidaan kuvata sopivasti valituilla otostunnusluvuilla (ks. aiempi ja myös myöhemmät luvut koskien otostunnuslukuja ja otosjakaumia).</p></li>
+</ul>
+<p>Koska useampiulotteisten kuvioiden kuin kaksiulotteisten muodostaminen ei ole usein kovin mielekästä, kolmen tai useamman muuttujan havaintoaineistoja havainnollistetaan tavallisesti niin, että muuttujia tarkastellaan pareittain.</p>
+<ul>
+<li><p>Kahden järjestys-, välimatka- tai suhdeasteikoillisen muuttujan havaittujen arvojen pareja havainnollistetaan tavallisesti graafisella esityksellä, jota kutsutaan hajontakuvioksi tai <strong>pistediagrammiksi</strong> (“pistekaavio”, engl. <strong>scatter plot</strong>).</p></li>
+<li><p>Ks. esimerkkikuva pistediagrammista allaolevasta isien ja poikien pituuksia koskevasta esimerkistä.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p><span class="marginnote">Pistediagrammi</span></p>
+<div class="defblock">
+<p><strong>Pistediagrammi</strong> (<em>scatter plot</em>). Olkoot (X) ja (Y) järjestys-, välimatka- tai suhdeasteikollisia satunnaismuuttujia, joiden <span class="math inline">\(n\)</span> kappaletta havaittuja arvoja ovat (x_1, x_2, , x_n) ja (y_1, y_2, , y_n). Oletetaan lisäksi, että havaintoarvot (x_i) ja (y_i) liittyvät samaan havaintoyksikköön kaikille (i = 1, 2, , n) eli tarkastellaan pareja <span class="math inline">\((x_i, y_i), \, i=1,...,n\)</span>.</p>
+<ul>
+<li><p>Havaintoarvojen parien (lukuparien) ((x_i, y_i)) pistediagrammi saadaan esittämällä lukuparit niiden määrittelemien pisteiden tasokoordinaatistossa.</p></li>
+<li><p>Pistediagrammi sopii erityisesti kahden muuttujan välisen riippuvuuden havainnollistamiseen. Se on keskeinen työväline korrelaatio- ja regressioanalyysissa.</p></li>
+</ul>
+</div>
+<div class="eblock">
+<p><strong>Esimerkki: Isän ja pojan pituus</strong>. Perinnöllisyystieteen mukaan lapset perivät geneettiset ominaisuutensa vanhemmiltaan. Periytyykö isän pituus heidän pojilleen?</p>
+<p>Jo aiemmin tilastoaineiston esimerkkikohdassa viitattiin seuraavaan Karl Pearsonin klassikkoesimerkkiin 1078 havainnon aineistosta, joka sisältää isän ja heidän poikiensa pituuksia. Ts. aineisto koostuu lukuparista ((x_i , y_i),, i = 1, 2, , 1078), jossa (x_i) = isän (i) pituus ja (y_i) = isän (i) pojan pituus. Yksittäinen piste (kuvassa “ympyrä”) vastaa yhtä ko. lukuparien havaintoa. (Lähde: Kaggle: <a href="https://www.kaggle.com/datasets/abhilash04/fathersandsonheight.)" class="uri">https://www.kaggle.com/datasets/abhilash04/fathersandsonheight.)</a></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="isapoikadata.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Isän ja pojan pituus.
+</center>
+<p>&nbsp;</p>
+<ul>
+<li><p>Yhtä pitkillä isillä näyttää olevan monen mittaisia poikia, mutta</p></li>
+<li><p>lyhyillä isillä näyttää olevan keskimäärin lyhyempiä poikia kuin pitkillä isillä ja pitkillä isillä näyttää olevan keskimäärin pitempiä poikia kuin lyhyillä isillä.</p></li>
+</ul>
+<p>Tällaisten tilastollisten riippuvuuksien analysoimista lineaaristen regressiomallien avulla tarkastellaan myöhemmin. Ts. miten pojan pituutta voidaan mallintaa isän pituutta hyödyntäen.</p>
+</div>
+<!-- Co-Pilot: 
+Karl Pearsonin kuuluisa isä–poika-pituusesimerkki on klassinen tilastotieteen tapaus, jota käytetään usein havainnollistamaan korrelaation ja regression käsitteitä.
+
+Tausta
+Karl Pearson (1857–1936) oli brittiläinen tilastotieteilijä, joka kehitti monia tilastollisia menetelmiä, kuten Pearsonin korrelaatiokertoimen. Hän oli kiinnostunut perinnöllisyydestä ja käytti tilastollisia menetelmiä tutkiakseen, miten ominaisuudet, kuten pituus, periytyvät sukupolvien välillä.
+
+Isä–poika-pituusesimerkki
+Pearson keräsi aineistoa isien ja heidän poikiensa pituuksista. Hän halusi selvittää, kuinka vahvasti pojan pituus on yhteydessä isän pituuteen.
+
+Havainnot:
+Hän havaitsi, että pitkät isät saavat keskimäärin pitkiä poikia, ja lyhyet isät lyhyitä poikia.
+Kuitenkin poikien pituudet eivät olleet yhtä äärimmäisiä kuin isien — eli pojat olivat lähempänä keskipituutta kuin isänsä. Tätä ilmiötä kutsutaan regressioksi kohti keskiarvoa (regression to the mean).
+Esimerkki:
+Jos isä on 190 cm pitkä (selvästi keskiarvon yläpuolella), hänen poikansa on todennäköisesti myös keskimääräistä pidempi, mutta ei välttämättä 190 cm — ehkä esimerkiksi 185 cm. Samoin, jos isä on 160 cm, poika voi olla 165 cm — eli lähempänä keskiarvoa.
+
+Tilastollinen merkitys
+Pearson käytti tätä aineistoa kehittääkseen:
+
+Korrelaatiokertoimen (mittaa kahden muuttujan välistä lineaarista yhteyttä)
+Lineaarisen regressiomallin (ennustaa toisen muuttujan arvoa toisen perusteella)
+Miksi tämä on tärkeää?
+Tämä esimerkki on edelleen yksi tunnetuimmista havainnollistuksista siitä, miten tilastolliset menetelmät voivat paljastaa perinnöllisyyden ja muiden ilmiöiden rakenteita. Se myös osoittaa, että vaikka yhteys on olemassa, se ei ole täydellinen — ympäristötekijät ja satunnaisuus vaikuttavat myös.
+-->
+<p>&nbsp;</p>
+<p>Usean muuttujan havaintoaineistojen karakteristisia ominaisuuksia voidaan kuvata muuttujakohtaisilla otostunnusluvuilla. Muuttujakohtaiset otostunnusluvut eivät kuitenkaan voi antaa informaatiota muuttujien välisistä riippuvuuksista. Muuttujien parittaisia tilastollisia riippuvuuksia voidaan (usein ja osin) kuvata sopivasti valitulla korrelaation mitalla, mitä tarkastellaankin seuraavaksi.</p>
+<p>&nbsp;</p>
+</section>
+<section id="alaluku64" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="alaluku64"><span class="header-section-number">8.3</span> Satunnaismuuttujien kovarianssi ja korrelaatio</h2>
+<p>Tarkastellaan välimatka- tai suhdeasteikollisten satunnaismuuttujien (X) ja (Y) (Pearsonin tulomomentti-) korrelaatiokerrointa (_{XY}) ja sen estimointia.</p>
+<ul>
+<li><p>Tällä kurssilla <strong>emme tarkastele</strong> tarkemmin mm. seuraavia tilastollisia testejä korrelaatiokertoimelle (_{XY}), kuten:</p>
+<ul>
+<li>Yhden otoksen testi korrelaatiokertoimelle</li>
+<li>Korrelaatiokertoimien vertailutestiä</li>
+<li>Korreloimattomuuden testaamista</li>
+</ul></li>
+<li><p>Todetaan myös, että lisätietoja ja tarkempia yksityiskohtia moniulotteisista satunnaismuuttujista ja jakaumista tarkastellaan todennäköisyyslaskennan kursseilla.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p><span class="marginnote">Kovarianssi ja korrelaatio</span></p>
+<div class="defblock">
+<p><strong>Satunnaismuuttujien kovarianssi ja korrelaatio</strong>. Olkoon (<span class="math inline">\((X, Y)\)</span>) satunnaismuuttujien (<span class="math inline">\(X\)</span>) ja (<span class="math inline">\(Y\)</span>) muodostama pari. Lisäksi <span class="math display">\[\begin{equation*} \mu_X = \mathsf{E}(X) \qquad \mathrm{ja} \qquad \mu_Y = \mathsf{E}(Y) \end{equation*}\]</span> ovat ko. satunnaismuuttujien (X) ja (Y) odotusarvot ja <span class="math display">\[\begin{align*}
+\sigma^2_X &amp;= \mathsf{Var}(X) = \text{D}^2(X) = \mathsf{E}[(X - \mu_X)^2] \\
+\sigma^2_Y &amp;= \mathsf{Var}(Y) = \text{D}^2(Y) = \mathsf{E}[(Y - \mu_Y)^2]
+\end{align*}\]</span> satunnaismuuttujien (<span class="math inline">\(X\)</span>) ja (<span class="math inline">\(Y\)</span>) varianssit.</p>
+<p>Määritellään satunnaismuuttujien (<span class="math inline">\(X\)</span>) ja (<span class="math inline">\(Y\)</span>) välinen <strong>kovarianssi</strong> (<span class="math inline">\(\sigma_{XY}\)</span>) kaavalla <span class="math display">\[\begin{equation*} \sigma_{XY} = \mathsf{Cov}(X,Y) = \mathsf{E}[(X-\mu_X)(Y-\mu_Y)].
+\end{equation*}\]</span> Sm:jien (<span class="math inline">\(X\)</span>) ja (<span class="math inline">\(Y\)</span>) <strong>korrelaatio</strong> (<span class="math inline">\(\rho_{XY}\)</span>) on vastaavasti <span class="math display">\[\begin{equation*} \rho_{XY} = \mathrm{Cor}(X,Y) = \frac{\sigma_{XY}}{\sigma_{X} \sigma_{Y}},
+\end{equation*}\]</span> jossa siis <span class="math inline">\(\sigma_X = \sqrt{\mathsf{Var}(X)} = \sqrt{\text{D}^2(X)}\)</span> ja <span class="math inline">\(\sigma_Y = \sqrt{\mathsf{Var}(Y)} = \sqrt{\text{D}^2(Y)}\)</span>.</p>
+</div>
+<p>&nbsp;</p>
+<p>Satunnaismuuttujien (X) ja (Y) korrelaatiota <span class="math display">\[\begin{equation*}
+\rho_{XY} = \mathrm{Cor}(X, Y)
+\end{equation*}\]</span> kutsutaan ajoittain siis <strong>Pearsonin korrelaatiokertoimeksi</strong> (tulomomenttikorrelaatiokertoimeksi).</p>
+<ul>
+<li><p>Pearsonin korrelaatiokerroin (<span class="math inline">\(\rho_{XY}\)</span>) <strong>mittaa satunnaismuuttujien</strong> (<span class="math inline">\(X\)</span>) <strong>ja</strong> (<span class="math inline">\(Y\)</span>) <strong>lineaarisen riippuvuuden voimakkuutta</strong>. Ts. sm:jien välistä (lineaarista) yhteyttä.</p></li>
+<li><p>Pearsonin korrelaatiokerrointa voidaan estimoida otoksen pohjalta Pearsonin <strong>otoskorrelaatiokertoimella</strong>.</p></li>
+</ul>
+<p><span class="marginnote">Otoskorrelaatio</span></p>
+<div class="defblock">
+<p><strong>Pearsonin otoskorrelaatiokerroin</strong>. Havaintoarvojen pareista <span class="math inline">\((x_i, y_i), \, i=1,...,n,\)</span> laskettu <strong>otoskovarianssi</strong> on <span class="math display">\[\begin{equation*}
+s_{xy} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x}) (y_i - \bar{y}),
+\end{equation*}\]</span> jossa (<span class="math inline">\(\bar{x}\)</span>) ja (<span class="math inline">\(\bar{y}\)</span>) ovat havaintoarvojen (<span class="math inline">\(x\)</span>) ja (<span class="math inline">\(y\)</span>) aritmeettiset otoskeskiarvot.</p>
+<p>Otoskovarianssin (<span class="math inline">\(s_{xy}\)</span>) avulla voidaan määritellä (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen lineaarisen tilastollisen riippuvuuden voimakkuuden mittari eli <strong>Pearsonin otoskorrelaatiokerroin</strong> (<span class="math inline">\(r_{xy}\)</span>), mikä saadaan otoskovarianssista (<span class="math inline">\(s_{xy}\)</span>) normeerausoperaatiolla, jossa otoskovarianssi (<span class="math inline">\(s_{xy}\)</span>) jaetaan (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen keskihajonnoilla (<span class="math inline">\(s_x\)</span>) ja (<span class="math inline">\(s_y\)</span>): <span class="math display">\[\begin{equation*} r_{xy} = \frac{s_{xy}}{s_x s_y} = \frac{\sum_{i=1}^{n} (x_i - \bar{x}) (y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}.
+\end{equation*}\]</span></p>
+</div>
+<p>Todetaan tässä kohtaa vain lyhyesti, että otoskorrelaatiokertoimen estimaattori voidaan johtaa sekä momenttimenetelmällä että suurimman uskottavuuden menetelmällä, jotka ovat tyypillisiä estimointimenetelmiä tilastotieteessä ja tarkemmin tilastollisessa päättelyssä.</p>
+<p><strong>Otoskovarianssin ominaisuuksia</strong>:</p>
+<ul>
+<li><p>Huomaa, että (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen otoskovarianssit niiden itsensä kanssa ovat niiden variansseja.</p></li>
+<li><p>Otoskovarianssi (<span class="math inline">\(s_{xy}\)</span>) mittaa (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen yhteisvaihtelua niiden aritmeettisten keskiarvojen ympärillä.</p></li>
+<li><p>Otoskovarianssilla on taipumus saada positiivisia (negatiivisia) arvoja, jos havaintopisteiden muodostama “pistepilvi” (“pisteparvi)” näyttää nousevalta (laskevalta) oikealle mentäessä; ks. pistediagrammin ilmeen ja Pearsonin otoskorrelaatiokertoimen yhteys, jota käsitellään seuraavaksi.</p></li>
+</ul>
+<p><strong>Pearsonin otoskorrelaatiokertoimella (<span class="math inline">\(r_{xy}\)</span>)</strong> on seuraavat ominaisuudet:</p>
+<ol type="i">
+<li>(<span class="math inline">\(-1 \le r\_{xy} \le 1\)</span>)</li>
+<li>(<span class="math inline">\(r_{xy} = \pm 1\)</span>), jos ja vain jos (<span class="math inline">\(y_i = \alpha + \beta x_i\)</span>), jossa (<span class="math inline">\(\alpha\)</span>) ja (<span class="math inline">\(\beta\)</span>) ovat reaalisia vakiota ja (<span class="math inline">\(\alpha,\beta \neq 0\)</span>).</li>
+<li>Korrelaatiokertoimella (<span class="math inline">\(r_{xy}\)</span>) ja kovarianssilla (<span class="math inline">\(s_{xy}\)</span>) on aina sama etumerkki</li>
+</ol>
+<p>Näiden ominaisuuksien (i)-(iii) perusteella voidaan tehdä seuraavia huomioita ja tulkintoja:</p>
+<ul>
+<li>Havaintoarvojen pareista (<span class="math inline">\((x_i, y_i), i = 1,2, \ldots, n,\)</span>) laskettu Pearsonin otoskorrelaatiokerroin (<span class="math inline">\(r_{xy}\)</span>) mittaa (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen lineaarisen tilastollisen riippuvuuden voimakkuutta.</li>
+<li>Jos (<span class="math inline">\(r_{xy} = \pm 1\)</span>), niin (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen välillä on eksakti eli funktionaalinen lineaarinen riippuvuus, mikä merkitsee sitä, että kaikki havaintopisteet (<span class="math inline">\((x_i, y_i)\)</span>) asettuvat samalle suoralle.</li>
+<li>Jos (<span class="math inline">\(r_{xy} = 0\)</span>), niin (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen välillä ei voi olla eksaktia lineaarista riippuvuutta.</li>
+<li>Karkeasti ajatellen voidaan todeta, että jos <span class="math inline">\(|r_{xy}|&gt;0.8\)</span>, niin korrelaatio on voimakasta, välillä 0.6-0.8 huomattavaa, ja tätä ennen kohtalaista tai lähes merkityksetöntä kun <span class="math inline">\(r_{xy} \approx 0\)</span>.</li>
+<li>Vaikka (<span class="math inline">\(r_{xy} = 0\)</span>), (<span class="math inline">\(x\)</span>)- ja (<span class="math inline">\(y\)</span>)-havaintoarvojen välillä saattaa silti olla jopa eksakti <strong>epälineaarinen riippuvuus</strong>.</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki</strong>: Alapuolella esitettävät (simuloidut) kuviot havainnollistavat kahden muuttujan havaittujen arvojen (<span class="math inline">\((n = 100)\)</span>) pistediagrammin ilmeen ja korrelaation välistä yhteyttä.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Scatterploterikorrelaatioita.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Havainnollistuksia Pearsonin otoskorrelaatiokertoimen arvosta ja erilaisista xy-pisteparvista.
+</center>
+<p>Ks. seuraavasta linkistä lisää havainnollistuksia: <em>Guess the correlation</em> pelissä pääset arvioimaan esitettävän pisteparven korrelaation voimakkuutta erilaisissa simuloiduissa tilanteissa: <a href="http://guessthecorrelation.com/" class="uri">http://guessthecorrelation.com/</a></p>
+</div>
+<p><span class="marginnote">Kausaalisuuden ehdot</span></p>
+<div class="defblock">
+<p><strong>Kausaalisuus</strong>. Muuttujan (<span class="math inline">\(x\)</span>) arvojen muutos vaikuttaa muuttujan (<span class="math inline">\(y\)</span>) arvoihin (syy-vaikutussuhde), jos seuraavat kolme aika yleiselle tasolle tuotua ehtoa täyttyvät:</p>
+<ul>
+<li>Muuttujan (<span class="math inline">\(x\)</span>) muutos esiintyy ajallisesti ennen (<span class="math inline">\(y\)</span>):n muutosta.</li>
+<li>Muuttujissa (<span class="math inline">\(x\)</span>) ja (<span class="math inline">\(y\)</span>) tapahtuvien muutosten välillä on tilastollista riippuvuutta (korrelaatiota tai muuta riippuvuutta).</li>
+<li>Ei sekoittumista. Muuttujassa (<span class="math inline">\(y\)</span>) tapahtunutta muutosta ei voida selittää millään muilla tekijöillä.</li>
+</ul>
+</div>
+<p>Kausaalisuhteita on vaikea todentaa tilastollisesti, mutta hyvin suunnitellut satunnaistetut kokeet ovat usemmiten paras käytettävissä oleva viitekehys tämänkaltaisen tutkimusasetelman saavuttamiseksi, mikäli se on ylipäätään ko. sovelluksen kohdalla mahdollista.</p>
+<ul>
+<li>Satunnaistetut kokeet vähentävät harhan ja sekoittavien tekijöiden vaikutusta, mikä tekee niistä luotettavimman tavan osoittaa kausaalisuhteita.</li>
+</ul>
+<p>Käytännössä kausaalisuhteita selvitettäessä on tunnettava etukäteen ilmiötä koskevat aiemmat teoriat ja tutkimukset tarkasti, jotta voidaan ottaa huomioon ilmiöön vaikuttavat tekijät.</p>
+<ul>
+<li>Todellisuus (ja mahdollinen kausaalisuussuhde) on usein monimutkaisempi, kuin mitä tällainen yksinkertainen (kahden muuttujan välinen) analyysi kykenee kuvaamaan:</li>
+</ul>
+<p>Voidaan siis todeta, että <strong>kahden muuttujan yhteisvaihtelu ei riitä todisteeksi siitä, että kyseessä olevien muuttujien välillä on kausaalista yhteyttä</strong>.</p>
+<p>Tilastollisia menetelmiä, kuten regressioanalyysiä ja siinä yhteydessä erilaisten selittävien muuttujien myötä tapahtuvaa niiden vaikutuksen kontrollointia voidaan käyttää ko. tekijöiden huomioon ottamiseksi, mutta aina tarvitaan harkintaa sen suhteen, kuinka luottavaisesti kausaalisuudesta voidaan väittää jotain. Tämä johtuu (osaltaan) siitä, että tilastolliset mallit perustuvat oletuksiin, jotka eivät aina pidä paikkaansa todellisessa maailmassa.</p>
+<div class="eblock">
+<p><strong>Esimerkki</strong>. Alla olevassa kuvassa on esimerkki todella vahvasta yhteisvaihtelusta jäädykejogurtin (eng. frozen yogurt) kulutuksen ja väkivaltarikosten välillä Yhdysvalloissa. Kyseisten havaintojen korrelaatioksi vuosien 1990-2021 välillä saadaan (<span class="math inline">\(r_{xy} = 0.947\)</span>), joka on erittäin suurta, kun huomioidaan että kyseiset muuttujat eivät tunnu liittyvän toisiinsa mitenkään.</p>
+<p>Kyseessä onkin nk. “näennäinen korrelaatio”, eli tilanne, jossa kaksi muuttujaa korreloi vahvasti vailla mitään syytä. Näin voi tapahtua täysin sattumalta! Voit etsiä lisää esimerkkejä Tyler Vigenin tarjoamalta Spurious Correlations -verkkosivulta!</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="spuriouscorrelation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<center>
+Kuva: Esimerkki nk. näennäisestä korrelaatiosta (eng. spurious correlation). Lähde: Tyler Vigen.
+</center>
+</div>
+<p>Yhteisvaihtelu voi johtua myös kolmannen muuttujan vaikutuksesta molempiin muuttujiin tai virheellisestä otannasta, vaikka muuttujat olisivatkin perusjoukossa toisistaan riippumattomia.</p>
+<ul>
+<li>Klassinen esimerkki tällaisesta “puuttuvan muuttujan harhasta” on hukkumiskuolemien ja jäätelön kulutuksen näennäinen yhteys, jos tarkastellaan vain niiden välistä korrelaatiota.</li>
+<li>Tosiasiassa molempia selittää lämpimät kelit, jolloin ihmiset uivat enemmän, mutta myös syövät enemmän jäätelöä!</li>
+</ul>
+<div class="eblock">
+<p><strong>Esimerkki: Simpsonin paradoksi: U.C. Berkeleyn sukupuolisyrjintä</strong>. Simpsonin paradoksilla tarkoitetaan tilannetta, jossa kahden muuttujan välinen korrelaatio muuttuu päinvastaiseksi otettaessa huomioon jokin kolmas muuttuja, joka korreloi molempien muuttujien kanssa.</p>
+<ul>
+<li><p>Yksi tunnetuimmista esimerkeistä Simpsonin paradoksista on Berkeleyn yliopiston sukupuolisyrjintätapaus.</p>
+<ul>
+<li>Yliopisto haastettiin oikeuteen vuonna 1973 sukupuolisyrjinnästä.</li>
+<li>Väitettiin, että yliopistoon olisi miesten helpompi päästä kuin naisten, sillä yhteensä 8442:sta mieshakijasta 44 % hyväksyttiin kun samat luvut olivat naisilla 4321 ja 35 %.</li>
+<li>Mieshakijoista pääsi siis 9 prosenttiyksikköä enemmän sisälle kuin naisista.</li>
+</ul></li>
+<li><p>Tarkasteltaessa erikseen eri tiedekuntia huomattiin, että itse asiassa useammassa tiedekunnassa naisia on päässyt sisälle isompi osuus hakijoista.</p>
+<ul>
+<li>Tämä johtui siitä, että naiset hakivat opiskelemaan aloja, joille sisäänpääsystä käytiin kovempaa kilpailua. Toisin sanoen, naisten hakemukset keskittyivät aloille, joilla oli vähemmän aloituspaikkoja.</li>
+<li>Aineisto kuudesta isoimmasta tiedekunnasta on listattu alla olevaan taulukkoon.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>| Tiedekunta | Hakijat (Miehet) | Hyväksytyt % (Miehet) | Hakijat (Naiset) | Hyväksytyt % (Naiset) |</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>|------------|------------------|-----------------------|------------------|-----------------------|</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>| A          | 825              | 62                    | 108              | 82                    |</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>| B          | 560              | 63                    | 25               | 68                    |</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>| C          | 325              | 37                    | 593              | 34                    |</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>| D          | 417              | 33                    | 375              | 35                    |</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>| E          | 191              | 28                    | 393              | 24                    |</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>| F          | 373              | 6                     | 341              | 7                     |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vielä siis tiivistäen <strong>korrelaatiokertoimeen liittyviä tulkintavirheitä</strong> aiheuttavat useimmiten seuraavat seikat:</p>
+<ul>
+<li>Riippuvuudesta ei välttämättä seuraa syy-seuraussuhdetta.</li>
+<li>Kolmas muuttuja eli kahden muuttujan välinen yhteys selittyy yhteisestä syystä (esimerkiksi lämpimästä kesästä).</li>
+<li>Muuttujien välinen yhteys ei ole lineaarinen (on epälineaarinen).</li>
+<li>Poikkeavien havaintojen vaikutus.</li>
+</ul>
+<p>Puutteita: Korrelaatiokertoimella on kaksi puutetta:</p>
+<ul>
+<li>Se mittaa vain lineaarista riippuvuutta.</li>
+<li>Se ei ole (tilastollinen) malli, jonka avulla nähtäisiin, miten toinen muuttuja vaikuttaa toiseen muuttujaan.</li>
+</ul>
+<p>::::::::</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./07-perustunnusluvut.html" class="pagination-link" aria-label="Perustunnusluvuista">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Perustunnusluvuista</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./09-osa1_yhteenveto.html" class="pagination-link" aria-label="Osan I yhteenvetoa signaalin ja kohinan näkökulmasta">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Osan I yhteenvetoa signaalin ja kohinan näkökulmasta</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

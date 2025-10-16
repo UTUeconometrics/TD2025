@@ -1,0 +1,210 @@
+---
+title: "Otannan idea"
+---
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+## Otannan perusteet
+
+Otantatutkimuksen (karkeat) suunnittelu- ja työvaiheet ovat mm. seuraavat:
+
+1.  Tavoitteiden asettaminen
+2.  Perusjoukon (populaation) asettaminen
+3.  Otantakehikko
+4.  Kerättävän informaation sisältö (mitä tietoa todella tarvitaan, mitä voidaan jättää pois, suunnitellaan kysymykset ja mahdollinen kyselylomake)
+5.  Otoskoon määrittäminen
+6.  Suoritetaan otoksen poiminta, tietojen keräys ja tarkastus
+7.  Aineiston taulukointi ja analysointi
+8.  Raportin laatiminen
+
+Otantatutkimuksessa ajatuksena on siis poimia **edustava otos** siitä populaatiosta (perusjoukosta), joka on mielenkiinnon kohteena eli jota halutaan tutkia ja josta halutaan tietoja.
+
+-   **Tavoiteperusjoukko** on joukko, johon otannan myötä saatavat tutkimustulokset halutaan yleistää. Toisin sanoen, se mistä haluamme tietoja määrää populaation.
+
+-   **Kohdeperusjoukko** on joukko, jota koskevia tietoja halutaan kerätä.
+
+::: eblock
+**Esimerkiksi** äänestysikäiset Suomen kansalaiset voivat muodostaa kohdeperusjoukon.
+
+Usein tavoiteperusjoukko = kohdeperusjoukko. Tavoiteperusjoukko voi joskus olla laajempi (esim. "ihmiset" vs. "suomalaiset").
+:::
+
+Tutkimuksessa (edustavaan) otokseen poimitut tilastoyksiköt, näiden tilastolliset muuttujat ja niiden arvot muodostavat siis **otosaineiston** eli (otannalla saadun) **datan**.
+
+-   Tutkimuskysymykseen vastatakseen tutkija valitsee sopivan tilastollisen mallin ja estimoi sen parametrit poimittuun otokseen perustuen.
+-   Perusoletuksena ja tavoitteena on otoksen ja valitun tilastollisten mallin pohjalta suoritettavan tilastollisen päättelyn **yleistettävyys koko populaatioon**.
+-   Otos tuotetaan tilanteeseen sopivaa **otantamenetelmää** hyödyntäen pyrkien varmistamaan otoksen edustavuus (ts. perusjoukko pienoiskoossa).
+
+[Edustava otos]{.marginnote}
+
+::: defblock
+**Edustavuus** (lopulta tämän myötä muodostuva **edustava otos**). Tutkimukseen valitut yksiköt edustavat koko populaatiota. Ts. tutkimukseen valittu osajoukko kuvaa perusjoukon ominaisuuksia kattavasti.
+:::
+
+ 
+
+Keskeistä tutkimuksen ja sen edustavuuden kannalta on, että tutkija osaa kerätä sisällöllisesti ja määrällisesti **sopivan kokoisen** aineiston. Tietyn otoksen edustavuutta arvioidessa voidaan käyttää apuna seuraavia kysymyksiä. Ts. **miksi päädyttiin tämän kokoiseen otokseen**?
+
+[Otoskoko]{.marginnote} **Otoskoko** vaikuttaa siihen miten hyvin otoksesta tehdyt johtopäätökset voidaan yleistää koskemaan koko perusjoukkoa, ts. kuinka luotettavia ne ovat.
+
+-   Tämä johtuu siitä, että yksittäisten otosyksiköiden ominaisuudet saattavat vaihdella suuresti ja kasvattamalla otoskokoa perusjoukon systemaattiset piirteet tulevat otoskoon kasvaessa yhä paremmin esille.
+
+-   Kun otoskoko vastaa populaation kokoa, on kyseessä tietenkin kokonaistutkimus, joka kertoo kaiken perusjoukosta.
+
+    -   Otoskoon tarkempaan valintaan ja määräämiseen palataan myöhemmin.
+
+-   Käytettiinkö apuna tilastotieteellisesti vankkaa suunnittelua otoskoon määrittämiseksi, vai/tai miten pyrittiin varmistamaan tärkeisiin analyysiryhmiin kuuluvien riittävä määrä aineistossa?
+
+    -   Harkittiinko muita otantamenetelmiä ja miksi päädyttiin juuri käytössä olleeseen menetelmään?
+
+Edustavuuteen vaikuttaa keskeisesti se, millä tavoin otanta pystytään suorittamaan, ts. mihin kohdeperusjoukkoon otanta kohdistetaan. Kaiken kaikkiaan **edustavan otoksen** avulla on **mahdollista tehdä perusjoukkoa koskevaa tilastollista päättelyä**, sillä otos kuvaa perusjoukon ominaisuuksia riittävän hyvin. **Tämä on yksi tilastotieteen keskeisimpiä oppeja** mutta myös kriittisen tiedelukutaidon ja arkijärjen kannalta tärkeää.
+
+ 
+
+## Näytteistä ja otannan haasteista
+
+[Otantekehikko]{.marginnote}
+
+::: defblock
+**Kehikkoperusjoukko** on rekisterin tai luettelon tms. peittämä osa kohdeperusjoukkoa. Kyseessä on siis se osa kohdeperusjoukkoa, josta otanta ylipäänsä pystytään suorittamaan eli **otantakehikko**.
+:::
+
+[Ali- ja ylipeitto]{.marginnote}
+
+::: defblock
+**Otantakehikon ali- ja ylipeitto**. Otantakehikon alipeitto esiintyy, kun otantakehikosta puuttuu osa kohdeperusjoukon alkioista (esim. tutkimus suoritetaan puhelinhaastattelulla, mutta osa aiottuun otokseen kuuluvista haastateltavista ei omista puhelinta).
+
+-   Vastaavasti otantakehikon ylipeittoa esiintyy, kun otantakehikkoon kuuluu kohdeperusjoukkoon kuulumattomia alkioita.
+
+**Vajaapeittävyys**. Otantakehikon yli- ja alipeitto ovat nk. **kehikkovirheitä**. Lisäksi esimerkiksi kyselytutkimuksissa tai rekisteriaineistoissa saattaa esiintyä **katoa** (**vastauskatoa**, ks. alla), eli osa vastauksista jää uupumaan tai niitä ei jostain syystä mitata.
+
+-   Vajaapeittävyys voi esiintyä myös silloin kun populaation alkioista ei ole välttämättä täydellistä luetteloa.
+:::
+
+[Vastauskato ja vastausharha]{.marginnote}
+
+::: defblock
+**Vastauskato ja vastausharha**.
+
+-   **Vastauskatoa** syntyy, kun tutkimuksen kohteita ei tavoiteta tai he kieltäytyvät vastaamatta. Kadon vuoksi lopullinen otoskoko saattaa jopa karsiutua pois tai jokin osajoukko on aliedustettuna.
+
+-   **Vastausharhaa** voi esiintyä, kun kysymykset voivat olla huonosti muotoiltuja tai vastaajat voivat antaa vääriä tietoja.
+:::
+
+[Otantavirhe]{.marginnote}
+
+::: defblock
+**Otantavirhe** on vastaavasti satunnaisuudesta johtuvaa tilastollisten muuttujien vaihtelua otoksesta toiseen, minkä tuloksena mm. otoksen perusteella lasketun tarkasteltavan estimaatin ja sen populaatiovastineen välillä on eroavaisuutta.
+
+-   Otantavirhe onkin ainoa virhelaji, jonka suuruutta voidaan tilastollisin menetelmin arvioida.
+
+-   Otantavirheen myötä on myös mahdollista, että tietyssä otoksessa havaittava tilastollinen systemaattisuus tai ylipäätään "signaalilta" (vs. kohina) vaikuttava informaatio voi johtua pelkästään satunnaisesta vaihtelusta.
+:::
+
+```{r, Otannanvirhelajit, echo=FALSE, out.width="60%", fig.align = "center", fig.cap=""}
+knitr::include_graphics("~/Documents/TD/TD2025/Otannanvirhelajeja2.png")
+```
+
+<center>Kuva: Otannan virhelajeja ja vaiheita kahdessa eri tapauksessa.</center>
+
+ 
+
+::: eblock
+**Esimerkki**:**Kotitalouksien tulot, tuloerot ja pienituloisuusrajan kehitys**.
+
+-   Tilastoyksikkö on kotitalous, joten kaikkien kotitalouksien tutkiminen (kokonaistutkimus, ks. alla) olisi vaikeaa, kallista ja aikaavievää.
+
+-   Tutkittavaksi valitaan vain muutama tuhat kotitaloutta (ts. otantatutkimus) ja selvitetään näiden tulot.
+
+-   On mahdollista tehdä kaikkia suomalaisia kotitalouksia koskevia johtopäätöksiä, jos tutkitut yksiköt ovat edustava otos suomalaisista kotitalouksista. Ts. osajoukkoa koskevat päätelmät voidaan yleistää koskemaan perusjoukkoa, mikäli osajoukko on edustava otos perusjoukosta.
+:::
+
+ 
+
+**Otos vai näyte?**
+
+Joskus kohdeperusjoukko on sellainen, ettei siitä voi kerätä edustavaa otosta. Tämä voi johtua esimerkiksi siitä, että ei tiedetä keitä kohdeperusjoukkoon kuuluu eikä täten myöskään sen kokoa. Tällöin ei tietenkään voida myöskään suorittaa satunnaisotantaa.
+
+[Näyte]{.marginnote}
+
+::: defblock
+**Poimintaharha ja näyte**. Poimintaharhaa tapahtuu kun otos ei edusta populaatiota. Otos ei siis ole edustava otos. Jos tutkimukseen poimitaan ne tiedettyyn perusjoukkoon kuuluvat tilastoyksiköt, jotka sattuvat olemaan "saatavilla" tutkimuksen tekemishetkellä, tai ovat jopa itse valinneet itsensä otokseen, niin kyseessä on **näyte**. Näyte ei kata ilmiön koko vaihtelua edustavan satunnaisotoksen tapaan.
+
+Koska **näyte ei ole edustava otos**, ei sen perusteella voida tehdä perusjoukkoa koskevia yleistyksiä luotettavasti.
+:::
+
+ 
+
+**Edustavan otoksen vaatimus on yksi tilastollisen tutkimuksen tavoitteista, joten näytteiden käyttö ei ole suositeltavaa!**
+
+ 
+
+::: eblock
+**Esimerkkejä näytteistä**.
+
+-   Jos television ajankohtaisohjelma pyytää katsojia twiittaamaan mielipiteensä ajankohtaisesta asiasta, kyseessä on itse valikoituva näyte (osallistujat valitsevat itse itsensä).
+
+-   Esimerkiksi perinteiset katukyselyt eivät ole myöskään edusta erityisen hyvää otantatapaa, sillä kadulla liikkujat eivät välttämättä kovin hyvin edusta tutkittavaa perusjoukkoa, ellei perusjoukkona ole kyseisellä kadulla kyseiseen aikaan liikkuvat ihmiset.
+
+-   Vastaavasti surullisenkuuluisat X:ssä (ent. Twitter) toteutetut, tietyn henkilön omalle seuraajakunnalleen osoittamat kyselyt **eivät muodosta edustavaa otosta** edes X:n käyttäjistä, saati sitten koko kohdeperusjoukosta! (Ellei sitten kohdeperusjoukko ole juurikin kyseisen käyttäjän seuraajat, joskin näin kyseisiä kyselytuloksia harvemmin tulkitaan.)
+:::
+
+ 
+
+::: eblock
+**Esimerkki**: **Rikollisuuden tutkiminen harkinnanvaraisen näytteen avulla**. Kriminologian tutkija haluaa selvittää mitkä tekijät selittävät kesämökkimurtoja tehtailevien rikollisten motivaatiota rikoksilleen.
+
+-   Mikään rekisteri Suomessa ei kata kaikkia kesämökkimurtoja tehneitä ihmisiä, sillä osa näistä rikollisista ei jää koskaan kiinni.
+
+-   Täten tutkija ei voi muodostaa satunnaisotantaa kohdeperusjoukosta, vaan hän joutuu tyytymään esimerkiksi oikeuden pöytäkirjoista selviäviin kesämökkimurroista kiinnijääneisiin tilastoyksiköihin, joista hän valikoi tutkimukseensa sopivat yksilöt.
+
+-   Tällöin kyseessä on **harkinnanvarainen näyte**, sillä ei voida taata näytteeseen valikoitujen tilastoyksiköiden olevan edustava otos kohdeperusjoukosta!
+
+-   Harkinnanvarainen näyte voi kuvata kohdeperusjoukkoa hyvin, mutta on kuitenkin alisteinen tutkijan suorittamalle harkinnalle, joka voi olla tiedostamatta tai tiedostaen jollain tavalla vääristynyttä.
+:::
+
+ 

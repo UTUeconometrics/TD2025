@@ -1,0 +1,267 @@
+---
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+urlcolor: blue
+linkcolor: blue
+---
+
+#  {.unnumbered}
+
+```{=html}
+<!-- HUOM. 
+* Lukujen numerointi: number_section: true tai false 
+-->
+```
+
+<!-- Use JavaScript to Disable Right-Click -->
+
+```{=html}
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+```
+
+<!-- Custom JavaScript for toggling code visibility -->
+
+```{=html}
+<script>
+function toggleCode(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+```
+
+```{=html}
+<!-- Visibility selections. display: none;? 
+  <style>
+
+/* Initially hide elements */
+.marginnotevideo {
+  display: none;
+}
+
+.marginnote {
+  display: none;
+}
+
+  </style>
+-->
+```
+
+ 
+
+# Esipuhe/kurssi-informaatiota {.unnumbered}
+
+ 
+
+<a class="toggle-link" onclick="toggleCode('rakenne')">Kurssin (osat I ja II) rakenne</a>
+
+::: {#rakenne style="display:none;"}
+ 
+
+Tilastotiede ja data -kurssi koostuu kahdesta erillisestä osasta, jotka tarjoavat opiskelijalle työkaluja tieteen ja tutkimuksen ymmärtämiseen tilastotieteen näkökulmasta käsin. Lisäksi kurssi pyrkii antamaan, varsinkin alkuosaltaan, melko ei-matemaattisen johdannon tilastotieteen keskeisiin ideoihin ja perusteisiin.
+
+-   **Osa I** (2op): Ensimmäinen osa toimii johdantokurssina tieteen ja tutkimuksen tekoon esittelemällä keskeisiä käsitteitä, käytäntöjä ja termejä, joita kvantitatiivisessa/määrällisessä tutkimuksessa tilastotieteen ja sen menetelmien osalta tarvitaan (ks. osaamistavoitteet alla).
+
+    -   Tarkoituksena on yleisellä tasolla johdatella tilastotieteen ja aineistojen (datan) maailmaan sekä pohtia myös näiden laajempaa merkitystä tieteellisen tutkimuksen hyvin keskeisinä osina.
+
+    -   Kurssin ensimmäisen osan lopuksi järjestetään tentti, joka arvioidaan hyväksytty/hylätty asteikolla.
+
+-   **Osa II** (4op): Kurssin toisessa osassa syvennytään ensimmäisen osan teemoihin tarkastelemalla erityisesti tilastollisten menetelmien roolia tutkimuksessa.
+
+    -   Tarkoituksena on luoda pohja tosielämän satunnaisilmiöiden tutkimukselle tilastotieteen ja tilastollisten menetelmien keinoin.
+
+    -   Harjoitustehtävien tavoite on totuttaa opiskelija erityisesti matematiikan ja tilastotieteen opinnoissa yleiseen viikottaisten harjoitustehtävien tekemisen käytäntöön.
+
+    -   Kurssin toisen osan lopuksi järjestetään tentti, joka arvioidaan 0-5 arviointiasteikolla.
+
+Kurssilla vältetään kovin teknistä matemaattista esitystapaa, mutta erityisesti Osassa II, tarvittavissa määrin, tullaan kuitenkin käyttämään tilastotieteen perusopinnoissa käytettäviä matemaattisia merkintöjä ja määritelmiä.
+
+-   Esim. todennäköisyyslaskennan ja tilastollisen päättelyn perusteita ei käydä vielä riittävällä matemaattisella tarkkuudella lävitse, vaan nämä tarkastelut jäävät tätä kurssia seuraavien kurssien **TILM3553 Todennäköisyyslaskennan peruskurssi** (<https://opas.peppi.utu.fi/fi/opintojakso/TILM3553/1734?period=2022-2024)> tai **TILM3568 Todennäköisyyslaskenta sivuaineopiskelijoille** (<https://opas.peppi.utu.fi/fi/opintojakso/TILM3568/3385?period=2%20022-2024)> sekä **TILM3555 Tilastollisen päättelyn peruskurssi** (<https://opas.peppi.utu.fi/fi/opintojakso/TILM3555/1731?period=2022-2024)> asiaksi. Nämä kurssit, yhdessä alkuvaiheen pakollisten matematiikan kurssien lisäksi, muodostavat siis tämän kurssin kanssa lähtökohdan tilastotieteen opinnoille (Turun yliopistossa).
+:::
+
+ 
+
+<a class="toggle-link" onclick="toggleCode('kurssimateriaali')">Kurssimateriaali</a>
+
+::: {#kurssimateriaali style="display:none;"}
+ 
+
+Luennot eivät suoraan perustu yhteen kirjaan tai lähteeseen. Käytettyjä lähdemateriaaleja luetellaan alapuolella oheislukemiston myötä.
+
+Oheislukemistoa (sopivilta osin):
+
+-   Alho, J., Arjas, E., Läärä, E., ja P. Pere (2023). Tilastotieteen sanasto. Suomen Tilastoseuran julkaisuja, no. 8 2. laitos. Suomen Tilastoseura. Helsinki.
+
+    -   Ks. myös alapuolella linkki sanaston verkkoversioon.
+
+-   Holopainen, M. ja P. Pulkkinen (2008). Tilastolliset menetelmät. Sanoma Pro Oy.
+
+-   Mellin, I. (2004). Johdatus tilastotieteeseen: Tilastotieteen johdantokurssi (1. kirja). Yliopistopaino, Helsingin yliopisto.
+
+-   Mellin, I. (2000). Johdatus tilastotieteeseen: Tilastotieteen jatkokurssi (2. kirja). Yliopistopaino, Helsingin yliopisto.
+
+-   Mellin, I. (2006). Tilastolliset menetelmät. Luentomoniste, Aalto yliopisto (TKK).
+
+-   Pesonen, M. (2017). Kurssimateriaali kurssille Aineistonhankinta ja tutkimusasetelmat, Turun yliopisto.
+
+-   Silver, N. (2014). Signaali ja kohina: Miksi monet ennusteet epäonnistuvat mutta jotkin eivät? Terra Cognita. (Suomentanut Kimmo Pietiläinen)
+
+    -   Englanninkielinen teos: Silver, N. (2015). The Signal and the Noise: Why So Many Predictions Fail--but Some Don't. Penguin Books; Illustrated edition
+
+-   Spiegelhalter, D. (2020). The Art of Statistics. Learning from Data. Penguin Books Ltd.
+
+-   Sund, R. (2003). Tilastotiede käytännön tutkimuksessa -kurssi. Helsingin yliopisto.
+
+ 
+
+Näiden lisäksi materiaalissa viitataan seuraaviin artikkeleihin ja kirjoihin täydentävänä materiaalina:
+
+-   Box, G. E. P. (1976). Science and Statistics. Journal of the American Statistical Association, 71(356), 791–799.
+-   Haaparanta, L., ja I. Niiniluoto (2016). Johdatus Tieteelliseen Ajatteluun. Gaudeamus.
+-   Hamermesh, D.S. (2007). Replication in economics. *Canadian Journal of Economics/Revue canadienne d' economique* 40 (3), 715--733.
+-   Friendly, M., ja D. Meyer (2015). *Discrete Data Analysis with R. Visualization and Modeling Techniques for Categorical and Count Data.* Chapman & Hall/CRC.
+-   Marks, H. (2020). Mastering the Market Cycle. Getting the Odds on Your Side. Nicholas Brealey Publishing (paperback).
+-   Pahkinen, E. ja R. Lehtonen (1989). Otanta-asetelmat ja tilastollinen analyysi. Gaudeamus, Helsinki.
+-   Pahkinen, E. ja R. Lehtonen (2004). Practical Methods for Design and Analysis of Complex Surveys. 2. painos, Wiley.
+-   Taleb, N. N. (2007). The Black Swan: The Impact of the Highly Improbable. Random House. <!-- – Tämä teos käsittelee mustia joutsenia eli epätodennäköisiä mutta vaikutuksiltaan suuria tapahtumia 1. -->
+-   Taleb, N. N. (2012). Antifragile: Things That Gain from Disorder. Random House. <!-- – Tässä Taleb esittelee käsitteen "antifragiliteetti", eli kyvyn hyötyä epävarmuudesta ja stressistä --> <!-- -  Spiegelhalter, D. (2024). The Art of Uncertainty. How to Navigate Chance, Ignorance, Risk
+        and Luck. Penguin Books Ltd. -->
+-   Vartia, Y. (1989). Tilastotieteen perusteet. Yliopistopaino, Helsinki. II painos.
+
+ 
+
+Muita taustamateriaaleja
+
+-   Tilastokeskuksen tilastokoulu (<https://tilastokoulu.stat.fi/verkkokoulu_v2.xql?course_id=tkoulu_tilaj&lesson_id=1&subject_id=0&page_type=sisalto)>
+
+-   Tilastotieteen sanasto suomi-englanti-suomi hakukone. Juha Alho, Elja Arjas, Juha Karvanen, Lasse Leskelä, Esa Läärä ja Pekka Pere (2025). Tilastotieteen sanasto. Verkkoversio 8.6.2025. Suomen Tilastoseura. <https://sanasto.tilastoseura.fi/.>
+
+ 
+
+Suuret kiitokset VTM Visa Kuntzelle, VTM Emil Lehdelle ja filosofian ylioppilas Roni Karjanlahdelle kommenteista ja avusta materiaalin työstämisessä. Kaikki jäljelle jääneet painovirheet ovat materiaalin kokoajien.
+:::
+
+ 
+
+<a class="toggle-link" onclick="toggleCode('osaamistavoitteet')">Osaamistavoitteet</a>
+
+::: {#osaamistavoitteet style="display:none;"}
+ 
+
+Kurssin materiaali on koostettu em. lähteistä ja pyrkii paikoin pelkistettyyn esitysmuotoon mutta kuitenkin niin että materiaalin opiskelemalla kurssien osaamistavoitteet täyttyvät kokonaisuudessaan.
+
+Osaamistavoitteet on listattu Turun yliopiston opinto-oppaassa matematiikan ja tilastotieteen laitoksen opintotarjonnasta kurssikuvauksien alta **Osa I** (<https://opas.peppi.utu.fi/fi/opintojakso/TILM3712/102471?period=2024-2027)> ja **Osa II** (<https://opas.peppi.utu.fi/fi/opintojakso/TILM3713/102472?period=2024-2027)> ja ne löytyvät alta vielä laajemmin.
+
+ 
+
+**Osa I**: Opintojakson suoritettuaan opiskelija
+
+-   on saanut kokonaiskuvan tilastotieteestä ja sen perusteista
+
+-   on sisäistänyt tilastotieteen keskeisiä käsitteitä ja osaa niiden avulla tarkastella kriittisesti tieteellisiä tutkimuksia
+
+-   pystyy erottamaan edustavan otoksen ja näytteen
+
+-   tuntee tilastotieteen keskeiset perustunnusluvut
+
+ 
+
+**Osa II**: Opintojakson suoritettuaan opiskelija on täydentänyt osassa I opittuja tilastotieteen perustietoja mm. seuraavilta osin
+
+-   osaa hahmottaa tilastotieteen roolin omana tieteenalana ja eri sovellusalueiden yhteydessä
+
+-   tunnistaa erilaiset tutkimusasetelmat ja aineistotyypit
+
+-   ymmärtää otannan ja otantateorian perusteet
+
+-   hahmottaa tilastollisen riippuvuuden, korrelaation ja yksinkertaisen lineaarisen regressiomallin idean
+
+-   ymmärtää tilastollisen ennustaminen perusajatukset
+:::
+
+ 
+
+<a class="toggle-link" onclick="toggleCode('sisalto')">Kurssin sisältö</a>
+
+::: {#sisalto style="display:none;"}
+ 
+
+Kurssin osien I ja II sisältöjä on listattu opinto-oppaassa ja laajemmin alla. Tämä listaus toimii hyvänä luettelona kurssin keskeisistä teemoista.
+
+**Osa I**
+
+-   Tieteellinen tieto, tilastot ja arkitieto yhteiskunnassa
+
+-   Tilastotiede tieteenalana ja sen suhde lähitieteisiin, kuten datatieteeseen (data science)
+
+-   Sattuma ja satunnaisuus tilastotieteessä
+
+-   Tilastolliset aineistot (data), niiden kerääminen ja mittaaminen
+
+-   Tilastollinen riippuvuus ja korrelaatio
+
+ 
+
+**Osa 2**
+
+-   Tilastolliset mallit ja jakaumat
+
+-   Otantamenetelmien perusteet
+
+-   Tilastollisen päättelyn perusteita
+
+-   Regressioanalyysin perusteet
+
+-   Tilastotieteen rooli uuden tieteellisen tiedon tuottamisessa
+
+-   Aineisto- ja tutkimustyypit ja koeasetelmat tilastotieteessä
+
+-   Tilastotieteen sovellusten ja sovellusalueiden esittelyä
+:::
+
+ 
+
+<a class="toggle-link" onclick="toggleCode('merkinnat')">Merkinnät</a>
+
+::::: {#merkinnat style="display:none;"}
+```{=html}
+<!-- On this course, we follow the following notational selections: 
+
+- We will use the same notation for random quantities and their realized values. The context should make the difference clear.
+
+- In matrix calculations, vectors are interpreted as column vectors and we might also denote, for example, $y=\left[y_{1}\text{ }\cdots\text{ }y_{T}\right]^{\prime}$, where the superscripted comma denotes transpose of a vector (or elsewhere also of a matrix).
+-->
+```
+
+Huomaa, että tässä materiaalissa käytetään desimaalipistettä desimaalipilkun asemasta. Tämä on tarkalleen ottaen suomenkielen sääntöjen vastaista (sen yleistymisestä huolimatta), mutta tekstissä, johon liittyy matemaattista kielenkäyttöä, tämä kv. käytäntö käyttää desimaalipistettä on selvempi.
+
+Materiaalin seassa on eritelty väärikoodatuin tietolaatikoin erinäisiä tärkeitä tilastotieteellisiä konsepteja ja termejä sekä esimerkkejä tilastotieteen sovelluksista. Näistä ensin mainitut löytyvät Deltan violeteista laatikoista ja jälkimmäiset Statistikan oransseista.
+
+-   Toim. Huom. värit eivät täysin alkuperäisten värien kanssa yhteneväisiä.
+
+Alla esimerkkilaatikot.
+
+::: defblock
+**Konsepti tai termi**
+
+Konseptin tai termin löyhä määritelmä.
+:::
+
+::: eblock
+**Esimerkki**
+
+Aihetta koskeva esimerkki.
+:::
+
+   
+:::::
+
+
